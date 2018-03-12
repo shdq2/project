@@ -16,7 +16,7 @@ import com.kte.project.dao.LoginDAO;
 @Controller
 public class LoginController {
 	@Autowired
-	LoginDAO lDAO = null;
+	LoginDAO lDAO = null; 
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String register(Model model) {
