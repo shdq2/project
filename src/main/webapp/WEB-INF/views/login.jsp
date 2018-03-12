@@ -52,7 +52,7 @@
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
 	<script type="text/javascript" src="resources/js/rightform.js"></script>
-	<script>
+	<script>	
 		$(function() {
 			
 		});

@@ -1,6 +1,33 @@
 /**
  * 
  */
+
+function myAccFunc(x, c, n, s) {
+	var r = -1;
+	console.log(x + ' ' + n + ' ' + s);
+	for(var i=0; i<4; i++) {
+		if(i == s) {
+			c[i].className = c[i].className.replace(" glyphicon-menu-down", " glyphicon-menu-right");
+			x[i].className = x[i].className.replace(" w3-show", "");
+	        x[i].previousElementSibling.className = 
+	        x[i].previousElementSibling.className.replace(" w3-green", "");
+	        
+	        if(s == n) {
+	        	break;
+	        }
+		}
+		if(i == n) {
+			c[i].className = c[i].className.replace(" glyphicon-menu-right", " glyphicon-menu-down");
+			x[i].className += " w3-show";
+	        x[i].previousElementSibling.className += " w3-green";
+	        
+	        r = i;
+		}
+	}
+	
+	return r;
+}
+
 function topbar_view() {
 	if(width <= 690) {		
 		$('.topbar').css('width', width);
@@ -58,7 +85,25 @@ $(function() {
 		topbar_view();
 	});
 	
+	var a_id = [document.getElementById("Acc1"), document.getElementById("Acc2"), document.getElementById("Acc3"), document.getElementById("Acc4")];
+	var c_id = [document.getElementById("cursor1"), document.getElementById("cursor2"), document.getElementById("cursor3"), document.getElementById("cursor4")];
+	var save_open_menu = -1;
 	
+	$('#list-item1').click(function() {	    
+		save_open_menu = myAccFunc(a_id, c_id, 0, save_open_menu);
+	});
+	
+	$('#list-item2').click(function() {
+		save_open_menu = myAccFunc(a_id, c_id, 1, save_open_menu);
+	});
+	
+	$('#list-item3').click(function() {	    
+		save_open_menu = myAccFunc(a_id, c_id, 2, save_open_menu);
+	});
+	
+	$('#list-item4').click(function() {	    
+		save_open_menu = myAccFunc(a_id, c_id, 3, save_open_menu);
+	});
 	
 	$('.topbar-menu').click(function() {
 		var str = $('.topbar-menu').css('background-image');
