@@ -31,7 +31,7 @@ public class LoginController {
 		CustomVO cvo = lDAO.selectCustomOne(vo);
 		
 		if(cvo != null) {
-			System.out.println("로그인 성공");
+			System.out.println("濡쒓렇�씤 �꽦怨�");
 			HttpSession httpsession = request.getSession();
 			httpsession.setAttribute("custom_name", cvo.getCustom_name());
 			httpsession.setAttribute("custom_id", cvo.getCustom_id());
@@ -39,7 +39,7 @@ public class LoginController {
 			return "redirect:main.do";
 		}
 		
-		System.out.println("로그인 실패");
+		System.out.println("濡쒓렇�씤 �떎�뙣");
 		return "redirect:login.do";
 	}
 	
