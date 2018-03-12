@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+html, body {
+	height: 100%; overflow: hidden;
+	min-width: 525px;
+	margin: 0px auto;
+}
+
+.topbar {
+	width: 100%;
+	height: 60px;
+}
+
+.topbar-menu {
+	display: none;
+	border: 0px;
+	float: left;
+	margin: 10px 10px 10px 10px;
+	background-image: url("../imgs/topbar_menu.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.topbar-bmenu {
+	display: none;
+	border: 0px;
+	background-color: rgb(255, 255, 255, 0);
+	opacity: 0;
+}
+
+.topbar-buttons {
+	display: none;
+	float: right;
+}
+
+.topbar-logo {
+	padding: 10px 12px 10px 12px;
+	float: left;
+}
+
+.topbar-logo img {
+	height: 40px;
+	background-position: center;
+}
+
+.topbar-ul {
+	height: 20px;
+	list-style:none;
+	display: inline-block;
+	margin: 20px 0px 20px 0px;
+}
+
+#topbar-flag {
+	width: 24px;
+	height: 17px;
+}
+
+#topbar-user {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin: 15px 15px 15px 0px;
+	float: right;
+}
+
+.topbar-li {
+	float: right;
+}
+
+li a {
+	padding: 22px 16px 22px 16px;
+	text-decoration: none;
+	font-size: 10pt;
+	font-weight: lighter;
+	color: gray;
+}
+
+li a:hover {
+	text-decoration: none;
+	color: gray;
+}
+
+li a:active {
+	color: gray;
+}
+
+li a:visited {
+	color: gray;
+}
+
+.tmenu {
+	position: absolute;
+	display: none;
+	left: -270px;
+	width: 270px;
+	height: 100%;
+	background-color: #fff;
+	float: left;
+}
+
+.tmenu-1 {
+	width: 100%;
+	height: 540px;
+	background-color: #fff;
+}
+
+.custom-box.lock {
+	padding-top: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 100%;
+	height: 160px;
+	background-color: #f95442;
+	float: right;
+	box-shadow: 0px 0px 25px #d50606 inset;
+}
+
+.lock-icon {
+	width: 40px;
+	height: 35px;
+	margin-right: 20px;
+	background-image: url("../imgs/lock.png");
+	background-size: 40px 35px;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.lock-text p {
+	color: white;
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	margin-top: 10px;
+	padding-bottom: 30px;
+}
+
+.custom-box.unlock {
+	width: 100%;
+	height: 190px;
+	background-color: #fff;
+	text-align: center;
+	border: 1px solid #f2f2f2;
+	box-shadow: 0px 1px 2px #eee inset;
+}
+
+.unlock-icon {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	background-image: url("../imgs/user.png");
+	background-size: 60px 60px;
+	background-repeat: no-repeat;
+	margin: 25px 0px 20px 0px;
+	float: center;
+}
+
+.unlock-text label {
+	margin: 5px;
+	font-weight: lighter;
+	letter-spacing: 1px;
+}
+
+.tmenu-list {
+	padding-top: 30px;
+}
+
+.tmenu-list a {
+	display: table;
+	width: 100%;
+	height: 50px;
+	padding: 0px 30px 0px 30px;
+	color: #aaa;
+	text-decoration: none;
+}
+
+.tmenu-list a:hover {
+	background-color: #f5f5f5;
+	text-decoration: none;
+}
+
+.menu-icon {
+	width: 50px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.menu-title {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.menu-arrow {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+}
+
+.tmenu-2 {
+	width: 100%;
+	height: 120px;
+	border: 1px solid #ddd;
+	background-color: #efefef;
+	display: table;
+}
+
+.tmenu-2 p {
+	color: #a2a2a2;
+	padding: 10px;
+}
+
+.tmenu-buttons button {
+	display: table-cell;
+	width: 50%;
+	height: 40px;
+	float: left;
+}
+
+.tmenu-buttons button i {
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+}
