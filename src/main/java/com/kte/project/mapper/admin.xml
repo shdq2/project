@@ -8,7 +8,7 @@
 	</select>	
 	
 	<select id="AdminUserMain" resultType="customVO">
-		select custom_id,custom_name,custom_date from custom order by custom_date desc Limit 0,4
+		select * from custom where custom_block <![CDATA[<]]> 10 order by custom_date desc
 	</select>
 	
 	<select id = "yesterday" resultType="Int">
@@ -17,5 +17,9 @@
 	
 	<select id = "today" resultType="Int">
 		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date()
+	</select>
+	
+	<select id="room_count" resultType="Int" parameterType="String">
+		select count(room_code) as room_count from room where custom_id = #{custom_id}
 	</select>
 </mapper>

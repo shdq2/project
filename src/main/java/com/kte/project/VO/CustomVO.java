@@ -43,7 +43,14 @@ public class CustomVO {
    	/*
  	 * 고객 여행 목록 vo
  	 * */
-   	 
+   	 private int room_count = 0;
+	
+	public int getRoom_count() {
+		return room_count;
+	}
+	public void setRoom_count(int room_count) {
+		this.room_count = room_count;
+	}
    	 
    public String getCustom_name() {
       return custom_name;

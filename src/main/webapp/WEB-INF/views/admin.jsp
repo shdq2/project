@@ -79,7 +79,7 @@
 									<th>Joined</th>
 								</tr>
 
-								<c:forEach var="i" items="${clist }">
+								<c:forEach var="i" items="${clist }" end="3">
 									<tr>
 										<td>${i.custom_name }</td>
 										<td>${i.custom_id }</td>

@@ -30,4 +30,8 @@ public class adminDAO {
 	public int yesterday() {
 		return sql.selectOne("admin.yesterday");
 	}
+	
+	public int room_count(String custom_id){
+		return sql.selectOne("admin.room_count",custom_id);
+	}
 }	
