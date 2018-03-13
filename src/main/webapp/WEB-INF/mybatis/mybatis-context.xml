@@ -7,29 +7,6 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://mybatis.org/schema/mybatis-spring 
 	http://mybatis.org/schema/mybatis-spring-1.2.xsd">
-
-	<!--
-	class ABC extends BasicDataSource{
-		public void setDriverClassName(String value){
-		
-		}
-		public void setUrl(String value){
-		
-		}
-		public void setUsername(String value){
-		
-		}
-		public void setPassword(String value){
-		
-		}
-	}
-	
-	ABC dataSource = new ABC();
-	dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-	dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-	dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-	dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
--->
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
@@ -50,11 +27,9 @@
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name ="dataSource" ref="dataSource1" />
-<<<<<<< HEAD
+
 		<property name="mapperLocations" value="classpath:com/kte/project/mapper/*.xml" />
-=======
-		<property name="mapperLocations" value="classpath:com/kte/project/sql/*.xml" />
->>>>>>> branch 'changwoo' of https://github.com/shdq2/project.git
+
 		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml" />
 		<property name="transactionFactory">
 			<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />

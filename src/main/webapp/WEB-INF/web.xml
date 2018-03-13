@@ -7,14 +7,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-<<<<<<< HEAD
-			/WEB-INF/spring/root-context.xml
-			/WEB-INF/mybatis/mybatis-context.xml
-				
-=======
 		/WEB-INF/spring/root-context.xml
 		/WEB-INF/mybatis/mybatis-context.xml
->>>>>>> branch 'changwoo' of https://github.com/shdq2/project.git
+
 		</param-value>
 	</context-param>
 	
