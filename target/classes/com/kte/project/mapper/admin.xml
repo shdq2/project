@@ -10,4 +10,12 @@
 	<select id="AdminUserMain" resultType="customVO">
 		select custom_id,custom_name,custom_date from custom order by custom_date desc Limit 0,4
 	</select>
+	
+	<select id = "yesterday" resultType="Int">
+		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date() - interval 1 day
+	</select>
+	
+	<select id = "today" resultType="Int">
+		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date()
+	</select>
 </mapper>

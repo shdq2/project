@@ -12,11 +12,30 @@
 						<div class="panel-body">
 							<div class="col-md-3">
 								<div class="well dash-box">
-									<h2>
-										<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										${ucount }
-									</h2>
-									<h4>Users</h4>
+								<table style="width:100%">
+									<tr>
+									<td style="width:30%"><h1>
+										<c:if test="${ret < 0 }">
+											<label style="color:red">${ret}</label>
+										</c:if>
+										<c:if test="${ret == 0 }">${ret }</c:if></h1>
+									</td>
+									<td style="width:30%">
+										<h2>
+											<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+											${sessionScope._ucount }
+										</h2>
+										<h4>오늘 가입자 수</h4>
+									</td>
+										<td style="width:30%"><h1>
+											<c:if test="${ret > 0 }">
+												<label style="color:green">+ ${ret}</label>
+											</c:if>
+											<c:if test="${ret == 0 }">${ret }</c:if></h1>
+										</td>
+									</tr>									
+								</table>
+									
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -85,6 +104,10 @@
 	</footer>
 	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-
+	<script>
+		$(function(){
+			$('.main').addClass("active");
+		})
+	</script>
 </body>
 </html>

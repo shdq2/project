@@ -30,18 +30,20 @@ public class adminController {
 	public String home(Model model,HttpSession http) {
 		int ucount = adao.usercount();
 		List<CustomVO> list = adao.AdminUserMain();
+		
+		int today = adao.today();
+		int yesterday= adao.yesterday();
+		int ret = today-yesterday;
 		http.setAttribute("_ucount", ucount);	
 		model.addAttribute("clist", list);
+		model.addAttribute("ret", ret);
 		return "admin";
 	}
 	
 	@RequestMapping(value = "/admin_member.do", method = RequestMethod.GET)
 	public String member(Model model) {
-		int ucount = adao.usercount();
-		List<CustomVO> list = adao.AdminUserMain();
-		model.addAttribute("ucount", ucount);
-		model.addAttribute("clist", list);
-		return "admin";
+		
+		return "admin_member";
 	}
 	
 }

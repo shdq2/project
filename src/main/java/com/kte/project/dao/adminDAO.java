@@ -23,4 +23,11 @@ public class adminDAO {
 	public List<CustomVO> AdminUserMain(){
 		return sql.selectList("admin.AdminUserMain");
 	}
+	
+	public int today() {
+		return sql.selectOne("admin.today");
+	}
+	public int yesterday() {
+		return sql.selectOne("admin.yesterday");
+	}
 }	
