@@ -17,19 +17,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
+import com.kte.project.dao.adminmemberDAO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class adminController {
+public class AdminController {
 	@Autowired
 	private adminDAO adao = null; 
+	@Autowired
+	private adminmemberDAO amdao = null; 
 	
 	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
 		int ucount = adao.usercount();
-		List<CustomVO> list = adao.AdminUserMain();
+		List<CustomVO> list = amdao.AdminUserMain();
 		
 		int today = adao.today();
 		int yesterday= adao.yesterday();
@@ -39,15 +42,4 @@ public class adminController {
 		model.addAttribute("ret", ret);
 		return "admin";
 	}
-	
-	@RequestMapping(value = "/admin_member.do", method = RequestMethod.GET)
-	public String member(Model model) {
-		List<CustomVO> list = adao.AdminUserMain();
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_count(adao.room_count(list.get(i).getCustom_id()));
-		}
-		model.addAttribute("list", list);
-		return "admin_member";
-	}
-	
 }

@@ -9,6 +9,7 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
 }
@@ -45,6 +46,8 @@ template {
 a {
   background-color: transparent;
 }
+.help_div{display:none; position:absolute;margin:0px auto;}
+	
 a:active,
 a:hover {
   outline: 0;

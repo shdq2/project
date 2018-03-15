@@ -29,7 +29,7 @@
 									</td>
 										<td style="width:30%"><h1>
 											<c:if test="${ret > 0 }">
-												<label style="color:green">+ ${ret}</label>
+												<label style="color:green">+${ret}</label>
 											</c:if>
 											<c:if test="${ret == 0 }">${ret }</c:if></h1>
 										</td>
