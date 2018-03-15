@@ -28,4 +28,8 @@ public class adminmemberDAO {
 	public int member_block(CustomVO vo) {
 		return sql.update("admin_member.member_block",vo);
 	}
+	
+	public CustomVO admin_member_select(String id) {
+		return sql.selectOne("admin_member.admin_member_select",id);
+	}
 }	

@@ -14,4 +14,8 @@
 	<update id="member_block" parameterType="customVO">
 		update custom set custom_block = #{custom_block} where custom_id=#{custom_id}
 	</update>
+	
+	<select id="admin_member_select" parameterType="String" resultType="customVO">
+		select * from custom where custom_id=#{id}
+	</select>
 </mapper>

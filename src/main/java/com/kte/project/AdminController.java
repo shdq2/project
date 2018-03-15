@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
+import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
 
 /**
@@ -28,6 +29,8 @@ public class AdminController {
 	private adminDAO adao = null; 
 	@Autowired
 	private adminmemberDAO amdao = null; 
+	@Autowired
+	private admin_wishDAO wdao = null;
 	
 	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
@@ -37,9 +40,11 @@ public class AdminController {
 		int today = adao.today();
 		int yesterday= adao.yesterday();
 		int ret = today-yesterday;
+		int wcount = wdao.wish_count();
 		http.setAttribute("_ucount", ucount);	
 		model.addAttribute("clist", list);
 		model.addAttribute("ret", ret);
+		model.addAttribute("wcount", wcount);
 		return "admin";
 	}
 }

@@ -17,9 +17,6 @@
 </head>
 
 <body>
-
-
-
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
@@ -36,7 +33,7 @@
 				<ul class="nav navbar-nav">
 					<li class="menu_check"><a href="index.html">Dashboard</a></li>
 					<li class="menu_check"><a href="pages.html">Pages</a></li>
-					<li class="menu_check"><a href="posts.html">Posts</a></li>
+					<li class="menu_check"><a href="wish.do">Wish</a></li>
 					<li class="menu_check"><a href="admin_member.do">Users</a></li>
 				</ul>
 
@@ -68,7 +65,7 @@
 						</button>
 						<ul class="dropdown-menu">
 							<li><a href="#">Add Pages</a></li>
-							<li><a href="#">Add Posts</a></li>
+							<li><a href="#">Add wish</a></li>
 							<li><a href="#">Add Users</a></li>
 						</ul>
 					</div>
@@ -90,10 +87,10 @@
 							class="badge">12</span> </a> <a href="pages.html"
 							class="list-group-item room_menu"><span
 							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							숙소관리<span class="badge">25</span></a> <a href="posts.html"
+							숙소관리<span class="badge">25</span></a> <a href="wish.do"
 							class="list-group-item post_menu"><span
 							class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							Posts<span class="badge">126</span></a> <a href="admin_member.do"
+							Wish<span class="badge">126</span></a> <a href="admin_member.do"
 							class="list-group-item custom_menu"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span> 회원관리<span
 							class="badge">${sessionScope._ucount }</span></a>

@@ -23,7 +23,8 @@ public class JSON_Admin_member_Controller {
 	public @ResponseBody int member_block(Model model,
 			@RequestParam("id")String id,
 			@RequestParam("block")int block) {
-		
+		System.out.println("테스트 : " + id);
+		System.out.println("test : " + block);
 		CustomVO vo = new CustomVO();
 		vo.setCustom_id(id);
 		vo.setCustom_block(block);

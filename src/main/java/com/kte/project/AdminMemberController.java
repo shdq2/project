@@ -38,10 +38,11 @@ public class AdminMemberController {
 		return "admin_member";
 	}
 	
-	@RequestMapping(value = "/member_room_list.do", method = RequestMethod.GET)
-	public String room_list(Model model,@RequestParam("id")String id) {
-		
-		model.addAttribute("id", id);
-		return "member_room_list";
+	@RequestMapping(value = "/admin_member_detail.do", method = RequestMethod.GET)
+	public String admin_member_detail(Model model,
+			@RequestParam("id")String id) {
+		CustomVO vo = amdao.admin_member_select(id);
+		model.addAttribute("vo", vo);
+		return "admin_member_detail";
 	}
 }

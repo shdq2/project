@@ -50,10 +50,18 @@
 							<div class="col-md-3">
 								<div class="well dash-box">
 									<h2>
-										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>126
+										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>${wcount }
 									</h2>
-									<h4>Posts</h4>
+									<h4>
+									
+									Wishes
+									<c:if test="${wcount != 0 }">
+										<div class="sticker sticker-new"></div>
+									</c:if>	
+									</h4>
+									
 								</div>
+								
 							</div>
 							<div class="col-md-3">
 								<div class="well dash-box">
@@ -62,6 +70,7 @@
 										2129
 									</h2>
 									<h4>Visitores</h4>
+									
 								</div>
 							</div>
 						</div>
