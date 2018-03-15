@@ -1,14 +1,26 @@
 @charset "UTF-8";
 
 html, body {
-	height: 100%; overflow: hidden;
-	min-width: 525px;
+	position: relative;
 	margin: 0px auto;
 }
 
 .topbar {
+	text-align: center;
 	width: 100%;
 	height: 60px;
+	position: absolute;
+	background: white;
+	z-index: 1;
+	
+    -moz-box-shadow: 0px 2px 8px rgb(240,240,240);
+    -webkit-box-shadow: 0px 2px 8px rgb(240,240,240);
+    box-shadow: 0px 2px 8px rgb(240,240,240);
+}
+
+.Fixed {
+	position: fixed;
+	top: 0px;
 }
 
 .topbar-menu {
@@ -71,7 +83,7 @@ li a {
 	padding: 22px 16px 22px 16px;
 	text-decoration: none;
 	font-size: 10pt;
-	font-weight: lighter;
+	font-weight: normal;
 	color: gray;
 }
 
@@ -90,12 +102,21 @@ li a:visited {
 
 .tmenu {
 	position: absolute;
-	display: none;
-	left: -270px;
+	visibility: hidden;
 	width: 270px;
-	height: 100%;
+	height: calc(100% - 60px);
+	min-height: 640px;
+	top: 60px;
 	background-color: #fff;
 	float: left;
+	transform: translateX(-270px);
+    transition: transform 0.3s ease;
+	border: 1px solid #f2f2f2;
+	border-left: 0px;
+}
+
+.tmenu::-webkit-scrollbar { 
+    display: none; 
 }
 
 .tmenu-1 {
@@ -139,8 +160,7 @@ li a:visited {
 	height: 190px;
 	background-color: #fff;
 	text-align: center;
-	border: 1px solid #f2f2f2;
-	box-shadow: 0px 1px 2px #eee inset;
+	border-bottom: 1px solid #f2f2f2;
 }
 
 .unlock-icon {
@@ -156,7 +176,7 @@ li a:visited {
 
 .unlock-text label {
 	margin: 5px;
-	font-weight: lighter;
+	font-weight: normal;
 	letter-spacing: 1px;
 }
 
@@ -219,17 +239,10 @@ li a:visited {
 
 .tmenu-2 {
 	width: 96%;
-	height: 120px;
+	height: auto;
 	background-color: #efefef;
 	display: inline-block;
 	margin: 2%;
-}
-
-.tmenu-2 p {
-	display: inline-block;
-	color: #626262;
-	font-size: 10pt;
-	padding: 10px;
 	border: 1px solid #ddd;
 }
 
@@ -241,6 +254,14 @@ li a:visited {
 	border: 1px solid #ddd;
 	padding: 0px;
 	float: left;
+}
+
+.tmenu-2-p {
+	display: inline-block;
+	color: #626262;
+	font-size: 10pt;
+	padding: 10px;
+	margin: 0px;
 }
 
 .tmenu-buttons button:hover {

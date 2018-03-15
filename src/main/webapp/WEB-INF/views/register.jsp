@@ -6,6 +6,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<!-- 안드로이드 주소창 -->
+<meta name="mobile-web-app-capable" content="yes">
+<!-- 아이폰 주소창 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta charset="UTF-8">
 <title>미스터멘션</title>
 <link rel="stylesheet" href="resources/css/w3.css" />
@@ -43,6 +48,7 @@
 	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
+	<script type="text/javascript" src="resources/js/topbar_menu.js"></script>
 	<script type="text/javascript" src="resources/js/rightform.js"></script>
 	<script>
 		$(function() {

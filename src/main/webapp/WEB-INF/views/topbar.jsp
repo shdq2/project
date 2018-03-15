@@ -6,7 +6,7 @@
 <!-- css -->
 <link rel="stylesheet" href="resources/css/topbar.css"/>
 
-<div class="topbar">
+<div class="topbar Fixed">
 	<div class="topbar-menu">
 		<button class="topbar-bmenu"></button>
 	</div>
@@ -104,7 +104,7 @@
 				<i class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></i><span class="menu-title">프로필</span><span id="cursor3" class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>
 			<div id="Acc3" class="w3-hide w3-white w3-card submenu">
-				<a href="#" class="w3-bar-item w3-button">
+				<a href="profile.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">프로필보기</span>
 				</a>
 				<a href="#" class="w3-bar-item w3-button">
@@ -146,7 +146,7 @@
 				<button type="button" id="btn-logout" onclick="location.href='logout.do'"><i class="glyphicon glyphicon-off" aria-hidden="true"></i></button>
 				<button type="button" id="btn-home" onclick="location.href='main.do'"><i class="glyphicon glyphicon-home" aria-hidden="true"></i></button>
 			</div>
-			<p>접속하신 단말/브라우저에서 Mr, Mention이 제공하는 일부 기능이 작동하지 않을 수 있다는 점 양해부탁드립니다.</p>
+			<p class="tmenu-2-p">접속하신 단말/브라우저에서 Mr, Mention이 제공하는 일부 기능이 작동하지 않을 수 있다는 점 양해부탁드립니다.</p>
 		</div>
 	</div>
 </div>
