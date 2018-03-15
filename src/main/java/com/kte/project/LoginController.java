@@ -31,16 +31,23 @@ public class LoginController {
 		CustomVO cvo = lDAO.selectCustomOne(vo);
 		
 		if(cvo != null) {
-			System.out.println("濡쒓렇�씤 �꽦怨�");
-			HttpSession httpsession = request.getSession();
-			httpsession.setAttribute("custom_name", cvo.getCustom_name());
-			httpsession.setAttribute("custom_id", cvo.getCustom_id());
+			if(cvo.getCustom_block() != 1) {
+				HttpSession httpsession = request.getSession();
+				httpsession.setAttribute("custom_name", cvo.getCustom_name());
+				httpsession.setAttribute("custom_id", cvo.getCustom_id());
+				System.out.println("로그인 성공");
+				return "redirect:main.do";
+			}else {
+				System.out.println("차단된 아이디");
+				return "redirect:login.do"; 
+			}
 			
-			return "redirect:main.do";
+		}else {
+			System.out.println("존재하지 않는 아이디");
+			return "redirect:login.do";
 		}
 		
-		System.out.println("濡쒓렇�씤 �떎�뙣");
-		return "redirect:login.do";
+		
 	}
 	
 	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
