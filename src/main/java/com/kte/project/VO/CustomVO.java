@@ -3,45 +3,45 @@ package com.kte.project.VO;
 public class CustomVO {
 	
 	/*
-	 * È¸¿ø vo
+	 * È¸ï¿½ï¿½ vo
 	 * */
-	private String custom_id = null; 	// °í°´ id => °í°´°ü·Ã ¿Ü·¡Å°
-   private String custom_name = null;   // °í°´ ÀÌ¸§
-   private String custom_pw = null;		// °í°´ ºñ¹Ð¹øÈ£
-   private String custom_bank = null;	// °í°´ ÀºÇà
-   private String custom_cash = null;	// °í°´ °èÁÂ¹øÈ£
-   private String custom_phone = null;	// °í°´ ÀüÈ­¹øÈ£
-   private int custom_block = 0;		// °í°´ Â÷´Ü ¿©ºÎ
-   private String custom_date = null;	// È¸¿ø°¡ÀÔ ÀÏÀÚ
+	private String custom_id = null; 	// ï¿½ï¿½ id => ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü·ï¿½Å°
+    private String custom_name = null;   // ï¿½ï¿½ ï¿½Ì¸ï¿½
+    private String custom_pw = null;		// ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£
+    private String custom_bank = null;	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private String custom_cash = null;	// ï¿½ï¿½ ï¿½ï¿½ï¿½Â¹ï¿½È£
+    private String custom_phone = null;	// ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½È£
+    private int custom_block = 0;		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private String custom_date = null;	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    /*
-	 * È¸¿ø vo
+	 * È¸ï¿½ï¿½ vo
 	 * */
    
    /*
-	 * Âò¸ñ·Ï vo
+	 * ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
-   	private String wish_date=null;		//Âò¸ñ·Ï µî·Ï ÀÏÀÚ
+   	private String wish_date=null;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    
    /*
-	 * Âò¸ñ·Ï vo
+	 * ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
    
    	/*
-	 * È£½ºÆ® vo
+	 * È£ï¿½ï¿½Æ® vo
 	 * */
    	
-   	 private String host_date=null;		//È£½ºÆ® µî·Ï ÀÏÀÚ
+   	 private String host_date=null;		//È£ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    	
    	/*
-	 * È£½ºÆ® vo
+	 * È£ï¿½ï¿½Æ® vo
 	 * */
    	/*
- 	 * °í°´ ¿©Çà ¸ñ·Ï vo
+ 	 * ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ vo
  	 * */
-   	 private int reser_code = 0;		//¿©Çà¸ñ·Ï ±âº»Å°
-   	 private String reservation_date = null;	//¿¹¾à ÀÏÀÚ
+   	 private int reser_code = 0;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»Å°
+   	 private String reservation_date = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
    	/*
- 	 * °í°´ ¿©Çà ¸ñ·Ï vo
+ 	 * ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ vo
  	 * */
    	 private int room_count = 0;
 	
