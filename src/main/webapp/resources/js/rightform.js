@@ -2,7 +2,7 @@
  * 
  */
 function w_resize() {
-	if(width <= 690) {
+	if(width <= 768) {
 		$('#filter').css('display', 'none');
 		$('#register-form-login').css('height', '240px');
 		$('#right-panel').css('width', '100%');
@@ -20,7 +20,7 @@ function w_resize() {
 		$('#img-panel').css('transition', 'transform 0s ease');
 		$('.reg-btn').css('display', 'none');
 		$('.reg-a').attr('href', 'register.do');
-		$('.reg-a').css('color', '#d200ad');
+		$('.reg-a').css('color', '#A50D73');
 		$('.reg-a').text('회원가입하기');
 		
 		$('.tmenu').css('transform', 'translateX(-270px)');

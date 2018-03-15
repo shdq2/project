@@ -107,7 +107,7 @@
 				<a href="profile.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">프로필보기</span>
 				</a>
-				<a href="#" class="w3-bar-item w3-button">
+				<a href="profile_edit.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">프로필수정</span>
 				</a>
 				<a href="#" class="w3-bar-item w3-button">

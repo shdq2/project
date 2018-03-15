@@ -25,7 +25,7 @@
 			<a href="profile.do" id="profile-list-1">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 보기</span>
 			</a>
-			<a href="profile/edit.do" id="profile-list-2">
+			<a href="profile_edit.do" id="profile-list-2">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 수정</span>
 			</a>
 			<a href="profile/picture/edit.do" id="profile-list-3">

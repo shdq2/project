@@ -1,23 +1,24 @@
 @charset "UTF-8";
 
 html, body {
-	
+	height: 100%;
+	overflow: hidden;
 }
 
 .profile-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 64px);
+    height: calc(100% - 60px);
     top: 60px;
     display: inline-block;
-    padding: 0px 15px 0px 15px;
+    padding: 0px 0px 0px 15px;
     transition: transform 0.3s ease;
 }
 
 /* profile-nav */
 
 .profile-nav {
-    position: relative;
+    position: fixed;
     vertical-align: top;
 	width: 205px;
 	height: auto;
@@ -57,12 +58,14 @@ html, body {
 /* profile-main */
 
 .profile-main {
+	position: relative;
 	display: inline-block;
 	width: calc(100% - 220px);
-	margin-left: -4px;
 	padding-top: 35px;
 	height: 100%;
-	overflow: scroll;
+	left: 220px;
+	border-left: 1px solid #f2f2f2;
+	overflow-y: scroll;
 }
 
 
@@ -121,5 +124,6 @@ html, body {
 
 .tabs-detail {
 	height: auto;
-	padding: 10px;
+	min-height: 200px;
+	padding: 10px 10px 50px 10px;
 }

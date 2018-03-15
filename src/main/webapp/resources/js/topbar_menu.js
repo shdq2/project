@@ -24,15 +24,20 @@ function myAccFunc(x, c, n, s) {
 	        r = i;
 		}
 	}
+	var size = 0;
+	var height = $(window).height();
+	size = $('.topbar').outerHeight() + $('.custom-box.unlock').outerHeight() + $('.custom-box.lock').outerHeight() + $('.tmenu-list').outerHeight() + $('.tmenu-2').outerHeight();
 
-	$('body').css('height', 'calc(100% + ' + size);
-	console.log('body : ' + $('body').height());
-	scrollbar();
+	if(height < size) {
+		$('.tmenu').css('overflow-y', 'scroll');
+	} else {
+		$('.tmenu').css('overflow-y', 'hidden');
+	}
 	
 	return r;
 }
 
-$(function() {	
+$(function() {
 	var a_id = [document.getElementById("Acc1"), document.getElementById("Acc2"), document.getElementById("Acc3"), document.getElementById("Acc4")];
 	var c_id = [document.getElementById("cursor1"), document.getElementById("cursor2"), document.getElementById("cursor3"), document.getElementById("cursor4")];
 	var save_open_menu = -1;
