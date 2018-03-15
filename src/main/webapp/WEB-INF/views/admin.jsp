@@ -25,7 +25,7 @@
 											<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 											${sessionScope._ucount }
 										</h2>
-										<h4>오늘 가입자 수</h4>
+										<h4>User</h4>
 									</td>
 										<td style="width:30%"><h1>
 											<c:if test="${ret > 0 }">
