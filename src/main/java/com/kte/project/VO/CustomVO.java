@@ -17,6 +17,7 @@ public class CustomVO {
 	private String custom_job = null; //예금주
 	private String custom_homepage = null; //예금주
 	private int custom_block = 0; // �� ���� ����
+	private int room_count = 0;
 	private String custom_date = null; // ȸ������ ����
 	/*
 	 * ȸ�� vo
@@ -54,6 +55,10 @@ public class CustomVO {
 	
 	public String getCustom_name() {
 		return custom_name;
+	}
+
+	public int getRoom_count() {
+		return room_count;
 	}
 
 	public String getCustom_age() {
@@ -186,5 +191,10 @@ public class CustomVO {
 
 	public void setCustom_date(String custom_date) {
 		this.custom_date = custom_date;
+	}
+
+	public void setRoom_count(int room_count) {
+		// TODO Auto-generated method stub
+		
 	}
 }
