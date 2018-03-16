@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.WishVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
@@ -24,28 +26,31 @@ import com.kte.project.dao.adminmemberDAO;
  * Handles requests for the application home page.
  */
 @Controller
-public class AdminController {
-	@Autowired
-	private adminDAO adao = null; 
-	@Autowired
-	private adminmemberDAO amdao = null; 
+public class AdminWishController {
 	@Autowired
 	private admin_wishDAO wdao = null;
 	
-	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin_wish.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
-		int ucount = adao.usercount();
-		List<CustomVO> list = amdao.AdminUserMain();
+		List<WishVO> list = wdao.wish_list(0);
+		model.addAttribute("wlist", list);
+		int tot = ((wdao.wish_all()-1)/10)+1;
+		model.addAttribute("tot", tot);
 		
-		int today = adao.today();
-		int yesterday= adao.yesterday();
-		int ret = today-yesterday;
-		int wcount = wdao.wish_count();
-		http.setAttribute("_ucount", ucount);
-		http.setAttribute("_wcount", wcount);	
-		model.addAttribute("clist", list);
-		model.addAttribute("ret", ret);
-		model.addAttribute("wcount", wcount);
-		return "admin";
+		return "admin_wish";
+	}
+	
+
+	@RequestMapping(value = "/admin_wish_detail.do", method = RequestMethod.GET)
+	public String wish_detail(Model model,HttpSession http,
+			@RequestParam("code")int code) {
+		wdao.wish_update(code);
+		WishVO vo = wdao.wish_One(code);
+		int pre = wdao.wish_pre(code);
+		int next=wdao.wish_next(code);
+		model.addAttribute("vo", vo);
+		model.addAttribute("pre", pre);
+		model.addAttribute("next", next);
+		return "admin_wish_detail";
 	}
 }
