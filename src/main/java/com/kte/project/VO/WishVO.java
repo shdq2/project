@@ -14,21 +14,23 @@ public class WishVO {
 	private String wish_price = null;
 	private String wish_date = null;
 	private String wish_email = null;
-	private String wish_checkbox = null;
+	private int wish_chk = 0;
 	private List<WishchkVO> list = null;
 	
 	
+	
+	
+	public int getWish_chk() {
+		return wish_chk;
+	}
+	public void setWish_chk(int wish_chk) {
+		this.wish_chk = wish_chk;
+	}
 	public List<WishchkVO> getList() {
 		return list;
 	}
 	public void setList(List<WishchkVO> list) {
 		this.list = list;
-	}
-	public String getWish_checkbox() {
-		return wish_checkbox;
-	}
-	public void setWish_checkbox(String wish_checkbox) {
-		this.wish_checkbox = wish_checkbox;
 	}
 	public String getWish_email() {
 		return wish_email;

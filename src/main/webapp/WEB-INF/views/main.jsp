@@ -16,14 +16,14 @@
 <title>메인 페이지</title>
 	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 	<link rel="stylesheet" href="resources/css/main_slide.css">
 	<link rel="stylesheet" href="resources/css/main_button.css">
 	<link rel="stylesheet" href="resources/css/w3.css">
 	<link rel="stylesheet" href="resources/css/main_main.css">
 	<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
 	<link rel="stylesheet" href="resources/css/main_checkbox.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-	<link rel="stylesheet" href="resources/css/main_change">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
 </head>
 <body>
 	<!-- 메뉴바  -->
@@ -35,24 +35,19 @@
 		<div align="center">
 			<div class="row">
 				<div class="col-md-12">
-					<div id="main">
-						<section class="first_screen"> <img src="resources/imgs/mr1.PNG" >  </section>
-					    <section class="second_screen"> <img src="resources/imgs/mr2.PNG" >  </section>
-					    <section class="Last_screen"><img src="resources/imgs/mr3.PNG">   </section>
-					</div>
-					<!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- <ol class="carousel-indicators">
 							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						</ol>
+						</ol> -->
 						<div class="carousel-inner">
 							<div class="item active">
 								<img src="resources/imgs/mr1.PNG" alt="First slide" >
-								<div class="carousel-caption">
+								<!-- <div class="carousel-caption">
 									<h3>First slide</h3>
 									<p>첫번째 슬라이드</p>
-								</div>
+								</div> -->
 							</div>
 							<div class="item">
 								<img src="resources/imgs/mr2.PNG" alt="Second slide">
@@ -61,7 +56,7 @@
 								<img src="resources/imgs/mr3.PNG" alt="Third slide">
 							</div>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -78,7 +73,7 @@
 		</div>
 		
 		<!-- 갈 곳 고르는 버튼  -->
-		<div class="aaa" style="width:80%">
+		<div class="aaa" style="width:80%; margin:auto" >
 			  <div class="thumbex">
 			    <div class="thumbnail"><a href="#"> <img src="resources/imgs/jeju.jpg"/><span>제주도</span></a></div>
 			  </div>
@@ -280,49 +275,126 @@
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
 	<script src="resources/js/reaction_main.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		/* 슬라이드 넘어가는 시간 */
 		$(document).ready(function(){
+			/* 슬라이드 넘어가는 시간 */
 			$('.carousel').carousel({
 				interval:2000	/* 숫자크게하면 느려짐 */
 			});
-		});
+			
+			/*달력
+			var Now = new Date();
+			var day = Now.getFullYear()+"-"+ 0+(Now.getMonth()+1) +"-"+Now.getDate();
+			
+			console.log(day);
+			
+			$('#checkin').datepicker();
+			$('#checkin').datepicker("option", "dateFormat", 'yy-mm-dd');
+		    $('#checkin').datepicker("option", "minDate", day);
+		    $('#checkin').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#checkout").datepicker( "option", "minDate", selectedDate );
+		    });
+		 	
+		    $('#checkout').datepicker();
+		    $('#checkout').datepicker("option", "dateFormat", 'yy-mm-dd');
+		    $('#checkout').datepicker("option", "minDate", $("#checkin").val());
+		    $('#checkout').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#checkin").datepicker( "option", "maxDate", selectedDate );
+		    });
+			*/
+			
+			 $("#checkin").datepicker({
+	                dateFormat: "dd-M-yy",
+	                onSelect: function (date) {
+	                    var date2 = $('#checkin').datepicker('getDate');
+	                    date2.setDate(date2.getDate());
+	                    $('#checkout').datepicker('setDate', date2);
+	                    //sets minDate to dateofbirth date + 1
+	                    $('#checkout').datepicker('option', 'minDate', date2);
+	                }
+	            });
+	            $('#checkout').datepicker({
+	                dateFormat: "dd-M-yy",
+	                onClose: function () {
+	                    var dt1 = $('#checkin').datepicker('getDate');
+	                    console.log(dt1);
+	                    var dt2 = $('#checkout').datepicker('getDate');
+	                    if (dt2 <= dt1) {
+	                        var minDate = $('#checkout').datepicker('option', 'minDate');
+	                        $('#checkout').datepicker('setDate', minDate);
+	                    }
+	                }
+	            });
+	        });
 	
-		/* 달력 관련 */
+		
+		/* 달력 관련 
 		$(function(){
 			$('#checkin').datepicker({
-				dateFormat : 'yymmdd'
+				dateFormat : 'yy-mm-dd',
+				minDate : 0
 			});
 		});
 		
 		$(function(){
 			$('#checkout').datepicker({
-				dateFormat : 'yymmdd'
+				dateFormat : 'yy-mm-dd',
 			});
-		});
+		}); 
+		*/
+		
+		/* $(document).ready(function () {
+		    $.datepicker.regional['ko'] = {
+		        closeText: '닫기',
+		        prevText: '이전달',
+		        nextText: '다음달',
+		        currentText: '오늘',
+		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+		        '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+		        monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+		        '7월','8월','9월','10월','11월','12월'],
+		        dayNames: ['일','월','화','수','목','금','토'],
+		        dayNamesShort: ['일','월','화','수','목','금','토'],
+		        dayNamesMin: ['일','월','화','수','목','금','토'],
+		        weekHeader: 'Wk',
+		        dateFormat: 'yy-mm-dd',
+		        firstDay: 0,
+		        isRTL: false,
+		        showMonthAfterYear: true,
+		        yearSuffix: '',
+		        showOn: 'both',
+		        buttonText: "달력",
+		        changeMonth: true,
+		        changeYear: true,
+		        showButtonPanel: true,
+		        yearRange: 'c-99:c+99',
+		    };
+		    $.datepicker.setDefaults($.datepicker.regional['ko']);
+		 
+		    $('#checkin').datepicker();
+		    $('#checkin').datepicker("option", "maxDate", $("#checkout").val());
+		    $('#checkin').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#checkout").datepicker( "option", "minDate", selectedDate );
+		    });
+		 
+		    $('#checkout').datepicker();
+		    $('#checkout').datepicker("option", "minDate", $("#checkin").val());
+		    $('#checkout').datepicker("option", "onClose", function ( selectedDate ) {
+		        $("#checkin").datepicker( "option", "maxDate", selectedDate );
+		    });
+		}); */
+		
 	
 		$(function(){
-			var values = document.getElementByName("checkbox");
+			var values = $('input[type=checkbox]');
 			for(var i=0; i<values.length; i++){
 				if(values[i].checked){
 					alert(values[i].value);
 				}
 			}
-			
 		});
-		
-		//화면 바뀜.
-		$(document).ready(function() {
-		    $(".first_screen").delay(2000).fadeOut(500,function(){
-		    $(".second_screen").fadeIn(1000).show().delay(2000).fadeOut(500,function(){
-		    $(".Last_screen").fadeIn(300).show();
-		   });
-		  });
-		 });
-		});
-
-	</script>
-
+		</script>
 
 </body>
 </html>

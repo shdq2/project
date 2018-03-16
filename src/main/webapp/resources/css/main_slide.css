@@ -15,6 +15,10 @@ Image credits: unsplash.com
 .fade-carousel .carousel-inner .item {
     height: 100vh;
 }
+.fade-carousel .carousel-inner .item img{
+    max-width: 100%; 
+	height: auto;
+}
 .fade-carousel .carousel-indicators > li {
     margin: 0 2px;
     background-color: #f39c12;
@@ -60,7 +64,7 @@ Image credits: unsplash.com
          -o-transition: 2s all ease-in-out .1s; 
             transition: 2s all ease-in-out .1s; 
 }
-.fade-carousel .carousel-inner .item.active .hero {
+.fade-carousel .carousel-inner .item .active .hero {
     opacity: 1;
     -webkit-transition: 2s all ease-in-out .1s;
        -moz-transition: 2s all ease-in-out .1s; 
@@ -125,3 +129,4 @@ Image credits: unsplash.com
 @media screen and (max-width: 640px){
     .hero h1 { font-size: 4em; }    
 }
+
