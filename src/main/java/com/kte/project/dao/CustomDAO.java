@@ -9,16 +9,12 @@ import org.springframework.stereotype.Service;
 import com.kte.project.VO.CustomVO;
 
 @Service
-public class LoginDAO {
+public class CustomDAO {
 @Autowired
 @Resource(name="sqlSession")
 private SqlSession sqlsession = null;
 
-	public CustomVO selectCustomOne(CustomVO vo) {
-		return sqlsession.selectOne("login.selectCustomOne", vo);
-	}
-	
-	public int confirmPw(CustomVO vo) {
-		return sqlsession.selectOne("login.confirmPw", vo);
+	public int passwordEdit(String pw) {
+		return sqlsession.update("custom.passwordEdit", pw);
 	}
 }
