@@ -1,4 +1,4 @@
-package com.kte.project;
+package com.kte.project.admin;
 
 import java.text.DateFormat;
 import java.util.Date;

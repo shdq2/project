@@ -65,11 +65,24 @@
 							</div>
 							<div class="col-md-3">
 								<div class="well dash-box">
-									<h2>
+									<table style="width:100%;">
+										<tr>
+											<td style="border-right: 1px groove;width:50%">
+												<h2>
+											<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+											${vmonth}
+										</h2>
+										<h4>Month Visitores</h4>
+											</td>
+											<td>
+											<h2>
 										<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-										2129
+										${vtoday}
 									</h2>
-									<h4>Visitores</h4>
+									<h4>Day Visitores</h4>
+											</td>
+										</tr>
+									</table>
 									
 								</div>
 							</div>

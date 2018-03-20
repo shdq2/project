@@ -1,4 +1,4 @@
-package com.kte.project;
+package com.kte.project.admin;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -19,6 +19,7 @@ import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.visitDAO;
 
 /**
  * Handles requests for the application home page.
@@ -31,6 +32,8 @@ public class AdminController {
 	private adminmemberDAO amdao = null; 
 	@Autowired
 	private admin_wishDAO wdao = null;
+	@Autowired
+	private visitDAO vdao = null;
 	
 	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
@@ -50,6 +53,10 @@ public class AdminController {
 		http.setAttribute("_wcount", wcount);	
 		model.addAttribute("wcount", wcount);
 		
+		int today_visit = vdao.today_visit();
+		int month_visit = vdao.month_visit();
+		model.addAttribute("vtoday", today_visit);
+		model.addAttribute("vmonth", month_visit);
 		return "admin";
 	}
 }

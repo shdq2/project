@@ -1,4 +1,4 @@
-package com.kte.project;
+package com.kte.project.admin;
 
 import java.util.List;
 
