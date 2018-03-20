@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="resources/css/main_main.css">
 	<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
 	<link rel="stylesheet" href="resources/css/main_checkbox.css">
+	<link rel="stylesheet" href="resources/css/foundation-datapicker.css"> <!-- 달력 -->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
 </head>
 <body>
@@ -259,13 +260,12 @@
 	
 	<!-- footer -->
 	<jsp:include page="footer.jsp"></jsp:include>
-		
-		
+	
 
 	
 	
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<!-- <script	src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
+	<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
@@ -276,117 +276,49 @@
 	<script src="resources/js/topbar.js"></script>
 	<script src="resources/js/reaction_main.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/js/foundation-datapicker.js"></script> <!-- 달력 -->
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
 			/* 슬라이드 넘어가는 시간 */
 			$('.carousel').carousel({
 				interval:2000	/* 숫자크게하면 느려짐 */
 			});
 			
-			/*달력
-			var Now = new Date();
-			var day = Now.getFullYear()+"-"+ 0+(Now.getMonth()+1) +"-"+Now.getDate();
-			
-			console.log(day);
-			
-			$('#checkin').datepicker();
-			$('#checkin').datepicker("option", "dateFormat", 'yy-mm-dd');
-		    $('#checkin').datepicker("option", "minDate", day);
-		    $('#checkin').datepicker("option", "onClose", function ( selectedDate ) {
-		        $("#checkout").datepicker( "option", "minDate", selectedDate );
-		    });
-		 	
-		    $('#checkout').datepicker();
-		    $('#checkout').datepicker("option", "dateFormat", 'yy-mm-dd');
-		    $('#checkout').datepicker("option", "minDate", $("#checkin").val());
-		    $('#checkout').datepicker("option", "onClose", function ( selectedDate ) {
-		        $("#checkin").datepicker( "option", "maxDate", selectedDate );
-		    });
-			*/
-			
-			 $("#checkin").datepicker({
-	                dateFormat: "dd-M-yy",
-	                onSelect: function (date) {
-	                    var date2 = $('#checkin').datepicker('getDate');
-	                    date2.setDate(date2.getDate());
-	                    $('#checkout').datepicker('setDate', date2);
-	                    //sets minDate to dateofbirth date + 1
-	                    $('#checkout').datepicker('option', 'minDate', date2);
-	                }
-	            });
-	            $('#checkout').datepicker({
-	                dateFormat: "dd-M-yy",
-	                onClose: function () {
-	                    var dt1 = $('#checkin').datepicker('getDate');
-	                    console.log(dt1);
-	                    var dt2 = $('#checkout').datepicker('getDate');
-	                    if (dt2 <= dt1) {
-	                        var minDate = $('#checkout').datepicker('option', 'minDate');
-	                        $('#checkout').datepicker('setDate', minDate);
-	                    }
-	                }
-	            });
-	        });
+			/*달력*/
+		  var nowTemp = new Date();
+	      var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+	      var checkin = jQuery('#checkin').fdatepicker({
+	          format: "yyyy-mm-dd",
+	          onRender: function (date) {
+	              return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	          }
+	      }).on('changeDate', function (ev) {
+	              if (ev.date.valueOf() > checkout.date.valueOf()) {
+	                  var newDate = new Date(ev.date)
+	                  newDate.setDate(newDate.getDate()); // Remove the '+1' to mantain in the same date
+	                  checkout.update(newDate); //Change 'setValue' to 'update'
+	              }
+	              checkin.hide();
+	              jQuery('#checkout')[0];
+	          }).data('datepicker');
+	      var checkout = jQuery('#checkout').fdatepicker({
+	          format: "yyyy-mm-dd",
+	          onRender: function (date) {
+	              return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+	          }
+	      }).on('changeDate', function (ev) {
+	              checkout.hide();
+	          }).data('datepicker');
+
+	          jQuery("#checkin,#checkout").fdatepicker({
+	              autoclose: true,
+	              format: "yyyy-mm-dd",
+	              language: 'en',
+	              todayHighlight: false
+	          });
 	
 		
-		/* 달력 관련 
-		$(function(){
-			$('#checkin').datepicker({
-				dateFormat : 'yy-mm-dd',
-				minDate : 0
-			});
-		});
-		
-		$(function(){
-			$('#checkout').datepicker({
-				dateFormat : 'yy-mm-dd',
-			});
-		}); 
-		*/
-		
-		/* $(document).ready(function () {
-		    $.datepicker.regional['ko'] = {
-		        closeText: '닫기',
-		        prevText: '이전달',
-		        nextText: '다음달',
-		        currentText: '오늘',
-		        monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
-		        '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
-		        monthNamesShort: ['1월','2월','3월','4월','5월','6월',
-		        '7월','8월','9월','10월','11월','12월'],
-		        dayNames: ['일','월','화','수','목','금','토'],
-		        dayNamesShort: ['일','월','화','수','목','금','토'],
-		        dayNamesMin: ['일','월','화','수','목','금','토'],
-		        weekHeader: 'Wk',
-		        dateFormat: 'yy-mm-dd',
-		        firstDay: 0,
-		        isRTL: false,
-		        showMonthAfterYear: true,
-		        yearSuffix: '',
-		        showOn: 'both',
-		        buttonText: "달력",
-		        changeMonth: true,
-		        changeYear: true,
-		        showButtonPanel: true,
-		        yearRange: 'c-99:c+99',
-		    };
-		    $.datepicker.setDefaults($.datepicker.regional['ko']);
-		 
-		    $('#checkin').datepicker();
-		    $('#checkin').datepicker("option", "maxDate", $("#checkout").val());
-		    $('#checkin').datepicker("option", "onClose", function ( selectedDate ) {
-		        $("#checkout").datepicker( "option", "minDate", selectedDate );
-		    });
-		 
-		    $('#checkout').datepicker();
-		    $('#checkout').datepicker("option", "minDate", $("#checkin").val());
-		    $('#checkout').datepicker("option", "onClose", function ( selectedDate ) {
-		        $("#checkin").datepicker( "option", "maxDate", selectedDate );
-		    });
-		}); */
-		
-	
-		$(function(){
 			var values = $('input[type=checkbox]');
 			for(var i=0; i<values.length; i++){
 				if(values[i].checked){
