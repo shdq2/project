@@ -36,7 +36,8 @@ public class AdminWishController {
 		model.addAttribute("wlist", list);
 		int tot = ((wdao.wish_all()-1)/10)+1;
 		model.addAttribute("tot", tot);
-		
+		int wcount = wdao.wish_count();
+		http.setAttribute("_wcount", wcount);
 		return "admin_wish";
 	}
 	
@@ -51,6 +52,8 @@ public class AdminWishController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("pre", pre);
 		model.addAttribute("next", next);
+		int wcount = wdao.wish_count();
+		http.setAttribute("_wcount", wcount);
 		return "admin_wish_detail";
 	}
 }

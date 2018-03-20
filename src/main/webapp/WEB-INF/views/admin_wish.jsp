@@ -48,6 +48,24 @@
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 	<script>
+	
+	var numberformat = function(num){
+		var str;
+		
+		num = num+"";
+		var len = num.length;
+		var idx = num.length%3;
+		str = num.substring(0,idx);
+		while(idx<len){
+			if(str != ""){
+				str+=",";
+			}
+			str+= num.substring(idx,idx+3);
+			idx+=3;
+		}
+		return str;
+	}
+
 		$(function(){
 			//활성화된 메뉴 처리
 			$('.wish_menu').addClass("active");
@@ -60,33 +78,49 @@
 					 $.get('json_wish.do?page='+page,function(data){
 						$('#table tbody').empty();
 						var leng = data.length;
-						for(var i=0;i<leng;i++){							
-							$('#table tbody').append(
-								'<tr>'+
-									'<td>'+data[i].no+'</td>'+
-									'<td>'+data[i].name+'</td>'+
-									'<td>'+data[i].qty+'</td>'+
-									'<td>'+numberformat(data[i].price)+' 원</td>'+
-									'<td>'+numberformat(total)+' 원</td>'+
-									'<td>'+data[i].date1+'</td>'+
-								'</tr>'
-							);
+						for(var i=0;i<leng;i++){			
+							if(data[i].wish_chk == 0){
+								$('#table tbody').append(
+										'<tr class="wlist">'+
+										'<td class="wish_code">'+data[i].wish_code+'</td>'+
+										'<td>'+data[i].wish_name+'</td>'+
+										'<td>'+data[i].wish_region+'</td>'+
+										'<td>'+data[i].wish_msg+'</td>'+
+										'<td>'+data[i].wish_start+' ~ '+data[i].wish_end+'</td>'+				
+										'<td>'+data[i].wish_number+'</td>'+
+										'<td><span class="badge">new</span></td>'+
+									'</tr>'
+								);
+							}								
+							else{
+								$('#table tbody').append(
+										'<tr class="wlist">'+
+										'<td class="wish_code">'+data[i].wish_code+'</td>'+
+										'<td>'+data[i].wish_name+'</td>'+
+										'<td>'+data[i].wish_region+'</td>'+
+										'<td>'+data[i].wish_msg+'</td>'+
+										'<td>'+data[i].wish_start+' ~ '+data[i].wish_end+'</td>'+			
+										'<td>'+data[i].wish_number+'</td>'+
+										'<td></td>'+
+									'</tr>'
+								);
+							}
 						}
 					},'json'); 
 			      }
 		   });
 			
-			$('.wlist').click(function(){
+			 $(document).on('click', '.wlist', function(){
 				var idx = $(this).index('.wlist');
 				var code = $('.wish_code').eq(idx).text();
 				window.location.href="admin_wish_detail.do?code="+code;
 			})
-				$('.wlist').mouseover(function(event) {	
-							$(this).addClass('hover');							 
-						});
-				 $('.wlist').mouseout(function() {			
-							$(this).removeClass('hover');							
-						});	
+			 $(document).on('mouseover', '.wlist', function(){
+					$(this).addClass('hover');							 
+				});
+			 $(document).on('mouseout', '.wlist', function(){			
+					$(this).removeClass('hover');							
+				});	
 			})
 							
 	

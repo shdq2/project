@@ -34,18 +34,22 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
-		int ucount = adao.usercount();
+		
 		List<CustomVO> list = amdao.AdminUserMain();
+		model.addAttribute("clist", list);
+		
+		int ucount = adao.usercount();
+		http.setAttribute("_ucount", ucount);
 		
 		int today = adao.today();
 		int yesterday= adao.yesterday();
 		int ret = today-yesterday;
-		int wcount = wdao.wish_count();
-		http.setAttribute("_ucount", ucount);
-		http.setAttribute("_wcount", wcount);	
-		model.addAttribute("clist", list);
 		model.addAttribute("ret", ret);
+		
+		int wcount = wdao.wish_count();
+		http.setAttribute("_wcount", wcount);	
 		model.addAttribute("wcount", wcount);
+		
 		return "admin";
 	}
 }
