@@ -39,9 +39,9 @@
 							</div>
 							<a href="findPw.do" id="findPw">비밀번호가 기억안나세요?</a><br />
 						</div>
-						<input type="submit" id="btn_login" class="w3-button w3-round w3-blue" value="로그인" style="width: 100%" />
+						<input type="submit" id="btn_login" class="btn btn-primary" value="로그인" style="width: 100%" />
 						<div class="reg-btn">
-							<a href="register.do" class="w3-button w3-round w3-purple">회원가입</a>
+							<a href="register.do" class="btn btn-success">회원가입</a>
 						</div>
 					</form:form>
 				</div>

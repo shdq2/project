@@ -25,7 +25,7 @@
 			<a href="profile.do" id="profile-list-1">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 보기</span>
 			</a>
-			<a href="profile/edit.do" id="profile-list-2">
+			<a href="profileEdit.do" id="profile-list-2">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 수정</span>
 			</a>
 			<a href="profile/picture/edit.do" id="profile-list-3">
@@ -58,13 +58,13 @@
 					</ul>
 					
 					<div class="tab-content tabs-detail">
-						<div class="tab-pane active" id="detail-1">
+						<div class="tab-pane fade in active" id="detail-1">
 							<p class="detail-1-p">등록된 숙소가 없습니다.</p>
 						</div>
-						<div class="tab-pane" id="detail-2">
+						<div class="tab-pane fade" id="detail-2">
 							<p class="detail-2-p">등록된 게스트후기가 없습니다.</p>
 						</div>
-						<div class="tab-pane" id="detail-3">
+						<div class="tab-pane fade" id="detail-3">
 							<p class="detail-3-p">등록된 호스트후기가 없습니다.</p>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 	</div>
 	
 	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
 	<script type="text/javascript" src="resources/js/profile_view.js"></script>
 	<script>

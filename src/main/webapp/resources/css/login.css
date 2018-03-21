@@ -3,6 +3,8 @@
 html, body {
 	height: 100%;
 	font-weight: normal;
+	height: 100%;
+	overflow: hidden;
 }
 
 #img-panel {

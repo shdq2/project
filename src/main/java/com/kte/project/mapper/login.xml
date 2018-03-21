@@ -28,4 +28,8 @@
 		SELECT * FROM custom WHERE custom_id = #{custom_id} AND custom_pw = SHA1(#{custom_pw})
 	</select>
 	
+	<select id="confirmPw" parameterType="com.kte.project.VO.CustomVO" resultType="int">
+		SELECT COUNT(custom_id) FROM custom WHERE custom_id = #{custom_id} AND custom_pw = SHA1(#{custom_pw})
+	</select>
+	
 </mapper>

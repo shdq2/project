@@ -1,5 +1,5 @@
 function topbar_view() {
-	if(width <= 690) {
+	if(width <= 768) {
 		$('.topbar-menu').css('display', 'inline-block');
 		$('.topbar-menu').css('width', '40px');
 		$('.topbar-menu').css('height', '40px');
@@ -37,19 +37,7 @@ function topbar_view() {
 }
 
 function scrollbar() {
-	var size = 0;
-	
-	console.log('register : ' + size);
-	console.log('window : ' + height);
-	console.log('topbar : ' + $('.topbar').outerHeight() + ', unlock : ' + $('.custom-box.unlock').outerHeight() + ', lock : ' + $('.custom-box.lock').outerHeight() + ', list : ' + $('.tmenu-list').outerHeight() + ', tmenu-2 : ' + $('.tmenu-2').outerHeight());
-	
-	size = $('.topbar').outerHeight() + $('.custom-box.unlock').outerHeight() + $('.custom-box.lock').outerHeight() + $('.tmenu-list').outerHeight() + $('.tmenu-2').outerHeight();
-	console.log('size : ' + size);
-	if(height < size) {
-		$('.tmenu').css('overflow-y', 'scroll');
-	} else {
-		$('.tmenu').css('overflow-y', 'hidden');
-	}
+	var size = 0;	
 	
 	size = 0;
 	size = $('#register-box').outerHeight();

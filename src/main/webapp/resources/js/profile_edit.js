@@ -5,8 +5,14 @@ function w_resize() {
 		$('.profile-main').css('width', '100%');
 		$('.profile-main').css('left', '0%');
 		$('.profile-main').css('border-left', '0px');
-		$('.col-main').removeClass('col-xs-9').addClass('col-xs-12');
-		$('.col-img').removeClass('col-xs-3').addClass('col-xs-12');
+		$('.profile-main').css('padding', '35px 0px 0px 0px');
+		$('.form-group').css('height', 'auto');
+		$('.form-label').css('padding', '0px 15px 0px 15px');
+		$('.form-label').css('text-align', 'left');
+		$('#btn-save').css('width', 'calc(100% - 30px)');
+		$('#btn-save').css('float', 'none');
+		$('#btn-save').css('margin-right', '0px');		
+		
 		$('.profile-container').css('transition', 'transform 0.3s ease');
 	} else {
 		$('.profile-container').css('padding', '0px 0px 0px 15px');
@@ -14,8 +20,14 @@ function w_resize() {
 		$('.profile-main').css('width', 'calc(100% - 220px)');
 		$('.profile-main').css('left', '220px');
 		$('.profile-main').css('border-left', '1px solid #f2f2f2');
-		$('.col-main').removeClass('col-xs-12').addClass('col-xs-9');
-		$('.col-img').removeClass('col-xs-12').addClass('col-xs-3');
+		$('.profile-main').css('padding', '35px 15% 0px 15%');
+		$('.form-group').css('height', 'auto');
+		$('.form-label').css('padding', '0px');
+		$('.form-label').css('text-align', 'right');
+		$('#btn-save').css('width', '100px');
+		$('#btn-save').css('float', 'right');
+		$('#btn-save').css('margin-right', '15px');
+		
 		$('.profile-container').css('transition', 'transform 0s ease');
 		
 		$('.tmenu').css('transform', 'translateX(-270px)');
@@ -50,6 +62,11 @@ $(function() {
 	var a_id = [document.getElementById("Acc1"), document.getElementById("Acc2"), document.getElementById("Acc3"), document.getElementById("Acc4")];
 	var c_id = [document.getElementById("cursor1"), document.getElementById("cursor2"), document.getElementById("cursor3"), document.getElementById("cursor4")];
 	var save_open_menu = -1;
+	
+	$('.add-cellphone').click(function() {
+		$('.add-cellphone').css('display', 'none');
+		$('#cellphone-panel').css('display', 'inline-block');
+	});
 	
 	$('#list-item1').click(function() {	    
 		save_open_menu = myAccFunc(a_id, c_id, 0, save_open_menu);
