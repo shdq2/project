@@ -15,7 +15,7 @@ public class ProfileController {
 		return "profile_view";
 	}
 
-	@RequestMapping(value="/profile_edit.do", method = RequestMethod.GET)
+	@RequestMapping(value="/profileEdit.do", method = RequestMethod.GET)
 	public String profileEdit() {
 		
 		

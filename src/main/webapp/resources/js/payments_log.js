@@ -6,12 +6,7 @@ function w_resize() {
 		$('.profile-main').css('left', '0%');
 		$('.profile-main').css('border-left', '0px');
 		$('.profile-main').css('padding', '35px 0px 0px 0px');
-		$('.form-group').css('height', 'auto');
-		$('.form-label').css('padding', '0px 15px 0px 15px');
-		$('.form-label').css('text-align', 'left');
-		$('#btn-save').css('width', 'calc(100% - 30px)');
-		$('#btn-save').css('float', 'none');
-		$('#btn-save').css('margin-right', '0px');		
+		
 		
 		$('.profile-container').css('transition', 'transform 0.3s ease');
 	} else {
@@ -20,13 +15,9 @@ function w_resize() {
 		$('.profile-main').css('width', 'calc(100% - 220px)');
 		$('.profile-main').css('left', '220px');
 		$('.profile-main').css('border-left', '1px solid #f2f2f2');
-		$('.profile-main').css('padding', '35px 15% 0px 15%');
-		$('.form-group').css('height', 'auto');
-		$('.form-label').css('padding', '0px');
-		$('.form-label').css('text-align', 'right');
-		$('#btn-save').css('width', '100px');
-		$('#btn-save').css('float', 'right');
-		$('#btn-save').css('margin-right', '15px');
+		$('.profile-main').css('padding', '35px 15px 0px 15px');
+		
+		
 		
 		$('.profile-container').css('transition', 'transform 0s ease');
 		

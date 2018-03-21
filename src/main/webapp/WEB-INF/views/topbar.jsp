@@ -75,7 +75,7 @@
 			<a href="#" id="list-item1">
 				<i class="glyphicon glyphicon-home menu-icon" aria-hidden="true"></i><span class="menu-title">호스트</span><span id="cursor1" class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>			
-			<div id="Acc1" class="w3-hide w3-white w3-card submenu">
+			<div id="Acc1" class="w3-hide w3-white w3-card submenu w3-animate-opacity">
 				<a href="#" class="w3-bar-item w3-button">
 					<span class="smenu-title">숙소등록하기</span>
 				</a>
@@ -90,7 +90,7 @@
 			<a href="#" id="list-item2">
 				<i class="glyphicon glyphicon-briefcase menu-icon" aria-hidden="true"></i><span class="menu-title">게스트</span><span id="cursor2" class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>
-			<div id="Acc2" class="w3-hide w3-white w3-card submenu">
+			<div id="Acc2" class="w3-hide w3-white w3-card submenu w3-animate-opacity">
 				<a href="#" class="w3-bar-item w3-button">
 					<span class="smenu-title">여행목록</span>
 				</a>
@@ -103,11 +103,11 @@
 			<a href="#" id="list-item3">
 				<i class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></i><span class="menu-title">프로필</span><span id="cursor3" class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>
-			<div id="Acc3" class="w3-hide w3-white w3-card submenu">
+			<div id="Acc3" class="w3-hide w3-white w3-card submenu w3-animate-opacity">
 				<a href="profile.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">프로필보기</span>
 				</a>
-				<a href="profile_edit.do" class="w3-bar-item w3-button">
+				<a href="profileEdit.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">프로필수정</span>
 				</a>
 				<a href="#" class="w3-bar-item w3-button">
@@ -122,11 +122,11 @@
 			<a href="#" id="list-item4">
 				<i class="glyphicon glyphicon-cog menu-icon" aria-hidden="true"></i><span class="menu-title">계정관리</span><span id="cursor4" class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>
-			<div id="Acc4" class="w3-hide w3-white w3-card submenu">
-				<a href="#" class="w3-bar-item w3-button">
+			<div id="Acc4" class="w3-hide w3-white w3-card submenu w3-animate-opacity">
+				<a href="passwordEdit.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">비밀번호변경</span>
 				</a>
-				<a href="#" class="w3-bar-item w3-button">
+				<a href="paymentsLog.do" class="w3-bar-item w3-button">
 					<span class="smenu-title">결제내역</span>
 				</a>
 			</div>
@@ -135,8 +135,6 @@
 			<a href="help.do">
 				<i class="glyphicon glyphicon-question-sign menu-icon" aria-hidden="true"></i><span class="menu-title">도움말</span><span class="menu-arrow glyphicon glyphicon-menu-right" aria-hidden="true"></span>
 			</a>
-			
-			
 			
 			</c:if>
 		</div>

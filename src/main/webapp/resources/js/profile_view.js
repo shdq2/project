@@ -1,6 +1,5 @@
 function w_resize() {
 	if(width <= 768) {
-		console.log('width: '+width);
 		$('.profile-container').css('padding', '0px');
 		$('.profile-nav').css('display', 'none');
 		$('.profile-main').css('width', '100%');
@@ -10,7 +9,6 @@ function w_resize() {
 		$('.col-img').removeClass('col-xs-3').addClass('col-xs-12');
 		$('.profile-container').css('transition', 'transform 0.3s ease');
 	} else {
-		console.log('width: '+width);
 		$('.profile-container').css('padding', '0px 0px 0px 15px');
 		$('.profile-nav').css('display', 'inline-block');
 		$('.profile-main').css('width', 'calc(100% - 220px)');

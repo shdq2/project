@@ -37,13 +37,7 @@ function topbar_view() {
 }
 
 function scrollbar() {
-	var size = 0;
-	
-	console.log('register : ' + size);
-	console.log('window : ' + height);
-	console.log('topbar : ' + $('.topbar').outerHeight() + ', unlock : ' + $('.custom-box.unlock').outerHeight() + ', lock : ' + $('.custom-box.lock').outerHeight() + ', list : ' + $('.tmenu-list').outerHeight() + ', tmenu-2 : ' + $('.tmenu-2').outerHeight());
-	
-	
+	var size = 0;	
 	
 	size = 0;
 	size = $('#register-box').outerHeight();

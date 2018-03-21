@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <title>미스터멘션</title>
 <link rel="stylesheet" href="resources/css/w3.css" />
-<link rel="stylesheet" href="resources/css/profile_view.css" />
+<link rel="stylesheet" href="resources/css/payments_log.css" />
 <link rel="stylesheet" href="resources/css/bootstrap.css" />
 </head>
 <body>
@@ -31,12 +31,12 @@
 		</div>
 		
 		<div class="profile-main">
-			<div class="profile-header">
+			<div class="main-header">
 				<h3>결제내역</h3>
 				<p>Payments Log</p>
 			</div>
 			
-			<div class="profile-content">
+			<div class="main-content">
 				<table class="table">
 					<tr>
 						<th>No</th>
@@ -58,7 +58,7 @@
 	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
-	<script type="text/javascript" src="resources/js/profile_view.js"></script>
+	<script type="text/javascript" src="resources/js/payments_log.js"></script>
 	<script>
 		$(function() {
 			

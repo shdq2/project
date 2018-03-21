@@ -33,7 +33,7 @@
 						<form:input type="text" class="form-control" path="custom_name" placeholder="이름" /><br />
 						<form:input type="text" class="form-control" path="custom_id" placeholder="이메일" /><br />
 						<form:input type="password" class="form-control" path="custom_pw" placeholder="비밀번호" /><br />
-						<input type="submit" class="w3-button w3-round w3-blue" value="회원가입" style="width: 100%" />
+						<input type="submit" class="btn btn-primary" value="회원가입" style="width: 100%" />
 					</form:form>
 				</div>
 				
