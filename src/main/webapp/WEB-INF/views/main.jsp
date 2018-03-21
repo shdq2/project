@@ -21,46 +21,49 @@
 	<link rel="stylesheet" href="resources/css/main_button.css">
 	<link rel="stylesheet" href="resources/css/w3.css">
 	<link rel="stylesheet" href="resources/css/main_main.css">
-	<link rel="stylesheet" href="resources/css/jquery-ui.min.css">
+	<!-- <link rel="stylesheet" href="resources/css/jquery-ui.min.css"> -->
 	<link rel="stylesheet" href="resources/css/main_checkbox.css">
 	<link rel="stylesheet" href="resources/css/foundation-datapicker.css"> <!-- 달력 -->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"> -->
+	<style>
+	</style>
 </head>
 <body>
 	<!-- 메뉴바  -->
 	<jsp:include page="topbar.jsp"></jsp:include>
-		
+
+
 	<div class="container1" align="center" style="margin-top:62px">
 	
 		<!-- 슬라이드  -->
-		<div align="center">
-			<div class="row">
-				<div class="col-md-12">
-					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		
+			<div class="row" align="center">
+				<div class="col-md-12" >
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
 						<!-- <ol class="carousel-indicators">
 							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 						</ol> -->
-						<div class="carousel-inner">
+						<div class="carousel-inner" >
 							<div class="item active">
-								<img src="resources/imgs/mr1.PNG" alt="First slide" >
+								<img src="resources/imgs/mr1.PNG" >
 								<!-- <div class="carousel-caption">
 									<h3>First slide</h3>
 									<p>첫번째 슬라이드</p>
 								</div> -->
 							</div>
-							<div class="item">
-								<img src="resources/imgs/mr2.PNG" alt="Second slide">
+							<div class="item" style="overflow:hidden">
+								<img src="resources/imgs/mr2.PNG" >
 							</div>
-							<div class="item">
-								<img src="resources/imgs/mr3.PNG" alt="Third slide">
+							<div class="item" style="overflow:hidden">
+								<img src="resources/imgs/mr3.PNG">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		
 		<!-- 어디로 (jpg) -->
 		<div class="hidden-xs hidden-sm" align="center" style="padding-top:40px; padding-bottom:40px">
@@ -90,7 +93,7 @@
 		</div>	
 		
 		<!-- 안드로이드 어플 연결 -->
-		<div align="center" style="max-width:1200px; padding-top:40px; padding-bottom:40px" >
+		<div align="center" style="max-width:1200px; padding-top:40px; padding-bottom:40px; overflow:hidden" >
         	<a href="#" style="margin:0px; padding:0px"><img src="resources/imgs/android.PNG" style="width: 100%;max-height: 100%"/></a>
         </div>
 		
@@ -134,7 +137,7 @@
         		<form:form action="#" method="post" class="input-request-form" modelAttribute="vo">
         			
         			<!-- 왼쪽면 -->
-        			<div class="default col-xs-12 col-sm-4 col-md-5">
+        			<div class="wish-left col-xs-4 col-sm-6 col-md-5 ">
         				<div style="padding:30px"><h3>내게 맞는 방을 찾아주세요!</h3></div>
         				<div class="personal-info col-md-12">
         					
@@ -168,14 +171,14 @@
         					</div>
         					
         					<!-- 모바일에서는 안나오는 놈 -->
-        					<div class="form-group hidden-xs hidden-sm" style="margin-top:15px; padding:0px 15px; " >
+        					<div class="form-group" style="margin-top:15px; padding:0px 15px; " >
         						<div>
         							<label class="control-label" align="left" style="width:100%">희망 숙박 기간</label>
         						</div>
         						<div class="form-inline" >
         							<div class=" col-sm-6" style="padding:5px;" >
         								<label align="left" style="width:150px">- 체크인</label><br>
-        								<form:input class="form-control" type="text" placeholder="체크인" style="width:150px" id="checkin" path="wish_start"/>
+        								<form:input class="form-control " type="text" placeholder="체크인" style="width:150px" id="checkin" path="wish_start"/>
         							</div>
         							<div class=" col-sm-6" style="padding:5px">
         								<label  align="left" style="width:150px">- 체크아웃</label><br>
@@ -183,6 +186,7 @@
         							</div>
         						</div>
         					</div>
+        					
         					
         					<div class="hidden-xs hidden-sm" style="height:50px"></div>
         					<div style="padding:0 15px; margin-top:10px" >
@@ -192,14 +196,14 @@
         						<form:textarea class="form-control" style="height:77px" rows="10" cols="50" placeholder="메세지를 적어주세요." path="wish_msg"></form:textarea>
         					</div>
         					
-        					<div class="hidden-sm hidden-md hidden-lg" style="margin-top:20px; width:100%; height:20px">
+        					<div class=" hidden-md hidden-lg" style="margin-top:20px; width:100%; height:20px">
         						<input type="submit" class="btn btn-danger btn-block" value="전송"/>
         					</div>
         				</div>
         			</div> 
         			
         			<!-- 오른쪽 면 -->	
-        			<div class="extend hidden-xs hidden-sm col-md-7">
+        			<div class="wish-right hidden-xs hidden-sm col-md-7 ">
         				<div style="padding:30px"><h3>추가 요청사항을 입력해주세요.</h3></div>
         				
         				<div class="row col-sm-12">
@@ -216,14 +220,6 @@
 						                </div>
 					                </label>
 	        					</c:forEach>
-	        					<!-- 원래방식 -->
-				                <!-- <label class="btn btn-default btn-checkbox" style="width:170px">
-				                	<div align="left">
-					                    <span class="glyphicon glyphicon-unchecked" data-icon-on="glyphicon glyphicon-check" data-icon-off="glyphicon glyphicon-unchecked" ></span>
-					                    <input name="checkbox[]" type="checkbox" value="1" style="display: none" autocomplete="false"/> 원룸
-					                </div>
-				                </label>
-				                 -->
 				                </div>
 			                </div>
 		                </div>
@@ -274,6 +270,7 @@
 	<script src="resources/js/main_checkbox.js"></script> <!-- 방타입 체크박스 -->
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/main.js"></script>
 	<script src="resources/js/reaction_main.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="resources/js/foundation-datapicker.js"></script> <!-- 달력 -->
@@ -290,7 +287,8 @@
 	      var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 	      var checkin = jQuery('#checkin').fdatepicker({
 	          format: "yyyy-mm-dd",
-	          onRender: function (date) {
+	          onRender: function (date, inst) {
+	        	  // inst.dpDiv.css({marginTop: -date.offsetHeight + 'px', marginLeft: date.offsetWidth + 'px'});
 	              return date.valueOf() < now.valueOf() ? 'disabled' : '';
 	          }
 	      }).on('changeDate', function (ev) {
@@ -315,10 +313,10 @@
 	              autoclose: true,
 	              format: "yyyy-mm-dd",
 	              language: 'en',
-	              todayHighlight: false
+	              todayHighlight: true
 	          });
 	
-		
+			/*체크박스*/
 			var values = $('input[type=checkbox]');
 			for(var i=0; i<values.length; i++){
 				if(values[i].checked){
