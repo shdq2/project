@@ -50,17 +50,23 @@ public class HomeController {
 	@RequestMapping(value = "visit.do", method = RequestMethod.GET)
 	public String visit(Locale locale, Model model,HttpSession http) {
 		CustomVO vo = (CustomVO)http.getAttribute("custom");
+		String ret1=null;
+		int ret = 0;
 		if(vo != null) {
-			int ret = vdao.visit_chk(vo.getCustom_id());
+			ret = vdao.visit_chk(vo.getCustom_id());
 			if(ret == 0) {
 				vdao.visit_insert(vo.getCustom_id());
 			}
+			
 		}else {
-			int ret = vdao.visit_chk((String)http.getAttribute("id"));
+			ret = vdao.visit_chk((String)http.getAttribute("id"));
 			if(ret == 0) {
 				vdao.visit_insert((String)http.getAttribute("id"));
 			}
 		}
+		ret1 = ret+"";
+		System.out.println("ret : "+ ret1);
+		http.setAttribute("ret1", ret1);
 		return "redirect:/";
 	}
 }
