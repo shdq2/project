@@ -11,22 +11,14 @@ import org.springframework.stereotype.Service;
 import com.kte.project.VO.CustomVO;
 
 @Service
-public class adminDAO {
+public class admin_wishDAO {
 	@Autowired
 	@Resource(name="sqlSession")
 	private SqlSession sql = null;
 	
-	public int usercount() {
-		return sql.selectOne("admin.UserCount");
+	public int wish_count() {
+		return sql.selectOne("admin_wish.wish_count");
 	}
-
-	public int today() {
-		return sql.selectOne("admin.today");
-	}
-	public int yesterday() {
-		return sql.selectOne("admin.yesterday");
-	}
-	
 	
 
 }	
