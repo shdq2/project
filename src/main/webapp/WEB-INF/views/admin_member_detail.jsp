@@ -5,9 +5,10 @@
 	<jsp:include page="admin_menu.jsp"></jsp:include>
 	
 	<div class="col-md-9">
+	<div class="col-md-6">
 	<div class="panel panel-default">
 						<div class="panel-heading" style="background-color: #BCE9B7;">
-							<h3 class="panel-title">찜목록</h3>
+							<h3 class="panel-title">프로필</h3>
 						</div>
 						<div class="panel-body">
 		<table class="table">
@@ -35,8 +36,41 @@
 	</div>
 	</div>	
 	</div>
-	<div style="border-top: 1px solid #ccc;height: 15px;"></div>
-	<div class="col-md-3">
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background-color: #BCE9B7;">
+				<h3 class="panel-title">등록한 목록</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped">
+					<tr>
+						<th>번호</th>
+						<th>숙소이름</th>
+						<th>가격</th>
+						<th>사용 불가 기간 선택</th>
+						<th>현재 상태</th>
+					</tr>		
+					<c:if test="${!empty list }">	
+					<c:forEach var="i" items="${list }" varStatus="j">
+						<tr class="rlist">
+							<td>${j.count }</td>
+							<td>${i.room_name }</td>
+							<td>${i.room_price }</td>
+							<td><input type="button" value="날짜 선택"></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+					</c:if>
+					<c:if test="${empty list }">
+					<tr><td rowspan="4" colspan="5" style="text-align:center;width:100%;height:100%">등록된 숙소가 없습니다</td></tr>
+					
+					</c:if>
+				</table>
+			</div>
+		</div>
+	</div>
+		<div style="border-top: 1px solid #ccc;height: 15px;"></div>
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="background-color: #BCE9B7;">
 				<h3 class="panel-title">찜목록</h3>
@@ -53,7 +87,7 @@
 			</div>
 		</div>
 	</div>
-<div class="col-md-3">
+<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="background-color: #BCE9B7;">
 				<h3 class="panel-title">여행 목록</h3>
@@ -70,46 +104,10 @@
 				</table>
 			</div>
 		</div>
-	</div><div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading" style="background-color: #BCE9B7;">
-				<h3 class="panel-title">등록한 목록</h3>
-			</div>
-			<div class="panel-body">
-				<table class="table table-striped table-hover">
-					<tr>
-						<th>번호</th>
-						<th>숙소이름</th>
-						<th>가격</th>
-						<th>사용 불가 기간 선택</th>
-						<th>현재 상태</th>
-					</tr>			
-					<tr>
-						<th>1</th>
-						<th>test</th>
-						<th>25000</th>
-						<th><input type="button" value="달력선택" /></th>
-						<th>등록</th>
-					</tr>
-					<tr>
-						<th>2</th>
-						<th>test</th>
-						<th>25000</th>
-						<th><input type="button" value="달력선택" /></th>
-						<th>등록대기</th>
-					</tr>		
-					<tr>
-						<th>3</th>
-						<th>test</th>
-						<th>25000</th>
-						<th><input type="button" value="달력선택" /></th>
-						<th>미등록</th>
-					</tr>		
-										
-				</table>
-			</div>
-		</div>
 	</div>
+	
+	</div>
+
 
 </div>
 
@@ -126,7 +124,14 @@
 			//활성화된 메뉴 처리
 			$('.custom_menu').addClass("active");
 			///
-									
+						
+			 $(document).on('mouseover', '.rlist', function(){
+					$(this).addClass('hover');
+				});
+			 $(document).on('mouseout', '.rlist', function(){			
+					$(this).removeClass('hover');							
+				});	
+			
 		})
 	</script>
 </body>

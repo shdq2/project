@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.RoomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.adminroomDAO;
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +29,8 @@ import com.kte.project.dao.adminmemberDAO;
 public class AdminMemberController {
 	@Autowired
 	private adminmemberDAO amdao = null; 
+	@Autowired
+	private adminroomDAO ardao = null;
 	
 	@RequestMapping(value = "/admin_member.do", method = RequestMethod.GET)
 	public String member(Model model) {
@@ -43,6 +47,8 @@ public class AdminMemberController {
 			@RequestParam("id")String id) {
 		CustomVO vo = amdao.admin_member_select(id);
 		model.addAttribute("vo", vo);
+		List<RoomVO> list = ardao.roomList(id);
+		model.addAttribute("list", list);
 		return "admin_member_detail";
 	}
 }
