@@ -1,0 +1,35 @@
+package com.kte.project.dao;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kte.project.VO.CustomVO;
+
+@Service
+public class adminmemberDAO {
+	@Autowired
+	@Resource(name="sqlSession")
+	private SqlSession sql = null;
+	
+
+	public List<CustomVO> AdminUserMain(){
+		return sql.selectList("admin_member.AdminUserMain");
+	}
+	
+	public int room_count(String custom_id){
+		return sql.selectOne("admin_member.room_count",custom_id);
+	}
+	
+	public int member_block(CustomVO vo) {
+		return sql.update("admin_member.member_block",vo);
+	}
+	
+	public CustomVO admin_member_select(String id) {
+		return sql.selectOne("admin_member.admin_member_select",id);
+	}
+}	

@@ -24,7 +24,7 @@
 		UPDATE V6_BOARD SET BRD_HIT = BRD_HIT + 1 WHERE BRD_NO = #{brd_no}
 	</update> -->
 	
-	<insert id="insertRegister" parameterType="com.kte.project.vo.CustomVO">
+	<insert id="insertRegister" parameterType="com.kte.project.VO.CustomVO">
 		INSERT INTO custom(custom_id, custom_pw, custom_name, custom_date) VALUES(#{custom_id}, SHA1(#{custom_pw}), #{custom_name}, NOW())
 	</insert>
 	

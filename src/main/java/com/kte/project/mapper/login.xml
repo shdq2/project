@@ -24,8 +24,12 @@
 		UPDATE V6_BOARD SET BRD_HIT = BRD_HIT + 1 WHERE BRD_NO = #{brd_no}
 	</update> -->
 	
-	<select id="selectCustomOne" parameterType="com.kte.project.vo.CustomVO" resultType="com.kte.project.vo.CustomVO">
+	<select id="selectCustomOne" parameterType="com.kte.project.VO.CustomVO" resultType="com.kte.project.VO.CustomVO">
 		SELECT * FROM custom WHERE custom_id = #{custom_id} AND custom_pw = SHA1(#{custom_pw})
+	</select>
+	
+	<select id="confirmPw" parameterType="com.kte.project.VO.CustomVO" resultType="int">
+		SELECT COUNT(custom_id) FROM custom WHERE custom_id = #{custom_id} AND custom_pw = SHA1(#{custom_pw})
 	</select>
 	
 </mapper>
