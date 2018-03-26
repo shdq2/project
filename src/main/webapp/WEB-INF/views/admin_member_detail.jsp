@@ -5,15 +5,15 @@
 	<jsp:include page="admin_menu.jsp"></jsp:include>
 	
 	<div class="col-md-9">
-	<div class="col-md-6">
-	<div class="panel panel-default">
+	<div class="col-md-6" style="min-height: 340px;">
+	<div class="panel panel-default" style="height:315px;">
 						<div class="panel-heading" style="background-color: #BCE9B7;">
 							<h3 class="panel-title">프로필</h3>
 						</div>
-						<div class="panel-body">
-		<table class="table">
+						<div class="panel-body"style="height: 270px;">
+		<table class="table table-striped">
 			<tr>
-				<td rowspan="4" align="center" style="width:30%">프로필 사진</td>
+				<td rowspan="6" align="center" style="width:30%">프로필 사진</td>
 				<td style="width:20%">회원 아이디</td>
 				<td>아이디</td>
 			</tr>
@@ -32,16 +32,34 @@
 				<td>전화번호</td>
 				<td>010-1234-1234</td>
 			</tr>
+			<tr>
+				
+				<td>여행 횟수</td>
+				<td>0</td>
+			</tr> 
+			<tr>
+				
+				<td>여행 횟수</td>
+				<td>0</td>
+			</tr> 
 		</table>
 	</div>
 	</div>	
 	</div>
-	<div class="col-md-6">
-		<div class="panel panel-default">
+	<div class="col-md-6" style="min-height: 340px;">
+		<div class="panel panel-default" style="height:315px;">
 			<div class="panel-heading" style="background-color: #BCE9B7;">
-				<h3 class="panel-title">등록한 목록</h3>
+				<table style="width:100%">
+					<tr>
+						<td style="width:30%"> < </td>
+						<td style="width:30%;text-align: center" > <h3 class="panel-title">등록한 목록</h3> </td>
+						<td style="width:30%; text-align: right;"> > </td>						
+					</tr>
+				</table>
+				
+				
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="height: 270px;">
 				<table class="table table-striped">
 					<tr>
 						<th>번호</th>

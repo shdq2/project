@@ -4,7 +4,7 @@
 <mapper namespace="admin_room">
 	
 	<select id="select_room" resultType="roomVO" parameterType="String">
-		select * from room where custom_id = #{id} order by room_code desc
+		select * from room where custom_id = #{id} order by room_code desc LIMIT 0,4
 	</select>
 	
 </mapper>
