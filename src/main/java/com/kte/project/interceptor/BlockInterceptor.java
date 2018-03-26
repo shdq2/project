@@ -10,27 +10,31 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.kte.project.VO.CustomVO;
 
-public class VisitInterceptor extends HandlerInterceptorAdapter {
+public class BlockInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession http = request.getSession();
-
-		String ret = (String)http.getAttribute("ret1");
-		System.out.println("ret1 : " + ret);
-		if(ret == null || ret == "0") {
-			System.out.println("test1");
-			response.sendRedirect("visit.do");
-			return false;
-		}
-			
-		else {
+		CustomVO vo = (CustomVO) http.getAttribute("custom");
+		if(vo == null) {
 			return true;
+		}else {
+			String block = (String)http.getAttribute("block");
+			if(block == null) {
+				response.sendRedirect("block.do");
+				return false;
+			}
+			if(block == "0" || block == "999") {				
+				return true;			
+			}else {
+				System.out.println("차단되었습니다");
+				http.invalidate();
+				response.sendRedirect("/project/");
+				return false;
+			}
 		}
-		
 	}
-
 	
 }

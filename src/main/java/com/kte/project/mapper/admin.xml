@@ -15,4 +15,7 @@
 		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date() and custom_block <![CDATA[<]]> 10
 	</select>
 	
+	<select id="block_chk" resultType="Int" parameterType="String">
+		select custom_block from custom where custom_id=#{id}
+	</select>
 </mapper>

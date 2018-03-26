@@ -1,6 +1,8 @@
 package com.kte.project.admin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.RoomVO;
 import com.kte.project.VO.WishVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.adminroomDAO;
 
 @RestController
 public class JSON_Admin_Controller {
@@ -24,6 +28,8 @@ public class JSON_Admin_Controller {
 	private adminmemberDAO amdao=null; 
 	@Autowired
 	private admin_wishDAO wdao=null; 
+	@Autowired
+	private adminroomDAO ardao=null; 
 	
 	// json member ///////
 	@RequestMapping(value = "/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
@@ -38,6 +44,27 @@ public class JSON_Admin_Controller {
 		vo.setCustom_block(block);
 		int ret = amdao.member_block(vo);
 		return ret;
+	}
+	
+	@RequestMapping(value = "/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> member_room(Model model,
+			HttpSession http,
+			@RequestParam("id")String id,
+			@RequestParam("page")int page) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		int p = (page-1)*4;
+		
+		RoomVO vo = new RoomVO(); 
+		
+		vo.setCustom_id(id);
+		vo.setPage(p);
+		int total = ardao.total_room_count();
+		int tot = ((total-1)/4)+1;
+		List<RoomVO> list = ardao.roomList(vo);
+		map.put("data", list);
+		map.put("page", tot);
+		return map;
 	}
 	////////////////////////
 	

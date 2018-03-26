@@ -2,57 +2,74 @@ package com.kte.project.VO;
 
 public class RoomVO {
 	/*
-	 * ·ë ÀÌ¹ÌÁö vo
+	 * ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ vo
 	 * */
-	private String room_code = null; // ¼÷¼Ò µî·Ï ¹øÈ£ => ¼÷¼Ò °ü·Ã vo °ø¿ë
-	// ·ë ÀÌ¹ÌÁö
+	private String room_code = null; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È£ => ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ vo ï¿½ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
 	private byte[] room_img1=null;
 	private byte[] room_img2=null;
 	private byte[] room_img3=null;
 	private byte[] room_img4=null;
 	private byte[] room_img5=null;
-	// ·ë ÀÌ¹ÌÁö
-	private String room_img_date =null; // ÀÌ¹ÌÁö µî·Ï ³¯Â¥
+	// ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private String room_img_date =null; // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥
 	/*
-	 * ·ë ÀÌ¹ÌÁö vo
+	 * ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ vo
 	 * */
 	
 	/*
-	 * ·ë ¿É¼Ç vo
+	 * ï¿½ï¿½ ï¿½É¼ï¿½ vo
 	 * */
-	private String ro_option = null;	// ¼÷¼Ò ±âº» ¿É¼Ç
-	private String ro_option2 = null;	// ¼÷¼Ò Ãß°¡¿É¼Ç
-	private String ro_security = null;	// ¼÷¼Ò º¸¾È»çÇ×
-	private String ro_date = null;		// ¿É¼Ç µî·Ï ÀÏÀÚ
+	private String ro_option = null;	// ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½É¼ï¿½
+	private String ro_option2 = null;	// ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½É¼ï¿½
+	private String ro_security = null;	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½
+	private String ro_date = null;		// ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	/*
-	 * ·ë ¿É¼Ç vo
-	 * */
-	
-	/*
-	 * ·ë vo
-	 * */
-	private String room_name = null;	//¼÷¼Ò ÀÌ¸§
-	private String room_content = null;	//¼÷¼Ò ¼³¸í
-	private String room_price = null;	//¼÷¼Ò °¡°Ý (1¹Ú±âÁØ)
-	private String room_date = null;	//¼÷¼Ò µî·Ï ÀÏÀÚ
-	private String room_block= null;	//¼÷¼Ò¸¦ ¸®½ºÆ®¿¡ Ãß°¡ÇÒÁö ¸»Áö ¿©ºÎ
-	private String room_addr = null;	//¼÷¼Ò ÁÖ¼Ò
-	/*
-	 * ·ë vo
+	 * ï¿½ï¿½ ï¿½É¼ï¿½ vo
 	 * */
 	
 	/*
-	 * Áö¿ª vo
+	 * ï¿½ï¿½ vo
 	 * */
-	private String region_name = null;	//¼÷¼Ò°¡ µî·ÏµÈ Áö¿ª ÀÌ¸§
-	private int region_no = 0;			//Áö¿ª ¹øÈ£
+	private String room_name = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private String room_content = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String room_price = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (1ï¿½Ú±ï¿½ï¿½ï¿½)
+	private String room_date = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String room_block= null;	//ï¿½ï¿½ï¿½Ò¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String room_addr = null;	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½
+	/*
+	 * ï¿½ï¿½ vo
+	 * */
+	
+	/*
+	 * ï¿½ï¿½ï¿½ï¿½ vo
+	 * */
+	private String region_name = null;	//ï¿½ï¿½ï¿½Ò°ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+	private int region_no = 0;			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 	
 	
 	/*
-	 * Áö¿ª vo
+	 * ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
 	
+	private int page = 0;
+	private String custom_id = null;
+	
+	
+	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
 	public String getRoom_code() {
 		return room_code;
 	}

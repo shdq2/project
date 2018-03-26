@@ -47,8 +47,14 @@ public class AdminMemberController {
 			@RequestParam("id")String id) {
 		CustomVO vo = amdao.admin_member_select(id);
 		model.addAttribute("vo", vo);
-		List<RoomVO> list = ardao.roomList(id);
+		RoomVO rvo = new RoomVO();
+		rvo.setCustom_id(id);
+		rvo.setPage(0);
+		List<RoomVO> list = ardao.roomList(rvo);
 		model.addAttribute("list", list);
+		
+		int count = ardao.total_room_count();
+		model.addAttribute("count", count);
 		return "admin_member_detail";
 	}
 }

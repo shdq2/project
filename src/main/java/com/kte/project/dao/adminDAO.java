@@ -27,6 +27,8 @@ public class adminDAO {
 		return sql.selectOne("admin.yesterday");
 	}
 	
-	
+	public int block_chk(String id) {
+		return sql.selectOne("admin.block_chk",id);
+	}
 
 }	

@@ -3,8 +3,12 @@
 
 <mapper namespace="admin_room">
 	
-	<select id="select_room" resultType="roomVO" parameterType="String">
-		select * from room where custom_id = #{id} order by room_code desc LIMIT 0,4
+	<select id="select_room" resultType="roomVO" parameterType="roomVO">
+		select * from room where custom_id = #{custom_id} order by room_code desc LIMIT #{page},4
+	</select>
+	
+	<select id="total_room_count" resultType="Int">
+		select count(*) from room
 	</select>
 	
 </mapper>

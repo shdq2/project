@@ -17,10 +17,12 @@ public class adminroomDAO {
 	@Resource(name="sqlSession")
 	private SqlSession sql = null;
 	
-	public List<RoomVO> roomList(String id){
-		return sql.selectList("admin_room.select_room",id);
+	public List<RoomVO> roomList(RoomVO vo){
+		return sql.selectList("admin_room.select_room",vo);
 	}
 	
-	
+	public int total_room_count() {
+		return sql.selectOne("admin_room.total_room_count");
+	}
 
 }	
