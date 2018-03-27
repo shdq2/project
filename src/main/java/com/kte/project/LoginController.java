@@ -19,7 +19,7 @@ public class LoginController {
 	LoginDAO lDAO = null; 
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
-	public String register(Model model) {
+	public String login(Model model) {
 		CustomVO vo = new CustomVO();
 		model.addAttribute("vo", vo);
 
