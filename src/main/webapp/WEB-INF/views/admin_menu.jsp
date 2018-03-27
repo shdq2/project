@@ -94,5 +94,9 @@
 							class="list-group-item custom_menu"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span> 회원관리<span
 							class="badge">${sessionScope._ucount }</span></a>
+							
+							<a href="admin_member.do" class="list-group-item reser_menu">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 예약관리
+							<span class="badge">${sessionScope._ucount }</span></a>
 					</div>
 				</div>

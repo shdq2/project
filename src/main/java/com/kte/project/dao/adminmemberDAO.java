@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 
 @Service
 public class adminmemberDAO {
@@ -31,5 +32,12 @@ public class adminmemberDAO {
 	
 	public CustomVO admin_member_select(String id) {
 		return sql.selectOne("admin_member.admin_member_select",id);
+	}
+	
+	public List<ReservationVO> reser_list(ReservationVO vo){
+		return sql.selectList("admin_reservation.reservation_member",vo);
+	}
+	public int reser_total(String id) {
+		return sql.selectOne("admin_reservation.reser_total",id);
 	}
 }	

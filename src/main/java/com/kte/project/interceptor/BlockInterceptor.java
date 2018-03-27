@@ -26,13 +26,13 @@ public class BlockInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect("block.do");
 				return false;
 			}
-			if(block == "0" || block == "999") {				
-				return true;			
-			}else {
+			if(block == "1") {				
 				System.out.println("차단되었습니다");
 				http.invalidate();
 				response.sendRedirect("/project/");
-				return false;
+				return false;			
+			}else {				
+				return true;
 			}
 		}
 	}

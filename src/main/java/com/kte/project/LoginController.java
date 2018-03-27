@@ -30,12 +30,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession http) {
+	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession httpsession) {
 		CustomVO cvo = lDAO.selectCustomOne(vo);
 		if(cvo != null) {
 			if(cvo.getCustom_block() != 1) {
-				HttpSession httpsession = request.getSession();
+				
+				
 				httpsession.setAttribute("custom",cvo);
+				System.out.println("로그인 cvo 테스트 : " + (CustomVO)httpsession.getAttribute("custom"));
 				httpsession.setAttribute("custom_id",cvo.getCustom_id());
 				httpsession.setAttribute("custom_name",cvo.getCustom_name());
 				System.out.println("로그인 성공");					

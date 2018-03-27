@@ -21,8 +21,8 @@ public class adminroomDAO {
 		return sql.selectList("admin_room.select_room",vo);
 	}
 	
-	public int total_room_count() {
-		return sql.selectOne("admin_room.total_room_count");
+	public int total_room_count(String id) {
+		return sql.selectOne("admin_room.total_room_count",id);
 	}
 
 }	

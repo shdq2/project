@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 import com.kte.project.VO.RoomVO;
 import com.kte.project.VO.WishVO;
 import com.kte.project.dao.adminDAO;
@@ -59,9 +60,30 @@ public class JSON_Admin_Controller {
 		
 		vo.setCustom_id(id);
 		vo.setPage(p);
-		int total = ardao.total_room_count();
+		int total = ardao.total_room_count(id);
 		int tot = ((total-1)/4)+1;
 		List<RoomVO> list = ardao.roomList(vo);
+		map.put("data", list);
+		map.put("page", tot);
+		return map;
+	}
+	
+	@RequestMapping(value = "/Json_member_travel.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> member_travel(Model model,
+			HttpSession http,
+			@RequestParam("id")String id,
+			@RequestParam("page")int page) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		int p = (page-1)*6;
+		
+		ReservationVO vo = new ReservationVO(); 
+		
+		vo.setCustom_id(id);
+		vo.setPage(p);
+		int total = amdao.reser_total(id);
+		int tot = ((total-1)/6)+1;
+		List<ReservationVO> list = amdao.reser_list(vo);
 		map.put("data", list);
 		map.put("page", tot);
 		return map;

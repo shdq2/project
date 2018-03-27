@@ -15,6 +15,7 @@ public class ProfileController {
 	@RequestMapping(value="/profile.do", method = RequestMethod.GET)
 	public String profile(HttpSession http) {
 		CustomVO vo =(CustomVO)http.getAttribute("custom");
+		
 		if(vo == null) {
 			return "redirect:login.do";
 		}

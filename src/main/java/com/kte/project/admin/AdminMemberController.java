@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 import com.kte.project.VO.RoomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.adminmemberDAO;
@@ -53,8 +54,18 @@ public class AdminMemberController {
 		List<RoomVO> list = ardao.roomList(rvo);
 		model.addAttribute("list", list);
 		
-		int count = ardao.total_room_count();
+		int count = ardao.total_room_count(id);
 		model.addAttribute("count", count);
+		
+		ReservationVO revo = new ReservationVO();
+		revo.setCustom_id(id);
+		revo.setPage(0);
+		
+		List<ReservationVO> rlist = amdao.reser_list(revo);
+		model.addAttribute("rlist", rlist);
+		
+		int rcount=amdao.reser_total(id);
+		model.addAttribute("rcount",rcount);
 		return "admin_member_detail";
 	}
 }
