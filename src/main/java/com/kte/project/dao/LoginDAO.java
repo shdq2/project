@@ -17,4 +17,8 @@ private SqlSession sqlsession = null;
 	public CustomVO selectCustomOne(CustomVO vo) {
 		return sqlsession.selectOne("login.selectCustomOne", vo);
 	}
+	
+	public int confirmPw(CustomVO vo) {
+		return sqlsession.selectOne("login.confirmPw", vo);
+	}
 }

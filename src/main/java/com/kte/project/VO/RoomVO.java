@@ -2,60 +2,106 @@ package com.kte.project.VO;
 
 public class RoomVO {
 	/*
+<<<<<<< HEAD
 	 * �� �̹��� vo
+=======
+	 * 占쏙옙 占싱뱄옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
-	private String room_code = null; // ���� ��� ��ȣ => ���� ���� vo ����
-	// �� �̹���
+
+	private String room_code = null; // 占쏙옙占쏙옙 占쏙옙占� 占쏙옙호 => 占쏙옙占쏙옙 占쏙옙占쏙옙 vo 占쏙옙占쏙옙
+	// 占쏙옙 占싱뱄옙占쏙옙
 	private byte[] room_img1=null;
 	private byte[] room_img2=null;
 	private byte[] room_img3=null;
 	private byte[] room_img4=null;
 	private byte[] room_img5=null;
+
 	// �� �̹���
 	private String room_img_date =null; // �̹��� ��� ��¥
+
 	/*
+<<<<<<< HEAD
 	 * �� �̹��� vo
+=======
+	 * 占쏙옙 占싱뱄옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
 	 * �� �ɼ� vo
+=======
+	 * 占쏙옙 占심쇽옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
-	private String ro_option = null;	// ���� �⺻ �ɼ�
-	private String ro_option2 = null;	// ���� �߰��ɼ�
-	private String ro_security = null;	// ���� ���Ȼ���
-	private String ro_date = null;		// �ɼ� ��� ����
-	
+
+	private String ro_option = null;	// 占쏙옙占쏙옙 占썩본 占심쇽옙
+	private String ro_option2 = null;	// 占쏙옙占쏙옙 占쌩곤옙占심쇽옙
+	private String ro_security = null;	// 占쏙옙占쏙옙 占쏙옙占싫삼옙占쏙옙
+	private String ro_date = null;		// 占심쇽옙 占쏙옙占� 占쏙옙占쏙옙
+
 	/*
+<<<<<<< HEAD
 	 * �� �ɼ� vo
+=======
+	 * 占쏙옙 占심쇽옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
 	 * �� vo
+=======
+	 * 占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
-	private String room_name = null;	//���� �̸�
-	private String room_content = null;	//���� ����
-	private String room_price = null;	//���� ���� (1�ڱ���)
-	private String room_date = null;	//���� ��� ����
-	private String room_block= null;	//���Ҹ� ����Ʈ�� �߰����� ���� ����
-	private String room_addr = null;	//���� �ּ�
+
+	private String room_name = null;	//占쏙옙占쏙옙 占싱몌옙
+	private String room_content = null;	//占쏙옙占쏙옙 占쏙옙占쏙옙
+	private String room_price = null;	//占쏙옙占쏙옙 占쏙옙占쏙옙 (1占쌘깍옙占쏙옙)
+	private String room_date = null;	//占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
+	private String room_block= null;	//占쏙옙占쌀몌옙 占쏙옙占쏙옙트占쏙옙 占쌩곤옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+	private String room_addr = null;	//占쏙옙占쏙옙 占쌍쇽옙
+	private String room_type = null;	//占쏙옙占쏙옙 占쌍쇽옙
+	private int room_like = 0;	//占쏙옙占쏙옙 占쌍쇽옙
+	private String room_day = null;
+	private String room_month = null;
+	
+	private String custom_id = null;
+	
+	private String map_lat = null;
+	private String map_lng = null;
+
 	/*
+<<<<<<< HEAD
 	 * �� vo
+=======
+	 * 占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
 	 * ���� vo
+=======
+	 * 占쏙옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	private String region_name = null;	//���Ұ� ��ϵ� ���� �̸�
 	private int region_no = 0;			//���� ��ȣ
+
 	
 	
 	/*
+<<<<<<< HEAD
 	 * ���� vo
+=======
+	 * 占쏙옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	private int page = 0;
-	private String custom_id = null;
-	
 	
 	
 	public int getPage() {
@@ -185,6 +231,40 @@ public class RoomVO {
 		this.region_no = region_no;
 	}
 
-	
-	
+	public String getMap_lat() {
+		return map_lat;
+	}
+	public void setMap_lat(String map_lat) {
+		this.map_lat = map_lat;
+	}
+	public String getMap_lng() {
+		return map_lng;
+	}
+	public void setMap_lng(String map_lng) {
+		this.map_lng = map_lng;
+	}
+	public String getRoom_type() {
+		return room_type;
+	}
+	public void setRoom_type(String room_type) {
+		this.room_type = room_type;
+	}
+	public int getRoom_like() {
+		return room_like;
+	}
+	public void setRoom_like(int room_like) {
+		this.room_like = room_like;
+	}
+	public String getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(String room_day) {
+		this.room_day = room_day;
+	}
+	public String getRoom_month() {
+		return room_month;
+	}
+	public void setRoom_month(String room_month) {
+		this.room_month = room_month;
+	}
 }

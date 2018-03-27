@@ -1,55 +1,21 @@
-function myAccFunc(x, c, n, s) {
-	var r = -1;
-	var size = 0;
-
-	for(var i=0; i<4; i++) {
-		if(i == s) {
-			c[i].className = c[i].className.replace(" glyphicon-menu-down", " glyphicon-menu-right");
-			x[i].className = x[i].className.replace(" w3-show", "");
-	        x[i].previousElementSibling.className = 
-	        x[i].previousElementSibling.className.replace(" w3-green", "");
-	        
-	        size = 0;
-	        if(s == n) {
-	        	break;
-	        }
-		}
-		if(i == n) {
-			c[i].className = c[i].className.replace(" glyphicon-menu-right", " glyphicon-menu-down");
-			x[i].className += " w3-show";
-	        x[i].previousElementSibling.className += " w3-green";
-	        
-	        size = $(x[i]).css('height');
-	        
-	        r = i;
-		}
-	}
-
-	$('body').css('height', 'calc(100% + ' + size);
-	console.log('body : ' + $('body').height());
-	scrollbar();
-	
-	return r;
-}
-
-$(function() {	
+$(function() {
 	var a_id = [document.getElementById("Acc1"), document.getElementById("Acc2"), document.getElementById("Acc3"), document.getElementById("Acc4")];
 	var c_id = [document.getElementById("cursor1"), document.getElementById("cursor2"), document.getElementById("cursor3"), document.getElementById("cursor4")];
 	var save_open_menu = -1;
-	
-	$('#list-item1').click(function() {	    
+	console.log('0');
+	$('#list-item1').click(function() {console.log('1');
 		save_open_menu = myAccFunc(a_id, c_id, 0, save_open_menu);
 	});
 	
-	$('#list-item2').click(function() {
+	$('#list-item2').click(function() {console.log('2');
 		save_open_menu = myAccFunc(a_id, c_id, 1, save_open_menu);
 	});
 	
-	$('#list-item3').click(function() {	    
+	$('#list-item3').click(function() {console.log('3');
 		save_open_menu = myAccFunc(a_id, c_id, 2, save_open_menu);
 	});
 	
-	$('#list-item4').click(function() {	    
+	$('#list-item4').click(function() {console.log('4');
 		save_open_menu = myAccFunc(a_id, c_id, 3, save_open_menu);
 	});
 	
@@ -79,3 +45,42 @@ $(function() {
 		}
 	});
 });
+
+function myAccFunc(x, c, n, s) {
+	var r = -1;
+	var size = 0;
+
+	for(var i=0; i<4; i++) {
+		if(i == s) {
+			c[i].className = c[i].className.replace(" glyphicon-menu-down", " glyphicon-menu-right");
+			x[i].className = x[i].className.replace(" w3-show", "");
+	        x[i].previousElementSibling.className = 
+	        x[i].previousElementSibling.className.replace(" w3-green", "");
+	        
+	        size = 0;
+	        if(s == n) {
+	        	break;
+	        }
+		}
+		if(i == n) {
+			c[i].className = c[i].className.replace(" glyphicon-menu-right", " glyphicon-menu-down");
+			x[i].className += " w3-show";
+	        x[i].previousElementSibling.className += " w3-green";
+	        
+	        size = $(x[i]).css('height');
+	        
+	        r = i;
+		}
+	}
+	var size = 0;
+	var height = $(window).height();
+	size = $('.topbar').outerHeight() + $('.custom-box.unlock').outerHeight() + $('.custom-box.lock').outerHeight() + $('.tmenu-list').outerHeight() + $('.tmenu-2').outerHeight();
+
+	if(height < size) {
+		$('.tmenu').css('overflow-y', 'scroll');
+	} else {
+		$('.tmenu').css('overflow-y', 'hidden');
+	}
+	
+	return r;
+}
