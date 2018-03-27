@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin_visit">
+	<select id="visit_chk" parameterType="String" resultType="Int">
+		select count(*) from visitor where visitor_id = #{id} and date_format(visitor_date,"%y-%c-%e") = date_format(now(),"%y-%c-%e") 
+	</select>
+	
+	<insert id="visit_insert" parameterType="String">
+		insert into visitor select ifnull(max(visitor_no)+1,0),#{id},now() from visitor;
+	</insert>
+	
+	<select id="month_visit" resultType="Int">
+		SELECT count(*) from visitor where visitor_date <![CDATA[>]]> LAST_DAY(NOW() - interval 1 month) and visitor_date <![CDATA[<=]]> last_day(now())
+	</select>
+	
+	<select id="today_visit" resultType="Int">
+		select count(*) from visitor where visitor_date >= curdate()
+	</select>
+</mapper>
