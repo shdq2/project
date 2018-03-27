@@ -9,29 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
-import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 
 @Service
-public class adminDAO {
+public class adminroomDAO {
 	@Autowired
 	@Resource(name="sqlSession")
 	private SqlSession sql = null;
 	
-	public int usercount() {
-		return sql.selectOne("admin.UserCount");
-	}
-
-	public int today() {
-		return sql.selectOne("admin.today");
-	}
-	public int yesterday() {
-		return sql.selectOne("admin.yesterday");
+	public List<RoomVO> roomList(RoomVO vo){
+		return sql.selectList("admin_room.select_room",vo);
 	}
 	
-	public int block_chk(String id) {
-		return sql.selectOne("admin.block_chk",id);
+	public int total_room_count(String id) {
+		return sql.selectOne("admin_room.total_room_count",id);
 	}
-	
-
 
 }	

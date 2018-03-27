@@ -129,4 +129,5 @@ public class CustomVO {
 	public void setReservation_date(String reservation_date) {
 		this.reservation_date = reservation_date;
 	}
+
 }

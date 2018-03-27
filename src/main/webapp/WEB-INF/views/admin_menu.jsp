@@ -33,7 +33,7 @@
 				<ul class="nav navbar-nav">
 					<li class="menu_check"><a href="index.html">Dashboard</a></li>
 					<li class="menu_check"><a href="pages.html">Pages</a></li>
-					<li class="menu_check"><a href="wish.do">Wish</a></li>
+					<li class="menu_check"><a href="admin_wish.do">Wish</a></li>
 					<li class="menu_check"><a href="admin_member.do">Users</a></li>
 				</ul>
 
@@ -87,12 +87,16 @@
 							class="badge">12</span> </a> <a href="pages.html"
 							class="list-group-item room_menu"><span
 							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-							숙소관리<span class="badge">25</span></a> <a href="wish.do"
-							class="list-group-item post_menu"><span
+							숙소관리<span class="badge">25</span></a> <a href="admin_wish.do"
+							class="list-group-item wish_menu"><span
 							class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-							Wish<span class="badge">126</span></a> <a href="admin_member.do"
+							Wish<span class="badge">${sessionScope._wcount }</span></a> <a href="admin_member.do"
 							class="list-group-item custom_menu"><span
 							class="glyphicon glyphicon-user" aria-hidden="true"></span> 회원관리<span
 							class="badge">${sessionScope._ucount }</span></a>
+							
+							<a href="admin_member.do" class="list-group-item reser_menu">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 예약관리
+							<span class="badge">${sessionScope._ucount }</span></a>
 					</div>
 				</div>

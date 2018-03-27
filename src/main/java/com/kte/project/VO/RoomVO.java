@@ -2,8 +2,13 @@ package com.kte.project.VO;
 
 public class RoomVO {
 	/*
+<<<<<<< HEAD
+	 * �� �̹��� vo
+=======
 	 * 占쏙옙 占싱뱄옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
+
 	private String room_code = null; // 占쏙옙占쏙옙 占쏙옙占� 占쏙옙호 => 占쏙옙占쏙옙 占쏙옙占쏙옙 vo 占쏙옙占쏙옙
 	// 占쏙옙 占싱뱄옙占쏙옙
 	private byte[] room_img1=null;
@@ -11,27 +16,47 @@ public class RoomVO {
 	private byte[] room_img3=null;
 	private byte[] room_img4=null;
 	private byte[] room_img5=null;
-	// 占쏙옙 占싱뱄옙占쏙옙
-	private String room_img_date =null; // 占싱뱄옙占쏙옙 占쏙옙占� 占쏙옙짜
+
+	// �� �̹���
+	private String room_img_date =null; // �̹��� ��� ��¥
+
 	/*
+<<<<<<< HEAD
+	 * �� �̹��� vo
+=======
 	 * 占쏙옙 占싱뱄옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
+	 * �� �ɼ� vo
+=======
 	 * 占쏙옙 占심쇽옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
+
 	private String ro_option = null;	// 占쏙옙占쏙옙 占썩본 占심쇽옙
 	private String ro_option2 = null;	// 占쏙옙占쏙옙 占쌩곤옙占심쇽옙
 	private String ro_security = null;	// 占쏙옙占쏙옙 占쏙옙占싫삼옙占쏙옙
 	private String ro_date = null;		// 占심쇽옙 占쏙옙占� 占쏙옙占쏙옙
-	
+
 	/*
+<<<<<<< HEAD
+	 * �� �ɼ� vo
+=======
 	 * 占쏙옙 占심쇽옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
+	 * �� vo
+=======
 	 * 占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
+
 	private String room_name = null;	//占쏙옙占쏙옙 占싱몌옙
 	private String room_content = null;	//占쏙옙占쏙옙 占쏙옙占쏙옙
 	private String room_price = null;	//占쏙옙占쏙옙 占쏙옙占쏙옙 (1占쌘깍옙占쏙옙)
@@ -47,21 +72,50 @@ public class RoomVO {
 	
 	private String map_lat = null;
 	private String map_lng = null;
+
 	/*
+<<<<<<< HEAD
+	 * �� vo
+=======
 	 * 占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
 	/*
+<<<<<<< HEAD
+	 * ���� vo
+=======
 	 * 占쏙옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
-	private String region_name = null;	//占쏙옙占쌀곤옙 占쏙옙溝占� 占쏙옙占쏙옙 占싱몌옙
-	private int region_no = 0;			//占쏙옙占쏙옙 占쏙옙호
+	private String region_name = null;	//���Ұ� ��ϵ� ���� �̸�
+	private int region_no = 0;			//���� ��ȣ
+
 	
 	
 	/*
+<<<<<<< HEAD
+	 * ���� vo
+=======
 	 * 占쏙옙占쏙옙 vo
+>>>>>>> refs/remotes/origin/master
 	 * */
 	
+	private int page = 0;
+	
+	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
 	public String getRoom_code() {
 		return room_code;
 	}
@@ -176,12 +230,7 @@ public class RoomVO {
 	public void setRegion_no(int region_no) {
 		this.region_no = region_no;
 	}
-	public String getCustom_id() {
-		return custom_id;
-	}
-	public void setCustom_id(String custom_id) {
-		this.custom_id = custom_id;
-	}
+
 	public String getMap_lat() {
 		return map_lat;
 	}

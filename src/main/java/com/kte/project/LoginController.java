@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.LoginDAO;
+import com.kte.project.dao.visitDAO;
 
 @Controller
 public class LoginController {
 	@Autowired
 	LoginDAO lDAO = null; 
+	@Autowired
+	visitDAO vdao = null;
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -27,16 +30,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo) {
+	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession httpsession) {
 		CustomVO cvo = lDAO.selectCustomOne(vo);
-		
 		if(cvo != null) {
 			if(cvo.getCustom_block() != 1) {
-				HttpSession httpsession = request.getSession();
-				httpsession.setAttribute("custom_name", cvo.getCustom_name());
-				httpsession.setAttribute("custom_id", cvo.getCustom_id());
-				System.out.println("로그인 성공");
-				return "redirect:main.do";
+				
+				
+				httpsession.setAttribute("custom",cvo);
+				System.out.println("로그인 cvo 테스트 : " + (CustomVO)httpsession.getAttribute("custom"));
+				httpsession.setAttribute("custom_id",cvo.getCustom_id());
+				httpsession.setAttribute("custom_name",cvo.getCustom_name());
+				System.out.println("로그인 성공");					
+				return "redirect:visit.do";
 			}else {
 				System.out.println("차단된 아이디");
 				return "redirect:login.do"; 
