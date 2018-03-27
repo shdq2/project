@@ -31,13 +31,13 @@ header h1 {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 .aaa .thumbex {
   margin: 10px 20px 30px;
-  min-width: 300px;
-  max-width: 300px;
-  height: 300px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 250px;
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -50,7 +50,7 @@ header h1 {
 .aaa .thumbex .thumbnail {
   overflow: hidden;
   min-width: 250px;
-  height: 300px;
+  height: 250px;
   position: relative;
   opacity: 0.88;
   backface-visibility: hidden;
@@ -69,7 +69,7 @@ header h1 {
 .aaa .thumbex .thumbnail span {
   position: absolute;
   z-index: 2;
-  top: calc(150px - 20px);
+  top: calc(120px - 20px);
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.7);

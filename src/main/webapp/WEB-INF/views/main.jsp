@@ -34,7 +34,7 @@
 
 
 	<div class="container1" align="center" style="margin-top:62px">
-	
+
 		<!-- 슬라이드  -->
 		
 			<div class="row" align="center">
@@ -47,17 +47,17 @@
 						</ol> -->
 						<div class="carousel-inner" >
 							<div class="item active">
-								<img src="resources/imgs/mr1.PNG" >
+								<img src="resources/imgs/mr11.PNG" >
 								<!-- <div class="carousel-caption">
 									<h3>First slide</h3>
 									<p>첫번째 슬라이드</p>
 								</div> -->
 							</div>
 							<div class="item" style="overflow:hidden">
-								<img src="resources/imgs/mr2.PNG" >
+								<img src="resources/imgs/mr22.PNG" >
 							</div>
 							<div class="item" style="overflow:hidden">
-								<img src="resources/imgs/mr3.PNG">
+								<img src="resources/imgs/mr33.PNG">
 							</div>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 		<!-- 갈 곳 고르는 버튼  -->
 		<div class="aaa" style="width:80%; margin:auto" >
 			  <div class="thumbex">
-			    <div class="thumbnail"><a href="#"> <img src="resources/imgs/jeju.jpg"/><span>제주도</span></a></div>
+			    <div class="thumbnail"><a href="#"> <img src="resources/imgs/jeju.jpg"/><span>제주</span></a></div>
 			  </div>
 			  <div class="thumbex">    
 			    <div class="thumbnail"><a href="#"><img src="resources/imgs/british.jpg"/><span>영국</span></a></div>
@@ -175,15 +175,13 @@
         						<div>
         							<label class="control-label" align="left" style="width:100%">희망 숙박 기간</label>
         						</div>
-        						<div class="form-inline" >
-        							<div class=" col-sm-6" style="padding:5px;" >
-        								<label align="left" style="width:150px">- 체크인</label><br>
-        								<form:input class="form-control " type="text" placeholder="체크인" style="width:150px" id="checkin" path="wish_start"/>
-        							</div>
-        							<div class=" col-sm-6" style="padding:5px">
-        								<label  align="left" style="width:150px">- 체크아웃</label><br>
-        								<form:input class="form-control" type="text" placeholder="체크아웃" style="width:150px" id="checkout" path="wish_end"/>
-        							</div>
+       							<div class=" form-group col-sm-6 " style="padding:5px;" >
+       								<label class="control-label" align="left" style="width:100%">- 체크인</label><br>
+       								<form:input class="form-control " type="text" placeholder="체크인" id="checkin" path="wish_start"/>
+       							</div>
+       							<div class=" form-group col-sm-6 " style="padding:5px">
+       								<label class="control-label" align="left" style="width:100%">- 체크아웃</label><br>
+       								<form:input class="form-control" type="text" placeholder="체크아웃"  id="checkout" path="wish_end"/>
         						</div>
         					</div>
         					

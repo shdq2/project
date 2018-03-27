@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.host-side {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    overflow-y: auto;
+    background: #fff;
+    border-right: 1px solid #e4eaec;
+    -webkit-transition: top .5s ease,width .5s ease,opacity .3s ease;
+    transition: top .5s ease,width .5s ease,opacity .3s ease;
+}
