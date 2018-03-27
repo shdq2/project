@@ -2,55 +2,64 @@ package com.kte.project.VO;
 
 public class RoomVO {
 	/*
-	 * ·ë ÀÌ¹ÌÁö vo
+	 * å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™ vo
 	 * */
-	private String room_code = null; // ¼÷¼Ò µî·Ï ¹øÈ£ => ¼÷¼Ò °ü·Ã vo °ø¿ë
-	// ·ë ÀÌ¹ÌÁö
+	private String room_code = null; // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™í˜¸ => å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ vo å ì™ì˜™å ì™ì˜™
+	// å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™
 	private byte[] room_img1=null;
 	private byte[] room_img2=null;
 	private byte[] room_img3=null;
 	private byte[] room_img4=null;
 	private byte[] room_img5=null;
-	// ·ë ÀÌ¹ÌÁö
-	private String room_img_date =null; // ÀÌ¹ÌÁö µî·Ï ³¯Â¥
+	// å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™
+	private String room_img_date =null; // å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™ì§œ
 	/*
-	 * ·ë ÀÌ¹ÌÁö vo
+	 * å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™ vo
 	 * */
 	
 	/*
-	 * ·ë ¿É¼Ç vo
+	 * å ì™ì˜™ å ì‹¬ì‡½ì˜™ vo
 	 * */
-	private String ro_option = null;	// ¼÷¼Ò ±âº» ¿É¼Ç
-	private String ro_option2 = null;	// ¼÷¼Ò Ãß°¡¿É¼Ç
-	private String ro_security = null;	// ¼÷¼Ò º¸¾È»çÇ×
-	private String ro_date = null;		// ¿É¼Ç µî·Ï ÀÏÀÚ
+	private String ro_option = null;	// å ì™ì˜™å ì™ì˜™ å ì©ë³¸ å ì‹¬ì‡½ì˜™
+	private String ro_option2 = null;	// å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™å ì‹¬ì‡½ì˜™
+	private String ro_security = null;	// å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì‹«ì‚¼ì˜™å ì™ì˜™
+	private String ro_date = null;		// å ì‹¬ì‡½ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™
 	
 	/*
-	 * ·ë ¿É¼Ç vo
-	 * */
-	
-	/*
-	 * ·ë vo
-	 * */
-	private String room_name = null;	//¼÷¼Ò ÀÌ¸§
-	private String room_content = null;	//¼÷¼Ò ¼³¸í
-	private String room_price = null;	//¼÷¼Ò °¡°İ (1¹Ú±âÁØ)
-	private String room_date = null;	//¼÷¼Ò µî·Ï ÀÏÀÚ
-	private String room_block= null;	//¼÷¼Ò¸¦ ¸®½ºÆ®¿¡ Ãß°¡ÇÒÁö ¸»Áö ¿©ºÎ
-	private String room_addr = null;	//¼÷¼Ò ÁÖ¼Ò
-	/*
-	 * ·ë vo
+	 * å ì™ì˜™ å ì‹¬ì‡½ì˜™ vo
 	 * */
 	
 	/*
-	 * Áö¿ª vo
+	 * å ì™ì˜™ vo
 	 * */
-	private String region_name = null;	//¼÷¼Ò°¡ µî·ÏµÈ Áö¿ª ÀÌ¸§
-	private int region_no = 0;			//Áö¿ª ¹øÈ£
+	private String room_name = null;	//å ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™
+	private String room_content = null;	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+	private String room_price = null;	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ (1å ìŒ˜ê¹ì˜™å ì™ì˜™)
+	private String room_date = null;	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™
+	private String room_block= null;	//å ì™ì˜™å ìŒ€ëªŒì˜™ å ì™ì˜™å ì™ì˜™íŠ¸å ì™ì˜™ å ìŒ©ê³¤ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+	private String room_addr = null;	//å ì™ì˜™å ì™ì˜™ å ìŒì‡½ì˜™
+	private String room_type = null;	//å ì™ì˜™å ì™ì˜™ å ìŒì‡½ì˜™
+	private int room_like = 0;	//å ì™ì˜™å ì™ì˜™ å ìŒì‡½ì˜™
+	private String room_day = null;
+	private String room_month = null;
+	
+	private String custom_id = null;
+	
+	private String map_lat = null;
+	private String map_lng = null;
+	/*
+	 * å ì™ì˜™ vo
+	 * */
+	
+	/*
+	 * å ì™ì˜™å ì™ì˜™ vo
+	 * */
+	private String region_name = null;	//å ì™ì˜™å ìŒ€ê³¤ì˜™ å ì™ì˜™æºå ï¿½ å ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™
+	private int region_no = 0;			//å ì™ì˜™å ì™ì˜™ å ì™ì˜™í˜¸
 	
 	
 	/*
-	 * Áö¿ª vo
+	 * å ì™ì˜™å ì™ì˜™ vo
 	 * */
 	
 	public String getRoom_code() {
@@ -167,7 +176,46 @@ public class RoomVO {
 	public void setRegion_no(int region_no) {
 		this.region_no = region_no;
 	}
-
-	
-	
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
+	public String getMap_lat() {
+		return map_lat;
+	}
+	public void setMap_lat(String map_lat) {
+		this.map_lat = map_lat;
+	}
+	public String getMap_lng() {
+		return map_lng;
+	}
+	public void setMap_lng(String map_lng) {
+		this.map_lng = map_lng;
+	}
+	public String getRoom_type() {
+		return room_type;
+	}
+	public void setRoom_type(String room_type) {
+		this.room_type = room_type;
+	}
+	public int getRoom_like() {
+		return room_like;
+	}
+	public void setRoom_like(int room_like) {
+		this.room_like = room_like;
+	}
+	public String getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(String room_day) {
+		this.room_day = room_day;
+	}
+	public String getRoom_month() {
+		return room_month;
+	}
+	public void setRoom_month(String room_month) {
+		this.room_month = room_month;
+	}
 }

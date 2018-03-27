@@ -1,6 +1,11 @@
 @charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 /**/
+
+label {
+	color: #9897a6 !important;
+}
 
 html, body {
 	height: 100%;
@@ -23,6 +28,7 @@ input[type=checkbox]
     top: 60px;
     display: inline-block;
     transition: transform 0.3s ease;
+    overflow: hidden;
 }
 
 
@@ -35,7 +41,7 @@ input[type=checkbox]
 	width: 100%;
 	height: 100%;
 	border-left: 1px solid #f2f2f2;
-	overflow-y: scroll;
+	overflow: hidden;
 }
 
 
@@ -47,6 +53,22 @@ input[type=checkbox]
 #col-main {
 	height: 100%;
 	padding-top: 15px;
+	padding-bottom: 15px;
+	overflow: hidden;
+}
+
+#col-search {
+	width: 100%;
+	height: 16%;
+	margin-bottom: 1%;
+}
+
+#col-content {
+	width: 100%;
+	height: 83%;
+	margin-top: 10px;
+	display: inline-block;
+	overflow-y: scroll;
 }
 
 #div-place {
@@ -94,7 +116,7 @@ input[type=checkbox]
 }
 
 .house-type {
-
+	margin-bottom: 15px;
 }
 
 .wrap {
@@ -128,6 +150,10 @@ input[type=checkbox]
 	margin-left: -15px;
 }
 
+.col-md-2.div-more {
+	float: right;
+}
+
 .div-more a {
 	text-align: center;
 	color: #a50d73;
@@ -146,4 +172,65 @@ input[type=checkbox]
 
 .detail-p {
 	margin: 20px 0px 20px 0px;
+}
+
+.search-list {
+	width: 100%;
+	height: auto;
+}
+
+.room-item {
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+	position: relative;
+}
+
+.room-item h5 {
+	color: white;
+	margin-left: 10px;
+	line-height: 1.5em;
+}
+
+.room-img {
+	width: 100%;
+	height: auto;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	
+	margin-bottom: 0px;
+}
+
+.room-panel {
+	width: 100%;
+	height: 130px;
+	padding: 10px 15px 15px 15px;
+	border-bottom: 1px solid #d5d5d5;
+}
+
+.room-panel span {
+	font-weight: normal;
+}
+
+#marker-detail {
+	position: absolute;
+	background: white;
+	width: 190px;
+	height: 147px;
+	text-align: center;
+	z-index: 999;
+}
+
+#mdetail-img {
+	width: 170px;
+	height: 112px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	background: red;
+}
+
+#mdetail-p {
+	color: gray;
+	padding-bottom: 5px;
 }

@@ -28,7 +28,7 @@ $(function() {
 		w_resize();
 	});
 	
-	$('.profile-container').click(function() {
+	$('.profile-container').click(function(e) {
 		var str = $('.topbar-menu').css('background-image');
 		str = str.replace(/topbar_cancel.png/gi, 'topbar_menu.png');			
 		$('.topbar-menu').css('background-image', str);
@@ -40,8 +40,83 @@ $(function() {
 	var a_id = [document.getElementById("Acc1"), document.getElementById("Acc2"), document.getElementById("Acc3"), document.getElementById("Acc4")];
 	var c_id = [document.getElementById("cursor1"), document.getElementById("cursor2"), document.getElementById("cursor3"), document.getElementById("cursor4")];
 	var save_open_menu = -1;
+	var active = 0;
 	
-	$('#list-item1').click(function() {	    
+	$(document).on('mouseover', '.heart-icon', function(e) {
+		var index = $('.heart-icon').index(this);
+		$('.heart-icon i:eq('+ index +')').removeClass('glyphicon glyphicon-heart-empty');
+		$('.heart-icon i:eq('+ index +')').addClass('glyphicon glyphicon-heart');
+	});
+	
+	$(document).on('mouseleave', '.heart-icon', function(e) {
+		var index = $('.heart-icon').index(this);
+		$('.heart-icon i:eq('+ index +')').removeClass('glyphicon glyphicon-heart');
+		$('.heart-icon i:eq('+ index +')').addClass('glyphicon glyphicon-heart-empty');
+	});
+	
+	var z_index = 0;
+	
+	$(document).on('mouseover', '.room-item', function(e) {
+		var index = $('.room-item').index(this);
+		$('.marker[data-marker_id~='+ active +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
+		$('#marker-detail').remove();
+		
+		$('.marker[data-marker_id~='+ index +']').css('background-image', 'url("/project/resources/imgs/price_marker_mouse_on.png")');
+		
+		z_index = $('.marker[data-marker_id~='+ index +']').css('z-index');
+		$('.marker[data-marker_id~='+ index +']').css('z-index', 999);
+		
+		var top = Number($('.marker[data-marker_id~='+ index +']').css('top').replace("px", ""));
+		var left = Number($('.marker[data-marker_id~='+ index +']').css('left').replace("px", ""));
+		
+		$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'" style="top: '+(top-157)+'px; left:'+(left-45)+'px;">'+
+				'<img id="mdetail-img" src="'+$('.room-item[data-marker_id~='+ index +'] .room-img').attr('src')+'" />'+
+				'<p id="mdetail-p">'+ $('.room-item[data-marker_id~='+ index +'] .room-name').html() +'</p></div>');
+	});
+	
+	$(document).on('mouseout', '.room-item', function(e) {
+		var index = $('.room-item').index(this);
+		active = index;
+		
+		$('.marker[data-marker_id~='+ index +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
+		
+		$('.marker[data-marker_id~='+ index +']').css('z-index', z_index);
+		z_index = 0;
+		
+		$('#marker-detail').remove();
+	});
+	
+	$(document).on('click', '.marker', function(e) {
+		e.stopPropagation();
+		
+		var index = $('.marker').index(this) + 1;
+		$('.marker[data-marker_id~='+ active +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
+		$('#marker-detail').remove();
+
+		active = index;
+		$('.marker[data-marker_id~='+ index +']').css('background-image', 'url("/project/resources/imgs/price_marker_mouse_on.png")');
+		
+		z_index = $('.marker[data-marker_id~='+ index +']').css('z-index');
+		$('.marker[data-marker_id~='+ index +']').css('z-index', 999);
+		
+		var top = Number($('.marker[data-marker_id~='+ index +']').css('top').replace("px", ""));
+		var left = Number($('.marker[data-marker_id~='+ index +']').css('left').replace("px", ""));
+		
+		$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'">'+
+				'<img id="mdetail-img" src="'+$('.room-item[data-marker_id~='+ index +'] .room-img').attr('src')+'" />'+
+				'<p id="mdetail-p">'+ $('.room-item[data-marker_id~='+ index +'] .room-name').html() +'</p></div>');
+		$('#marker-detail').css('top', (top-157)+'px');
+		$('#marker-detail').css('left', (left-45)+'px');		
+	});
+	
+	$(document).on('click', '#col-map', function(e) {
+		e.stopPropagation();
+		
+		$('.marker[data-marker_id~='+ active +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
+		$('#marker-detail').remove();
+	});
+	
+	$('#list-item1').click(function() {
 		save_open_menu = myAccFunc(a_id, c_id, 0, save_open_menu);
 	});
 	
@@ -49,11 +124,11 @@ $(function() {
 		save_open_menu = myAccFunc(a_id, c_id, 1, save_open_menu);
 	});
 	
-	$('#list-item3').click(function() {	    
+	$('#list-item3').click(function() {
 		save_open_menu = myAccFunc(a_id, c_id, 2, save_open_menu);
 	});
 	
-	$('#list-item4').click(function() {	    
+	$('#list-item4').click(function() {
 		save_open_menu = myAccFunc(a_id, c_id, 3, save_open_menu);
 	});
 	
@@ -89,9 +164,11 @@ $(function() {
 		if($('#div-more-1').attr('class') == 'w3-hide') {
 			id.className = id.className.replace("w3-hide", "w3-show");
 			$('#more-1').text('▲숨기기');
+			$('#more-1').css('text-decoration', 'none');
 		} else {
 			id.className = id.className.replace("w3-show", "w3-hide");
 			$('#more-1').text('▼더보기');
+			$('#more-1').css('text-decoration', 'none');
 		}
 	});
 
@@ -100,10 +177,12 @@ $(function() {
 
 		if($('#div-more-2').attr('class') == 'w3-hide') {
 			id.className = id.className.replace("w3-hide", "w3-show");
-			$('#more-1').text('▲숨기기');
+			$('#more-2').text('▲숨기기');
+			$('#more-2').css('text-decoration', 'none');
 		} else {
 			id.className = id.className.replace("w3-show", "w3-hide");
-			$('#more-1').text('▼더보기');
+			$('#more-2').text('▼더보기');
+			$('#more-2').css('text-decoration', 'none');
 		}
 	});
 	
