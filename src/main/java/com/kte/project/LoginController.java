@@ -30,29 +30,40 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession httpsession) {
+	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession httpsession,Model model) {
 		CustomVO cvo = lDAO.selectCustomOne(vo);
 		if(cvo != null) {
 			if(cvo.getCustom_block() != 1) {
+				if(cvo.getCustom_block() == 999) {
+					httpsession.setAttribute("custom",cvo);
+					httpsession.setAttribute("custom_id",cvo.getCustom_id());
+					httpsession.setAttribute("custom_name",cvo.getCustom_name());
+					
+					return "redirect:admin.do";
+				}else {
+					httpsession.setAttribute("custom",cvo);
+					httpsession.setAttribute("custom_id",cvo.getCustom_id());
+					httpsession.setAttribute("custom_name",cvo.getCustom_name());
+					
+					model.addAttribute("url", "visit.do");
+					model.addAttribute("msg", "환영합니다");
+					model.addAttribute("ret", "y");	
+				}
 				
-				
-				httpsession.setAttribute("custom",cvo);
-				System.out.println("로그인 cvo 테스트 : " + (CustomVO)httpsession.getAttribute("custom"));
-				httpsession.setAttribute("custom_id",cvo.getCustom_id());
-				httpsession.setAttribute("custom_name",cvo.getCustom_name());
-				System.out.println("로그인 성공");					
-				return "redirect:visit.do";
 			}else {
-				System.out.println("차단된 아이디");
-				return "redirect:login.do"; 
+				model.addAttribute("url", "login.do");
+				model.addAttribute("msg", "차단된 아이디입니다");
+				model.addAttribute("ret", "n");
 			}
 			
 		}else {
+			model.addAttribute("url", "login.do");
+			model.addAttribute("msg", "회원 정보가 올바르지 않습니다");
+			model.addAttribute("ret", "n");
 			System.out.println("존재하지 않는 아이디");
-			return "redirect:login.do";
 		}
 		
-		
+		return "alert";
 	}
 	
 	@RequestMapping(value="/logout.do", method = RequestMethod.GET)

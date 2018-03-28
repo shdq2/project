@@ -25,10 +25,28 @@
 	</update> -->
 	
 	<select id="selectCustomOne" parameterType="com.kte.project.VO.CustomVO" resultType="com.kte.project.VO.CustomVO">
-		SELECT * FROM custom WHERE custom_id = #{custom_id} AND custom_pw = SHA1(#{custom_pw})
+		SELECT 
+		custom_name,bank_code,custom_cash,custom_phone,date_format(custom_date,'%Y년 %m월 %d일 %h시 %i분') as custom_date,custom_gender,
+		custom_bank_host,custom_age,custom_introduce,custom_homepage,custom_id,custom_job
+		 FROM custom WHERE custom_id = #{custom_id}
 	</select>
 	
 	<update id="passwordEdit" parameterType="String">
 		UPDATE custom SET custom_pw = SHA1(#{pw})
+	</update>
+	
+	<update id="custom_edit" parameterType="customVO">
+		update custom set custom_name=#{custom_name},bank_code=#{bank_code},custom_cash=#{custom_cash},custom_phone=#{custom_phone},custom_gender=#{custom_gender},custom_bank_host=#{custom_bank_host},
+		custom_job=#{custom_job},custom_age=#{custom_age},custom_homepage=#{custom_homepage},custom_introduce=#{custom_introduce}
+		where custom_id=#{custom_id}
+	</update>
+	
+	<!-- 은행 목록 불러오기 -->
+	<select id="bank_list" resultType="customVO">
+		select * from bank
+	</select>
+	
+	<update id="delete_phone" parameterType="String">
+		update custom set custom_phone = '' where custom_id=#{id}
 	</update>
 </mapper>

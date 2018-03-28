@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +50,16 @@ public class JSON_Admin_Controller {
 	
 	@RequestMapping(value = "/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String,Object> member_room(Model model,
-			HttpSession http,
+			HttpSession http,HttpServletResponse response,
 			@RequestParam("id")String id,
 			@RequestParam("page")int page) {
-		
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		response.setHeader("Access-Control-Max-Age", "3600");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+
 		Map<String,Object> map = new HashMap<String,Object>();
 		int p = (page-1)*4;
 		

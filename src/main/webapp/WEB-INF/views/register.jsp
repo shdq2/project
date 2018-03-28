@@ -29,7 +29,7 @@
 				<p>Mr, Mention에 오신것을 환영합니다.</p>
 				
 				<div id="register-form-register">
-					<form:form action="register.do" method="post" modelAttribute="vo">
+					<form:form action="register.do" method="post" modelAttribute="vo" id="form">
 						<form:input type="text" class="form-control" path="custom_name" placeholder="이름" /><br />
 						<form:input type="text" class="form-control" path="custom_id" placeholder="이메일" /><br />
 						<form:input type="password" class="form-control" path="custom_pw" placeholder="비밀번호" /><br />
@@ -50,9 +50,48 @@
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
 	<script type="text/javascript" src="resources/js/topbar_menu.js"></script>
 	<script type="text/javascript" src="resources/js/rightform.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.validate.js"></script>
 	<script>
 		$(function() {
-			
+			$('#form').validate({
+				submitHandler:function(){
+					return true;
+				},
+				rules:{
+					custom_id:{
+						/*
+						required : 비어있는지 확인여부  - true/false
+						minlength: 최소길이 - 숫자
+						digits : 숫자 - true(숫자만가능)/false
+						email: 이메일 입력 -true/false
+						*/
+						required :true,
+						email:true,						
+						remote:'Json_id_check.do' // 아이디 중복확인
+					},
+					custom_pw:{
+						required :true,
+						minlength:6
+					},
+					custom_name:{
+						required :true,
+					}
+				},
+				messages:{
+					custom_id:{
+						required:'내용이 없습니다',
+						email:'유효하지 않은 형식입니다',						
+						remote:'사용중인 아이디 입니다'
+					},
+					custom_pw:{
+						required:'내용이 없습니다',
+						minlength:"6자 이상 입력하세요"
+					},
+					custom_name:{
+						required :"내용이 없습니다",
+					}
+				}
+			});
 		});
 	</script>
 </body>

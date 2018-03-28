@@ -28,4 +28,7 @@
 		INSERT INTO custom(custom_id, custom_pw, custom_name, custom_date) VALUES(#{custom_id}, SHA1(#{custom_pw}), #{custom_name}, NOW())
 	</insert>
 	
+	<select id="id_check" parameterType="String" resultType="Int">
+		select count(*) from custom where custom_id=#{id}
+	</select>
 </mapper>
