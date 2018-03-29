@@ -3,7 +3,7 @@
 	<!-- css -->
 	<link rel="stylesheet" href="resources/css/footer.css"/>
 	
-	<footer class="row" style="background-color:#2a2a2a;">
+	<footer class="row" style="background-color:#2a2a2a; ">
 		<div class="site-footer" >
 			<div class="col-md-6 col-md-offset-3 text-center" >
 				 <div class="col-sm-12" >

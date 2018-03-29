@@ -16,7 +16,7 @@
 <title>호스트 페이지</title>
 	<link rel="stylesheet" href="resources/css/bootstrap.css">
 	<link rel="stylesheet" href="resources/css/w3.css">
-	
+	<link rel="stylesheet" href="resources/css/host.css">
 	<style>
 	</style>
 </head>
@@ -24,27 +24,30 @@
 	<!-- 메뉴바  -->
 	<jsp:include page="topbar.jsp"></jsp:include>
 
-
-	<div class="container1" align="center" style="margin-top:62px">
-		<div style="width: 300px; position:absolute">
-			<a href="#" class="w3-bar-item w3-button">Link 1</a><br>
-			<a href="#" class="w3-bar-item w3-button">Link 2</a><br>
-			<a href="#"	class="w3-bar-item w3-button">Link 3</a>
-		</div>
+	<div class="container1">
 		<div class="host-side">
-			<h5>숙소 설정</h5>
-			<a href="#">설명</a>
-			<a href="#">기본설정</a>
-			<a href="#">위치</a>
-			<a href="#">편의시설</a>
-			<a href="#">사진</a>
-			<a href="#">예약/요금설정</a>
-			<a href="#">입/퇴실시간</a>
+			<p style="text-align:center; margin-bottom:30px" >숙소설정</p>
+			<a href="#">
+				<span class="pull-left">설명</span>
+				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
+			</a>
+			
+			<a href="#">기본설정<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#">위치<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#">편의시설<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#">사진<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#">예약/요금 설정<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#">입/퇴실시간<i class="glyphicon glyphicon-ok-circle"></i></a>
+			<a href="#"><i class="glyphicon glyphicon-calendar"></i> 달력 관리</a>
+			<a href="#"><i class="	glyphicon glyphicon-plus"></i> 새로운 숙소 등록</a>
+			<a href="#"><i class="	glyphicon glyphicon-th-list"></i> 숙소목록</a>
+		</div>
+		<div class="host-intro">
+			소개합니다.
 		</div>
 	</div>
 	
-	<!-- footer -->
-	<jsp:include page="footer.jsp"></jsp:include>
+	
 	
 
 	
