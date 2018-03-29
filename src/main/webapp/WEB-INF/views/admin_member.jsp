@@ -28,7 +28,7 @@
 				</td>
 				<td>${i.custom_name }</td>
 				<td class="id">${i.custom_id }</td>
-				<td>${i.custom_bank }</td>
+				<td>테스트</td>
 				<td>${i.custom_cash }</td>
 				<td>${i.custom_phone }</td>
 				<td>${i.room_count }</td>

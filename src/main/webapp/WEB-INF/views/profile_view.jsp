@@ -28,10 +28,10 @@
          <a href="profileEdit.do" id="profile-list-2">
             <i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 수정</span>
          </a>
-         <a href="profile/picture/edit.do" id="profile-list-3">
+         <a href="picture.do" id="profile-list-3">
             <i class="glyphicon glyphicon-picture menu-icon" aria-hidden="true"></i><span class="menu-title">사진 수정</span>
          </a>
-         <a href="profile/certification.do" id="profile-list-4">
+         <a href="certification.do" id="profile-list-4">
             <i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">인증 현황</span>
          </a>
       </div>
@@ -42,11 +42,11 @@
          </div>
          <div class="col-xs-9 col-main">
             <div class="profile-box-top">
-               <h3 class="top-title">안녕하세요, <!-- ${vo.custom_name} -->입니다!</h3>
-               <p class="join-date">Republic of Korea - 회원가입 : <!-- ${vo.custom_date} --></p>
-               <p class="introduce">내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 내용 없음 <!-- ${vo.custom_intro} --></p>
+               <h3 class="top-title">안녕하세요, ${cvo.custom_name} 입니다!</h3>
+               <p class="join-date">Republic of Korea - 회원가입 : ${cvo.custom_date}</p>
+               <p class="introduce">${cvo.custom_introduce }</p>
                
-               <a href="#" id="profile-edit" class="btn btn-default">프로필 수정하기</a>
+               <a href="profileEdit.do" id="profile-edit" class="btn btn-default">프로필 수정하기</a>
                <div style="clear: both;"></div>
             </div>
             

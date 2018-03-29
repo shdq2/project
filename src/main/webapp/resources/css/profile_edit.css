@@ -58,14 +58,13 @@ html, body {
 /* profile-main */
 
 .profile-main {
-	position: relative;
+	position: fixed;
 	display: inline-block;
-	width: calc(100% - 220px);
+	width: calc(100% - 50px);
 	padding: 35px 15% 0px 15%;
 	height: 100%;
-	left: 220px;
 	border-left: 1px solid #f2f2f2;
-	overflow-y: scroll;
+	overflow: auto;
 }
 
 .main-header {

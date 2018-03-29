@@ -37,7 +37,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,HttpSession http) {
 		CustomVO vo = (CustomVO)http.getAttribute("custom");
-		System.out.println("홈 로그인 테스트 : " + vo);
 		if(vo == null) {
 			String id = http.getId();
 			http.setAttribute("custom_id", id);	
@@ -69,7 +68,6 @@ public class HomeController {
 			}
 		}
 		ret1 = ret+"";
-		System.out.println("ret : "+ ret1);
 		http.setAttribute("ret1", ret1);
 		return "redirect:/";
 	}

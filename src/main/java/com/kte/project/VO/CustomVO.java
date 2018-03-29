@@ -6,7 +6,7 @@ public class CustomVO {
 	private String custom_pw = null;
 	private String custom_phone = null;
 	private String custom_introduce = null;
-	private String custom_bank = null;
+	private String bank_code = null;
 	private String custom_cash = null;
 	private String custom_depositor = null; //예금주
 	private String custom_age = null; //예금주
@@ -15,12 +15,39 @@ public class CustomVO {
 	private int custom_block = 0;
 	private int room_count = 0;
 	private String custom_date = null;
-  
+	private String custom_bank_host = null;
+	private String bank_name = null;
 	private String wish_date = null;
 	private String host_date = null;
 	private int reser_code = 0;
 	private String reservation_date = null;
+	private int custom_gender=0;
+	private String origin_id = null;
 	
+	public String getOrigin_id() {
+		return origin_id;
+	}
+	public void setOrigin_id(String origin_id) {
+		this.origin_id = origin_id;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public String getCustom_bank_host() {
+		return custom_bank_host;
+	}
+	public void setCustom_bank_host(String custom_bank_host) {
+		this.custom_bank_host = custom_bank_host;
+	}
+	public int getCustom_gender() {
+		return custom_gender;
+	}
+	public void setCustom_gender(int custom_gender) {
+		this.custom_gender = custom_gender;
+	}
 	public String getCustom_id() {
 		return custom_id;
 	}
@@ -51,11 +78,12 @@ public class CustomVO {
 	public void setCustom_introduce(String custom_introduce) {
 		this.custom_introduce = custom_introduce;
 	}
-	public String getCustom_bank() {
-		return custom_bank;
+
+	public String getBank_code() {
+		return bank_code;
 	}
-	public void setCustom_bank(String custom_bank) {
-		this.custom_bank = custom_bank;
+	public void setBank_code(String bank_code) {
+		this.bank_code = bank_code;
 	}
 	public String getCustom_cash() {
 		return custom_cash;

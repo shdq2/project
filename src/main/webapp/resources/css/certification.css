@@ -5,7 +5,7 @@ html, body {
    overflow: hidden;
 }
 
-.profile-container {
+.certification-container {
     position: relative;
     width: 100%;
     height: calc(100% - 60px);
@@ -15,9 +15,9 @@ html, body {
     transition: transform 0.3s ease;
 }
 
-/* profile-nav */
+/* certification-nav */
 
-.profile-nav {
+.certification-nav {
     position: fixed;
     vertical-align: top;
    width: 205px;
@@ -28,7 +28,7 @@ html, body {
     margin: 0px 15px 0px 0px;
 }
 
-.profile-nav a {
+.certification-nav a {
    display: table;
    width: 100%;
    height: 50px;
@@ -37,7 +37,7 @@ html, body {
    text-decoration: none;
 }
 
-.profile-nav a:hover {
+.certification-nav a:hover {
    background-color: #f5f5f5;
    text-decoration: none;
 }
@@ -55,14 +55,15 @@ html, body {
 
 
 
-/* profile-main */
+/* certification-main */
 
-.profile-main {
-   position: fixed;
+.certification-main {
+   position: relative;
    display: inline-block;
    width: calc(100% - 220px);
    padding-top: 35px;
    height: 100%;
+   left: 220px;
    border-left: 1px solid #f2f2f2;
    overflow-y: scroll;
 }
@@ -82,9 +83,9 @@ html, body {
 
 
 
-/* profile-box-top */
+/* certification-box-top */
 
-.profile-box-top {
+.certification-box-top {
    height: auto;
 }
 
@@ -105,18 +106,39 @@ html, body {
    word-wrap: break-word;
 }
 
-#profile-edit {
+#certification-edit {
    margin-top: 15px;
    margin-right: 10px;
    margin-bottom: 20px;
    float: right;
 }
 
+.main-header {
+	width: 100%;
+	height: auto;
+	padding: 0px 15px 15px 15px;
+	display: inline-block;
+}
 
+.main-header h3 {
+	position: relative;
+	margin: 0px;
+	display: inline-block;
+	color: #ef6d1f;
+}
 
-/* profile-box-bottom */
+.main-header p {
+	position: absolute;
+	padding: 0px 0px 6px 10px;
+	margin: 0px;
+	display: inline-block;
+	color: #b2b2b2;
+	font-weight: normal;
+}
 
-.profile-box-bottom {
+/* certification-box-bottom */
+
+.certification-box-bottom {
    height: auto;
    padding-bottom: 20px; 
 }
