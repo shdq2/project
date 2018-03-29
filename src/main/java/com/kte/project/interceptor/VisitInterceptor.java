@@ -19,9 +19,7 @@ public class VisitInterceptor extends HandlerInterceptorAdapter {
 		HttpSession http = request.getSession();
 
 		String ret = (String)http.getAttribute("ret1");
-		System.out.println("ret1 : " + ret);
 		if(ret == null || ret == "0") {
-			System.out.println("test1");
 			response.sendRedirect("visit.do");
 			return false;
 		}

@@ -35,4 +35,8 @@ private SqlSession sqlsession = null;
 	public int delete_phone(String id) {
 		return sqlsession.update("custom.delete_phone",id);
 	}
+	
+	public int phone_edit(CustomVO vo) {
+		return sqlsession.update("custom.phone_edit",vo);
+	}
 }

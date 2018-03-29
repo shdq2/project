@@ -22,7 +22,14 @@ public class CustomVO {
 	private int reser_code = 0;
 	private String reservation_date = null;
 	private int custom_gender=0;
+	private String origin_id = null;
 	
+	public String getOrigin_id() {
+		return origin_id;
+	}
+	public void setOrigin_id(String origin_id) {
+		this.origin_id = origin_id;
+	}
 	public String getBank_name() {
 		return bank_name;
 	}

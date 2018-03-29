@@ -22,16 +22,33 @@ public class ProfileController {
 	private CustomDAO cdao = null;
 	
 	@RequestMapping(value="/profile.do", method = RequestMethod.GET)
-	public String profile(HttpSession http) {
+	public String profile(HttpSession http,Model model) {
 		CustomVO vo =(CustomVO)http.getAttribute("custom");
 		
 		if(vo == null) {
 			return "redirect:login.do";
 		}
 		
+		CustomVO cvo = cdao.selectmember(vo.getCustom_id());
+		model.addAttribute("cvo", cvo);
+		
 		return "profile_view";
 	}
 
+	@RequestMapping(value="/certification.do", method = RequestMethod.GET)
+	public String certification(HttpSession http,Model model) {
+		CustomVO vo =(CustomVO)http.getAttribute("custom");
+		
+		if(vo == null) {
+			return "redirect:login.do";
+		}
+		
+		CustomVO cvo = cdao.selectmember(vo.getCustom_id());
+		model.addAttribute("cvo", cvo);
+		
+		return "certification";
+	}
+	
 	@RequestMapping(value="/profileEdit.do", method = RequestMethod.GET)
 	public String profileEdit(HttpSession http,Model model) {
 		CustomVO vo =(CustomVO)http.getAttribute("custom");
@@ -39,7 +56,8 @@ public class ProfileController {
 		if(vo == null) {
 			return "redirect:login.do";
 		}
-		CustomVO cvo = cdao.selectmember(vo.getCustom_id()); 
+		CustomVO cvo = cdao.selectmember(vo.getCustom_id());
+		cvo.setOrigin_id(vo.getCustom_id());
 		model.addAttribute("cvo", cvo);	
 		
 		List<CustomVO> bank_list= cdao.bank_list();
@@ -53,11 +71,13 @@ public class ProfileController {
 		if(vo == null) {
 			return "redirect:login.do";
 		}
+		System.out.println(cvo.getOrigin_id());
 		int ret = cdao.customedit(cvo);
 		if(ret==1) {
 			model.addAttribute("url", "profileEdit.do");
 			model.addAttribute("msg", "프로필이 저장되었습니다");
 			model.addAttribute("ret", "y");
+			http.setAttribute("custom", cvo);
 		}else {
 			model.addAttribute("url", "profileEdit.do");
 			model.addAttribute("msg", "프로필이 저장되지 않았습니다");

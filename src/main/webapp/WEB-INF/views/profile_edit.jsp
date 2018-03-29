@@ -20,7 +20,7 @@
 <body>
 	<jsp:include page="topbar.jsp"></jsp:include>
 	
-	<div class="profile-container">
+	<div class="profile-container" >
 		<div class="profile-nav">
 			<a href="profile.do" id="profile-list-1">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 보기</span>
@@ -28,24 +28,24 @@
 			<a href="profileEdit.do" id="profile-list-2">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">프로필 수정</span>
 			</a>
-			<a href="profile/picture/edit.do" id="profile-list-3">
+			<a href="picture.do" id="profile-list-3">
 				<i class="glyphicon glyphicon-picture menu-icon" aria-hidden="true"></i><span class="menu-title">사진 수정</span>
 			</a>
-			<a href="profile/certification.do" id="profile-list-4">
+			<a href="certification.do" id="profile-list-4">
 				<i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">인증 현황</span>
 			</a>
 		</div>
 		<form:form action="profileEdit.do" method="post" modelAttribute="cvo" id="form">
-		<div class="profile-main">
+		<div class="profile-main" >
 			<div class="main-header">
 				<h3>프로필 수정</h3>
 				<p>Edit profile</p>
 			</div>
-			<div class="main-content">
+			<div class="main-content" style="max-width: 580px">
 				<h3>필수 항목</h3>
 				
 				<form:form action="profile_edit.do" method="post" modelAttribute="cvo">
-				<div class="form-group">
+				<div class="form-group"  >
 					<div class="col-sm-3 form-label">
 						<label>가입일시</label>
 					</div>
@@ -58,12 +58,13 @@
 						<p class="joindate">${cvo.custom_date }</p>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="height:40px;" >
 					<div class="col-sm-3 form-label">
 						<label>이름</label>
 					</div>
-					<div class="col-sm-9">
+					<div class="col-sm-9" >
 						<form:input type="text" class="form-control" placeholder="이름을 입력하세요." path="custom_name" />
+						<label style="display:none;color:red;" id="name_chk"></label>
 					</div>
 				</div>
 				<div class="form-group">
@@ -77,7 +78,7 @@
 						</form:select>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" >
 					<div class="col-sm-3 form-label">
 						<label>이메일</label>
 					</div>
@@ -85,38 +86,41 @@
 						<!-- 
 							<input type="text" class="form-control" placeholder="이메일 주소를 입력하세요." value="${vo.custom_id}" />
 						-->
-						<form:input type="text" class="form-control" placeholder="이메일 주소를 입력하세요." path="custom_id"/>
+						<form:input type="text" class="form-control" placeholder="이메일 주소를 입력하세요." path="custom_id" id="custom_id"/>
+						<label style="display=none;color:red;" id="id_chk"></label>
+						<form:input type="hidden" path="origin_id" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3 form-label">
 						<label>휴대전화</label>
 					</div>
-					<div class="col-sm-9" id="phone_div">
+					<div class="col-sm-9">
+					<div id="phone_div">
+					
 						<c:if test="${cvo.custom_phone == null || cvo.custom_phone =='' }">
 						<a href="#" class="add-cellphone"><i class="glyphicon glyphicon-plus menu-icon"></i>전화번호 추가하기</a>
 						<div id="cellphone-panel" class="panel panel-default" style="border-color: #ccc; width: 100%; height: auto;">
-							<div id="cellphone" class="panel-body">
-								<label><i class="glyphicon glyphicon-phone menu-icon"></i> 휴대전화 인증</label><br/>
-								<label>국가를 선택하세요</label><br />
-								<select class="form-control">
-									<option>Republic of Korea</option>
-								</select><br />
-								<label>전화번호 추가</label>
-								<form:input type="text" class="form-control" placeholder="" path="custom_phone"/><br />
-								<a href="#" class="btn btn-default" style="width: 100%; background: #A50D73; color: white; border: 1px solid #A50D73">인증문자 보내기</a>
-							</div>
+						 
 						</div>
 						</c:if>
 						<c:if test="${cvo.custom_phone != null && cvo.custom_phone !='' }">
 						
 							<div class="form-inline input-group">
 								<form:input type="text" class="form-control"  path="custom_phone" readonly="true" style="width:100%"/>
-								<input type="text" value="인증되었습니다" class="form-control" style="width:70%"/>
-								<input type="button" class="form-control" value="삭제" style="width:30%;margin:0px;" id="delete_phone"/>
+								<div class="form-control" style="width:75%;vertical-align: middel;text-align: center"><label style="color:green;margin:0px"><i class="glyphicon glyphicon-ok-sign"></i>인증되었습니다</label></div>
+								<input type="button" class="form-control" value="삭제" style="width:25%;margin:0px;" id="delete_phone"/>
 							</div>
 						
 						</c:if>
+					</div>
+					<div style="display:none" id="phone">
+						<div class="form-inline input-group">
+							<form:input type="text" class="form-control"  path="custom_phone" readonly="true" style="width:100%" id="phone_val"/>
+							<div class="form-control" style="width:75%;vertical-align: middel;text-align: center"><label style="color:green;margin:0px"><i class="glyphicon glyphicon-ok-sign"></i>인증되었습니다</label></div>
+							<input type="button" class="form-control" value="삭제" style="width:30%;margin:0px;" id="delete_phone"/>
+						</div>
+					</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -207,7 +211,7 @@
 					</div>
 				</div>
 				<div style="width: 100%; display: inline-block; margin-top: 10px;">
-					<button type="submit" id="btn-save" class="btn btn-primary">저장하기</button>
+					<button type="button" id="btn-save" class="btn btn-primary">저장하기</button>
 				</div>
 				</form:form>
 				
@@ -223,8 +227,14 @@
 <script type="text/javascript" src="resources/js/profile_edit.js"></script>
 <script type="text/javascript" src="resources/js/jquery.validate.js"></script>
 <script>
+	function validateEmail(email) {
+		var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{1})?)$/i;
+		return re.test(email);
+	}
 	$(function() {
-		
+		console.log($('.profile-main').height());
+		var id = '${cvo.custom_id}';
+		var origin_id = '${cvo.custom_id}';
 		//json 파일 불러오기
 		/* var bankjson = "resources/json/bank.json";
 		$.get(bankjson, function(data){
@@ -242,58 +252,123 @@
 			});
 
 		}); */
-		$('#delete_phone').click(function(){
-			var form = 'form:';
+		$(document).on('click','#delete_phone',function(){
+			
 			$.get('Json_delete_phone.do',function(data){
 				$('#phone_div').empty();
+				$('#phone').css("display","none");
 				$('#phone_div').append(
 					'<a href="#" class="add-cellphone"><i class="glyphicon glyphicon-plus menu-icon"></i>전화번호 추가하기</a>'+
-					'<div id="cellphone-panel" class="panel panel-default" style="border-color: #ccc; width: 100%; height: auto;">'+
-						'<div id="cellphone" class="panel-body">'+
-							'<label><i class="glyphicon glyphicon-phone menu-icon"></i> 휴대전화 인증</label><br/>'+
-							'<label>국가를 선택하세요</label><br />'+
-							'<select class="form-control">'+
-								'<option>Republic of Korea</option>'+
-							'</select><br />'+
-							'<label>전화번호 추가</label>'+
-							'<'+form+'input type="text" class="form-control" placeholder="" path="custom_phone"/><br />'+
-							'<a href="#" class="btn btn-default" style="width: 100%; background: #A50D73; color: white; border: 1px solid #A50D73">인증문자 보내기</a>'+
-						'</div>'+
- 					'</div>'		
+						'<div id="cellphone-panel" class="panel panel-default" style="border-color: #ccc; width: 100%; height: auto;">'+
+						
+ 						'</div>'		
 				);
 			},'json');
 		}) 
-		$('#form').validate({
-			submitHandler:function(){
-				return true;
-			},
-			rules:{
-				custom_id:{
-					/*
-					required : 비어있는지 확인여부  - true/false
-					minlength: 최소길이 - 숫자
-					digits : 숫자 - true(숫자만가능)/false
-					email: 이메일 입력 -true/false
-					*/
-					required :true,
-					email:true,						
-					remote:'Json_id_check.do' // 아이디 중복확인
-				},
-				custom_name:{
-					required :true,
-				}
-			},
-			messages:{
-				custom_id:{
-					required:'내용이 없습니다',
-					email:'유효하지 않은 형식입니다',						
-					remote:'사용중인 아이디 입니다'
-				},
-				custom_name:{
-					required :"내용이 없습니다",
-				}
+		$(document).on('click','.add-cellphone',function(){
+			$('#cellphone-panel').empty();
+			$('#cellphone-panel').css("display","block");
+			$('.add-cellphone').css("display","none");
+			$('#cellphone-panel').append(
+				'<div id="cellphone" class="panel-body" style="border-color: #ccc; width: 100%; height: auto;">'+
+					'<label><i class="glyphicon glyphicon-phone menu-icon"></i> 휴대전화 인증</label><br/>'+
+					'<label>국가를 선택하세요</label><br />'+
+					'<select class="form-control">'+
+						'<option>Republic of Korea</option>'+
+					'</select><br />'+
+					'<label>전화번호 추가</label>'+
+					'<input type="text" class="form-control" placeholder="-없이 입력하세요" id="custom_phone" style="margin-bottom:10px;"/>'+
+					'<label id="phone_txt"  style="display:none;color:red;"></label>'+
+					'<a href="#" class="btn btn-default" id="btn_send" style="width: 100%; background: #A50D73; color: white; border: 1px solid #A50D73;">인증문자 보내기</a>'+
+				'</div>'
+			);
+			
+		});
+		
+		$(document).on('click','#btn_send',function(){
+			if($('#custom_phone').val() == ""){
+				$('#phone_txt').text("전화번호를 입력하세요");
+				$('#phone_txt').css("display","block");
+				$('#custom_phone').css("border-color","red");
+				$('#custom_phone').focus();
+			}else{
+				$.get('Json_phone_update.do?custom_phone='+$('#custom_phone').val(),function(data){
+					if(data == 1){
+						$('#phone_val').val($('#custom_phone').val());
+						$('#phone').css("display","block");
+						$('#phone_div').empty();
+						alert("인증이 완료되었습니다");
+					}
+				})				
+			}			
+		});
+		
+		
+		$('#custom_name').keyup(function(){
+			if($('#custom_name').val()!=""){
+				$('#custom_name').css("border-color","");
+				$('#name_chk').css("display","none");
+				
 			}
 		});
+		$('#custom_id').keyup(function(){
+			if($('#custom_id').val()!=""){
+				$('#custom_id').css("border-color","");
+				$('#id_chk').css("display","none");
+				
+			}
+		});
+		$('#btn-save').click(function(){
+			var custom_id=$('#custom_id').val();
+			if(custom_id == origin_id){
+				if($('#custom_name').val() == ""){
+					$('#custom_name').css("border-color","red");
+					$('#custom_name').focus();
+					$('#name_chk').text("항목이 비어있습니다");
+					$('#name_chk').css("display","block");
+				}else{
+					$('#form').submit();
+				}
+			}else{				
+				if($('#custom_name').val() == ""){
+					$('#custom_name').css("border-color","red");
+					$('#custom_name').focus();
+					$('#name_chk').text("항목이 비어있습니다");
+					$('#name_chk').css("display","block");
+				}
+				if($('#custom_id').val()==""){
+					$('#custom_id').css("border-color","red");
+					$('#custom_id').focus();
+					$('#id_chk').text("항목이 비어있습니다");
+					$('#id_chk').css("display","block");
+				}else{
+					if(!validateEmail(custom_id)){
+						$('#id_chk').text("올바른 이메일 형식이 아닙니다");
+						$('#id_chk').css("display","block");
+						$('#custom_id').css("border-color","red");
+						$('#custom_id').focus();
+					}
+					else{
+						$.get('Json_id_check.do?custom_id='+custom_id,function(data){
+							if(!data){
+								$('#id_chk').text("사용중인 이메일 입니다.");
+								$('#id_chk').css("display","block");
+								$('#custom_id').css("border-color","red");
+								$('#custom_id').focus();								
+							}else{
+								if($('#custom_name').val() != ""){
+									$('#form').submit();
+								}
+							}
+						})	
+					}
+					
+				}
+							
+			
+			}
+		})
+		
 	});
 </script>
 </body>

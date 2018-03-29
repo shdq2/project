@@ -27,6 +27,7 @@ public class LoginController {
 		model.addAttribute("vo", vo);
 
 		return "login";
+		
 	}
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)

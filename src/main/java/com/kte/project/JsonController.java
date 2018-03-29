@@ -39,7 +39,18 @@ public class JsonController {
 		
 		String id = (String) http.getAttribute("custom_id");
 		int ret = cdao.delete_phone(id);
-		
+		return ret;
+	}
+	
+
+	@RequestMapping(value = "/Json_phone_update.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody int edit_phone(Model model,
+		HttpSession http,@RequestParam("custom_phone")String phone) {
+		CustomVO vo = new CustomVO();		
+		String id = (String) http.getAttribute("custom_id");
+		vo.setCustom_phone(phone);
+		vo.setCustom_id(id);
+		int ret = cdao.phone_edit(vo);
 		return ret;
 	}
 }

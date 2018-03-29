@@ -36,9 +36,9 @@
 	</update>
 	
 	<update id="custom_edit" parameterType="customVO">
-		update custom set custom_name=#{custom_name},bank_code=#{bank_code},custom_cash=#{custom_cash},custom_phone=#{custom_phone},custom_gender=#{custom_gender},custom_bank_host=#{custom_bank_host},
-		custom_job=#{custom_job},custom_age=#{custom_age},custom_homepage=#{custom_homepage},custom_introduce=#{custom_introduce}
-		where custom_id=#{custom_id}
+		update custom set custom_name=#{custom_name},bank_code=#{bank_code},custom_cash=#{custom_cash},custom_gender=#{custom_gender},custom_bank_host=#{custom_bank_host},
+		custom_job=#{custom_job},custom_age=#{custom_age},custom_homepage=#{custom_homepage},custom_introduce=#{custom_introduce},custom_id=#{custom_id}
+		where custom_id=#{origin_id}
 	</update>
 	
 	<!-- 은행 목록 불러오기 -->
@@ -49,4 +49,8 @@
 	<update id="delete_phone" parameterType="String">
 		update custom set custom_phone = '' where custom_id=#{id}
 	</update>
-</mapper>
+	
+	<update id="phone_edit" parameterType="customVO">
+		update custom set custom_phone=#{custom_phone} 
+		where custom_id=#{custom_id}
+	</update></mapper>
