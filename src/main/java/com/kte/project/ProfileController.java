@@ -67,7 +67,10 @@ public class ProfileController {
 		
 		List<CustomVO> list = cdao.select_profile(vo.getCustom_id());
 		model.addAttribute("list", list);
-		
+		if(list.size()>0)
+			model.addAttribute("first", list.get(0).getImg_code());
+		else
+			model.addAttribute("first", 0);
 		return "picture";
 	}
 	

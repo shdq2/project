@@ -41,10 +41,16 @@
 			<h3>사진</h3>
 			<p>User Photo's</p>
 		</div>
-		<div class="main-content"style="width:100%;max-width: 900px;">
+		<div class="main-content"style="width:100%;max-width: 900px;">			
 			<div class="col-xs-3 col-img" >
-				<img src="resources/imgs/user.png" class="user-picture"/>
+				<c:if test="${first == 0 }">
+					<img src="resources/imgs/user.png" class="user-picture"/>
+				</c:if>
+				<c:if test="${first != 0 }">
+					<img src="show_img.do?code=${first }" class="user-picture"/>
+				</c:if>
 			</div>
+			
 			<div class="col-xs-9" style="margin:0px auto;">
 				<div class="file-box form-control">
 					<form enctype="multipart/form-data" method="post"  id="img_form" >
@@ -57,8 +63,8 @@
 				<div class="file-drop" style="width:100%;" >
 					<c:if test="${!empty list }">
 						<c:forEach var="i" items="${list}">
-							<div class="block-md-3 block-sm-6 ui-state-default photo" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5)">
-								<div class="">
+							<div class="block-md-3 block-sm-6 ui-state-default photo" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5);max-height:250px;">
+								<div class="user-picture" style="height:100%;width:100%;">
 									<img src="show_img.do?code=${i.img_code }" style="width:100%;height:100%;margin-top:8px;margin-left:1px;margin-right:1px;" />	
 								</div>
 								<div style="float:right;margin-top:5px;">
@@ -87,25 +93,20 @@
    <script type="text/javascript" src="resources/js/picture.js"></script>
    <script>
 	$(function() {
-		var list = "";
 		var list2 = "";
-		var l2="";
-		$('.photo').each(function(idx){
-			list += $('.img_code').eq(idx).val()+"/";
-		})
 		$('.file-drop').sortable({
 			update:function(){
 				$('.photo').each(function(idx){					
 					list2 += $('.img_code').eq(idx).val()+"/";
 				})
-				console.log(list);
 				console.log(list2);
-				 $.get('Json_sortable.do?val='+list+'&val2='+list2,function(){
-					 $('.photo').each(function(idx){
-							list += $('.img_code').eq(idx).val()+"/";
-						})
+				 $.get('Json_sortable.do?val2='+list2,function(){
+					 $('.col-img').empty();
+					 $('.col-img').append(
+							'<img src="show_img.do?code='+$('.img_code').eq(0).val()+'" class="user-picture"/>'	 
+					 );
+					 
 				})		
-				list="";
 				list2="";
 			}
 		});
@@ -118,9 +119,15 @@
 				contentType:false,
 				success: function(data) {				
 				$('.file-drop').empty();
+				if(data.length == 1){
+					 $('.col-img').empty();
+					 $('.col-img').append(
+							'<img src="show_img.do?code='+data[0].img_code+'" class="user-picture"/>'	 
+					 );
+				}
 					for(var i = 0; i<data.length;i++){
         		   		$('.file-drop').append(
-        		   			'<div class="block-md-3 block-sm-6" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5)">'+
+        		   			'<div class="block-md-3 block-sm-6 ui-state-default photo" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5)">'+
     							'<div class="">'+
     							'<img src="show_img.do?code='+data[i].img_code+'" style="width:100%;height:100%;margin-top:8px;margin-left:1px;margin-right:1px;" />'+	
     							'</div>'+
@@ -131,6 +138,8 @@
     						'</div> '		
         		   		);
 					}
+				
+					
 				}   
 				,error: function(request,status,error) {        		    
 				alert("code:"+request.status+"n"+"message:"+request.responseText+"n"+"error:"+error);
@@ -144,15 +153,23 @@
         	$.get('Json_delete_profile.do?code='+img_code,function(data){
         		$('.file-drop').empty();
         		if(data.length == 0){
+        			$('.col-img').empty();
+					 $('.col-img').append(
+							'<img src="resources/imgs/user.png" class="user-picture"/>'	 
+					 );
         			$('.file-drop').append(
         				'<div style="color:#aaa;padding:25px 10px;font-size:30px;text-align:center">'+
     					'저장된 사진이 없습니다'+
     					'</div>	'
         			);        			
         		}else{
+        			$('.col-img').empty();
+					 $('.col-img').append(
+							'<img src="show_img.do?code='+data[0].img_code+'" class="user-picture"/>'	 
+					 );
         			for(var i = 0; i<data.length;i++){
         		   		$('.file-drop').append(
-        		   			'<div class="block-md-3 block-sm-6" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5)">'+
+        		   			'<div class="block-md-3 block-sm-6 ui-state-default photo" style="margin-top:5px;margin-left:15px;border:1px solid #ddd;border-radius: 4px;padding-left:4px;padding-right:4px;box-shadow:0 1px 1px rgba(0,0,0,0.5)">'+
     							'<div class="">'+
     								'<img src="show_img.do?code='+data[i].img_code+'" style="width:100%;height:100%;margin-top:8px;margin-left:1px;margin-right:1px;" />'+	
     							'</div>'+

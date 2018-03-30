@@ -3,13 +3,15 @@ package com.kte.project.VO;
 public class SortableVO {
 	public int idx1= 0;
 	public int idx2 = 0;
-	public int count = 0;
+
+	public byte[] img1 = null;
 	
-	public int getCount() {
-		return count;
+	
+	public byte[] getImg1() {
+		return img1;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setImg1(byte[] img1) {
+		this.img1 = img1;
 	}
 	public int getIdx1() {
 		return idx1;

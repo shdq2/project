@@ -58,8 +58,6 @@ private SqlSession sqlsession = null;
 	}
 	
 	public int profile_sortable(SortableVO vo) {
-		System.out.println("확인 : " + vo.getIdx1());
-		System.out.println("확인 : " + vo.getIdx2());
 		return sqlsession.update("custom.profile_sortable",vo);
 	}
 }

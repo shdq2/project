@@ -33,7 +33,7 @@
 	
 	<!-- 프로필 사진 목록 -->
 	<select id="select_profile" parameterType="String" resultType="customVO">
-		select img_code from custom_profile where custom_id = #{id} order by img_code asc
+		select img_code,custom_img from custom_profile where custom_id = #{id} order by img_code asc
 	</select>
 	
 	<!-- 프로필 사진 출력 -->
@@ -53,7 +53,7 @@
 	<select id="profile_sortable" parameterType="com.kte.project.VO.SortableVO" resultType="Int">
 		call profile_sortable(
 			#{idx1,mode=IN},
-			#{idx2,mode=IN}
+			#{img1,mode=IN,jdbcType=BLOB}
 		)
 	</select>
 	<!-- 은행 목록 불러오기 -->

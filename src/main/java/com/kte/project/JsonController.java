@@ -78,21 +78,29 @@ public class JsonController {
 
 	@RequestMapping(value = "/Json_sortable.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int Json_sortable(Model model,
-			@RequestParam("val")List<String> val,
 			@RequestParam("val2")List<String> val2,
 		HttpSession http) {
 		String id = (String) http.getAttribute("custom_id");
 		int ret = 0;
-		List<SortableVO> list = new ArrayList<SortableVO>();
-		String[] v1 = val.get(0).split("/");
+		List<CustomVO> ilist = cdao.select_profile(id);
 		String[] v2 = val2.get(0).split("/");
-		SortableVO vo = new SortableVO();		
-		for(int i=0;i<v1.length;i++) {			
-			vo.setIdx1(Integer.parseInt(v1[i]));
-			vo.setIdx2(Integer.parseInt(v2[i]));
+		
+		for(int i=0;i<v2.length;i++) {
+			int num = Integer.parseInt(v2[i]);
+			int idx = 0;
+			for(int j= 0; j<v2.length;j++) {
+				if(ilist.get(i).getImg_code() == Integer.parseInt(v2[j])) {
+					idx = j;
+					break;
+				}
 				
-			ret = cdao.profile_sortable(vo);
-			System.out.println(ret);
+			}
+			System.out.println("idx :" + idx);
+			SortableVO vo = new SortableVO();
+			vo.setIdx1(ilist.get(idx).getImg_code());
+			vo.setImg1(ilist.get(i).getCustom_img());
+			
+			cdao.profile_sortable(vo);
 		}
 		
 		//int ret = cdao.profile_sortable(vo);
