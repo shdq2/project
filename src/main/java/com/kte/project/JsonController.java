@@ -1,5 +1,9 @@
 package com.kte.project;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.SortableVO;
 import com.kte.project.dao.CustomDAO;
 import com.kte.project.dao.RegisterDAO;
 
@@ -33,8 +40,68 @@ public class JsonController {
 		}		
 	}
 	
+	@RequestMapping(value = "/Json_upload_img.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<CustomVO> Json_upload_img(Model model,
+		HttpSession http,
+		MultipartHttpServletRequest request) {
+		try {
+		String custom_id = (String)http.getAttribute("custom_id");
+		Map<String, MultipartFile> map = request.getFileMap();
+		CustomVO vo = new CustomVO();
+		vo.setCustom_id(custom_id);
+		MultipartFile tmp = map.get("upload_img");
+		
+			if(tmp != null && !tmp.getOriginalFilename().equals("")) {
+				vo.setCustom_img(tmp.getBytes());
+			}
+			List<CustomVO> list = cdao.upload_profile(vo);
+			
+			return list;
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/Json_delete_profile.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<CustomVO> Json_delete_profile(Model model,
+			@RequestParam("code")int code,
+		HttpSession http) {
+		String id = (String) http.getAttribute("custom_id");
+		CustomVO vo = new CustomVO();
+		vo.setImg_code(code);
+		vo.setCustom_id(id);
+		List<CustomVO> list = cdao.delete_profile(vo);
+		
+		return list;
+	}
+
+	@RequestMapping(value = "/Json_sortable.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody int Json_sortable(Model model,
+			@RequestParam("val")List<String> val,
+			@RequestParam("val2")List<String> val2,
+		HttpSession http) {
+		String id = (String) http.getAttribute("custom_id");
+		int ret = 0;
+		List<SortableVO> list = new ArrayList<SortableVO>();
+		String[] v1 = val.get(0).split("/");
+		String[] v2 = val2.get(0).split("/");
+		SortableVO vo = new SortableVO();		
+		for(int i=0;i<v1.length;i++) {			
+			vo.setIdx1(Integer.parseInt(v1[i]));
+			vo.setIdx2(Integer.parseInt(v2[i]));
+				
+			ret = cdao.profile_sortable(vo);
+			System.out.println(ret);
+		}
+		
+		//int ret = cdao.profile_sortable(vo);
+		
+		return 0;
+	}
+	
 	@RequestMapping(value = "/Json_delete_phone.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody int delete_phone(Model model,
+	public @ResponseBody int Json_delete_phone(Model model,
 		HttpSession http) {
 		
 		String id = (String) http.getAttribute("custom_id");
@@ -42,7 +109,6 @@ public class JsonController {
 		return ret;
 	}
 	
-
 	@RequestMapping(value = "/Json_phone_update.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int edit_phone(Model model,
 		HttpSession http,@RequestParam("custom_phone")String phone) {
