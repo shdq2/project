@@ -150,7 +150,7 @@
         					<div>
 	        					<div class="form-group col-md-5">
 	        						<label class="control-label" align="left" style="width:100%">이름</label>
-	        						<form:input class="form-control" type="text" path="wish_name" placeholder="예) 홍길동"/>
+	        						<form:input class="form-control" required="required" type="text" path="wish_name" placeholder="예) 홍길동"/>
 	        					</div>
 	        					<div class="form-group col-md-7">
 	        						<label class="control-label" align="left" style="width:100%">전화번호</label>

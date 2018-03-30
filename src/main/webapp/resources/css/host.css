@@ -15,10 +15,17 @@
     /* vertical-align: top; */
 	width: 205px;
 	height: auto;
-	padding: 20px 15px 20px 0px;
+	padding: 30px 15px 20px 0px;
     border-bottom: 1px solid #f2f2f2;
     margin: 0px 15px 0px 0px;
-    vertical-align: middle; 
+    vertical-align: middle;
+    
+    
+}
+
+.host-side > a > span {
+	font-family: 'Noto Sans KR', sans-serif; 
+    color: #6f7071 !important;
 }
 
 .host-side a {
@@ -36,12 +43,11 @@
 	text-decoration: none;
 }
 
-
-.host-intro{
+.host-main{
 	position: relative;
 	display: inline-block;
 	width: calc(100% - 220px);
-	padding: 35px 15% 0px 15%;
+	padding: 35px 15% 0px 5%;
 	height: 100%;
 	left: 220px;
 	border-left: 1px solid #f2f2f2;
@@ -56,3 +62,53 @@
 	float:right;
 }
 
+.host-main .host-header .host-title {
+	color: #ec7263 !important;
+    font-size: 1.6em;
+    font-weight: 400;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom:30px;
+}
+
+small{
+	font-weight:300;
+	font-size:65%;
+	line-height:1;
+	color:#a3afb7;
+}
+
+.panel {
+	position: relative;
+	margin-bottom: 30px;
+    border-width: 0;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 1px 1px rgba(0,0,0,.05);
+    border-top-color:transparent;
+    
+}
+
+.panel-body{
+	padding-top:30px;
+}
+
+.panel-head {
+	border-bottom: 1px solid #e4eaec;
+}
+
+.panel-title {
+	color: #6f7071 !important;
+    font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    display: block;
+    padding: 15px 20px;
+}
+ 
+.panel-body .control-label{
+	font-family: 'Noto Sans KR', sans-serif;
+	color: #6f7071 !important;
+	font-size: 14px;
+	
+}
