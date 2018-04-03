@@ -77,35 +77,30 @@ public class JsonController {
 	}
 
 	@RequestMapping(value = "/Json_sortable.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody int Json_sortable(Model model,
+	public @ResponseBody List<CustomVO> Json_sortable(Model model,
 			@RequestParam("val2")List<String> val2,
 		HttpSession http) {
 		String id = (String) http.getAttribute("custom_id");
-		int ret = 0;
 		List<CustomVO> ilist = cdao.select_profile(id);
 		String[] v2 = val2.get(0).split("/");
 		
 		for(int i=0;i<v2.length;i++) {
-			int num = Integer.parseInt(v2[i]);
+			
 			int idx = 0;
 			for(int j= 0; j<v2.length;j++) {
-				if(ilist.get(i).getImg_code() == Integer.parseInt(v2[j])) {
+				if(ilist.get(j).getImg_code() == Integer.parseInt(v2[i])) {
 					idx = j;
 					break;
 				}
-				
 			}
-			System.out.println("idx :" + idx);
-			SortableVO vo = new SortableVO();
-			vo.setIdx1(ilist.get(idx).getImg_code());
-			vo.setImg1(ilist.get(i).getCustom_img());
 			
+			SortableVO vo = new SortableVO();
+			vo.setIdx1(ilist.get(i).getImg_code());
+			vo.setImg1(ilist.get(idx).getCustom_img());
 			cdao.profile_sortable(vo);
 		}
-		
-		//int ret = cdao.profile_sortable(vo);
-		
-		return 0;
+		List<CustomVO> list = cdao.select_profile(id);
+		return list;
 	}
 	
 	@RequestMapping(value = "/Json_delete_phone.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})

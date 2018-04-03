@@ -97,6 +97,20 @@ public class JSON_Admin_Controller {
 	}
 	////////////////////////
 	
+	//////////////////// json room///////////////
+	
+	@RequestMapping(value = "/json_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<RoomVO> room(Model model,	
+			HttpSession http,
+			@RequestParam("page")int p) {		
+		int page = (p-1)*10;
+		List<RoomVO> list = ardao.allroomList(page);
+		return list;
+	}
+	
+	
+	//////////////////////////
+	
 	// json wish /////////////
 	@RequestMapping(value = "/json_wish.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody List<WishVO> wish(Model model,	

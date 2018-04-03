@@ -11,4 +11,16 @@
 		select count(*) from room where custom_id=#{id}
 	</select>
 	
+	<select id="all_room" resultType="roomVO">
+		select c.custom_name,r.room_name,r.room_day,r.room_block from custom c 
+		inner join
+		(select * from room ) r 
+		on c.custom_id = r.custom_id
+		order by room_code desc
+		Limit #{page},10
+	</select>
+	
+	<select id="room_count" resultType="Int">
+		select count(*) from room
+	</select>
 </mapper>

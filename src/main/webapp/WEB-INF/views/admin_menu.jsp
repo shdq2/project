@@ -32,7 +32,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="menu_check"><a href="index.html">Dashboard</a></li>
-					<li class="menu_check"><a href="pages.html">Pages</a></li>
+					<li class="menu_check"><a href="admin_room.do">Room</a></li>
 					<li class="menu_check"><a href="admin_wish.do">Wish</a></li>
 					<li class="menu_check"><a href="admin_member.do">Users</a></li>
 				</ul>
@@ -84,7 +84,7 @@
 					<div class="list-group">
 						<a href="admin.do" class="list-group-item  main"><span
 							class="glyphicon glyphicon-cog" aria-hidden="true"></span> 메인 <span
-							class="badge">12</span> </a> <a href="pages.html"
+							class="badge">12</span> </a> <a href="admin_room.do"
 							class="list-group-item room_menu"><span
 							class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 							숙소관리<span class="badge">25</span></a> <a href="admin_wish.do"
