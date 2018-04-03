@@ -27,38 +27,39 @@
 	<div class="container1">
 		<div class="host-side">
 			<p style="text-align:center; margin-bottom:30px" >숙소설정</p>
-			<a href="#">
+			<a href="/project/host.do">
 				<span class="pull-left">설명</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_basic.do">
 				<span class="pull-left">기본설정</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_location.do">
 				<span class="pull-left">위치</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_amenity.do">
 				<span class="pull-left">편의시설</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_imgs.do">
 				<span class="pull-left">사진</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_price.do">
 				<span class="pull-left">예약/요금 설정</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#">
+			<a href="/project/host_inout.do">
 				<span class="pull-left">입/퇴실시간</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="#"><i class="glyphicon glyphicon-calendar"></i>  달력 관리</a>
-			<a href="#"><i class="	glyphicon glyphicon-plus"></i>  새로운 숙소 등록</a>
-			<a href="#"><i class="	glyphicon glyphicon-th-list"></i>  숙소목록</a>
+			<a href="/project/host_calendar.do"><i class="glyphicon glyphicon-calendar"></i>  달력 관리</a>
+			<a href="/project/host_new.do"><i class="	glyphicon glyphicon-plus"></i>  새로운 숙소 등록</a>
+			<a href="/project/host_list.do"><i class="	glyphicon glyphicon-th-list"></i>  숙소목록</a>
 		</div>
+		
 		<div class="host-main">
 			<div class="host-header">
 				<h3 class="host-title">설명 <small>숙소를 소개해주세요</small></h3>
@@ -71,21 +72,21 @@
 								<h3 class="panel-title">회원님만의 특별한 이름과 소개글로 꾸며주세요.</h3>
 							</div>
 							<div class="panel-body">
-								<form method="POST" >
+								<form:form action="#" method="post" modelAttribute="vo">
 									<div class="form-group">
 										<label class="control-label">숙소이름</label> 
-										<input class="form-control" required="required" name="title" type="text" id="title" path="title">
+										<form:input class="form-control" required="required" type="text" path="name_title"></form:input>
 									</div>
 									<div class="form-group">
 										<label class="control-label">숙소소개</label>
-										<textarea style="resize:none" id="desc_content" class="form-control" required="required" name="described" cols="50" rows="10"></textarea>
+										<form:textarea style="resize:none" path="name_content" class="form-control" required="required" cols="50" rows="10"></form:textarea>
 									</div>
-									<div class="form-group ">
-										<div class="col-sm-2 pull-right">
+									<div class="form-group">
+										<div class="pull-right button-next">
 											<input class="btn btn-primary btn-block" type="submit" value="다음">
 										</div>
 									</div>
-								</form>
+								</form:form>
 							</div>
 						</div>
 					</div>
