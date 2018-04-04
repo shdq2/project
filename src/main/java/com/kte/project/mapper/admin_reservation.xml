@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin_reservation">
+	
+	<select id = "reservation_member" parameterType="reservationVO" resultType="reservationVO">
+		select 
+		r.reservation_code,r.custom_id,r.room_code,date_format(r.reservation_start,'%Y-%m-%d') as reservation_start,date_format(r.reservation_end,'%Y-%m-%d') as reservation_end,r.reser_title, 
+		ro.room_name,(to_days(r.reservation_end)-to_days(r.reservation_start)) as reser_day
+		from room ro
+		inner join
+			(select r.reservation_code,r.custom_id,r.room_code,r.reservation_start,r.reservation_end,rs.reser_title from reservation r
+			inner join reservation_state rs
+			on r.reser_code = rs.reser_code) r
+		on ro.room_code = r.room_code
+		where r.custom_id = #{custom_id} 
+		order by r.reservation_code desc
+		limit #{page},6
+	</select>
+	
+	<select id="reser_total" resultType="Int" parameterType="String">
+		select count(*) from reservation where custom_id=#{id}
+	</select>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="search">	
+	<!-- <select id="selectRoomData" resultType="com.kte.project.VO.RoomVO">
+		SELECT r.room_code, r.room_name, r.room_content, r.room_price, r.custom_id, r.room_date, r.room_type, r.room_like, r.room_day, r.room_month, ra.room_addr, ra.map_lat, ra.map_lng FROM room r
+			INNER JOIN room_addr ra On r.room_code = ra.room_code
+			ORDER BY ra.map_lat DESC
+	</select>	 -->
+	
+	<select id="getMarker" parameterType="com.kte.project.VO.boundVO" resultType="com.kte.project.VO.RoomVO">
+		SELECT r.room_code, r.room_name, r.room_content, r.room_price, r.custom_id, r.room_date, r.room_type, r.room_like, r.room_day, r.room_month, ra.room_addr, ra.map_lat, ra.map_lng FROM room r
+			INNER JOIN room_addr ra On r.room_code = ra.room_code WHERE ra.map_lat <![CDATA[<]]> #{ne_lat} AND ra.map_lat <![CDATA[>]]> #{sw_lat} AND ra.map_lng <![CDATA[<]]> #{ne_lng} AND ra.map_lng <![CDATA[>]]> #{sw_lng}
+				<if test="day_type == '한달'">
+					AND r.room_month <![CDATA[>]]> #{min_price} AND r.room_month <![CDATA[<]]> #{max_price}
+					
+					<if test="active_tab =='detail-1'">
+						ORDER BY ra.map_lat DESC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-4'">
+						ORDER BY r.room_date DESC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-5'">
+						ORDER BY r.room_month ASC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-6'">
+						ORDER BY r.room_month DESC LIMIT #{page}, 10
+					</if>
+				</if>
+				
+				<if test="day_type == '1박'">
+					AND r.room_day <![CDATA[>]]> #{min_price} AND r.room_day <![CDATA[<]]> #{max_price}
+					
+					<if test="active_tab =='detail-1'">
+						ORDER BY ra.map_lat DESC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-4'">
+						ORDER BY r.room_date DESC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-5'">
+						ORDER BY r.room_day ASC LIMIT #{page}, 10
+					</if>
+					<if test="active_tab =='detail-6'">
+						ORDER BY r.room_day DESC LIMIT #{page}, 10
+					</if>
+				</if>
+	</select>
+	
+	<select id="getMarker_count" parameterType="com.kte.project.VO.boundVO" resultType="int">
+		SELECT COUNT(r.room_code) FROM room r
+			INNER JOIN room_addr ra On r.room_code = ra.room_code WHERE ra.map_lat <![CDATA[<]]> #{ne_lat} AND ra.map_lat <![CDATA[>]]> #{sw_lat} AND ra.map_lng <![CDATA[<]]> #{ne_lng} AND ra.map_lng <![CDATA[>]]> #{sw_lng}
+			<if test="day_type == '한달'">
+				AND r.room_month <![CDATA[>]]> #{min_price} AND r.room_month <![CDATA[<]]> #{max_price}
+				
+				<if test="active_tab =='detail-1'">
+					ORDER BY ra.map_lat DESC
+				</if>
+				<if test="active_tab =='detail-4'">
+					ORDER BY r.room_date DESC
+				</if>
+				<if test="active_tab =='detail-5'">
+					ORDER BY r.room_month ASC
+				</if>
+				<if test="active_tab =='detail-6'">
+					ORDER BY r.room_month DESC
+				</if>
+			</if>
+			
+			<if test="day_type == '1박'">
+				AND r.room_day <![CDATA[>]]> #{min_price} AND r.room_day <![CDATA[<]]> #{max_price}
+				
+				<if test="active_tab =='detail-1'">
+					ORDER BY ra.map_lat DESC
+				</if>
+				<if test="active_tab =='detail-4'">
+					ORDER BY r.room_date DESC
+				</if>
+				<if test="active_tab =='detail-5'">
+					ORDER BY r.room_day ASC
+				</if>
+				<if test="active_tab =='detail-6'">
+					ORDER BY r.room_day DESC
+				</if>
+			</if>
+	</select>
+	
+</mapper>

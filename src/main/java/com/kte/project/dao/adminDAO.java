@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 
 @Service
 public class adminDAO {
@@ -27,6 +28,10 @@ public class adminDAO {
 		return sql.selectOne("admin.yesterday");
 	}
 	
+	public int block_chk(String id) {
+		return sql.selectOne("admin.block_chk",id);
+	}
 	
+
 
 }	

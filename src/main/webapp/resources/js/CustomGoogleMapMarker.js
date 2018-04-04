@@ -26,15 +26,25 @@ CustomMarker.prototype.draw = function() {
 		div.style.color = 'white';
 		div.style.textAlign = 'center';
 		div.style.paddingTop = '2px';
-		div.style.backgroundImage = 'url("/project/resources/imgs/price_marker.png")';
 		div.style.backgroundSize = 'contain';
 		div.style.backgroundRepeat = 'no-repeat';
-		div.style.zIndex = self.args.marker_id;
 
 		div.append(""+numberWithCommas(self.args.room_price));
 		
 		if (typeof(self.args.marker_id) !== 'undefined') {
 			div.dataset.marker_id = self.args.marker_id;
+		}
+
+		if (typeof(self.args.z_index) !== 'undefined') {
+			div.style.zIndex = self.args.z_index;
+		}
+		
+		if (typeof(self.args.room_code) !== 'undefined') {
+			div.dataset.room_code = self.args.room_code;
+		}
+		
+		if (typeof(self.args.bg_image) !== 'undefined') {
+			div.style.backgroundImage = self.args.bg_image;
 		}
 		
 		var panes = this.getPanes();

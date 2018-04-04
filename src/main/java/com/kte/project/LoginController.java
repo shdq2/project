@@ -12,49 +12,65 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.LoginDAO;
+import com.kte.project.dao.visitDAO;
 
 @Controller
 public class LoginController {
-	@Autowired
-	LoginDAO lDAO = null; 
-	
-	@RequestMapping(value="/login.do", method = RequestMethod.GET)
-	public String login(Model model) {
-		CustomVO vo = new CustomVO();
-		model.addAttribute("vo", vo);
+   @Autowired
+   LoginDAO lDAO = null; 
+   @Autowired
+   visitDAO vDAO = null; 
+   
+   @RequestMapping(value="/login.do", method = RequestMethod.GET)
+   public String login(Model model) {
+      CustomVO vo = new CustomVO();
+      model.addAttribute("vo", vo);
 
-		return "login";
-	}
-	
-	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo) {
-		CustomVO cvo = lDAO.selectCustomOne(vo);
-		
-		if(cvo != null) {
-			if(cvo.getCustom_block() != 1) {
-				HttpSession httpsession = request.getSession();
-				httpsession.setAttribute("custom_name", cvo.getCustom_name());
-				httpsession.setAttribute("custom_id", cvo.getCustom_id());
-				System.out.println("Î°úÍ∑∏Ïù∏ ÏÑ±Í≥µ");
-				return "redirect:main.do";
-			}else {
-				System.out.println("Ï∞®Îã®Îêú ÏïÑÏù¥Îîî");
-				return "redirect:login.do"; 
-			}
-			
-		}else {
-			System.out.println("Ï°¥Ïû¨ÌïòÏßÄ ÏïäÎäî ÏïÑÏù¥Îîî");
-			return "redirect:login.do";
-		}
-		
-		
-	}
-	
-	@RequestMapping(value="/logout.do", method = RequestMethod.GET)
-	public String p_logout(HttpServletRequest request) {
-		HttpSession httpsession = request.getSession();
-		httpsession.invalidate();
-		
-		return "redirect:login.do";
-	}
+      return "login";
+   }
+   
+   @RequestMapping(value="/login.do", method = RequestMethod.POST)
+   public String p_login(HttpServletRequest request, @ModelAttribute("vo") CustomVO vo,HttpSession httpsession,Model model) {
+      CustomVO cvo = lDAO.selectCustomOne(vo);
+      if(cvo != null) {
+         if(cvo.getCustom_block() != 1) {
+            if(cvo.getCustom_block() == 999) {
+               httpsession.setAttribute("custom",cvo);
+               httpsession.setAttribute("custom_id",cvo.getCustom_id());
+               httpsession.setAttribute("custom_name",cvo.getCustom_name());
+               
+               return "redirect:admin.do";
+            }else {
+               httpsession.setAttribute("custom",cvo);
+               httpsession.setAttribute("custom_id",cvo.getCustom_id());
+               httpsession.setAttribute("custom_name",cvo.getCustom_name());
+               
+               model.addAttribute("url", "visit.do");
+               model.addAttribute("msg", "»Øøµ«’¥œ¥Ÿ");
+               model.addAttribute("ret", "y");   
+            }
+            
+         }else {
+            model.addAttribute("url", "login.do");
+            model.addAttribute("msg", "¬˜¥‹µ» æ∆¿Ãµ¿‘¥œ¥Ÿ");
+            model.addAttribute("ret", "n");
+         }
+         
+      }else {
+         model.addAttribute("url", "login.do");
+         model.addAttribute("msg", "»∏ø¯ ¡§∫∏∞° ø√πŸ∏£¡ˆ æ Ω¿¥œ¥Ÿ");
+         model.addAttribute("ret", "n");
+         System.out.println("¡∏¿Á«œ¡ˆ æ ¥¬ æ∆¿Ãµ");
+      }
+      
+      return "alert";
+   }
+   
+   @RequestMapping(value="/logout.do", method = RequestMethod.GET)
+   public String p_logout(HttpServletRequest request) {
+      HttpSession httpsession = request.getSession();
+      httpsession.invalidate();
+      
+      return "redirect:login.do";
+   }
 }

@@ -58,7 +58,7 @@ $(function() {
 	
 	$(document).on('mouseover', '.room-item', function(e) {
 		var index = $('.room-item').index(this);
-		$('.marker[data-marker_id~='+ active +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
+		$('.marker').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
 		$('#marker-detail').remove();
 		
 		$('.marker[data-marker_id~='+ index +']').css('background-image', 'url("/project/resources/imgs/price_marker_mouse_on.png")');
@@ -89,7 +89,7 @@ $(function() {
 	$(document).on('click', '.marker', function(e) {
 		e.stopPropagation();
 		
-		var index = $('.marker').index(this) + 1;
+		var index = $('.marker').index(this);
 		$('.marker[data-marker_id~='+ active +']').css('background-image', 'url("/project/resources/imgs/price_marker.png")');
 		$('#marker-detail').remove();
 
@@ -102,7 +102,7 @@ $(function() {
 		var top = Number($('.marker[data-marker_id~='+ index +']').css('top').replace("px", ""));
 		var left = Number($('.marker[data-marker_id~='+ index +']').css('left').replace("px", ""));
 		
-		$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'">'+
+		$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'" data-room_code="'+ $('.marker[data-marker_id~='+ index +']').attr('data-room_code') +'">'+
 				'<img id="mdetail-img" src="'+$('.room-item[data-marker_id~='+ index +'] .room-img').attr('src')+'" />'+
 				'<p id="mdetail-p">'+ $('.room-item[data-marker_id~='+ index +'] .room-name').html() +'</p></div>');
 		$('#marker-detail').css('top', (top-157)+'px');
@@ -184,36 +184,7 @@ $(function() {
 			$('#more-2').text('▼더보기');
 			$('#more-2').css('text-decoration', 'none');
 		}
-	});
-	
-	var nonLinearSlider = document.getElementById('slider-range');
-
-	noUiSlider.create(nonLinearSlider, {
-		connect: true,
-		behaviour: 'tap',
-		start: [ 0, 3000000 ],
-		range: {
-			// Starting at 500, step the value by 500,
-			// until 4000 is reached. From there, step by 1000.
-			'min': [ 0, 100 ],
-			'40%': [ 100000, 1000 ],
-			'70%': [ 1000000, 100000 ],
-			'max': [ 3000000 ]
-		}
-	});
-	
-	var nodes = [
-		document.getElementById('a-1'), // 0
-		document.getElementById('a-2')  // 1
-	];
-
-	nonLinearSlider.noUiSlider.on('update', function ( values, handle, unencoded, isTap, positions ) {
-		nodes[handle].innerHTML = '￦' + numberWithCommas(parseInt(values[handle]));
-		
-		if(values[handle] == 3000000 && handle != 0)
-			nodes[handle].innerHTML += '+';
-	});
-	
+	});	
 });
 
 function numberWithCommas(x) {

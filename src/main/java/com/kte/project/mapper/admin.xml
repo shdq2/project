@@ -8,11 +8,14 @@
 	</select>	
 	
 	<select id = "yesterday" resultType="Int">
-		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date() - interval 1 day
+		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date() - interval 1 day and custom_block <![CDATA[<]]> 10
 	</select>
 	
 	<select id = "today" resultType="Int">
-		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date()
+		select count(*) from custom where date_format(custom_date,'%Y-%m-%d') = current_date() and custom_block <![CDATA[<]]> 10
 	</select>
 	
+	<select id="block_chk" resultType="Int" parameterType="String">
+		select custom_block from custom where custom_id=#{id}
+	</select>
 </mapper>

@@ -3,6 +3,12 @@
 
 /**/
 
+::-webkit-scrollbar { width: 8px; }
+
+::-webkit-scrollbar-button { width: 8px; }
+
+::-webkit-scrollbar-thumb { background: #a9a9a9; }
+
 label {
 	color: #9897a6 !important;
 }
@@ -52,6 +58,7 @@ input[type=checkbox]
 
 #col-main {
 	height: 100%;
+	min-height: 100%;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	overflow: hidden;
@@ -61,12 +68,14 @@ input[type=checkbox]
 	width: 100%;
 	height: 16%;
 	margin-bottom: 1%;
+	display: inline-block;
 }
 
 #col-content {
 	width: 100%;
 	height: 83%;
 	margin-top: 10px;
+	padding-bottom: 50px;
 	display: inline-block;
 	overflow-y: scroll;
 }
@@ -179,12 +188,19 @@ input[type=checkbox]
 	height: auto;
 }
 
+#row-4, #row-5 {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+}
+
 .room-item {
 	overflow: hidden;
 	width: 100%;
 	height: auto;
 	margin-top: 20px;
 	position: relative;
+	display: inline-block; 
 }
 
 .room-item h5 {

@@ -2,23 +2,68 @@ package com.kte.project.VO;
 
 public class ReservationVO {
 	/*
-	 * ¿¹¾à vo
+	 * ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
-	private int reservation_code = 0;		//¿¹¾à Å×ÀÌºí ±âº»Å°
-	private String reservation_date = null;	//¿¹¾àÀÏÀÚ
+	private int reservation_code = 0;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½âº»Å°
+	private String reservation_date = null;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/*
-	 * ¿¹¾à vo
+	 * ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
 	/*
-	 * ¿¹¾à»óÅÂ vo
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
-	private int reser_code = 0;				//¿©Çà»óÅÂ ±âº»Å°
-	private String reser_title = null;		//¿©Çà»óÅÂ ¸í(ex) ¿¹¾à ´ë±â, ¿¹¾à¿Ï·á, °áÁ¦Áß, °áÁ¦¿Ï·á, Ãë¼Ò µîµî)
+	private int reser_code = 0;				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»Å°
+	private String reser_title = null;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½(ex) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Ï·ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½)
 	private String reser_date=null;			
 	/*
-	 * ¿¹¾à»óÅÂ vo
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vo
 	 * */
 	
+	private String reservation_start = null;
+	private String reservation_end = null;
+	
+	private int reser_day = 0;
+	private String room_name = null;
+	
+	private int page=0;
+	private String custom_id=null;
+	
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
+	public String getRoom_name() {
+		return room_name;
+	}
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
+	}
+	public String getReservation_start() {
+		return reservation_start;
+	}
+	public void setReservation_start(String reservation_start) {
+		this.reservation_start = reservation_start;
+	}
+	public String getReservation_end() {
+		return reservation_end;
+	}
+	public void setReservation_end(String reservation_end) {
+		this.reservation_end = reservation_end;
+	}
+	public int getReser_day() {
+		return reser_day;
+	}
+	public void setReser_day(int reser_day) {
+		this.reser_day = reser_day;
+	}
 	public int getReservation_code() {
 		return reservation_code;
 	}

@@ -12,6 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <!-- 아이폰 주소창 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
+
 <meta charset="UTF-8">
 <title>미스터멘션</title>
 <link rel="stylesheet" href="resources/css/w3.css" />
@@ -58,7 +59,7 @@
 					<hr style="width: 100%; margin-top: 5px; margin-bottom: 5px;" />
 					<div id="row-2">
 						<div class="col-md-2 standard">
-							<select class="form-control">
+							<select id="day_type" class="form-control">
 								<option value="한달">한달</option>
 								<option value="1박">1박</option>
 							</select>
@@ -199,7 +200,7 @@
 					</div>
 
 					<div style="clear: both"></div>
-					<div class="col-lg-6 col-xlg-6 room-item" style="display: none;"></div>
+					<div class="col-lg-6 col-xlg-6" style="display: none;"></div>
 
 					<div id="row-5" style="margin-top: 20px">
 						<ul class="nav nav-tabs">
@@ -221,6 +222,10 @@
 							<div class="tab-pane fade" id="detail-6"></div>
 						</div>
 					</div>
+					
+					<div id="row-6" style="width: 100%; position: relative; display: inline-block; text-align: center">
+						<ul id="pagination" class="pagination-sm" style=""></ul>
+					</div>					
 				</div>
 			</div>
 		</div>
@@ -229,6 +234,7 @@
 	<script type="text/javascript" src="resources/js/nouislider.js"></script>
 	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="resources/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="resources/js/topbar.js"></script>
 	<script type="text/javascript" src="resources/js/room_search.js"></script>
@@ -238,6 +244,103 @@
 		src="resources/js/CustomGoogleMapMarker.js"></script>
 	<script>
 	var map;
+	var marker_list;
+	var ne_lat, ne_lng, sw_lat, sw_lng;
+	var count = 0;
+	var active_tab = $('.tab-pane.fade.in.active').attr('id');
+	var day_type = '한달';
+	
+	$('.nav-tabs li').click(function() {
+		var index = $('.nav-tabs li').index(this) + 1;
+		active_tab = 'detail-' + index;
+		
+		$('.marker').remove();
+		$('#marker-detail').remove();
+		
+		$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+      		 "ne_lng" : ne_lng,
+   		 "sw_lat" : sw_lat,
+   		 "sw_lng" : sw_lng,
+   		 "active_tab" : active_tab,
+   		 "day_type" : day_type,
+   		 "page" : 0 }, function(data) {
+		    
+   			var room_code = $('#marker-detail').attr('data-room_code');
+   			marker_list = data;
+   			addMarkerPost(marker_list, room_code);
+   			
+   			var total = ((data[0].room_count-1)/10) + 1;
+   			
+   			$('#pagination').twbsPagination('destroy');
+   			
+   			$('#pagination').twbsPagination({
+   		        totalPages: total,
+   		        visiblePages: 7,
+   		        onPageClick: function (event, page) {
+   		        	page = (page-1) * 10;
+
+   		        	$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+   			       		 "ne_lng" : ne_lng,
+   			    		 "sw_lat" : sw_lat,
+   			    		 "sw_lng" : sw_lng,
+   			    		 "active_tab" : active_tab,
+   			    		 "day_type" : day_type,
+   			    		 "page" : page }, function(data) {
+   						$('.marker').remove();
+   						$('#marker-detail').remove();
+
+   						marker_list = data;
+   						addMarkerPost(marker_list, 0);
+   					});
+   		    	}
+   		    });
+   		 });
+	});
+	
+	$('#day_type').change(function() {
+		day_type = $('#day_type').val();
+		
+		$('.marker').remove();
+		$('#marker-detail').remove();
+		
+		$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+      		 "ne_lng" : ne_lng,
+   		 "sw_lat" : sw_lat,
+   		 "sw_lng" : sw_lng,
+   		 "active_tab" : active_tab,
+   		 "day_type" : day_type,
+   		 "page" : 0 }, function(data) {
+		    	var room_code = $('#marker-detail').attr('data-room_code');
+   			marker_list = data;
+   			addMarkerPost(marker_list, room_code);
+   			
+   			var total = ((data[0].room_count-1)/10) + 1;
+   			
+   			$('#pagination').twbsPagination('destroy');
+   			
+   			$('#pagination').twbsPagination({
+   		        totalPages: total,
+   		        visiblePages: 7,
+   		        onPageClick: function (event, page) {
+   		        	page = (page-1) * 10;
+   		        	
+   		        	$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+   			       		 "ne_lng" : ne_lng,
+   			    		 "sw_lat" : sw_lat,
+   			    		 "sw_lng" : sw_lng,
+   			    		 "active_tab" : active_tab,
+   			    		 "day_type" : day_type,
+   			    		 "page" : page }, function(data) {
+   						$('.marker').remove();
+   						$('#marker-detail').remove();
+
+   						marker_list = data;
+   						addMarkerPost(marker_list, 0);
+   					});
+   		    	}
+   		    });
+   		 });
+	});
 
 	function initialize() {
 		var myLatlng = new google.maps.LatLng(35.1980, 129.0860);
@@ -254,78 +357,327 @@
 		map = new google.maps.Map(document.getElementById('map'), mapOptions);
 		var projection = map.getProjection();
 		
-		addMarker(); //마커 출력
+		google.maps.event.addListener(map, 'tilesloaded', function() {
+			if(count == 0) {
+				var bounds = map.getBounds();
+				ne_lat = bounds.getNorthEast().lat();
+				ne_lng = bounds.getNorthEast().lng();
+				sw_lat = bounds.getSouthWest().lat();
+				sw_lng = bounds.getSouthWest().lng();
+				
+				$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+		       		 "ne_lng" : ne_lng,
+		    		 "sw_lat" : sw_lat,
+		    		 "sw_lng" : sw_lng,
+		    		 "active_tab" : active_tab,
+		    		 "day_type" : day_type,
+		    		 "page" : 0 }, function(data) {
+				    	var room_code = $('#marker-detail').attr('data-room_code');
+		    			marker_list = data;
+		    			addMarkerPost(marker_list, room_code);
+		    			
+		    			var total = parseInt(((data[0].room_count-1)/10) + 1);
+		    			
+		    			$('#pagination').twbsPagination('destroy');
+		    			
+		    			$('#pagination').twbsPagination({
+		    		        totalPages: total,
+		    		        visiblePages: 7,
+		    		        onPageClick: function (event, page) {
+		    		        	page = (page-1) * 10;
+		    		        	
+		    		        	console.log('page : ' + page);
+		    		        	
+		    		        	$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+		    			       		 "ne_lng" : ne_lng,
+		    			    		 "sw_lat" : sw_lat,
+		    			    		 "sw_lng" : sw_lng,
+		    			    		 "active_tab" : active_tab,
+		    			    		 "day_type" : day_type,
+		    			    		 "page" : page }, function(data) {
+		    						$('.marker').remove();
+		    						$('#marker-detail').remove();
+
+		    						marker_list = data;
+		    						addMarkerPost(marker_list, 0);
+		    					});
+		    		    	}
+		    		    });
+	
+		    			setTimeout(function() {
+	    					reloadingMarkerDetail();
+			    		}, 300);
+	    		 });
+				count = count + 1;
+			}
+		});
 		
 		google.maps.event.addListener(map, 'zoom_changed', function() {
+			$('.marker').remove();
 			$('#marker-detail').css('visibility', 'hidden');
+			
 			var bounds = map.getBounds();
-			var ne_lat = bounds.getNorthEast().lat();
-			var ne_lng = bounds.getNorthEast().lng();
-			var sw_lat = bounds.getSouthWest().lat();
-			var sw_lng = bounds.getSouthWest().lng();
+			ne_lat = bounds.getNorthEast().lat();
+			ne_lng = bounds.getNorthEast().lng();
+			sw_lat = bounds.getSouthWest().lat();
+			sw_lng = bounds.getSouthWest().lng();
+			
+			$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+	       		 "ne_lng" : ne_lng,
+	    		 "sw_lat" : sw_lat,
+	    		 "sw_lng" : sw_lng,
+	    		 "active_tab" : active_tab,
+	    		 "day_type" : day_type,
+	    		 "page" : 0 }, function(data) {
+			    	var room_code = $('#marker-detail').attr('data-room_code');
+	    			marker_list = data;
+	    			addMarkerPost(marker_list, room_code);
+	    			
+	    			$('#pagination').twbsPagination('destroy');
+	    			
+	    			var total = ((data[0].room_count-1)/10) + 1;
+	    			
+	    			$('#pagination').twbsPagination({
+	    		        totalPages: total,
+	    		        visiblePages: 7,
+	    		        onPageClick: function (event, page) {
+	    		        	page = (page-1) * 10;
+	    		        	$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+	    			       		 "ne_lng" : ne_lng,
+	    			    		 "sw_lat" : sw_lat,
+	    			    		 "sw_lng" : sw_lng,
+	    			    		 "active_tab" : active_tab,
+	    			    		 "day_type" : day_type,
+	    			    		 "page" : page }, function(data) {
+	    						$('.marker').remove();
+	    						$('#marker-detail').remove();
 
-			reloadingMarkerDetail();
+	    						marker_list = data;
+	    						addMarkerPost(marker_list, 0);
+	    					});
+	    		    	}
+	    		    });
+
+	    			setTimeout(function() {
+    					reloadingMarkerDetail();
+		    		}, 300);
+    		 });
 		});
 		
 		google.maps.event.addListener(map, 'dragend', function() {
+			$('.marker').remove();
+			$('#marker-detail').css('visibility', 'hidden');
+			
 			var bounds = map.getBounds();
-			var ne_lat = bounds.getNorthEast().lat();
-			var ne_lng = bounds.getNorthEast().lng();
-			var sw_lat = bounds.getSouthWest().lat();
-			var sw_lng = bounds.getSouthWest().lng();
+			ne_lat = bounds.getNorthEast().lat();
+			ne_lng = bounds.getNorthEast().lng();
+			sw_lat = bounds.getSouthWest().lat();
+			sw_lng = bounds.getSouthWest().lng();
 			
+			$('#pagination').twbsPagination('destroy');
 			
+			$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+	       		 "ne_lng" : ne_lng,
+	    		 "sw_lat" : sw_lat,
+	    		 "sw_lng" : sw_lng,
+	    		 "active_tab" : active_tab,
+	    		 "day_type" : day_type,
+	    		 "page" : 0 }, function(data) {
+			    	var room_code = $('#marker-detail').attr('data-room_code');
+	    			marker_list = data;
+	    			addMarkerPost(marker_list, room_code);
+	    			
+					$('#pagination').twbsPagination('destroy');
+	    			
+	    			var total = ((data[0].room_count-1)/10) + 1;
+	    			
+	    			$('#pagination').twbsPagination({
+	    		        totalPages: total,
+	    		        visiblePages: 7,
+	    		        onPageClick: function (event, page) {
+	    		        	page = (page-1) * 10;
+	    		        	
+	    		        	$.post('boundsInMarker.do', { "ne_lat" : ne_lat,
+	    			       		 "ne_lng" : ne_lng,
+	    			    		 "sw_lat" : sw_lat,
+	    			    		 "sw_lng" : sw_lng,
+	    			    		 "active_tab" : active_tab,
+	    			    		 "day_type" : day_type,
+	    			    		 "page" : page }, function(data) {
+			    		        	
+	    						$('.marker').remove();
+	    						$('#marker-detail').remove();
+
+	    						marker_list = data;
+	    						addMarkerPost(marker_list, 0);
+	    					});
+	    		    	}
+	    		    });
+
+	    			setTimeout(function() {
+    					reloadingMarkerDetail();
+		    		}, 300);
+    		 });
 		});
 	}
 	
+	function checkMarker(room_code) {
+		for(var i=0; i<marker_list.length; i++) {
+			if(room_code == marker_list[i].room_code) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	function reloadingMarkerDetail() {
-		setTimeout(function() { 
-			if($('#marker-detail').length>0) {
-				var index = $('#marker-detail').attr('data-marker_id');
-
+		if($('#marker-detail').length>0) {
+			var index = $('#marker-detail').attr('data-marker_id');
+			var room_code = $('#marker-detail').attr('data-room_code');
+			
+			if(checkMarker(room_code)) {
+				$('#marker-detail').remove();
+			} else {	
+				var top = Number($('.marker[data-room_code~='+ room_code +']').css('top').replace('px', ''));
+				var left = Number($('.marker[data-room_code~='+ room_code +']').css('left').replace('px', ''));
+				
 				$('#marker-detail').remove();
 				
-				var top = Number($('.marker[data-marker_id~='+ index +']').css('top').replace("px", ""));
-				var left = Number($('.marker[data-marker_id~='+ index +']').css('left').replace("px", ""));
-				
-				$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'">'+
-						'<img id="mdetail-img" src="'+$('.room-item[data-marker_id~='+ index +'] .room-img').attr('src')+'" />'+
-						'<p id="mdetail-p">'+ $('.room-item[data-marker_id~='+ index +'] .room-name').html() +'</p></div>');
+				$('.marker').parent('div').append('<div id="marker-detail" data-marker_id="'+index+'" data-room_code="'+ room_code +'">'+
+						'<img id="mdetail-img" src="'+$('.room-item[data-room_code~='+ room_code +'] .room-img').attr('src')+'" />'+
+						'<p id="mdetail-p">'+ $('.room-item[data-room_code~='+ room_code +'] .room-name').html() +'</p></div>');
 				$('#marker-detail').css('top', (top-157)+'px');
 				$('#marker-detail').css('left', (left-45)+'px');
 			}
-		}, 300);
+		}
 	}
 	
-	function addMarker() {
+	function addMarkerPost(list, r) {
 		var marker_id = 0;
+		var image;
 		
-		<c:forEach var='vo' items='${list}'>
-			overlay = new CustomMarker(
-				new google.maps.LatLng(${vo.map_lat}, ${vo.map_lng}), 
-				map,
-				{
-					marker_id: (++marker_id) + '',
-					room_price: '￦ ${vo.room_day}'
-				}
-			);
+		$('.room-item').remove();
+		
+		$('#col-content').scrollTop(0);
 
-			$('#detail-1.tab-pane').append('<div class="col-lg-6 col-xlg-6 room-item" data-marker_id="'+ marker_id +'">'+
+		for(var i=0; i<list.length; i++) {
+			var room_code = list[i].room_code;
+			
+			if(r == room_code) {
+				overlay = new CustomMarker(
+						new google.maps.LatLng(list[i].map_lat, list[i].map_lng), 
+						map,
+						{
+							marker_id: marker_id + '',
+							bg_image: 'url("/project/resources/imgs/price_marker_mouse_on.png")',
+							z_index: '999',
+							room_code: room_code + '',
+							room_price: '￦ ' + list[i].room_day
+						}
+					);
+			} else {
+				overlay = new CustomMarker(
+						new google.maps.LatLng(list[i].map_lat, list[i].map_lng), 
+						map,
+						{
+							marker_id: marker_id + '',
+							bg_image: 'url("/project/resources/imgs/price_marker.png")',
+							z_index: marker_id+'',
+							room_code: room_code + '',
+							room_price: '￦ ' + list[i].room_day
+						}
+					);
+			}
+
+			$('#'+ active_tab +'.tab-pane').append('<div class="col-lg-6 col-xlg-6 room-item" data-marker_id="'+ marker_id +'" data-room_code="'+ room_code +'">'+
 			'<img class="room-img" src="/project/resources/imgs/room_default.jpg" />' +
 			'<div style="width: 200px; height: 64px; background: #526069; position: absolute; bottom: 150px; opacity: 0.85">' +
-			'<h5>1박&nbsp;&nbsp;￦ ${vo.room_day} (최소 1박)<br />한달 ￦ ${vo.room_month} (최소 1박)</h5></div>' +
+			'<h5>1박&nbsp;&nbsp;￦ '+ numberWithCommas(parseInt(list[i].room_day)) +' (최소 1박)<br />한달 ￦ '+ numberWithCommas(parseInt(list[i].room_month)) +' (최소 1박)</h5></div>' +
 			'<div style="position: absolute; width: 76px; height: 76px; right: 40px; bottom: 110px; background: white; border: 3px solid white; border-radius: 60px; background-image: url(/project/resources/imgs/avatar.png); background-size: 70px 70px;"></div>' +
 			'<div class="room-panel">' +
 			'<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin: 3px">' +
-			'<span class="room-name">${vo.room_name}</span></div>' +
+			'<span class="room-name">'+ list[i].room_name +'</span></div>' +
 			'<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin: 3px">' +
-			'<span style="color: #c1c1c1">${vo.room_type}</span> <i class="glyphicon glyphicon-map-marker" style="font-size: 8pt; color: #c1c1c1"></i> <span style="color: #c1c1c1">${vo.room_addr}</span></div>' +
+			'<span style="color: #c1c1c1">'+ list[i].room_type +'</span> <i class="glyphicon glyphicon-map-marker" style="font-size: 8pt; color: #c1c1c1"></i> <span style="color: #c1c1c1">'+ list[i].room_addr +'</span></div>' +
 			'<div class="heart-icon" style="display: inline-block; padding: 5px 15px 15px 15px; clear: both; width: auto; height: auto; margin: 3px; text-align: center;">' +
-			'<i class="glyphicon glyphicon-heart-empty" style="font-size: 16pt; color: #a50d73"></i><br/><span>${vo.room_like}</span></div></div></div>');
-		</c:forEach>
+			'<i class="glyphicon glyphicon-heart-empty" style="font-size: 16pt; color: #a50d73"></i><br/><span>'+ list[i].room_like +'</span></div></div></div>');
+			
+			marker_id = marker_id + 1;
+		}
 	}
 	
+	//가격 slider
+	
+	var nonLinearSlider = document.getElementById('slider-range');
+
+	noUiSlider.create(nonLinearSlider, {
+		connect: true,
+		behaviour: 'tap',
+		start: [ 0, 3000000 ],
+		range: {
+			// Starting at 500, step the value by 500,
+			// until 4000 is reached. From there, step by 1000.
+			'min': [ 0, 100 ],
+			'40%': [ 100000, 1000 ],
+			'70%': [ 1000000, 100000 ],
+			'max': [ 3000000 ]
+		}
+	});
+	
+	var nodes = [
+		document.getElementById('a-1'), // 0
+		document.getElementById('a-2')  // 1
+	];
+
+	nonLinearSlider.noUiSlider.on('update', function ( values, handle, unencoded, isTap, positions ) {
+		nodes[handle].innerHTML = '￦' + numberWithCommas(parseInt(values[handle]));
+
+		active_tab = $('.tab-pane.fade.in.active').attr('id');
+		
+		$.post('moveSlider.do', { "min_price" : parseInt(values[0]), "max_price" : parseInt(values[1]), "active_tab" : active_tab, "day_type" : day_type, "page" : 0 }, function(data) {
+			if(data != null) {			
+				$('.marker').remove();
+				$('#marker-detail').remove();
+				
+	   			marker_list = data;
+	   			addMarkerPost(marker_list, 0);
+	   			
+	   			$('#pagination').twbsPagination('destroy');
+    			
+    			//var total = ((data[0].room_count-1)/10) + 1;
+    			var total = 1;
+    			$('#pagination').twbsPagination({
+    		        totalPages: total,
+    		        visiblePages: 7,
+    		        onPageClick: function (event, page) {
+    		        	page = (page-1) * 10;
+    		        	
+    		        	$.post('moveSlider.do', { "min_price" : parseInt(values[0]), "max_price" : parseInt(values[1]), "active_tab" : active_tab, "day_type" : day_type, "page" : page }, function(data) {
+    						$('.marker').remove();
+    						$('#marker-detail').remove();
+
+    						marker_list = data;
+    						addMarkerPost(marker_list, 0);
+    					});
+    		    	}
+    		    });
+			}
+		 }).fail(function() {
+			 console.log('fail');
+			$('.marker').remove();
+			$('#marker-detail').remove();
+		 });
+		
+		if(values[handle] == 3000000 && handle != 0) {
+			nodes[handle].innerHTML += '+';
+		}
+	});
+	
 	google.maps.event.addDomListener(window, 'load', initialize);
+	
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	</script>
 </body>
 </html>
