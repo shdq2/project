@@ -25,4 +25,16 @@ public class adminroomDAO {
 		return sql.selectOne("admin_room.total_room_count",id);
 	}
 
+	public List<RoomVO> allroomList(int page){
+		return sql.selectList("admin_room.all_room",page);
+	}
+	
+	public int room_count() {
+		return sql.selectOne("admin_room.room_count");
+	}
+	
+	public int state_change(RoomVO vo) {
+		return sql.update("admin_room.state_change",vo);
+	}
+	
 }	

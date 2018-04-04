@@ -23,7 +23,22 @@ public class CustomVO {
 	private String reservation_date = null;
 	private int custom_gender=0;
 	private String origin_id = null;
+	private byte[] custom_img = null;
+	private int img_code = 0;
 	
+	
+	public byte[] getCustom_img() {
+		return custom_img;
+	}
+	public void setCustom_img(byte[] custom_img) {
+		this.custom_img = custom_img;
+	}
+	public int getImg_code() {
+		return img_code;
+	}
+	public void setImg_code(int img_code) {
+		this.img_code = img_code;
+	}
 	public String getOrigin_id() {
 		return origin_id;
 	}

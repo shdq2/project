@@ -25,7 +25,11 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 	</dependency>
-	
+	 <dependency>
+          <groupId>servlets.com</groupId>
+          <artifactId>cos</artifactId>
+          <version>05Nov2002</version>
+      </dependency>
 	<dependency>
 		<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -213,6 +217,16 @@
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+            	<groupId>org.apache.tomcat.maven</groupId>
+            	<artifactId>tomcat7-maven-plugin</artifactId>
+            	<version>2.2</version>
+            	<configuration>
+            		<url>http://211.110.165.201:8080/manager/text</url><!-- 서버주소 -->
+            		<path>/project</path> <!-- 프로젝트명 -->
+            		<server>TomcatServer</server> <!-- 서버 아이디/암호지정 -->
+            	</configuration>
             </plugin>
         </plugins>
     </build>

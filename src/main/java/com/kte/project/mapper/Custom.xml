@@ -2,27 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="custom">
-	<!-- <select id="selectBoardList" resultType="com.kte.mvc.vo.V6_Board">
-		SELECT BRD_NO, BRD_TITLE, BRD_WRITER, BRD_HIT, TO_CHAR(BRD_HIT, '999,999,999,999') AS BRD_HIT1, 
-		TO_CHAR(BRD_DATE, 'YYYY-MM-DD') AS BRD_DATE FROM V6_BOARD ORDER BY BRD_NO DESC
-	</select>
-	
-	<select id="selectBoardOne" resultType="com.kte.mvc.vo.V6_Board">
-		SELECT BRD_NO, BRD_TITLE, BRD_WRITER, BRD_HIT, TO_CHAR(BRD_HIT, '999,999,999,999') AS BRD_HIT1, 
-		BRD_DATE FROM V6_BOARD WHERE BRD_NO = #{brd_no}
-	</select>
-	
-	<select id="selectLastNo" resultType="int">
-		SELECT NVL(MAX(BRD_NO),0) FROM V6_BOARD
-	</select>
-	
-	<insert id="insertBoard" parameterType="com.kte.mvc.vo.V6_Board">
-		INSERT INTO V6_BOARD(BRD_NO, BRD_TITLE, BRD_CONTENT, BRD_HIT, BRD_WRITER, BRD_DATE) VALUES(#{brd_no},#{brd_title},#{brd_content},#{brd_hit},#{brd_writer},SYSDATE)
-	</insert>
-	
-	<update id="updateBoardHit" parameterType="int">
-		UPDATE V6_BOARD SET BRD_HIT = BRD_HIT + 1 WHERE BRD_NO = #{brd_no}
-	</update> -->
+	<resultMap id="resultImg" type="customVO">
+		<result column="custom_img" property="custom_img" jdbcType="BLOB" />	
+	</resultMap>
 	
 	<select id="selectCustomOne" parameterType="com.kte.project.VO.CustomVO" resultType="com.kte.project.VO.CustomVO">
 		SELECT 
@@ -41,6 +23,39 @@
 		where custom_id=#{origin_id}
 	</update>
 	
+	<!-- 프로필 사진 넣기 -->
+	<select id="upload_profile" parameterType="customVO" resultType="customVO">
+		call insert_profile(
+			#{custom_id,mode=IN},
+			#{custom_img,mode=IN,jdbcType=BLOB}
+		)
+	</select>
+	
+	<!-- 프로필 사진 목록 -->
+	<select id="select_profile" parameterType="String" resultType="customVO">
+		select img_code,custom_img from custom_profile where custom_id = #{id} order by img_code asc
+	</select>
+	
+	<!-- 프로필 사진 출력 -->
+	<select id="show_profile" parameterType="Int" resultMap="resultImg">
+		select custom_img from custom_profile where img_code=#{id} 
+	</select>
+	
+	<!-- 프로필 사진 삭제  -->
+	<select id="delete_profile" parameterType="customVO" resultType="customVO">
+		call delete_profile(
+			#{img_code,mode=IN},
+			#{custom_id,mode=IN}
+		)
+	</select>
+	
+	<!-- 프로필 순서 변경 -->
+	<select id="profile_sortable" parameterType="com.kte.project.VO.SortableVO" resultType="Int">
+		call profile_sortable(
+			#{idx1,mode=IN},
+			#{img1,mode=IN,jdbcType=BLOB}
+		)
+	</select>
 	<!-- 은행 목록 불러오기 -->
 	<select id="bank_list" resultType="customVO">
 		select * from bank

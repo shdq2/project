@@ -69,7 +69,7 @@ public class HomeController {
 		}
 		ret1 = ret+"";
 		http.setAttribute("ret1", ret1);
-		return "redirect:/";
+		return "redirect:picture.do";
 	}
 	
 	@RequestMapping(value = "block.do", method = RequestMethod.GET)

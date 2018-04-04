@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.SortableVO;
 
 @Service
 public class CustomDAO {
@@ -38,5 +39,25 @@ private SqlSession sqlsession = null;
 	
 	public int phone_edit(CustomVO vo) {
 		return sqlsession.update("custom.phone_edit",vo);
+	}
+	
+	public List<CustomVO> upload_profile(CustomVO vo) {
+		return sqlsession.selectList("custom.upload_profile",vo);
+	}
+	
+	public List<CustomVO> select_profile(String id) {
+		return sqlsession.selectList("custom.select_profile",id);
+	}
+	
+	public CustomVO show_profile(int id) {
+		return sqlsession.selectOne("custom.show_profile",id);
+	}
+	
+	public List<CustomVO> delete_profile(CustomVO vo) {
+		return sqlsession.selectList("custom.delete_profile",vo);
+	}
+	
+	public int profile_sortable(SortableVO vo) {
+		return sqlsession.update("custom.profile_sortable",vo);
 	}
 }
