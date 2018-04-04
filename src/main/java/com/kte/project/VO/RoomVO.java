@@ -210,7 +210,7 @@ public class RoomVO {
 	}
 	public String getRoom_block() {
 		return room_block;
-	}
+	} 
 	public void setRoom_block(String room_block) {
 		this.room_block = room_block;
 	}
