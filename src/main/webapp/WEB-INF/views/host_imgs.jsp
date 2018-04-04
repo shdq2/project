@@ -41,7 +41,7 @@
 							</div>
 							<div class="panel-body">
 								<form:form action="#" method="post" modelAttribute="vo">
-									
+									<input type="file" name="img1"/>
 								</form:form>
 							</div>
 						</div>

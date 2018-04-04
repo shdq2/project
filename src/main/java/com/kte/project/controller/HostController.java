@@ -1,14 +1,39 @@
 package com.kte.project.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kte.project.VO.HostVO;
+import com.kte.project.dao.HostDAO;
 
 @Controller
 public class HostController {
+	
+	@Autowired
+	private HostDAO hDAO = null;
+	
+	@RequestMapping(value="/host_create.do", method=RequestMethod.GET)
+	public String hostcreate(Model model) {
+		
+		HostVO vo = new HostVO();
+		
+		model.addAttribute("vo", vo);
+		
+		return "host_create";
+	}
+	
+	@RequestMapping(value="/host_create.do", method=RequestMethod.POST)
+	public String hostcreate() {
+		
+		HostVO vo = new HostVO();
+		
+		
+		return "redirect:/host.do";
+	}
 	
 	@RequestMapping(value="/host.do", method=RequestMethod.GET)
 	public String hostname(Model model) {
@@ -26,6 +51,14 @@ public class HostController {
 		model.addAttribute("vo", vo);
 		
 		return "host_name";
+	}
+	
+	@RequestMapping(value="/host.do", method=RequestMethod.POST)
+	public String hostname(@ModelAttribute("vo") HostVO vo) {
+		
+		hDAO.insertHostName(vo);
+		
+		return "redirect:/host_name.do";
 	}
 	
 	@RequestMapping(value="/host_basic.do", method=RequestMethod.GET)

@@ -25,40 +25,8 @@
 	<jsp:include page="topbar.jsp"></jsp:include>
 
 	<div class="container1">
-		<div class="host-side">
-			<p style="text-align:center; margin-bottom:30px" >숙소설정</p>
-			<a href="/project/host.do">
-				<span class="pull-left">설명</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_basic.do">
-				<span class="pull-left">기본설정</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_location.do">
-				<span class="pull-left">위치</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_amenity.do">
-				<span class="pull-left">편의시설</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_imgs.do">
-				<span class="pull-left">사진</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_price.do">
-				<span class="pull-left">예약/요금 설정</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_inout.do">
-				<span class="pull-left">입/퇴실시간</span>
-				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
-			</a>
-			<a href="/project/host_calendar.do"><i class="glyphicon glyphicon-calendar"></i>  달력 관리</a>
-			<a href="/project/host_new.do"><i class="	glyphicon glyphicon-plus"></i>  새로운 숙소 등록</a>
-			<a href="/project/host_list.do"><i class="	glyphicon glyphicon-th-list"></i>  숙소목록</a>
-		</div>
+	
+		<jsp:include page="hostside.jsp"></jsp:include>
 		
 		<div class="host-main">
 			<div class="host-header">

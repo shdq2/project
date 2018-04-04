@@ -54,15 +54,39 @@
 	overflow-y: scroll;
 }
 
+.host-main-create{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	padding: 35px 15% 0px 5%;
+	height: 100%;
+	overflow-y: scroll;
+}
+
 .pull-left{
 	float:left;
+}
+
+.pull-left1{
+	float:left;
+	margin-left:8px;
 }
 
 .pull-right{
 	float:right;
 }
 
+
+
 .host-main .host-header .host-title {
+	color: #ec7263 !important;
+    font-size: 1.6em;
+    font-weight: 400;
+    font-family: 'Noto Sans KR', sans-serif;
+    margin-bottom:30px;
+}
+
+.host-main-create .host-header .host-title {
 	color: #ec7263 !important;
     font-size: 1.6em;
     font-weight: 400;
@@ -144,3 +168,8 @@ small{
 .checkbox-title{
 	margin-bottom:30px;
 }
+
+.host-side > a > span{
+	margin-top : 14px;
+}
+

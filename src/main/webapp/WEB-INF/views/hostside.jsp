@@ -45,7 +45,16 @@
 				<span class="pull-left">입/퇴실시간</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>
-			<a href="/project/host_calendar.do"><i class="glyphicon glyphicon-calendar"></i>  달력 관리</a>
-			<a href="/project/host_new.do"><i class="	glyphicon glyphicon-plus"></i>  새로운 숙소 등록</a>
-			<a href="/project/host_list.do"><i class="	glyphicon glyphicon-th-list"></i>  숙소목록</a>
+			<a href="/project/host_calendar.do">
+				<span class="pull-left"><i class="glyphicon glyphicon-calendar"></i></span>  
+				<span class="pull-left1">달력 관리</span>
+			</a>
+			<a href="/project/host_create.do">
+				<span class="pull-left"><i class="glyphicon glyphicon-plus"></i></span> 
+				<span class="pull-left1">새로운 숙소 등록</span>
+			</a>
+			<a href="/project/host_list.do">
+				<span class="pull-left"><i class="glyphicon glyphicon-th-list"></i></span>
+				<span class="pull-left1">  숙소목록</span>
+			</a>
 		</div>
