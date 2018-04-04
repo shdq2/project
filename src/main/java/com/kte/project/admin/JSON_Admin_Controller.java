@@ -108,7 +108,17 @@ public class JSON_Admin_Controller {
 		return list;
 	}
 	
-	
+	@RequestMapping(value = "/json_room_state_change.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody int room_state_change(Model model,	
+			HttpSession http,
+			@RequestParam("code")String code,
+			@RequestParam("value")int value) {		
+		RoomVO vo= new RoomVO();
+		vo.setRoom_block(value);
+		vo.setRoom_code(code);
+		int ret = ardao.state_change(vo);
+		return ret;
+	}
 	//////////////////////////
 	
 	// json wish /////////////

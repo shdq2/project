@@ -33,4 +33,8 @@ public class adminroomDAO {
 		return sql.selectOne("admin_room.room_count");
 	}
 	
+	public int state_change(RoomVO vo) {
+		return sql.update("admin_room.state_change",vo);
+	}
+	
 }	

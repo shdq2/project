@@ -21,4 +21,20 @@
 	<select id="reser_total" resultType="Int" parameterType="String">
 		select count(*) from reservation where custom_id=#{id}
 	</select>
+	
+	<select id="reservation_all" resultType="reservationVO">
+		select c.custom_name as guest_name,r.host_name,r.room_code,r.room_name,r.guest_id,r.host_id,
+		r.reservation_start,r.reservation_end from custom c 
+			inner join
+				(select c.custom_name as host_name,r.host_id,r.room_code,r.guest_id,
+				r.reservation_start,r.reservation_end,r.room_name from custom c
+				inner join
+					(select ro.room_code,ro.custom_id as host_id,re.custom_id as guest_id,
+					re.reservation_start,re.reservation_end,ro.room_name from reservation re
+					inner join room ro
+					on re.room_code = ro.room_code) r
+			on c.custom_id = r.host_id) r
+		on c.custom_id = r.guest_id
+		
+	</select>
 </mapper>

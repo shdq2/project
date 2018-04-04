@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="all_room" resultType="roomVO">
-		select c.custom_name,r.room_name,r.room_day,r.room_block from custom c 
+		select c.custom_name,r.room_name,r.room_day,r.room_block,r.room_code from custom c 
 		inner join
 		(select * from room ) r 
 		on c.custom_id = r.custom_id
@@ -23,4 +23,8 @@
 	<select id="room_count" resultType="Int">
 		select count(*) from room
 	</select>
+	
+	<update id="state_change" parameterType="roomVO">
+		update room set room_block=#{room_block} where room_code = #{room_code}  
+	</update>
 </mapper>

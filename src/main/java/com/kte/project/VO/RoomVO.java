@@ -24,7 +24,7 @@ public class RoomVO {
    private String room_content = null;   //占쏙옙占쏙옙 占쏙옙占쏙옙
    private String room_price = null;   //占쏙옙占쏙옙 占쏙옙占쏙옙 (1占쌘깍옙占쏙옙)
    private String room_date = null;   //占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙
-   private String room_block= null;   //占쏙옙占쌀몌옙 占쏙옙占쏙옙트占쏙옙 占쌩곤옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+   private int room_block= 0;   //占쏙옙占쌀몌옙 占쏙옙占쏙옙트占쏙옙 占쌩곤옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
    private String room_addr = null;   //占쏙옙占쏙옙 占쌍쇽옙
    private String room_type = null;   //占쏙옙占쏙옙 占쌍쇽옙
    private int room_like = 0;   //占쏙옙占쏙옙 占쌍쇽옙
@@ -43,7 +43,14 @@ public class RoomVO {
    
    
    
-   public String getCustom_name() {
+   
+   public int getRoom_block() {
+	return room_block;
+}
+public void setRoom_block(int room_block) {
+	this.room_block = room_block;
+}
+public String getCustom_name() {
 	return custom_name;
 }
 public void setCustom_name(String custom_name) {
@@ -150,12 +157,6 @@ public int getPage() {
    }
    public void setRoom_date(String room_date) {
       this.room_date = room_date;
-   }
-   public String getRoom_block() {
-      return room_block;
-   }
-   public void setRoom_block(String room_block) {
-      this.room_block = room_block;
    }
    public String getRoom_addr() {
       return room_addr;

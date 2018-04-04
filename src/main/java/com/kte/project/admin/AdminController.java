@@ -19,6 +19,7 @@ import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.adminroomDAO;
 import com.kte.project.dao.visitDAO;
 
 /**
@@ -32,6 +33,8 @@ public class AdminController {
 	private adminmemberDAO amdao = null; 
 	@Autowired
 	private admin_wishDAO wdao = null;
+	@Autowired
+	private adminroomDAO ardao = null;
 	@Autowired
 	private visitDAO vdao = null;
 	
@@ -48,6 +51,9 @@ public class AdminController {
 		int yesterday= adao.yesterday();
 		int ret = today-yesterday;
 		model.addAttribute("ret", ret);
+		
+		int rcount = ardao.room_count();
+		http.setAttribute("_rcount", rcount);
 		
 		int wcount = wdao.wish_count();
 		http.setAttribute("_wcount", wcount);	

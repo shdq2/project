@@ -42,9 +42,9 @@
 								<div class="well dash-box">
 									<h2>
 										<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-										25
+										${sessionScope._rcount }
 									</h2>
-									<h4>Pages</h4>
+									<h4>Room</h4>
 								</div>
 							</div>
 							<div class="col-md-3">
