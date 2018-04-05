@@ -1,4 +1,4 @@
-package com.kte.project.controller;
+package com.kte.project;
 
 import java.text.DateFormat;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.kte.project.controller;
+package com.kte.project;
 
 import java.util.ArrayList;
 import java.util.List;

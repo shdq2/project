@@ -1,4 +1,4 @@
-package com.kte.project.controller;
+package com.kte.project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,16 @@ public class HostController {
 	
 	@Autowired
 	private HostDAO hDAO = null;
+	
+	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
+	public String hostprice(Model model) {
+		
+		HostVO vo = new HostVO();
+		
+		model.addAttribute("vo", vo);
+		
+		return "host_price";
+	}
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.GET)
 	public String hostcreate(Model model) {

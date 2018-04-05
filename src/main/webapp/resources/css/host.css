@@ -121,6 +121,13 @@ small{
 	border-bottom: 1px solid #e4eaec;
 }
 
+.panel-heading{
+	color: #6f7071 !important;
+    font-size: 1.2em;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+}
+
 .panel-title {
 	color: #6f7071 !important;
     font-size: 15px;
@@ -173,3 +180,15 @@ small{
 	margin-top : 14px;
 }
 
+.help-block {
+	font-size: 12px;
+    text-align: left;
+    margin-top: 7px;
+    margin-bottom: 8px;
+    display: block;
+    color: #bcc2c8;
+}
+
+.inline {
+    display: inline!important;
+}
