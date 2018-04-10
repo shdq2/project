@@ -16,6 +16,16 @@ public class HostController {
 	@Autowired
 	private HostDAO hDAO = null;
 	
+	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
+	public String hostcalendar(Model model) {
+		
+		HostVO vo = new HostVO();
+		
+		model.addAttribute("vo", vo);
+		
+		return "host_inout";
+	}
+	
 	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
 	public String hostprice(Model model) {
 		

@@ -224,7 +224,38 @@
 								</div>
 							</div>
 							
-					</div> <!-- panel -->
+							<div class="panel-heading">
+								<h3 class="panel-title">요금 부과 방법을 선택하세요.
+									<span class="panel-desc"></span>
+								</h3>
+							</div>
+							
+							<div class="panel-body">
+								<div class="form-group col-sm-12">
+									<label class="control-label col-sm-3">요금 부과 방법 선택</label>
+									<div class="form-group col-sm-9">
+										<div class="radio-inline">
+											<input name="radio2" checked="checked" type="radio"> <label>중/중기 예약 위주 숙소 - 할인/할증 설정</label>
+										</div>
+										<div class="radio-inline">
+											<input name="radio2" type="radio"> <label>단기 예약 위주 숙소 - 주말 가격 설정</label>
+										</div>
+										<p class="help-block" style="color:#76838f;font-size:14px;">
+	                                        <span style="color: red;">할인/할증 설정 : </span>숙박 시기 및 기간별 가격을 따로 적용할 수 있습니다.<br>
+	                                        <span style="color: red;">주말 가격 설정 : </span>일주일 미만의 단기 예약 숙소의 경우, 주말 가격을 따로 설정 할 수 있습니다.
+                                   		</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel-heading">
+								<h3 class="panel-title">기간별 세부 요금 설정
+									<span class="panel-desc"></span>
+								</h3>
+							</div>
+							
+						</div> <!-- panel -->
+					</div>
 				</div>
 			</div>
 		</div>
