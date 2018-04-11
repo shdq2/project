@@ -34,24 +34,28 @@
 
 
 	<div class="container1" align="center" style="margin-top:62px">
-
+		<div class="test1">
+			<div class="test" style="border:1px solid #ccc">
+		</div>
+		
+		</div>
 		<!-- 슬라이드  -->
 		
-			<div class="row" align="center">
+			<!-- <div class="row" align="center">
 				<div class="col-md-12" >
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
-						<!-- <ol class="carousel-indicators">
+						<ol class="carousel-indicators">
 							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-						</ol> -->
+						</ol>
 						<div class="carousel-inner" >
 							<div class="item active">
 								<img src="resources/imgs/mr11.PNG" >
-								<!-- <div class="carousel-caption">
+								<div class="carousel-caption">
 									<h3>First slide</h3>
 									<p>첫번째 슬라이드</p>
-								</div> -->
+								</div>
 							</div>
 							<div class="item" style="overflow:hidden">
 								<img src="resources/imgs/mr22.PNG" >
@@ -62,18 +66,18 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		
 		
 		<!-- 어디로 (jpg) -->
-		<div class="hidden-xs hidden-sm" align="center" style="padding-top:40px; padding-bottom:40px">
+		<!-- <div class="hidden-xs hidden-sm" align="center" style="padding-top:40px; padding-bottom:40px">
 			<img src="resources/imgs/where.png" class="img_responsive" >
-		</div>
+		</div> -->
 		
 		<!-- 어디로 (글) -->
-		<div class="hidden-xs hidden-sm" align ="center" style="padding-bottom:40px;" >
+		<div class="hidden-xs hidden-sm" align ="center" style="padding:30px 0px;" >
 			<h1>어디로 가실래요?</h1><br/>
-			<h1>상몽쓰펜션!</h1>
+			<h1>미스터펜션!</h1>
 		</div>
 		
 		<!-- 갈 곳 고르는 버튼  -->
