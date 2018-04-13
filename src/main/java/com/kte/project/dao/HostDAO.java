@@ -18,5 +18,13 @@ public class HostDAO {
 	public int insertHostName(HostVO vo) {
 		return sqlsession.insert("Host.insertHostName", vo);
 	}
+	
+	public int insertHostCreate(HostVO vo) {
+		return sqlsession.insert("Host.insertHostCreate",vo);
+	}
+	
+	public int selectRoomCode() {
+		return sqlsession.selectOne("Host.selectLastRoomcode");
+	}
 		
 }

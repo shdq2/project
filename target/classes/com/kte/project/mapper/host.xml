@@ -8,4 +8,13 @@
 			VALUES(#{name_title},#{name_content});
 	</insert>
 	
+	<insert id="insertHostCreate" parameterType="HostVO">
+		INSERT INTO room(room_code, room_building_type, room_type, room_basic_member)
+			VALUES(#{room_code},#{create_building_type},#{create_room_type},#{create_basic_member});
+	</insert>
+	
+	<select id="selectLastRoomcode" resultType="int">
+		SELECT MAX(room_code) FROM room
+	</select>
+	
 </mapper>	

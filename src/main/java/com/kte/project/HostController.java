@@ -41,16 +41,19 @@ public class HostController {
 		
 		HostVO vo = new HostVO();
 		
+		int room_code = hDAO.selectRoomCode();
+		vo.setRoom_code(room_code+1);
+		System.out.println(vo.getRoom_code());
+		
 		model.addAttribute("vo", vo);
 		
 		return "host_create";
 	}
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.POST)
-	public String hostcreate() {
+	public String hostcreate(@ModelAttribute("vo") HostVO vo) {
 		
-		HostVO vo = new HostVO();
-		
+		hDAO.insertHostCreate(vo);
 		
 		return "redirect:/host.do";
 	}

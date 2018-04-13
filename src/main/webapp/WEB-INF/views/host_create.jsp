@@ -35,12 +35,13 @@
 					<div class="col-sm-12 col-md-8">
 						<div class="panel">
 							<div class="panel-body">
-								<form:form action="#" method="post" modelAttribute="vo">
+								<form:form action="host_create.do" method="post" modelAttribute="vo">
+								<form:input type="hidden" path="room_code" />
 								<div  class="row">
 									<div class="form-group col-sm-12">
 										<label class="col-sm-3 control-label">숙소종류</label>
 										<div class="col-sm-9">
-											<select class="form-control" required="required">
+											<form:select class="form-control" required="required" path="create_room_type">
 												<option selected="selected" value="">선택하세요.</option>
 												<option value="1">원룸</option>
 												<option value="6">1.5룸</option>
@@ -50,14 +51,14 @@
 												<option value="5">복층</option>
 												<option value="9">호텔</option>
 												<option value="10">리조트</option>
-											</select>
+											</form:select>
 										</div>
 									</div>
 								
 									<div class="form-group col-sm-12">
 										<label class="col-sm-3 control-label">건물유형</label>
 										<div class="col-sm-9">
-											<select class="form-control" required="required">
+											<form:select class="form-control" required="required" path="create_building_type">
 												<option selected="selected" value="">선택하세요.</option>
 												<option value="13">빌라</option>
 												<option value="11">원룸</option>
@@ -71,13 +72,13 @@
 												<option value="10">단독주택(일부 사용)</option>
 												<option value="7">게스트하우스(개인실)</option>
 												<option value="9">게스트하우스(도미토리)</option>
-											</select>
+											</form:select>
 										</div>
 									</div>
 									<div class="form-group col-sm-12">
 										<label class="col-sm-3 control-label">기본 임대 인원</label>
 										<div class="col-sm-9">
-											<select class="form-control" required="required">
+											<form:select class="form-control" required="required" path="create_basic_member">
 												<option selected="selected" value="">선택</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -95,7 +96,7 @@
 												<option value="14">14</option>
 												<option value="15">15</option>
 												<option value="16">16+</option>
-											</select>
+											</form:select>
 										</div>
 									</div>
 									<div class="form-group">
