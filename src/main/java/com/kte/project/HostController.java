@@ -113,39 +113,69 @@ public class HostController {
 		return "host_amenity";
 	}
 	
+	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.GET)
 	public String hostimgs(Model model) {
 		
-		HostVO vo = new HostVO();
 		int room_img_code = hDAO.selectRoomImgCode();
-		vo.setRoom_img_code(room_img_code);
+		
+		HostVO vo = new HostVO();
+		vo.setRoom_img_code(room_img_code+1);
 		
 		model.addAttribute("vo", vo);
 		
 		return "host_imgs";
 	}
 	
-	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
+	
+	/*@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
 	public String hostimgs(MultipartHttpServletRequest request,
 						   HttpSession httpsession,
-						   @RequestParam("room_img_code") int room_img_code) {
+						   HostVO vo
+						   ) {
 		
 		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
-		HostVO vo = new HostVO();
 		vo.setRoom_code(room_code);
-		vo.setRoom_img_code(room_img_code);
+		
 		try {
 			MultipartFile file = request.getFile("file");
 			if(file != null && !file.getOriginalFilename().equals("")) {
 				vo.setRoom_img( file.getBytes() );
 			}
-			hDAO.insertHostImgs(vo);
+			hDAO.insertHostImg(vo);
 		} catch (Exception e) {
 			return "redirect:host_imgs.do";
 		}
 		
 		return "redirect:host_price.do";
+	}*/
+	
+	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
+	public String hostimgs(MultipartHttpServletRequest request,
+						   HttpSession httpsession,
+						   @ModelAttribute("vo") HostVO vo) {
+		System.out.println("aa");
+		try {
+			int room_code = (Integer) httpsession.getAttribute("room_code");
+			
+			vo.setRoom_code(room_code);
+			
+			MultipartFile file = request.getFile("file");
+			
+			if(file != null && !file.getOriginalFilename().equals("")) {
+				vo.setRoom_img(file.getBytes());
+			}
+			
+			System.out.println();
+			hDAO.insertHostImg(vo);
+			
+			return "redirect:host_price.do";
+			
+		} catch (Exception e) {
+			System.out.println("bb");
+			return "redirect:host_imgs.do";
+		}
 	}
 	
 	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)

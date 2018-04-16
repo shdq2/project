@@ -16,11 +16,11 @@
 		SELECT MAX(room_code) FROM room
 	</select>
 	
-	<insert id="insertHostImgs" parameterType="HostVO">
+	<insert id="insertHostImg" parameterType="HostVO">
 		INSERT INTO room_img(room_code, room_img, room_img_date) VALUES(#{room_code}, #{room_img, jdbcType=BLOB}, NOW());
 	</insert>
 	
-	<select id="selectRoomImgCode" resultType="int">
+	<select id="selectLastRoomImgcode" resultType="int">
 		SELECT MAX(room_img_code) FROM room_img
 	</select>
 	
