@@ -15,16 +15,24 @@ public class HostDAO {
 	@Resource(name="sqlSession")
 	private SqlSession sqlsession = null;
 	
-	public int insertHostName(HostVO vo) {
-		return sqlsession.insert("Host.insertHostName", vo);
+	public int selectRoomCode() {
+		return sqlsession.selectOne("Host.selectLastRoomcode");
 	}
 	
 	public int insertHostCreate(HostVO vo) {
 		return sqlsession.insert("Host.insertHostCreate",vo);
 	}
 	
-	public int selectRoomCode() {
-		return sqlsession.selectOne("Host.selectLastRoomcode");
+	public int updateHostName(HostVO vo) {
+		return sqlsession.update("Host.updateHostName", vo);
+	}
+	
+	public int insertHostImgs(HostVO vo) {
+		return sqlsession.insert("Host.insertHostImgs", vo);
+	}
+	
+	public int selectRoomImgCode() {
+		return sqlsession.selectOne("Host.selectLastRoomImgcode");
 	}
 		
 }

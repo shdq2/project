@@ -3,10 +3,9 @@
 
 <mapper namespace="Host">
 
-	<insert id="insertHostName" parameterType="HostVO">
-		INSERT INTO room(room_name, room_content)
-			VALUES(#{name_title},#{name_content});
-	</insert>
+	<update id="updateHostName" parameterType="HostVO">
+		UPDATE room SET room_name=#{name_title}, room_content=#{name_content} WHERE room_code=#{room_code};
+	</update>
 	
 	<insert id="insertHostCreate" parameterType="HostVO">
 		INSERT INTO room(room_code, room_building_type, room_type, room_basic_member)
@@ -15,6 +14,14 @@
 	
 	<select id="selectLastRoomcode" resultType="int">
 		SELECT MAX(room_code) FROM room
+	</select>
+	
+	<insert id="insertHostImgs" parameterType="HostVO">
+		INSERT INTO room_img(room_code, room_img, room_img_date) VALUES(#{room_code}, #{room_img, jdbcType=BLOB}, NOW());
+	</insert>
+	
+	<select id="selectRoomImgCode" resultType="int">
+		SELECT MAX(room_img_code) FROM room_img
 	</select>
 	
 </mapper>	

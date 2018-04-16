@@ -40,7 +40,8 @@
 								<h3 class="panel-title">회원님만의 특별한 이름과 소개글로 꾸며주세요.</h3>
 							</div>
 							<div class="panel-body">
-								<form:form action="#" method="post" modelAttribute="vo">
+								<form:form action="host_name.do" method="post" modelAttribute="vo">
+									<form:input type="hidden" path="room_code" />
 									<div class="form-group">
 										<label class="control-label">숙소이름</label> 
 										<form:input class="form-control" required="required" type="text" path="name_title"></form:input>

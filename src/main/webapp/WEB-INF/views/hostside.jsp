@@ -17,7 +17,7 @@
 				<input type="hidden" value="/project/host.do" class="test_val" />
 				<span>설명</span>
 			</div> -->
-			<a href="/project/host.do" >
+			<a href="/project/host_name.do" >
 				<span class="pull-left">설명</span>
 				<span class="pull-right"><i class="glyphicon glyphicon-ok-circle"></i></span>
 			</a>

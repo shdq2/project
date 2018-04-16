@@ -63,7 +63,7 @@ public class LoginController {
          System.out.println("존재하지 않는 아이디");
       }
       
-      return "alert";
+      return "redirect:host.do";
    }
    
    @RequestMapping(value="/logout.do", method = RequestMethod.GET)

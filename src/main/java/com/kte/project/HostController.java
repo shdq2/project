@@ -1,11 +1,15 @@
 package com.kte.project;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.HostVO;
 import com.kte.project.dao.HostDAO;
@@ -15,26 +19,6 @@ public class HostController {
 	
 	@Autowired
 	private HostDAO hDAO = null;
-	
-	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
-	public String hostcalendar(Model model) {
-		
-		HostVO vo = new HostVO();
-		
-		model.addAttribute("vo", vo);
-		
-		return "host_inout";
-	}
-	
-	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
-	public String hostprice(Model model) {
-		
-		HostVO vo = new HostVO();
-		
-		model.addAttribute("vo", vo);
-		
-		return "host_price";
-	}
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.GET)
 	public String hostcreate(Model model) {
@@ -51,17 +35,24 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.POST)
-	public String hostcreate(@ModelAttribute("vo") HostVO vo) {
+	public String hostcreate(@ModelAttribute("vo") HostVO vo,
+							 HttpSession httpsession) {
+		
+		int room_code = vo.getRoom_code();
+		httpsession.setAttribute("room_code", room_code);
 		
 		hDAO.insertHostCreate(vo);
 		
-		return "redirect:/host.do";
+		return "redirect:/host_name.do";
 	}
 	
-	@RequestMapping(value="/host.do", method=RequestMethod.GET)
-	public String hostname(Model model) {
+	@RequestMapping(value="/host_name.do", method=RequestMethod.GET)
+	public String hostname(Model model, HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
 		HostVO vo = new HostVO();
+		vo.setRoom_code(room_code);
 		
 		/*if(vo.getName_title() != null || vo.getName_content() != null) {
 			ret = 1;
@@ -76,12 +67,12 @@ public class HostController {
 		return "host_name";
 	}
 	
-	@RequestMapping(value="/host.do", method=RequestMethod.POST)
+	@RequestMapping(value="/host_name.do", method=RequestMethod.POST)
 	public String hostname(@ModelAttribute("vo") HostVO vo) {
 		
-		hDAO.insertHostName(vo);
+		hDAO.updateHostName(vo);
 		
-		return "redirect:/host_name.do";
+		return "redirect:/host_basic.do";
 	}
 	
 	@RequestMapping(value="/host_basic.do", method=RequestMethod.GET)
@@ -125,9 +116,54 @@ public class HostController {
 	public String hostimgs(Model model) {
 		
 		HostVO vo = new HostVO();
+		int room_img_code = hDAO.selectRoomImgCode();
+		vo.setRoom_img_code(room_img_code);
 		
 		model.addAttribute("vo", vo);
 		
 		return "host_imgs";
 	}
+	
+	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
+	public String hostimgs(MultipartHttpServletRequest request,
+						   HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		HostVO vo = new HostVO();
+		vo.setRoom_code(room_code);
+		
+		try {
+			MultipartFile file = request.getFile("file");
+			if(file != null && !file.getOriginalFilename().equals("")) {
+				vo.setRoom_img( file.getBytes() );
+			}
+			hDAO.insertHostImgs(vo);
+		} catch (Exception e) {
+			return "redirect:host_imgs.do";
+		}
+		
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
+	public String hostprice(Model model) {
+		
+		HostVO vo = new HostVO();
+		
+		model.addAttribute("vo", vo);
+		
+		return "host_price";
+	}
+	
+	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
+	public String hostcalendar(Model model) {
+		
+		HostVO vo = new HostVO();
+		
+		model.addAttribute("vo", vo);
+		
+		return "host_inout";
+	}
+	
 }

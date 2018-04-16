@@ -13,7 +13,32 @@ public class HostVO {
 	private String create_room_type = null;
 	private String create_basic_member = null;
 	
+	//host_imgs
+	private int room_img_code = 0;
+	private byte[] room_img = null;
+	private String room_img_date = null;
 	
+	
+	
+	
+	public int getRoom_img_code() {
+		return room_img_code;
+	}
+	public void setRoom_img_code(int room_img_code) {
+		this.room_img_code = room_img_code;
+	}
+	public byte[] getRoom_img() {
+		return room_img;
+	}
+	public void setRoom_img(byte[] room_img) {
+		this.room_img = room_img;
+	}
+	public String getRoom_img_date() {
+		return room_img_date;
+	}
+	public void setRoom_img_date(String room_img_date) {
+		this.room_img_date = room_img_date;
+	}
 	public int getRoom_code() {
 		return room_code;
 	}
