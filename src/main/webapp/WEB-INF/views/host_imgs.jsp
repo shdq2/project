@@ -41,7 +41,7 @@
 							</div>
 							<div class="panel-body">
 								<form action="host_imgs.do" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="room_img_code" />
+									<input type="hidden" name="room_img_code" id="room_img_code"/>
 								<!-- 	<label for="img1" style="border:1px solid;border-radius: 6px">사진추가하기</label> -->
 									<input type="file" name="img1" id="img1" /><!-- style="display:none" -->
 									<input type="submit" class="btn btn-success" value="사진 올리기">

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -126,13 +127,14 @@ public class HostController {
 	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
 	public String hostimgs(MultipartHttpServletRequest request,
-						   HttpSession httpsession) {
+						   HttpSession httpsession,
+						   @RequestParam("room_img_code") int room_img_code) {
 		
 		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
 		HostVO vo = new HostVO();
 		vo.setRoom_code(room_code);
-		
+		vo.setRoom_img_code(room_img_code);
 		try {
 			MultipartFile file = request.getFile("file");
 			if(file != null && !file.getOriginalFilename().equals("")) {
