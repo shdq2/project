@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
 
+
 @Service
 public class LoginDAO {
 @Autowired
@@ -15,6 +16,7 @@ public class LoginDAO {
 private SqlSession sqlsession = null;
 
 	public CustomVO selectCustomOne(CustomVO vo) {
+		
 		return sqlsession.selectOne("login.selectCustomOne", vo);
 	}
 	
