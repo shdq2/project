@@ -17,11 +17,26 @@
 	</select>
 	
 	<insert id="insertHostImg" parameterType="HostVO">
-		INSERT INTO room_img(room_code, room_img, room_img_date) VALUES(#{room_code}, #{room_img, jdbcType=BLOB}, NOW());
+		INSERT INTO room_img(room_img_code, room_code, room_img, room_img_date) VALUES(#{room_img_code}, #{room_code}, #{room_img, jdbcType=BLOB}, NOW());
 	</insert>
 	
 	<select id="selectLastRoomImgcode" resultType="int">
 		SELECT MAX(room_img_code) FROM room_img
 	</select>
+	
+	<!-- 사진 뿌리기 위한 list -->
+	<select id="selectRoomImgList" parameterType="int" resultType="HostVO">
+		SELECT room_img_code, room_code FROM `room_img` WHERE room_code=#{room_code}
+	</select>
+	
+	<!-- 사진받아오기 -->
+	<resultMap type="HostVO" id="selectRoomImg">
+	    <result column ="room_img_code" property="room_img_code" />
+	    <result column ="room_img" property="room_img" jdbcType="BLOB" />
+    </resultMap>
+   
+   <select id="selectRoomImg" parameterType="int" resultMap="selectRoomImg">
+      SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_cod}
+   </select>
 	
 </mapper>	

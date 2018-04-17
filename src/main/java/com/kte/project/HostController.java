@@ -1,13 +1,21 @@
 package com.kte.project;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -21,13 +29,15 @@ public class HostController {
 	private HostDAO hDAO = null;
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.GET)
-	public String hostcreate(Model model) {
+	public String hostcreate(Model model, HttpSession httpsession) {
 		
+		System.out.println(httpsession.getAttribute("room_code"));
+		httpsession.removeAttribute("room_code"); // 세션에 있는 것 삭제
+
 		HostVO vo = new HostVO();
 		
 		int room_code = hDAO.selectRoomCode();
 		vo.setRoom_code(room_code+1);
-		System.out.println(vo.getRoom_code());
 		
 		model.addAttribute("vo", vo);
 		
@@ -40,7 +50,7 @@ public class HostController {
 		
 		int room_code = vo.getRoom_code();
 		httpsession.setAttribute("room_code", room_code);
-		
+		System.out.println(httpsession.getAttribute("room_code"));
 		hDAO.insertHostCreate(vo);
 		
 		return "redirect:/host_name.do";
@@ -114,60 +124,67 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.GET)
-	public String hostimgs(Model model) {
+	public String hostimgs(Model model,HttpSession httpsession) {
 		
 		int room_img_code = hDAO.selectRoomImgCode();
+		
+		System.out.println(httpsession.getAttribute("room_code"));
 		
 		HostVO vo = new HostVO();
 		vo.setRoom_img_code(room_img_code+1);
 		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		List<HostVO> list = hDAO.selectRoomImgList(room_code);
+		
+		model.addAttribute("list", list);
 		model.addAttribute("vo", vo);
 		
 		return "host_imgs";
 	}
 	
-	
-	/*@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
-	public String hostimgs(MultipartHttpServletRequest request,
-						   HttpSession httpsession,
-						   HostVO vo
-						   ) {
-		
-		int room_code = (Integer) httpsession.getAttribute("room_code");
-		
-		vo.setRoom_code(room_code);
-		
-		try {
-			MultipartFile file = request.getFile("file");
-			if(file != null && !file.getOriginalFilename().equals("")) {
-				vo.setRoom_img( file.getBytes() );
-			}
-			hDAO.insertHostImg(vo);
-		} catch (Exception e) {
-			return "redirect:host_imgs.do";
-		}
-		
-		return "redirect:host_price.do";
-	}*/
+	@RequestMapping(value = "/host_imgs_img.do", method = RequestMethod.GET)
+	   public ResponseEntity<byte[]> selectEventImg(@RequestParam("room_img_code") int room_img_code, HttpServletRequest request){
+	      HostVO vo1 = new HostVO();
+	      vo1.setRoom_img_code(room_img_code);
+	      
+	      HostVO vo = hDAO.selectRoomImg(room_img_code);
+	      
+	      byte[] roomImg = null;
+	      roomImg = vo.getRoom_img();
+	      try {
+	         final HttpHeaders headers = new HttpHeaders();
+	         headers.setContentType(MediaType.IMAGE_JPEG);
+	         
+	         return new ResponseEntity<byte[]>(roomImg, headers, HttpStatus.OK);
+	      } catch (Exception e) {
+	         System.out.println(e.getMessage());
+	         return null;
+	      }
+	      
+	   }
 	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
 	public String hostimgs(MultipartHttpServletRequest request,
 						   HttpSession httpsession,
 						   @ModelAttribute("vo") HostVO vo) {
-		System.out.println("aa");
+		
 		try {
 			int room_code = (Integer) httpsession.getAttribute("room_code");
+			System.out.println("ROOM:"+ room_code);
 			
 			vo.setRoom_code(room_code);
 			
-			MultipartFile file = request.getFile("file");
+			MultipartFile file = request.getFile("img1");
 			
 			if(file != null && !file.getOriginalFilename().equals("")) {
 				vo.setRoom_img(file.getBytes());
 			}
 			
-			System.out.println();
+			System.out.println(vo.getRoom_img_code());
+			
 			hDAO.insertHostImg(vo);
+			
 			
 			return "redirect:host_price.do";
 			

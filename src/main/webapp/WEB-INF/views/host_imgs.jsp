@@ -47,6 +47,25 @@
 									<input type="submit" class="btn btn-success" value="사진 올리기">
 								</form:form>
 							</div>
+							<div class="panel-body">
+								<table class="table">
+									<tr>
+										<td>번호</td>
+										<td>사진</td>
+										<td>수정/삭제</td>
+									</tr>
+									<c:forEach var="vo" items="${list}">
+										<tr>
+											<td>${vo.room_code}</td>
+											<td><img src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:200px; height:50px;"></td>
+											<td>
+												<a href="#" class="btn btn-xs btn-success btn_update">수정</a>
+												<a href="#" class="btn btn-xs btn-danger btn_delete">삭제</a>	
+											</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
