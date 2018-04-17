@@ -40,12 +40,12 @@
 								<h3 class="panel-title">사진이 많을수록 많이 찾게 됩니다.</h3>
 							</div>
 							<div class="panel-body">
-								<form action="host_imgs.do" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="room_img_code" id="room_img_code"/>
+								<form:form action="host_imgs.do" method="post" modelAttribute="vo" enctype="multipart/form-data">
+									<form:input type="text" path="room_img_code" /><br/>
 								<!-- 	<label for="img1" style="border:1px solid;border-radius: 6px">사진추가하기</label> -->
 									<input type="file" name="img1" id="img1" /><!-- style="display:none" -->
 									<input type="submit" class="btn btn-success" value="사진 올리기">
-								</form>
+								</form:form>
 							</div>
 						</div>
 					</div>

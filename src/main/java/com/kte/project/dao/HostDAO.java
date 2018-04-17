@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.HostVO;
 
+
 @Service
 public class HostDAO {
 
@@ -27,12 +28,12 @@ public class HostDAO {
 		return sqlsession.update("Host.updateHostName", vo);
 	}
 	
-	public int insertHostImgs(HostVO vo) {
-		return sqlsession.insert("Host.insertHostImgs", vo);
-	}
-	
 	public int selectRoomImgCode() {
 		return sqlsession.selectOne("Host.selectLastRoomImgcode");
 	}
-		
+	
+	public int insertHostImg(HostVO vo) {
+		return sqlsession.insert("Host.insertHostImg", vo);
+	}
+	
 }
