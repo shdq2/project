@@ -37,7 +37,7 @@ public class JsonController {
 			return false;
 		}else {
 			return true;
-		}		
+		}
 	}
 	
 	@RequestMapping(value = "/Json_upload_img.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})

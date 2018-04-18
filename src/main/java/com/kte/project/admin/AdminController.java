@@ -38,7 +38,7 @@ public class AdminController {
 	@Autowired
 	private visitDAO vdao = null;
 	
-	@RequestMapping(value = "/admin.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
 		
 		List<CustomVO> list = amdao.AdminUserMain();

@@ -37,4 +37,7 @@ public class adminroomDAO {
 		return sql.update("admin_room.state_change",vo);
 	}
 	
+	public RoomVO room_img(String room_code) {
+		return sql.selectOne("admin_room.room_img",room_code);
+	}
 }	

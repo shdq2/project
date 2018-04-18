@@ -3,5 +3,5 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
 
-<link href="resources/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
-<link href="resources/css/admin.css" rel="stylesheet" id="bootstrap-css">
+<link href="/project/resources/css/bootstrap.css" rel="stylesheet" id="bootstrap-css">
+<link href="/project/resources/css/admin.css" rel="stylesheet" id="bootstrap-css">

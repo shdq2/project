@@ -85,15 +85,18 @@ public class ProfileController {
 		 header.setContentType(MediaType.IMAGE_JPEG);
 		byte[] imgs=null;
 		try {
-			 
-			 CustomVO vo = cdao.show_profile(code);
-			 imgs=vo.getCustom_img();
-			 r_data = new ResponseEntity<byte[]>(imgs,header,HttpStatus.OK);
-			 
-			return r_data;
+			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/user.png");
+			imgs = IOUtils.toByteArray(is);
+			if(code != -1) {
+				CustomVO vo = cdao.show_profile(code);
+				imgs=vo.getCustom_img();
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return null;
+			
+		}finally {
+			r_data = new ResponseEntity<byte[]>(imgs,header,HttpStatus.OK);
+			return r_data;
 		}
 	}
 	

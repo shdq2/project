@@ -54,8 +54,8 @@
  
 
 	
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
 	<script>
 		$(function(){
 			
@@ -99,7 +99,7 @@
 				} 
 
 				var id = $('.id').eq(idx).text();
-				 $.get('Json_member_block.do?id='+id+'&block='+value,function(data){
+				 $.get('/admin/Json_member_block.do?id='+id+'&block='+value,function(data){
 					if(data == 1){
 						console.log("정상적으로 처리되었습니다.");
 					}else{

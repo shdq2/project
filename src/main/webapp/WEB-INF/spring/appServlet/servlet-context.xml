@@ -14,7 +14,6 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
-			<exclude-mapping path="/admin**"/>
 			<exclude-mapping path="/login**"/>
 			<exclude-mapping path="/logout**"/>
 			<exclude-mapping path="/block**"/>
@@ -28,7 +27,8 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/block**"/>
-			<exclude-mapping path="/admin**"/>
+			<exclude-mapping path="/admin/**"/>
+			<exclude-mapping path="/show_img**"/>
 			<exclude-mapping path="/home**"/>
 			<exclude-mapping path="/visit**"/>
 			<exclude-mapping path="/login**"/>

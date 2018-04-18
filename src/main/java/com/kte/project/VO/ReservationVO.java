@@ -18,10 +18,34 @@ public class ReservationVO {
 	
 	private String host_name = null;
 	private String host_id = null;
+	private int host_img_code = 0;
+	
 	private String guest_name = null;
 	private String guest_id = null;
+	private int guest_img_code = 0;
+	private String room_code = null;
 	
 	
+	
+
+	public String getRoom_code() {
+		return room_code;
+	}
+	public void setRoom_code(String room_code) {
+		this.room_code = room_code;
+	}
+	public int getHost_img_code() {
+		return host_img_code;
+	}
+	public void setHost_img_code(int host_img_code) {
+		this.host_img_code = host_img_code;
+	}
+	public int getGuest_img_code() {
+		return guest_img_code;
+	}
+	public void setGuest_img_code(int guest_img_code) {
+		this.guest_img_code = guest_img_code;
+	}
 	public String getGuest_name() {
 		return guest_name;
 	}
@@ -118,8 +142,5 @@ public class ReservationVO {
 	public void setReser_date(String reser_date) {
 		this.reser_date = reser_date;
 	}
-	
-
-	
 	
 }	

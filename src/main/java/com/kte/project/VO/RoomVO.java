@@ -4,12 +4,9 @@ public class RoomVO {
 
    private String room_code = null; // 占쏙옙占쏙옙 占쏙옙占� 占쏙옙호 => 占쏙옙占쏙옙 占쏙옙占쏙옙 vo 占쏙옙占쏙옙
    // 占쏙옙 占싱뱄옙占쏙옙
-   private byte[] room_img1=null;
-   private byte[] room_img2=null;
-   private byte[] room_img3=null;
-   private byte[] room_img4=null;
-   private byte[] room_img5=null;
-
+   private byte[] room_img=null;
+   private String room_img_code = null;
+   
    private String room_img_date =null; // �̹��� ��� ��¥
 
 
@@ -74,37 +71,20 @@ public int getPage() {
    public void setRoom_code(String room_code) {
       this.room_code = room_code;
    }
-   public byte[] getRoom_img1() {
-      return room_img1;
-   }
-   public void setRoom_img1(byte[] room_img1) {
-      this.room_img1 = room_img1;
-   }
-   public byte[] getRoom_img2() {
-      return room_img2;
-   }
-   public void setRoom_img2(byte[] room_img2) {
-      this.room_img2 = room_img2;
-   }
-   public byte[] getRoom_img3() {
-      return room_img3;
-   }
-   public void setRoom_img3(byte[] room_img3) {
-      this.room_img3 = room_img3;
-   }
-   public byte[] getRoom_img4() {
-      return room_img4;
-   }
-   public void setRoom_img4(byte[] room_img4) {
-      this.room_img4 = room_img4;
-   }
-   public byte[] getRoom_img5() {
-      return room_img5;
-   }
-   public void setRoom_img5(byte[] room_img5) {
-      this.room_img5 = room_img5;
-   }
-   public String getRoom_img_date() {
+   
+   public byte[] getRoom_img() {
+	return room_img;
+	}
+	public void setRoom_img(byte[] room_img) {
+		this.room_img = room_img;
+	}
+	public String getRoom_img_code() {
+		return room_img_code;
+	}
+	public void setRoom_img_code(String room_img_code) {
+		this.room_img_code = room_img_code;
+	}
+	public String getRoom_img_date() {
       return room_img_date;
    }
    public void setRoom_img_date(String room_img_date) {

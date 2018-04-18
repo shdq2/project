@@ -34,7 +34,7 @@ public class JSON_Admin_Controller {
 	private adminroomDAO ardao=null; 
 	
 	// json member ///////
-	@RequestMapping(value = "/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int member_block(Model model,
 			HttpSession http,
 			@RequestParam("id")String id,
@@ -48,7 +48,7 @@ public class JSON_Admin_Controller {
 		return ret;
 	}
 	
-	@RequestMapping(value = "/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String,Object> member_room(Model model,
 			HttpSession http,HttpServletResponse response,
 			@RequestParam("id")String id,
@@ -75,7 +75,7 @@ public class JSON_Admin_Controller {
 		return map;
 	}
 	
-	@RequestMapping(value = "/Json_member_travel.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_travel.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String,Object> member_travel(Model model,
 			HttpSession http,
 			@RequestParam("id")String id,
@@ -99,7 +99,7 @@ public class JSON_Admin_Controller {
 	
 	//////////////////// json room///////////////
 	
-	@RequestMapping(value = "/json_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/json_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody List<RoomVO> room(Model model,	
 			HttpSession http,
 			@RequestParam("page")int p) {		
@@ -108,7 +108,7 @@ public class JSON_Admin_Controller {
 		return list;
 	}
 	
-	@RequestMapping(value = "/json_room_state_change.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/json_room_state_change.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int room_state_change(Model model,	
 			HttpSession http,
 			@RequestParam("code")String code,
@@ -122,7 +122,7 @@ public class JSON_Admin_Controller {
 	//////////////////////////
 	
 	// json wish /////////////
-	@RequestMapping(value = "/json_wish.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/json_wish.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody List<WishVO> wish(Model model,	
 			HttpSession http,
 			@RequestParam("page")int p) {		

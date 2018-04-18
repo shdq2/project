@@ -41,12 +41,11 @@
  
 
 	
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script>
 		$(function(){
-			
 			//활성화된 메뉴 처리
 			$('.room_menu').addClass("active");
 			///
@@ -55,7 +54,6 @@
 			      visiblePages: 7,
 			      onPageClick: function (event, page) {
 					 $.get('json_room.do?page='+page,function(data){
-						 console.log(data);
 						 var leng = data.length;
 						 var src = "";
 
@@ -71,21 +69,21 @@
 							 }
 							 $('.table tbody').append(
 								'<tr>'+
-									'<td>'+
-										'<img src=""><input type="hidden" value="'+data[i].room_code+'" class="room_code"/>'+
+									'<td style="width:110px;">'+
+										'<img src="admin_room_img.do?id='+data[i].room_code+'" style="width:100px;height:100px;"><input type="hidden" value="'+data[i].room_code+'" class="room_code"/>'+
 									'</td>'+
-									'<td>'+data[i].room_name+'</td>'+
-									'<td>'+data[i].custom_name+'</td>'+
+									'<td style="width:250px">'+data[i].room_name+'</td>'+
+									'<td style="width:100px;">'+data[i].custom_name+'</td>'+
 									'<td>'+data[i].room_day+'</td>'+
 									'<td>'+
-									'<select class="room_state">'+
+									'<select class="room_state form-control" style="width:100px;">'+
 									'<option value="0">비공개</option>'+
 									'<option value="1">미완성</option>'+
 									'<option value="2">공개</option>'+
 									'</select>'+
 									'</td>'+
-									'<td>'+
-										'<input type="button" value="수정">'+
+									'<td style="width:50px;">'+
+										'<input type="button" class="form-control" value="수정">'+
 									'</td>'+
 								'</tr>'
 							 );

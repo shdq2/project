@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin_room">
-	
+	<resultMap id="resultImg" type="roomVO">
+		<result column="room_img" property="room_img" jdbcType="BLOB" />	
+	</resultMap>
 	<select id="select_room" resultType="roomVO" parameterType="roomVO">
 		select * from room where custom_id = #{custom_id} order by room_code desc LIMIT #{page},4
 	</select>
@@ -27,4 +29,8 @@
 	<update id="state_change" parameterType="roomVO">
 		update room set room_block=#{room_block} where room_code = #{room_code}  
 	</update>
+	
+	<select id="room_img" parameterType="String" resultMap="resultImg">
+		select room_img from room_img where room_img_code in (select min(room_img_code) from room_img where room_code=#{room_code})
+	</select>
 </mapper>

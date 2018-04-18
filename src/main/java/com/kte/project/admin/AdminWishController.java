@@ -30,7 +30,7 @@ public class AdminWishController {
 	@Autowired
 	private admin_wishDAO wdao = null;
 	
-	@RequestMapping(value = "/admin_wish.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/admin_wish.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
 		List<WishVO> list = wdao.wish_list(0);
 		model.addAttribute("wlist", list);
@@ -42,7 +42,7 @@ public class AdminWishController {
 	}
 	
 
-	@RequestMapping(value = "/admin_wish_detail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/admin_wish_detail.do", method = RequestMethod.GET)
 	public String wish_detail(Model model,HttpSession http,
 			@RequestParam("code")int code) {
 		wdao.wish_update(code);

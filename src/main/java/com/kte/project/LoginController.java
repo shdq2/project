@@ -46,9 +46,7 @@ public class LoginController {
 					httpsession.setAttribute("custom_id",cvo.getCustom_id());
 					httpsession.setAttribute("custom_name",cvo.getCustom_name());
 					
-					model.addAttribute("url", "visit.do");
-					model.addAttribute("msg", "환영합니다");
-					model.addAttribute("ret", "y");	
+					return "redirect:visit.do";
 				}
 				
 			}else {

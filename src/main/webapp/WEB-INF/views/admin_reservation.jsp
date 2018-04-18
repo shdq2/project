@@ -3,38 +3,49 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
 	<jsp:include page="admin_menu.jsp"></jsp:include>
-	
-	<div class="col-md-9">
+	<link href="/project/resources/css/admin_reser.css" rel="stylesheet" id="bootstrap-css">
+
+		<div class="col-md-9">
 		<c:forEach var="i" items="${list }">
-			<div style="border:1px solid; height:150px;border-radius:10px; margin-bottom:10px;" >
-				<div style="border:1px solid #ccc;width:20%;height:100%;display:inline-block;">
-					<div class="reser-profile-img" style="height:70%;">
-					
-					</div>
-					<div class="reser-profile" style="bottom:0px;">
-						${i.host_id }<br />
-						${i.host_name }
-					</div>
-				</div>
-				<div style="border:1px solid #ccc;width:20%;height:100%;display:inline-block;">
-					<div class="reser-profile-img" style="height:70%;">
-					
-					</div>
-					<div class="reser-profile" style="bottom:0px;">
-						${i.guest_id }<br />
-						${i.guest_name }
+		
+			<div class="col-sm-12 col-md-6 reser-detail" style="border:1px solid; height:250px;border-radius:10px; margin-bottom:10px;position:relative;" >
+				<div class="col-sm-6 col-md-6" style="height:70%">
+					<div class= "reser-profile-div" >
+						<input type="hidden" class="reser_num" value="${i.reservation_code}" />
+						<div class="reser-profile-img">
+							<img src="/project/show_img.do?code=${i.host_img_code }" />
+						</div>
+						<div class="reser-profile" >
+							호스트 정보 <br />
+							
+						</div>
 					</div>
 				</div>
-				<div style="border:1px solid #ccc;width:58%;height:100%;display:inline-block;">
-					<div class="reser-profile-img" style="height:100%;">					
+				
+				<div class="col-sm-6 col-md-6" style="height:50%;">
+					<div class= "reser-profile-div" >
+						<div class="reser-profile-img">
+							<img src="/project/show_img.do?code=${i.guest_img_code }" />
+						</div>
+						<div class="reser-profile">
+							게스트 정보 <br />							
+							
+						</div>
+					</div>
+				</div>				
+				<div class= "reser-text-div" style="width: 100%">
+					<div class="reser-text" style="top:0%;height:auto;position:absolute;border:1px solid">
+						예약정보					
 						${i.room_name }<br />
 						${i.reservation_start } ~ ${i.reservation_end }<br /> 
-						${i.reservation_start } ~ ${i.reservation_end }
 					</div>
 				</div>
+				
+				
 			</div>
+			
 		</c:forEach>
-	</div>
+		</div>
 
 <%-- 
 <div style="position:relative">
@@ -50,16 +61,20 @@
  
 
 	
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script>
 		$(function(){
 			
 			//활성화된 메뉴 처리
 			$('.reser_menu').addClass("active");
 			///
-			
+			$('.reser-detail').click(function(){
+				var idx = $(this).index('.reser-detail');
+				var reser_num = $('.reser_num').eq(idx).val();
+				window.location.href="admin_reser_detail.do?reser_code="+reser_num;
+			})
 		});
 							
 	

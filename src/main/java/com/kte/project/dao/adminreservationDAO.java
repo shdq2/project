@@ -22,4 +22,11 @@ public class adminreservationDAO {
 		return sql.selectList("admin_reservation.reservation_all");
 	}
 	
+	public int profile_img(String id) {
+		return sql.selectOne("admin_reservation.profile_img",id);
+	}
+	
+	public ReservationVO select_reser(int code) {
+		return sql.selectOne("admin_reservation.select_reser",code);
+	}
 }	

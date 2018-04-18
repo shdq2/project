@@ -33,7 +33,7 @@ public class AdminMemberController {
 	@Autowired
 	private adminroomDAO ardao = null;
 	
-	@RequestMapping(value = "/admin_member.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/admin_member.do", method = RequestMethod.GET)
 	public String member(Model model) {
 		List<CustomVO> list = amdao.AdminUserMain();
 		for(int i=0;i<list.size();i++) {
@@ -43,7 +43,7 @@ public class AdminMemberController {
 		return "admin_member";
 	}
 	
-	@RequestMapping(value = "/admin_member_detail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/admin_member_detail.do", method = RequestMethod.GET)
 	public String admin_member_detail(Model model,
 			@RequestParam("id")String id) {
 		CustomVO vo = amdao.admin_member_select(id);
