@@ -33,7 +33,7 @@
 				<input type="button" value="여행중" id="travel"/>
 				<input type="button" value="여행완료" id="finish"/>
 			</div>			
-		</div>
+		</div> 
 	</div>
 	
 	
