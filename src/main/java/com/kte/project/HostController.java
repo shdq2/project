@@ -64,14 +64,6 @@ public class HostController {
 		HostVO vo = new HostVO();
 		vo.setRoom_code(room_code);
 		
-		/*if(vo.getName_title() != null || vo.getName_content() != null) {
-			ret = 1;
-		}
-		else {
-			ret = 0;
-		}*/
-		
-		
 		model.addAttribute("vo", vo);
 		
 		return "host_name";
@@ -86,13 +78,28 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_basic.do", method=RequestMethod.GET)
-	public String hostbasic(Model model) {
+	public String hostbasic(Model model, HttpSession httpsession) {
 		
-		HostVO vo = new HostVO();
+		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
+		HostVO vo = hDAO.selectHostBasic(room_code);
+		String[] str = {"원룸","1.5룸","투룸(방1개 + 거실1)","투룸(방2개)","쓰리룸이상","복층","호텔","리조트"};
+		String[] str1 = {"빌라","원룸","펜션","민박","아파트","오피스텔","레지던스","쉐어하우스","단독주택(독채)","단독주택(일부 사용)","게스트하우스(개인실)","게스트하우스(도미토리)"};
+		
+		model.addAttribute("str",str);
+		model.addAttribute("str1",str1);
 		model.addAttribute("vo", vo);
 		
 		return "host_basic";
+	}
+	
+	@RequestMapping(value="/host_basic.do", method=RequestMethod.POST)
+	public String hostbasic(@ModelAttribute("vo") HostVO vo) {
+		
+		
+		hDAO.updateHostBasic(vo);
+		
+		return "redirect:/host_location.do";
 	}
 	
 	@RequestMapping(value="/host_location.do", method=RequestMethod.GET)
@@ -119,6 +126,11 @@ public class HostController {
 		model.addAttribute("str3", str3);
 		model.addAttribute("vo", vo);
 		
+		/*<c:forEach var="tmp" items="str" varStafs="i">
+		if ca	
+		<option value="${tmp.str[i.index]}" >${tmp.str[i.index]}</op
+		</c>*/
+		
 		return "host_amenity";
 	}
 	
@@ -144,26 +156,24 @@ public class HostController {
 	}
 	
 	@RequestMapping(value = "/host_imgs_img.do", method = RequestMethod.GET)
-	   public ResponseEntity<byte[]> selectEventImg(@RequestParam("room_img_code") int room_img_code, HttpServletRequest request){
-	      HostVO vo1 = new HostVO();
-	      vo1.setRoom_img_code(room_img_code);
-	      
+	   public ResponseEntity<byte[]> selectEventImg(@RequestParam("room_img_code") int room_img_code){
+	     
 	      HostVO vo = hDAO.selectRoomImg(room_img_code);
 	      
-	      byte[] roomImg = null;
-	      roomImg = vo.getRoom_img();
+	      byte[] roomImg = vo.getRoom_img();
+	      
 	      try {
 	         final HttpHeaders headers = new HttpHeaders();
 	         headers.setContentType(MediaType.IMAGE_JPEG);
 	         
 	         return new ResponseEntity<byte[]>(roomImg, headers, HttpStatus.OK);
+	         
 	      } catch (Exception e) {
 	         System.out.println(e.getMessage());
 	         return null;
 	      }
-	      
 	   }
-	
+	   
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
 	public String hostimgs(MultipartHttpServletRequest request,
 						   HttpSession httpsession,
@@ -185,8 +195,7 @@ public class HostController {
 			
 			hDAO.insertHostImg(vo);
 			
-			
-			return "redirect:host_price.do";
+			return "redirect:host_imgs.do";
 			
 		} catch (Exception e) {
 			System.out.println("bb");

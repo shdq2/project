@@ -38,5 +38,16 @@
    <select id="selectRoomImg" parameterType="int" resultMap="selectRoomImg">
       SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_cod}
    </select>
+   
+   <select id="selectHostBasic" parameterType="int" resultType="HostVO">
+   		SELECT room_code, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
+   </select> 
+   
+   <update id="updateHostBasic" parameterType="HostVO">
+    	UPDATE room 
+    		SET room_number=#{room_number}, room_bed_number=#{room_bed_number},room_bath_number=#{room_bath_number},
+    			room_type=#{room_type},room_building_type=#{room_building_type}, room_space=#{room_space} 
+    		WHERE room_code=#{room_code}
+   </update>
 	
 </mapper>	

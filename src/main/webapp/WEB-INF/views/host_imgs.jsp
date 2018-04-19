@@ -65,6 +65,11 @@
 										</tr>
 									</c:forEach>
 								</table>
+								<div class="form-group">
+									<div class="pull-right button-next">
+										<a href="host_price.do" class="btn btn-primary btn-block" >다음</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

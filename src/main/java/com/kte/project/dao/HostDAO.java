@@ -45,4 +45,11 @@ public class HostDAO {
 		return sqlsession.selectOne("Host.selectRoomImg", room_img_code);
 	}
 	
+	public HostVO selectHostBasic(int room_code) {
+		return sqlsession.selectOne("Host.selectHostBasic", room_code);
+	}
+	
+	public int updateHostBasic(HostVO vo) {
+		return sqlsession.update("Host.updateHostBasic", vo);
+	}
 }
