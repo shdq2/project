@@ -29,4 +29,16 @@ public class adminreservationDAO {
 	public ReservationVO select_reser(int code) {
 		return sql.selectOne("admin_reservation.select_reser",code);
 	}
+	
+	public int update_state(ReservationVO vo) {
+		return sql.update("admin_reservation.update_state",vo);
+	}
+	
+	public List<ReservationVO> state_count() {
+		return sql.selectList("admin_reservation.state_count");
+	}
+	
+	public int reser_count() {
+		return sql.selectOne("admin_reservation.reser_count");
+	}
 }	

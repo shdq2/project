@@ -46,7 +46,9 @@ public class AdminReserController {
 			list.get(i).setGuest_img_code(aredao.profile_img(guest_id));
 			
 		}
+		List<ReservationVO> list2 = aredao.state_count();
 		
+		model.addAttribute("list2", list2);
 		model.addAttribute("list", list);
 		return "admin_reservation";
 	}

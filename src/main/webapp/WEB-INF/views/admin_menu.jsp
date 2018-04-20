@@ -97,6 +97,6 @@
 							
 							<a href="admin_reser.do" class="list-group-item reser_menu">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 예약관리
-							<span class="badge">${sessionScope._ucount }</span></a>
+							<span class="badge">${sessionScope._recount }</span></a>
 					</div>
 				</div>

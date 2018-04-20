@@ -22,6 +22,7 @@ import com.kte.project.VO.WishVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.adminreservationDAO;
 import com.kte.project.dao.adminroomDAO;
 
 @RestController
@@ -32,6 +33,8 @@ public class JSON_Admin_Controller {
 	private admin_wishDAO wdao=null; 
 	@Autowired
 	private adminroomDAO ardao=null; 
+	@Autowired
+	private adminreservationDAO aredao = null;
 	
 	// json member ///////
 	@RequestMapping(value = "/admin/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
@@ -96,6 +99,22 @@ public class JSON_Admin_Controller {
 		return map;
 	}
 	////////////////////////
+	
+	///////// json reser ////////////
+	@RequestMapping(value = "/admin/Json_update_state.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody int update_state(Model model,	
+			HttpSession http,
+			@RequestParam("code")int code,
+			@RequestParam("state")int state) {		
+		
+		ReservationVO vo = new ReservationVO();
+		vo.setReser_code(state);
+		vo.setReservation_code(code);
+		int ret = aredao.update_state(vo);
+		
+		return ret;
+	}
+	////////////////
 	
 	//////////////////// json room///////////////
 	

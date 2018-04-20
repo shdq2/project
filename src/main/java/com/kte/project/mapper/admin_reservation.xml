@@ -23,16 +23,22 @@
 	</select>
 	
 	<select id="reservation_all" resultType="reservationVO">
-		select c.custom_name as guest_name,r.host_name,r.room_code,r.room_name,r.guest_id,r.host_id,r.reservation_code,
-		date_format(r.reservation_start,"%Y-%m-%d") as reservation_start,date_format(r.reservation_end,"%Y-%m-%d") as reservation_end from custom c 
+		select c.custom_name as guest_name,r.host_name,r.room_code,r.room_name,r.guest_id,r.host_id,r.reservation_code,r.reser_title,r.reser_code,
+		date_format(r.reservation_start,"%Y-%m-%d") as reservation_start,date_format(r.reservation_end,"%Y-%m-%d") as reservation_end,
+		TO_DAYS(r.reservation_end) - TO_DAYS(r.reservation_start) as reser_day,r.room_day
+		from custom c 
 			inner join
-				(select c.custom_name as host_name,r.host_id,r.room_code,r.guest_id,r.reservation_code,
+				(select c.custom_name as host_name,r.host_id,r.room_code,r.guest_id,r.reservation_code,r.reser_title,r.room_day,r.reser_code,
 				r.reservation_start,r.reservation_end,r.room_name from custom c
 				inner join
-					(select ro.room_code,ro.custom_id as host_id,re.custom_id as guest_id,
-					re.reservation_start,re.reservation_end,ro.room_name,re.reservation_code from reservation re
-					inner join room ro
-					on re.room_code = ro.room_code) r
+					(select rs.reser_title,r.room_code,r.host_id,r.guest_id,r.reser_code,r.room_day,
+						r.reservation_start,r.reservation_end,r.room_name,r.reservation_code from reservation_state rs
+						inner join
+						(select ro.room_code,ro.custom_id as host_id,re.custom_id as guest_id,re.reser_code,ro.room_day,
+						re.reservation_start,re.reservation_end,ro.room_name,re.reservation_code from reservation re
+						inner join room ro
+						on re.room_code = ro.room_code) r
+					on r.reser_code = rs.reser_code) r					
 			on c.custom_id = r.host_id) r
 		on c.custom_id = r.guest_id
 		order by r.reservation_code desc
@@ -44,9 +50,32 @@
 	</select>
 	
 	<select id="select_reser" parameterType="Int" resultType="reservationVO">
-		select r.*,s.reser_title from reservation r 
+		select r.reservation_code,r.custom_id as guest_id, r.room_code,
+		date_format(r.reservation_start,'%Y년 %m월 %d일') as reservation_start,date_format(r.reservation_end,'%Y년 %m월 %d일') as reservation_end,
+		TO_DAYS(r.reservation_end) - TO_DAYS(r.reservation_start) as reser_day,
+		s.reser_title 
+		from reservation r 
 		inner join reservation_state s
 		on r.reser_code = s.reser_code
 		where r.reservation_code = #{code}
 	</select>
+	
+	<update id="update_state" parameterType="reservationVO">
+		update reservation set reser_code = #{reser_code} where reservation_code = #{reservation_code}
+	</update>
+	
+	<select id="state_count" parameterType="Int" resultType="reservationVO">
+		select r.reser_code, count(r.reser_code) as state_count,rs.reser_title from reservation r 
+		inner join reservation_state rs
+		on r.reser_code = rs.reser_code
+		group by reser_code
+		union all
+		select reser_code,0 as count,reser_title from reservation_state where reser_code not in (select reser_code from reservation);
+	</select>
+	
+	<select id="reser_count" resultType="Int">
+		select count(*) from reservation
+	</select>
+	
+	
 </mapper>

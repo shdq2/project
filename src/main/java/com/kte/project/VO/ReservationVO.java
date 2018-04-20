@@ -25,9 +25,23 @@ public class ReservationVO {
 	private int guest_img_code = 0;
 	private String room_code = null;
 	
-	
-	
+	private int state_count = 0;
 
+	private int room_day = 0;
+	
+	
+	public int getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(int room_day) {
+		this.room_day = room_day;
+	}
+	public int getState_count() {
+		return state_count;
+	}
+	public void setState_count(int state_count) {
+		this.state_count = state_count;
+	}
 	public String getRoom_code() {
 		return room_code;
 	}
