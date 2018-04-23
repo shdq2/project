@@ -1,8 +1,15 @@
 package com.kte.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.HostVO;
+import com.kte.project.VO.HostchkVO;
 import com.kte.project.dao.HostDAO;
 
 @Controller
@@ -22,13 +30,15 @@ public class HostController {
 	private HostDAO hDAO = null;
 	
 	@RequestMapping(value="/host_create.do", method=RequestMethod.GET)
-	public String hostcreate(Model model) {
+	public String hostcreate(Model model, HttpSession httpsession) {
 		
+		System.out.println(httpsession.getAttribute("room_code"));
+		httpsession.removeAttribute("room_code"); // 세션에 있는 것 삭제
+
 		HostVO vo = new HostVO();
 		
 		int room_code = hDAO.selectRoomCode();
 		vo.setRoom_code(room_code+1);
-		System.out.println(vo.getRoom_code());
 		
 		model.addAttribute("vo", vo);
 		
@@ -41,7 +51,7 @@ public class HostController {
 		
 		int room_code = vo.getRoom_code();
 		httpsession.setAttribute("room_code", room_code);
-		
+		System.out.println(httpsession.getAttribute("room_code"));
 		hDAO.insertHostCreate(vo);
 		
 		return "redirect:/host_name.do";
@@ -54,14 +64,6 @@ public class HostController {
 		
 		HostVO vo = new HostVO();
 		vo.setRoom_code(room_code);
-		
-		/*if(vo.getName_title() != null || vo.getName_content() != null) {
-			ret = 1;
-		}
-		else {
-			ret = 0;
-		}*/
-		
 		
 		model.addAttribute("vo", vo);
 		
@@ -77,13 +79,28 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_basic.do", method=RequestMethod.GET)
-	public String hostbasic(Model model) {
+	public String hostbasic(Model model, HttpSession httpsession) {
 		
-		HostVO vo = new HostVO();
+		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
+		HostVO vo = hDAO.selectHostBasic(room_code);
+		String[] str = {"원룸","1.5룸","투룸(방1개 + 거실1)","투룸(방2개)","쓰리룸이상","복층","호텔","리조트"};
+		String[] str1 = {"빌라","원룸","펜션","민박","아파트","오피스텔","레지던스","쉐어하우스","단독주택(독채)","단독주택(일부 사용)","게스트하우스(개인실)","게스트하우스(도미토리)"};
+		
+		model.addAttribute("str",str);
+		model.addAttribute("str1",str1);
 		model.addAttribute("vo", vo);
 		
 		return "host_basic";
+	}
+	
+	@RequestMapping(value="/host_basic.do", method=RequestMethod.POST)
+	public String hostbasic(@ModelAttribute("vo") HostVO vo) {
+		
+		
+		hDAO.updateHostBasic(vo);
+		
+		return "redirect:/host_location.do";
 	}
 	
 	@RequestMapping(value="/host_location.do", method=RequestMethod.GET)
@@ -113,64 +130,87 @@ public class HostController {
 		return "host_amenity";
 	}
 	
+	@RequestMapping(value="/host_amenity.do", method=RequestMethod.POST)
+	public String hostamenity(@ModelAttribute("vo") HostVO vo,
+							  @RequestParam("str[]") String[] chk,
+							  @RequestParam("str1[]") String[] chk1,
+							  @RequestParam("str2[]") String[] chk2,
+							  @RequestParam("str3[]") String[] chk3,
+							  HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		List<HostchkVO> list = new ArrayList<HostchkVO>();
+		for(String tmp : chk) {
+			HostchkVO vo1 = new HostchkVO();
+			vo1.setRoom_code(room_code);
+			vo1.setRoom_option(tmp);
+		}
+		
+		return "redirect:/host_imgs.do";
+	}
 	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.GET)
-	public String hostimgs(Model model) {
+	public String hostimgs(Model model,HttpSession httpsession) {
 		
 		int room_img_code = hDAO.selectRoomImgCode();
+		
+		System.out.println(httpsession.getAttribute("room_code"));
 		
 		HostVO vo = new HostVO();
 		vo.setRoom_img_code(room_img_code+1);
 		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		List<HostVO> list = hDAO.selectRoomImgList(room_code);
+		
+		model.addAttribute("list", list);
 		model.addAttribute("vo", vo);
 		
 		return "host_imgs";
 	}
 	
-	
-	/*@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
-	public String hostimgs(MultipartHttpServletRequest request,
-						   HttpSession httpsession,
-						   HostVO vo
-						   ) {
-		
-		int room_code = (Integer) httpsession.getAttribute("room_code");
-		
-		vo.setRoom_code(room_code);
-		
-		try {
-			MultipartFile file = request.getFile("file");
-			if(file != null && !file.getOriginalFilename().equals("")) {
-				vo.setRoom_img( file.getBytes() );
-			}
-			hDAO.insertHostImg(vo);
-		} catch (Exception e) {
-			return "redirect:host_imgs.do";
-		}
-		
-		return "redirect:host_price.do";
-	}*/
-	
+	@RequestMapping(value = "/host_imgs_img.do", method = RequestMethod.GET)
+	   public ResponseEntity<byte[]> selectEventImg(@RequestParam("room_img_code") int room_img_code){
+	     
+	      HostVO vo = hDAO.selectRoomImg(room_img_code);
+	      
+	      byte[] roomImg = vo.getRoom_img();
+	      
+	      try {
+	         final HttpHeaders headers = new HttpHeaders();
+	         headers.setContentType(MediaType.IMAGE_JPEG);
+	         
+	         return new ResponseEntity<byte[]>(roomImg, headers, HttpStatus.OK);
+	         
+	      } catch (Exception e) {
+	         System.out.println(e.getMessage());
+	         return null;
+	      }
+	   }
+	   
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.POST)
 	public String hostimgs(MultipartHttpServletRequest request,
 						   HttpSession httpsession,
 						   @ModelAttribute("vo") HostVO vo) {
-		System.out.println("aa");
+		
 		try {
 			int room_code = (Integer) httpsession.getAttribute("room_code");
+			System.out.println("ROOM:"+ room_code);
 			
 			vo.setRoom_code(room_code);
 			
-			MultipartFile file = request.getFile("file");
+			MultipartFile file = request.getFile("img1");
 			
 			if(file != null && !file.getOriginalFilename().equals("")) {
 				vo.setRoom_img(file.getBytes());
 			}
 			
-			System.out.println();
+			System.out.println(vo.getRoom_img_code());
+			
 			hDAO.insertHostImg(vo);
 			
-			return "redirect:host_price.do";
+			return "redirect:host_imgs.do";
 			
 		} catch (Exception e) {
 			System.out.println("bb");

@@ -43,14 +43,14 @@
 										<div class="col-sm-9">
 											<form:select class="form-control" required="required" path="create_room_type">
 												<option selected="selected" value="">선택하세요.</option>
-												<option value="1">원룸</option>
-												<option value="6">1.5룸</option>
-												<option value="8">투룸(방1개 + 거실1)</option>
-												<option value="2">투룸(방2개)</option>
-												<option value="3">쓰리룸이상</option>
-												<option value="5">복층</option>
-												<option value="9">호텔</option>
-												<option value="10">리조트</option>
+												<option value="원룸">원룸</option>
+												<option value="1.5룸">1.5룸</option>
+												<option value="투룸(방1개 + 거실1)">투룸(방1개 + 거실1)</option>
+												<option value="투룸(방2개)">투룸(방2개)</option>
+												<option value="쓰리룸이상">쓰리룸이상</option>
+												<option value="복층">복층</option>
+												<option value="호텔">호텔</option>
+												<option value="리조트">리조트</option>
 											</form:select>
 										</div>
 									</div>
@@ -60,18 +60,18 @@
 										<div class="col-sm-9">
 											<form:select class="form-control" required="required" path="create_building_type">
 												<option selected="selected" value="">선택하세요.</option>
-												<option value="13">빌라</option>
-												<option value="11">원룸</option>
-												<option value="5">펜션</option>
-												<option value="6">민박</option>
-												<option value="1">아파트</option>
-												<option value="3">오피스텔</option>
-												<option value="4">레지던스</option>
-												<option value="12">쉐어하우스</option>
-												<option value="2">단독주택(독채)</option>
-												<option value="10">단독주택(일부 사용)</option>
-												<option value="7">게스트하우스(개인실)</option>
-												<option value="9">게스트하우스(도미토리)</option>
+												<option value="빌라">빌라</option>
+												<option value="원룸">원룸</option>
+												<option value="펜션">펜션</option>
+												<option value="민박">민박</option>
+												<option value="아파트">아파트</option>
+												<option value="오피스텔">오피스텔</option>
+												<option value="레지던스">레지던스</option>
+												<option value="쉐어하우스">쉐어하우스</option>
+												<option value="단독주택(독채)">단독주택(독채)</option>
+												<option value="단독주택(일부 사용)">단독주택(일부 사용)</option>
+												<option value="게스트하우스(개인실)">게스트하우스(개인실)</option>
+												<option value="게스트하우스(도미토리)">게스트하우스(도미토리)</option>
 											</form:select>
 										</div>
 									</div>

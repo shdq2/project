@@ -217,7 +217,7 @@
 	        					<c:forEach var="tmp" items="${str}">
 	        						<label class="btn btn-default btn-checkbox" style="width:170px">
 					                	<div align="left">
-						                   <span class="glyphicon glyphicon-unchecked" data-icon-on="glyphicon glyphicon-check" data-icon-off="glyphicon glyphicon-unchecked" ></span>
+						                   <span class="glyphicon glyphicon-unchecked" data-icon-on="glyphicon glyphicon-check" data-icon-off="glyphicon glyphicon-unchecked"></span>
 						                   <input type="checkbox" style="display: none" autocomplete="false" name="str[]" value="${tmp}">${tmp}
 						                </div>
 					                </label>

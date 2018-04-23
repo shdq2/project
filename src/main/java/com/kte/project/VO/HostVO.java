@@ -13,6 +13,14 @@ public class HostVO {
 	private String create_room_type = null;
 	private String create_basic_member = null;
 	
+	//host_basic
+	private int room_number = 0;
+	private int room_bed_number = 0;
+	private int room_bath_number = 0;
+	private String room_type = null;
+	private String room_building_type = null;
+	private int room_space = 0;
+	
 	//host_imgs
 	private int room_img_code = 0;
 	private byte[] room_img = null;
@@ -21,6 +29,42 @@ public class HostVO {
 	
 	
 	
+	public int getRoom_number() {
+		return room_number;
+	}
+	public void setRoom_number(int room_number) {
+		this.room_number = room_number;
+	}
+	public int getRoom_bed_number() {
+		return room_bed_number;
+	}
+	public void setRoom_bed_number(int room_bed_number) {
+		this.room_bed_number = room_bed_number;
+	}
+	public int getRoom_bath_number() {
+		return room_bath_number;
+	}
+	public void setRoom_bath_number(int room_bath_number) {
+		this.room_bath_number = room_bath_number;
+	}
+	public String getRoom_type() {
+		return room_type;
+	}
+	public void setRoom_type(String room_type) {
+		this.room_type = room_type;
+	}
+	public String getRoom_building_type() {
+		return room_building_type;
+	}
+	public void setRoom_building_type(String room_building_type) {
+		this.room_building_type = room_building_type;
+	}
+	public int getRoom_space() {
+		return room_space;
+	}
+	public void setRoom_space(int room_space) {
+		this.room_space = room_space;
+	}
 	public int getRoom_img_code() {
 		return room_img_code;
 	}

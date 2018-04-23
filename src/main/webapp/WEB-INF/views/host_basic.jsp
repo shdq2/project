@@ -34,7 +34,13 @@
 			</div>
 			<div class="host-content">
 				<div class="row">
+				
 					<div class="col-md-12 col-lg-8">
+					<form:form action="host_basic.do" method="post" modelAttribute="vo">
+						<div style="display:hidden">
+							<form:input type="text" path="room_code"/>
+						</div>
+					
 						<div class="panel">
 							<div class="panel-head">
 								<h3 class="panel-title">침실 및 침대<br><br>
@@ -42,37 +48,50 @@
 								</h3>
 							</div>
 							<div class="panel-body">
-								<form:form method="POST" >
-									<div class="row">
-										<div class="form-group col-sm-4">
-											<label class="control-label">침실수</label>
-											<select class="form-control" required="required">
-												<c:forEach var="i" begin="0" end="10">
-													<option>${i}</option>
-												</c:forEach>
-												<option>10이상</option>
-											</select>
-										</div>
-										<div class="form-group col-sm-4">
-											<label class="control-label">침대수</label>
-											<select class="form-control" required="required">
-												<c:forEach var="i" begin="0" end="10">
-													<option>${i}</option>
-												</c:forEach>
-												<option>10이상</option>
-											</select>
-										</div>
-										<div class="form-group col-sm-4">
-											<label class="control-label">욕실수</label>
-											<select class="form-control" required="required">
-												<c:forEach var="i" begin="0" end="10">
-													<option>${i}</option>
-												</c:forEach>
-												<option>10이상</option>
-											</select>
-										</div>
+								<div class="row">
+									<div class="form-group col-sm-4">
+										<label class="control-label">침실수</label>
+										<form:select class="form-control" required="required" path="room_number">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${vo.room_number == i}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${vo.room_number != i}">
+													<option selected="selected" value="${i}">${i}</option>
+												</c:if>
+											</c:forEach>
+											<option>10이상</option>
+										</form:select>
 									</div>
-								</form:form>
+									<div class="form-group col-sm-4">
+										<label class="control-label">침대수</label>
+										<form:select class="form-control" required="required" path="room_bed_number">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${vo.room_bath_number == i}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${vo.room_bath_number != i}">
+													<option selected="selected" value="${i}">${i}</option>
+												</c:if>
+											</c:forEach>
+											<option>10이상</option>
+										</form:select>
+									</div>
+									<div class="form-group col-sm-4">
+										<label class="control-label">욕실수</label>
+										<form:select class="form-control" required="required" path="room_bath_number">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${vo.room_bath_number == i}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${vo.room_bath_number != i}">
+													<option selected="selected" value="${i}">${i}</option>
+												</c:if>
+											</c:forEach>
+											<option>10이상</option>
+										</form:select>
+									</div>
+								</div>
 							</div>
 						</div>
 						
@@ -81,61 +100,59 @@
 								<h3 class="panel-title">집/건물</h3>
 							</div>
 							<div class="panel-body">
-								<form:form method="POST" >
-									<div class="row">
-										<div class="form-group col-sm-4">
-											<label class="control-label">숙소 종류</label> 
-											<select class="form-control" required="required">
-												<option	selected="selected">원룸</option>
-												<option value="6">1.5룸</option>
-												<option value="8">투룸(방1개 + 거실1)</option>
-												<option value="2">투룸(방2개)</option>
-												<option value="3">쓰리룸이상</option>
-												<option value="5">복층</option>
-												<option value="9">호텔</option>
-												<option value="10">리조트</option>
-											</select>
-										</div>
-										<div class="form-group col-sm-4">
-											<label class="control-label">침대수</label> 
-											<select class="form-control" required="required">
-												<option	value="13" selected="selected">빌라</option>
-												<option value="11">원룸</option>
-												<option value="5">펜션</option>
-												<option value="6">민박</option>
-												<option value="1">아파트</option>
-												<option value="3">오피스텔</option>
-												<option value="4">레지던스</option>
-												<option value="12">쉐어하우스</option>
-												<option value="2">단독주택(독채)</option>
-												<option value="10">단독주택(일부 사용)</option>
-												<option value="7">게스트하우스(개인실)</option>
-												<option value="9">게스트하우스(도미토리)</option>
-											</select>
-										</div>
-										<div class="form-group col-sm-4">
-											<label class="control-label">욕실수</label>
-											<select class="form-control" required="required">
-												<option>모름</option>
-												<c:forEach var="i" begin="1" end="50">
-													<option>${i}</option>
-												</c:forEach>
-												<option>50이상</option>
-											</select>
-										</div>
+								<div class="row">
+									<div class="form-group col-sm-4">
+										<label class="control-label">숙소 종류</label> 
+										<form:select class="form-control" required="required" path="room_type">
+											<c:forEach var="tmp" items="${str}">
+												<c:if test="${vo.room_type eq tmp}">
+													<option value="${tmp}" selected="selected">${tmp}</option>
+												</c:if>
+												<c:if test="${vo.room_type ne tmp}">
+													<option value="${tmp}">${tmp}</option>
+												</c:if>
+											</c:forEach>										
+										</form:select>
 									</div>
-								</form:form>
+									<div class="form-group col-sm-4">
+										<label class="control-label">건물유형</label> 
+										<form:select class="form-control" required="required" path="room_building_type">
+											<c:forEach var="tmp" items="${str1}">
+												<c:if test="${vo.room_building_type eq tmp}">
+													<option value="${tmp}" selected="selected">${tmp}</option>
+												</c:if>
+												<c:if test="${vo.room_building_type ne tmp}">
+													<option value="${tmp}">${tmp}</option>
+												</c:if>
+											</c:forEach>	
+										</form:select>
+									</div>
+									<div class="form-group col-sm-4">
+										<label class="control-label">건물평수</label>
+										<form:select class="form-control" required="required" path="room_space">
+											<option>모름</option>
+											<c:forEach var="i" begin="1" end="50">
+												<option value="${i}">${i}</option>
+											</c:forEach>
+											<option>50이상</option>
+										</form:select>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="pull-right button-next" style="padding-top:10px;">
+										<input class="btn btn-primary btn-block" type="submit" value="다음">
+									</div>
+								</div>
 							</div>
 						</div>
+						
+					</form:form>
 					</div>
+				
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
-
 	
 	
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

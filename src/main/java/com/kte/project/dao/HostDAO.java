@@ -1,5 +1,7 @@
 package com.kte.project.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -35,4 +37,19 @@ public class HostDAO {
 		return sqlsession.insert("Host.insertHostImg", vo);
 	}
 	
+	public List<HostVO> selectRoomImgList(int room_code) {
+		return sqlsession.selectList("Host.selectRoomImgList", room_code);
+	}
+	
+	public HostVO selectRoomImg(int room_img_code) {
+		return sqlsession.selectOne("Host.selectRoomImg", room_img_code);
+	}
+	
+	public HostVO selectHostBasic(int room_code) {
+		return sqlsession.selectOne("Host.selectHostBasic", room_code);
+	}
+	
+	public int updateHostBasic(HostVO vo) {
+		return sqlsession.update("Host.updateHostBasic", vo);
+	}
 }
