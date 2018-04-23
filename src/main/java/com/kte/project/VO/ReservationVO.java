@@ -28,8 +28,23 @@ public class ReservationVO {
 	private int state_count = 0;
 
 	private int room_day = 0;
+	private String dayofweek_start = null;
+	private String dayofweek_end = null;
 	
 	
+	public String getDayofweek_start() {
+		return dayofweek_start;
+	}
+	public void setDayofweek_start(String dayofweek_start) {
+		this.dayofweek_start = dayofweek_start;
+	}
+	public String getDayofweek_end() {
+		return dayofweek_end;
+	}
+	public void setDayofweek_end(String dayofweek_end) {
+		this.dayofweek_end = dayofweek_end;
+	}
+
 	public int getRoom_day() {
 		return room_day;
 	}

@@ -41,4 +41,16 @@ public class adminreservationDAO {
 	public int reser_count() {
 		return sql.selectOne("admin_reservation.reser_count");
 	}
+	
+	public CustomVO admin_show_profile(String id) {
+		return sql.selectOne("admin_reservation.admin_show_profile",id);
+	}
+	
+	public CustomVO admin_custom(String id) {
+		return sql.selectOne("admin_reservation.admin_custom",id);
+	}
+	
+	public int reser_member_count(String id) {
+		return sql.selectOne("admin_reservation.reser_member_count",id);
+	}
 }	

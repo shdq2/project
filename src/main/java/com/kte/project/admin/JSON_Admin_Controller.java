@@ -114,6 +114,31 @@ public class JSON_Admin_Controller {
 		
 		return ret;
 	}
+	
+	@RequestMapping(value = "/admin/Json_select_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody ReservationVO select_reser(Model model,	
+			HttpSession http,
+			@RequestParam("code")int code) {	
+		ReservationVO vo = aredao.select_reser(code);
+		
+		return vo;
+	}
+	
+	@RequestMapping(value = "/admin/Json_member_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody CustomVO member(Model model,	
+			HttpSession http,
+			@RequestParam("id")String id) {
+		CustomVO vo = aredao.admin_custom(id);
+		
+		try {
+			int count = aredao.reser_member_count(id);
+			vo.setReser_count(count);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return vo;
+	}
 	////////////////
 	
 	//////////////////// json room///////////////

@@ -70,7 +70,7 @@ public class AdminRoomController {
 			RoomVO vo = ardao.room_img(id);
 				imgs=vo.getRoom_img();
 		} catch (Exception e) {
-			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/user.png");
+			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/default.jpg");
 			imgs = IOUtils.toByteArray(is);
 		}finally {
 			r_data = new ResponseEntity<byte[]>(imgs,header,HttpStatus.OK);

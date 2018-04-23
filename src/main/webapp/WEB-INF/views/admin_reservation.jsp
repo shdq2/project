@@ -43,9 +43,14 @@
 					${i.reservation_start } ~ ${i.reservation_end } ( ${i.reser_day }박 ${i.reser_day+1 }일)</p>
 				</div>
 				<div class="reser_payment">
-				 	<label class="reser_title">${i.reser_title }</label> <br />
-				 	<fmt:formatNumber value="${i.room_day * i.reser_day }" pattern="#,###" /> 원 <br />
-				 	<fmt:formatNumber value="${i.room_day * i.reser_day *0.1}" pattern="#,###" /> 원 <br />
+					<div style="width:50%;text-align: right">
+						<label class="reser_title">${i.reser_title }</label> <br />
+						 	<fmt:formatNumber value="${i.room_day * i.reser_day }" pattern="#,###" /> 원<br />
+						 	<fmt:formatNumber value="${i.room_day * i.reser_day *0.1}" pattern="#,###" /> 원<br />
+				 	</div>
+				 	<div style="height:">
+				 		
+				 	</div>
 				</div>
 				<div class="show_detail">
 					<span class="glyphicon glyphicon-chevron-down" ></span>
@@ -56,13 +61,60 @@
 						<li class="host_btn">호스트 정보</li>
 						<li class="guest_btn">게스트 정보</li>
 					</ul>
-					<div class="detail_content" style="width:100%;">
-						<div style="border:1px solid;width:170px;height:170px;margin-top:0px;float:left">
-							여기는 이미지
+					<div class="detail_content" style="width:100%;height:170px;">
+						<div class="img-div">
+							<img src="admin_room_img.do?id=${i.room_code }" style=""/>
 						</div>
-						<div style="float:left">
-							각종 세부 정보들
-						</div>
+						<div style="float:left" class="detail_infomation" style="">
+							<table class="table table-reser" style="height:170px; margin:0px;">
+								<tr>
+									<th>숙소명</th>
+									<td colspan = "2" class="room_name">${i.room_name }</td>
+									<th style="text-align: center"><input type="button" value="숙소 정보 보기" class="form-control" /></th> 
+								</tr>
+								<tr> 
+									<th>입실일</th>
+									<td><label class="reser_start">${i.reservation_start }</label> ( <label class="reser_start_day" style="<c:if test="${i.dayofweek_start eq '토' }">color:blue;</c:if><c:if test="${i.dayofweek_start eq '일' }">color:red;</c:if>">${i.dayofweek_start } </label> )</td>
+									<th>총 결제 금액</th>
+									<td>
+									<label class="reser_total">
+									<fmt:formatNumber value="${i.room_day * i.reser_day }" pattern="#,###" /> 원
+									</label> <br />
+									( 1박당 가격 : <label class="room_day"><fmt:formatNumber value="${i.room_day }" pattern="#,###" /> 원</label> / 숙박일수 : <label class="reser_day">${i.reser_day }</label>박 )
+									</td>
+								</tr>
+								<tr>
+									<th>퇴실일</th>
+									<td><label class="reser_end">${i.reservation_end }</label> ( <label class="reser_end_day" style="<c:if test="${i.dayofweek_end eq '토' }">color:blue;</c:if><c:if test="${i.dayofweek_end eq '일' }">color:red;</c:if>">${i.dayofweek_end }</label> )</td>
+									<th>예약금</th>
+									<td>
+									<label class="reser_price"><fmt:formatNumber value="${i.room_day * i.reser_day *0.1 }" pattern="#,###" /> 원</label><br />
+									( 총 결제 금액의 10% )
+									</td>
+								</tr>
+							</table>
+							
+							<table class="table table_member" style="height:170px;">
+								<tr>
+									<th >성명</th>
+									<td class="name">홍길동</td>
+									<th>아이디</th>
+									<td class="custom_id">부산</td>									</td> 
+								</tr>
+								<tr> 
+									<th >전화번호</th>
+									<td class="phone">01075443593
+									
+									<th class="bank">이용횟수</th>
+									<td class="using">0</td>
+								</tr>
+								<tr>
+									<th colspan="2" style="width:50%"><a href="admin_member_detail.do?id=${i.host_id }" class="form-control member_info">회원 정보 보기</a></th>									
+									<th colspan="2" style="width:50%"><input type="button" value="등록된 다른 숙소 보기" class="form-control"/></th>
+								</tr>
+							</table>
+						
+						</div>						
 						<div style="float:right">
 							<input type="button" value="예약신청" class="request btn btn-default btn_state" <c:if test="${i.reser_code } == 0">disabled=disabled</c:if>/><br />
 							<input type="button" value="결제진행중"  class="payment btn btn-warning btn_state"<c:if test="${i.reser_code } == 1">disabled=disabled</c:if>/><br />
@@ -72,7 +124,8 @@
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>	
+					<div style="clear: both;"></div>
 		</c:forEach>
 		</div>
 
@@ -130,7 +183,37 @@
 			})
 		
 	}
+	var numberformat = function(num){
+		var str;
+		
+	num = num+"";
+		var len = num.length;
+		var idx = num.length%3;
+		str = num.substring(0,idx);
+		while(idx<len){
+			if(str != ""){
+				str+=",";
+			}
+			str+= num.substring(idx,idx+3);
+			idx+=3;
+		}
+		return str;
+	}
 	
+	function reser_detail(code,idx){
+		$.get('Json_select_reser.do?code='+code,function(data){					
+			$('.room_name').eq(idx).text(data.room_name);
+			$('.reser_start').eq(idx).text(data.reservation_start);
+			$('.reser_end').eq(idx).text(data.reservation_end);
+			$('.reser_start_day').eq(idx).text(data.dayofweek_start);
+			$('.reser_end_day').eq(idx).text(data.dayofweek_end);
+			$('.reser_start_day').eq(idx).text(data.dayofweek_start);
+			$('.reser_total').eq(idx).text(numberformat(data.room_day * data.reser_day) + ' 원');
+			$('.room_day').eq(idx).text(numberformat(data.room_day) + ' 원');
+			$('.reser_day').eq(idx).text(data.reser_day);
+			$('.reser_price').eq(idx).text(numberformat(data.room_day * data.reser_day*0.1) + ' 원');
+		})
+	}
 		$(function(){
 			var code = 0;
 			$('.show_detail').click(function(){				
@@ -140,10 +223,16 @@
 				if(show_class == 'glyphicon glyphicon-chevron-down'){
 					$('.show_detail span').eq(idx).removeClass('glyphicon-chevron-down');
 					$('.show_detail span').eq(idx).addClass('glyphicon-chevron-up');
-					$('.reser_item').eq(idx).css('height','270px');
+					$('.reser_item').eq(idx).css('height','280px');
 					$('.show_detail').eq(idx).css('height','65px');
 					$('.detail').eq(idx).css('display','block');
 					var reser_code = $('.reser_code').eq(idx).val();
+					var img_w = $('.img-div img').eq(idx).css('width');
+					var btn_w = $('.btn_state').eq(idx).css('width');
+					var div_w = $('.detail').eq(idx).css('width');
+					var width = parseInt(div_w)-(parseInt(img_w)+parseInt(btn_w));
+					$('.detail_infomation').eq(idx).css('width',width-1+'px');
+					reser_detail(code,idx);
 					if(reser_code == 0){						
 						$('.request').eq(idx).attr('disabled',true);
 					}
@@ -169,6 +258,13 @@
 				}
 				
 			})
+			$(window).resize(function(){
+				var img_w = $('.img-div img').css('width');
+				var btn_w = $('.btn_state').css('width');
+				var div_w = $('.detail').css('width');
+				var width = parseInt(div_w)-(parseInt(img_w)+parseInt(btn_w));
+				$('.detail_infomation').css('width',width-1+'px');
+			})
 			//활성화된 메뉴 처리
 			$('.reser_menu').addClass("active");
 			///
@@ -179,6 +275,12 @@
 				$('.reser_btn').eq(idx).addClass('active');
 				$('.host_btn').eq(idx).removeClass('active');
 				$('.guest_btn').eq(idx).removeClass('active');
+				
+				$('.img-div img').eq(idx).attr('src','admin_room_img.do?id='+room_code);
+				$('.table_member').eq(idx).css('display','none');
+				$('.table-reser').eq(idx).css('display','table');
+				
+				reser_detail(code,idx);
 				
 				$('.request').eq(idx).click(function(){
 					var ix = $(this).index('.btn_state');
@@ -210,8 +312,19 @@
 				$('.reser_btn').eq(idx).removeClass('active');
 				$('.host_btn').eq(idx).removeClass('active');
 				$('.guest_btn').eq(idx).addClass('active');
-				$('.detail_content').eq(idx).empty();
-				$('.detail_content').eq(idx).append(code);
+				$('.table-reser').eq(idx).css('display','none');
+				$('.table_member').eq(idx).css('display','table');
+				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+code);
+				
+				$('.bank').eq(idx).text('이용횟수');
+				
+				$.get('Json_member_reser.do?id='+code,function(data){
+					$('.name').eq(idx).text(data.custom_name);
+					$('.custom_id').eq(idx).text(data.custom_id);
+					$('.phone').eq(idx).text(data.custom_phone);
+					$('.using').eq(idx).text(data.reser_count);
+					
+				})
 			})
 			
 			$('.host_btn').click(function(){				
@@ -221,11 +334,20 @@
 				$('.reser_btn').eq(idx).removeClass('active');
 				$('.host_btn').eq(idx).addClass('active');
 				$('.guest_btn').eq(idx).removeClass('active');
-				$('.detail_content').eq(idx).empty();
-				$('.detail_content').eq(idx).append(code);
+				$('.table-reser').eq(idx).css('display','none');
+				$('.table_member').eq(idx).css('display','table');
+				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+code);
+				
+				$('.bank').eq(idx).text('계좌 정보');
+				
+				$.get('Json_member_reser.do?id='+code,function(data){
+					$('.name').eq(idx).text(data.custom_name);
+					$('.custom_id').eq(idx).text(data.custom_id);
+					$('.phone').eq(idx).text(data.custom_phone);
+					$('.using').eq(idx).text(data.bank_name + ' / '+data.custom_cash);
+					
+				})
 			})
-			
-			
 		});
 							
 	

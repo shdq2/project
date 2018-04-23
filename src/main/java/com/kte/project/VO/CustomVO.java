@@ -25,8 +25,16 @@ public class CustomVO {
 	private String origin_id = null;
 	private byte[] custom_img = null;
 	private int img_code = 0;
+	private int reser_count = 0;
 	
 	
+	
+	public int getReser_count() {
+		return reser_count;
+	}
+	public void setReser_count(int reser_count) {
+		this.reser_count = reser_count;
+	}
 	public byte[] getCustom_img() {
 		return custom_img;
 	}
