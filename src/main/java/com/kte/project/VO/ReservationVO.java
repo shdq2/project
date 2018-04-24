@@ -31,7 +31,22 @@ public class ReservationVO {
 	private String dayofweek_start = null;
 	private String dayofweek_end = null;
 	
+	private String type=null;
+	private String txt = null;
 	
+	
+	public String getTxt() {
+		return txt;
+	}
+	public void setTxt(String txt) {
+		this.txt = txt;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String getDayofweek_start() {
 		return dayofweek_start;
 	}

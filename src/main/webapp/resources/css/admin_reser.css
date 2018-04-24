@@ -53,7 +53,7 @@
 }
 
 .detail{
-	height:205px;
+	height:240px;
 	display:none;
 }
 
@@ -65,7 +65,8 @@
 	margin-bottom:0px;
 }
 .btn_state{
-	width:100%;
+	width:96px;
+	display:list-item;
 }
 .detail ul li{
 	display:inline-block;
@@ -93,7 +94,7 @@
 	width:100%;
 	height:100%;
 	padding:2px;
-	border-radius: 5px;
+	border-radius: 50%;
 }
 
 .detail_infomation{
@@ -114,4 +115,12 @@
 }
 .table_member tbody{
 	width:100%;
+}
+
+.div_menu{
+	display: inline-block;
+	width:13%;
+	text-align:center;
+	cursor: pointer;
+	
 }

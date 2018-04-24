@@ -1,5 +1,6 @@
 package com.kte.project.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,17 +103,20 @@ public class JSON_Admin_Controller {
 	
 	///////// json reser ////////////
 	@RequestMapping(value = "/admin/Json_update_state.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody int update_state(Model model,	
+	public @ResponseBody Map<String,Object> update_state(Model model,	
 			HttpSession http,
 			@RequestParam("code")int code,
 			@RequestParam("state")int state) {		
-		
+		Map<String,Object> map = new HashMap<String,Object>();
 		ReservationVO vo = new ReservationVO();
 		vo.setReser_code(state);
 		vo.setReservation_code(code);
 		int ret = aredao.update_state(vo);
+		map.put("ret", ret);
+		List<ReservationVO> list2 = aredao.state_count();		
+		map.put("list2", list2);
 		
-		return ret;
+		return map;
 	}
 	
 	@RequestMapping(value = "/admin/Json_select_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
@@ -138,6 +142,34 @@ public class JSON_Admin_Controller {
 		}
 		
 		return vo;
+	}
+	
+	@RequestMapping(value = "/admin/Json_reser_list.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<ReservationVO> reser_list(Model model,	
+			HttpSession http,
+			@RequestParam("state")int state) {
+			List<ReservationVO> list = new ArrayList<ReservationVO>();
+		if(state == -1) {
+			list = aredao.reservation_all();
+		}else {
+			list = aredao.reservation_all_sort(state);
+		}
+		
+		return list;
+	}
+	
+	@RequestMapping(value = "/admin/Json_reser_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<ReservationVO> serarch(Model model,	
+			HttpSession http,
+			@RequestParam("type")String type,
+			@RequestParam("txt")String txt) {
+		
+		ReservationVO vo = new ReservationVO();
+		
+		vo.setTxt(txt);
+		vo.setType(type);
+		List<ReservationVO> list = aredao.reservation_search(vo);
+		return list;
 	}
 	////////////////
 	

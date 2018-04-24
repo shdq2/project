@@ -113,7 +113,8 @@
 		on r.reser_code = rs.reser_code
 		group by reser_code
 		union all
-		select reser_code,0 as count,reser_title from reservation_state where reser_code not in (select reser_code from reservation);
+		select reser_code,0 as count,reser_title from reservation_state where reser_code not in (select reser_code from reservation)
+		order by reser_code
 	</select>
 	
 	<select id="reser_count" resultType="Int">
@@ -132,8 +133,56 @@
 	</select>
 	<select id="reser_member_count" parameterType="String" resultType="Int">
 		select count(*) as count from reservation 
-		where custom_id = #{id} 
-		group by reser_code 
-		having reser_code = 4
+		where custom_id = #{id} and reser_code = 4
 	</select>
-</mapper>
+	<select id="reservation_all_sort" resultType="reservationVO" parameterType="Int">
+		select c.custom_name as guest_name,r.host_name,r.room_code,r.room_name,r.guest_id,r.host_id,r.reservation_code,r.reser_title,r.reser_code,
+		date_format(r.reservation_start,"%Y-%m-%d") as reservation_start,date_format(r.reservation_end,"%Y-%m-%d") as reservation_end,
+		TO_DAYS(r.reservation_end) - TO_DAYS(r.reservation_start) as reser_day,r.room_day,r.dayofweek_start,r.dayofweek_end
+		from custom c 
+			inner join
+				(select c.custom_name as host_name,r.host_id,r.room_code,r.guest_id,r.reservation_code,r.reser_title,r.room_day,r.reser_code,r.dayofweek_start,r.dayofweek_end,
+				r.reservation_start,r.reservation_end,r.room_name from custom c
+				inner join
+					(select rs.reser_title,r.room_code,r.host_id,r.guest_id,r.reser_code,r.room_day,r.dayofweek_start,r.dayofweek_end,
+						r.reservation_start,r.reservation_end,r.room_name,r.reservation_code from reservation_state rs
+						inner join
+						(select ro.room_code,ro.custom_id as host_id,re.custom_id as guest_id,re.reser_code,ro.room_day,
+						re.reservation_start,re.reservation_end,ro.room_name,re.reservation_code,
+						case WEEKDAY(re.reservation_start) 
+							when '0' then '월'
+							when '1' then '화'
+							when '2' then '수'
+							when '3' then '목'
+							when '4' then '금'
+							when '5' then '토'
+							when '6' then '일'
+			    		end as dayofweek_start,
+			    		case WEEKDAY(re.reservation_end) 
+							when '0' then '월'
+							when '1' then '화'
+							when '2' then '수'
+							when '3' then '목'
+							when '4' then '금'
+							when '5' then '토'
+							when '6' then '일'
+					    end as dayofweek_end
+						from reservation re
+						inner join room ro
+						on re.room_code = ro.room_code) r
+					on r.reser_code = rs.reser_code) r					
+			on c.custom_id = r.host_id) r
+		on c.custom_id = r.guest_id
+		where r.reser_code = #{state}
+		order by r.reservation_code desc
+		limit 10
+	</select>
+	
+	<select id="reservation_search" resultType="reservationVO" parameterType="ReservationVO">
+		call reser_search(
+			#{type,mode=IN},
+			#{txt,mode=IN}
+		)
+	</select>
+	
+	</mapper>

@@ -55,9 +55,11 @@ public class AdminReserController {
 			
 		}
 		List<ReservationVO> list2 = aredao.state_count();
+		int tot = ((aredao.reser_count()-1/10));;	
 		
 		model.addAttribute("list2", list2);
 		model.addAttribute("list", list);
+		model.addAttribute("tot", tot);
 		return "admin_reservation";
 	}
 		

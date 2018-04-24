@@ -53,4 +53,12 @@ public class adminreservationDAO {
 	public int reser_member_count(String id) {
 		return sql.selectOne("admin_reservation.reser_member_count",id);
 	}
+	
+	public List<ReservationVO> reservation_all_sort(int state){
+		return sql.selectList("admin_reservation.reservation_all_sort",state);
+	}
+	
+	public List<ReservationVO> reservation_search(ReservationVO vo){
+		return sql.selectList("admin_reservation.reservation_search",vo);
+	} 
 }	
