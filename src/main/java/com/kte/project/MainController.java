@@ -32,7 +32,6 @@ public class MainController {
 		
 		int no = mDAO.selectLastWishcNo();
 		int i = 0;
-		
 		List<WishchkVO> list = new ArrayList<WishchkVO>();
 		for(String tmp : chk) {
 			i++;
@@ -42,7 +41,9 @@ public class MainController {
 			vo1.setWishc_no(no+i);
 			System.out.println(tmp);
 			list.add(vo1);
+
 		}
+		
 		vo.setList(list);
 		
 		mDAO.insertWish(vo);

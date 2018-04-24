@@ -26,9 +26,27 @@ public class HostVO {
 	private byte[] room_img = null;
 	private String room_img_date = null;
 	
+	//host_inout
+	private String room_in = null;
+	private String room_out = null;
 	
 	
 	
+	
+	
+	
+	public String getRoom_in() {
+		return room_in;
+	}
+	public void setRoom_in(String room_in) {
+		this.room_in = room_in;
+	}
+	public String getRoom_out() {
+		return room_out;
+	}
+	public void setRoom_out(String room_out) {
+		this.room_out = room_out;
+	}
 	public int getRoom_number() {
 		return room_number;
 	}

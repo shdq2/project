@@ -53,10 +53,10 @@
 										<label class="control-label">침실수</label>
 										<form:select class="form-control" required="required" path="room_number">
 											<c:forEach var="i" begin="0" end="10">
-												<c:if test="${vo.room_number == i}">
+												<c:if test="${vo.room_number != i}">
 													<option value="${i}">${i}</option>
 												</c:if>
-												<c:if test="${vo.room_number != i}">
+												<c:if test="${vo.room_number == i}">
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
@@ -67,10 +67,10 @@
 										<label class="control-label">침대수</label>
 										<form:select class="form-control" required="required" path="room_bed_number">
 											<c:forEach var="i" begin="0" end="10">
-												<c:if test="${vo.room_bath_number == i}">
+												<c:if test="${vo.room_bath_number != i}">
 													<option value="${i}">${i}</option>
 												</c:if>
-												<c:if test="${vo.room_bath_number != i}">
+												<c:if test="${vo.room_bath_number == i}">
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
@@ -81,10 +81,10 @@
 										<label class="control-label">욕실수</label>
 										<form:select class="form-control" required="required" path="room_bath_number">
 											<c:forEach var="i" begin="0" end="10">
-												<c:if test="${vo.room_bath_number == i}">
+												<c:if test="${vo.room_bath_number != i}">
 													<option value="${i}">${i}</option>
 												</c:if>
-												<c:if test="${vo.room_bath_number != i}">
+												<c:if test="${vo.room_bath_number == i}">
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
@@ -132,7 +132,12 @@
 										<form:select class="form-control" required="required" path="room_space">
 											<option>모름</option>
 											<c:forEach var="i" begin="1" end="50">
-												<option value="${i}">${i}</option>
+												<c:if test="${vo.room_space == i}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${vo.room_space != i}">
+													<option value="${i}" selected="selected">${i}</option>
+												</c:if>
 											</c:forEach>
 											<option>50이상</option>
 										</form:select>

@@ -1,8 +1,8 @@
 package com.kte.project;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.HostVO;
+import com.kte.project.VO.HostchkVO;
 import com.kte.project.dao.HostDAO;
 
 @Controller
@@ -126,19 +127,69 @@ public class HostController {
 		model.addAttribute("str3", str3);
 		model.addAttribute("vo", vo);
 		
-		/*<c:forEach var="tmp" items="str" varStafs="i">
-		if ca	
-		<option value="${tmp.str[i.index]}" >${tmp.str[i.index]}</op
-		</c>*/
-		
 		return "host_amenity";
 	}
 	
+	@RequestMapping(value="/host_amenity.do", method=RequestMethod.POST)
+	public String hostamenity(@ModelAttribute("vo") HostVO vo,
+							  @RequestParam("str[]") String[] chk,
+							  @RequestParam("str1[]") String[] chk1,
+							  @RequestParam("str2[]") String[] chk2,
+							  @RequestParam("str3[]") String[] chk3,
+							  HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		int room_code1 = hDAO.selectOptionRoomCode();
+		List<HostchkVO> list = new ArrayList<HostchkVO>();
+		String str = "";
+		String str1 = "";
+		String str2 = "";
+		String str3 = "";
+		
+		HostchkVO vo1 = new HostchkVO();
+		for(String tmp : chk) {
+			str += tmp+ ";";
+		}
+		vo1.setRoom_option(str);
+		
+		for(String tmp : chk1) {
+			str1 += tmp+ ";";
+		}
+		vo1.setRo_plus(str1);
+		
+		for(String tmp : chk2) {
+			str2 += tmp+ ";";
+		}
+		vo1.setRo_special(str2);
+		
+		for(String tmp : chk3) {
+			str3 += tmp+ ";";
+		}
+		vo1.setRo_security(str3);
+		
+		vo1.setRoom_code(room_code);
+		
+		if(room_code == room_code1) {
+			hDAO.updateRoomAmenity(vo1);
+		}else {
+			hDAO.insertRoomAmenity(vo1);
+		}
+		
+		
+		/*
+		 *  뺄 때.
+		 * String str = vo.getsdfsd();
+		 * str = a;b;d;c;g;f;
+		 * List<String> list = str.split(';');
+		 * 
+		 */
+		return "redirect:/host_imgs.do";
+	}
 	
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.GET)
 	public String hostimgs(Model model,HttpSession httpsession) {
 		
-		int room_img_code = hDAO.selectRoomImgCode();
+		int room_img_code = hDAO.selectLastRoomImgCode();
 		
 		System.out.println(httpsession.getAttribute("room_code"));
 		
@@ -203,6 +254,13 @@ public class HostController {
 		}
 	}
 	
+	@RequestMapping(value="/host_img_delete.do", method=RequestMethod.GET)
+	public String hostimgdelete(@RequestParam("room_img_code") int room_img_code) {
+		hDAO.deleteRoomImg(room_img_code);
+		
+		return "redirect:host_imgs.do";
+	}
+	
 	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
 	public String hostprice(Model model) {
 		
@@ -214,13 +272,55 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
-	public String hostcalendar(Model model) {
+	public String hostcalendar(Model model, HttpSession httpsession) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+		System.out.println(room_code);
 		
 		HostVO vo = new HostVO();
+		vo.setRoom_code(room_code);
+		System.out.println(vo.getRoom_code()+"!");
 		
+		HostVO vo1 = hDAO.selectRoomInOut(room_code);
+		
+		System.out.println(vo1.getRoom_in());
+		/*if(vo.getRoom_in() == null) {
+			if(vo.getRoom_out() == null) {
+				vo.setRoom_out("09:00:00");
+			}else {
+				
+			};
+			vo.setRoom_in("09:00:00");
+		}else{
+			if(vo.getRoom_out() == null) {
+				vo.setRoom_out("09:00:00");
+			}else {
+				
+			};
+		};*/
+		
+		
+		System.out.println();
+		
+		String[] str = {"09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00",
+						"17:00:00",	"18:00:00","19:00:00","20:00:00","21:00:00","22:00:00","23:00:00","00:00:00"};
+		
+		model.addAttribute("str",str);
 		model.addAttribute("vo", vo);
 		
 		return "host_inout";
+	}
+	
+	@RequestMapping(value="/host_inout.do", method=RequestMethod.POST)
+	public String hostcalendar(@ModelAttribute("vo") HostVO vo, HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		vo.setRoom_code(room_code);
+		
+		hDAO.updateRoomInOut(vo);
+		
+		return "redirect:host_inout.do";
 	}
 	
 }

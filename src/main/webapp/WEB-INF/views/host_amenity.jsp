@@ -41,14 +41,14 @@
 							<div class="panel-head">
 								<h3 class="panel-title">회원님이 숙소에서 사용할 수 있는 편의시설들을 체크하세요.</h3>
 							</div>
-							<div class="panel-body">
-								<form:form action="#" method="post" modelAttribute="vo">
+							<form:form action="#" method="post" modelAttribute="vo">
+								<div class="panel-body">
 									<div class="col-lg-3">
 										<h3 class="checkbox-title">기본 시설</h3>
 										<c:forEach var="tmp" items="${str}">
 											<div class="checkbox checkbox-primary">
-												<input type="checkbox" value="${tmp}">
-												<label name="str[]">${tmp}</label>
+												<input name="str[]" type="checkbox" value="${tmp}">
+												<label >${tmp}</label>
 											</div>
 										</c:forEach>
 									</div>
@@ -57,8 +57,8 @@
 										<h3 class="checkbox-title">추가시설</h3>
 										<c:forEach var="tmp" items="${str1}">
 											<div class="checkbox checkbox-primary">
-												<input type="checkbox" value="${tmp}">
-												<label name="str[]">${tmp}</label>
+												<input name="str1[]" type="checkbox" value="${tmp}">
+												<label>${tmp}</label>
 											</div>
 										</c:forEach>
 									</div>
@@ -67,8 +67,8 @@
 										<h3 class="checkbox-title">특별시설</h3>
 										<c:forEach var="tmp" items="${str2}">
 											<div class="checkbox checkbox-primary">
-												<input type="checkbox" value="${tmp}">
-												<label name="str[]">${tmp}</label>
+												<input name="str2[]" type="checkbox" value="${tmp}">
+												<label>${tmp}</label>
 											</div>
 										</c:forEach>
 									</div>
@@ -77,13 +77,16 @@
 										<h3 class="checkbox-title">숙소안전</h3>
 										<c:forEach var="tmp" items="${str3}">
 											<div class="checkbox checkbox-primary">
-												<input type="checkbox" value="${tmp}">
-												<label name="str[]">${tmp}</label>
+												<input name="str3[]" type="checkbox" value="${tmp}">
+												<label>${tmp}</label>
 											</div>
 										</c:forEach>
 									</div>
-								</form:form>
-							</div>
+								</div>
+								<div class="panel-body" style="padding-right:50px">
+									<input type="submit" value="다음" class="btn btn-primary pull-right" >
+								</div>
+							</form:form>
 						</div>
 					</div>
 				</div>

@@ -36,8 +36,12 @@
     </resultMap>
    
    <select id="selectRoomImg" parameterType="int" resultMap="selectRoomImg">
-      SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_cod}
+      SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_code}
    </select>
+   
+   <delete id="deleteRoomImg" parameterType="int">
+   	 DELETE room_img FROM `room_img` WHERE room_img_code=#{room_img_code}
+   </delete>
    
    <select id="selectHostBasic" parameterType="int" resultType="HostVO">
    		SELECT room_code, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
@@ -49,5 +53,25 @@
     			room_type=#{room_type},room_building_type=#{room_building_type}, room_space=#{room_space} 
     		WHERE room_code=#{room_code}
    </update>
+   
+   <update id="updateRoomInOut" parameterType="HostVO">
+   		UPDATE room SET room_in=#{room_in}, room_out=#{room_out} WHERE room_code=#{room_code}
+   </update>
+   
+   <insert id="insertRoomAmenity" parameterType="HostchkVO">
+   		INSERT INTO room_option(room_code, room_option, ro_plus, ro_special, ro_security, ro_date) VALUES(#{room_code},#{room_option},#{ro_plus},#{ro_special},#{ro_security},NOW())
+   </insert>
+   
+   <update id="updateRoomAmenity" parameterType="HostchkVO">
+   		UPDATE room_option SET room_option=#{room_option}, ro_plus=#{ro_plus}, ro_special=#{ro_special}, ro_security=#{ro_security}, ro_date=NOW() WHERE room_code=#{room_code}
+   </update>
+   
+   <select id="selectOptionRoomCode" resultType="int">
+   		SELECT MAX(room_code) FROM room_option
+   </select>
+   
+   <select id="selectRoomInOut" parameterType="int" resultType="HostVO">
+   		SELECT room_in, room_out FROM `room` WHERE room_code=#{room_code}
+   </select>
 	
 </mapper>	
