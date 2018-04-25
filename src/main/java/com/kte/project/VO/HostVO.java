@@ -3,6 +3,7 @@ package com.kte.project.VO;
 public class HostVO {
 	
 	private int room_code = 0;
+	private String room_code1 = null;
 	
 	//host_name
 	private String name_title = null;
@@ -31,10 +32,17 @@ public class HostVO {
 	private String room_out = null;
 	
 	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "HostVO [room_code=" + room_code + ", create_building_type=" + create_building_type
+				+ ", create_room_type=" + create_room_type + ", create_basic_member=" + create_basic_member + "]";
+	}
+	public String getRoom_code1() {
+		return room_code1;
+	}
+	public void setRoom_code1(String room_code1) {
+		this.room_code1 = room_code1;
+	}
 	public String getRoom_in() {
 		return room_in;
 	}

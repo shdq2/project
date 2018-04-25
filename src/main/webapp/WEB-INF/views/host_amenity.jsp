@@ -45,11 +45,35 @@
 								<div class="panel-body">
 									<div class="col-lg-3">
 										<h3 class="checkbox-title">기본 시설</h3>
-										<c:forEach var="tmp" items="${str}">
-											<div class="checkbox checkbox-primary">
-												<input name="str[]" type="checkbox" value="${tmp}">
-												<label >${tmp}</label>
-											</div>
+										<%-- <c:forEach var="tmp" items="${str}">
+												<c:forEach var="tmp1" items="${room_option}">
+													<c:if test="${tmp1 == tmp}">
+														<div class="checkbox checkbox-primary">
+															<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
+															<label >${tmp}</label>
+														</div>
+													</c:if>
+													<c:if test="${tmp1 != tmp}">
+														<div class="checkbox checkbox-primary">
+															<input name="str[]" type="checkbox" value="${tmp}">
+															<label >${tmp}</label>
+														</div>
+													</c:if>
+												</c:forEach>
+										</c:forEach> --%>
+										<c:forEach var="tmp" items="${str}" varStatus="i">
+											<c:if test="${room_option[i.index] == tmp}">
+												<div class="checkbox checkbox-primary">
+													<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
+													<label >${tmp}</label>
+												</div>
+											</c:if>
+											<c:if test="${room_option[i.index] != tmp}">
+												<div class="checkbox checkbox-primary">
+													<input name="str[]" type="checkbox" value="${tmp}">
+													<label >${tmp}</label>
+												</div>
+											</c:if>
 										</c:forEach>
 									</div>
 									<hr class="hidden-lg">

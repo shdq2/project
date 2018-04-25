@@ -54,10 +54,10 @@
 											<span class="input-group-addon">입실</span> 
 											<form:select class="form-control" path="room_in">
 												<c:forEach items="${str}" var="tmp">
-													<c:if test=${vo.room_in eq tmp}>
+													<c:if test="${vo.room_in eq tmp}">
 														<option value="${tmp}" selected="selected">${tmp}</option>
 													</c:if>
-													<c:if test=${vo.room_in ne tmp}>
+													<c:if test="${vo.room_in ne tmp}">
 														<option value="${tmp}">${tmp}</option>
 													</c:if>
 												</c:forEach>
