@@ -38,6 +38,7 @@ public class HostController {
 		HostVO vo = new HostVO();
 		
 		int room_code = hDAO.selectRoomCode();
+		
 		vo.setRoom_code(room_code+1);
 		
 		model.addAttribute("vo", vo);
@@ -118,7 +119,7 @@ public class HostController {
 	@RequestMapping(value="/host_amenity.do", method=RequestMethod.GET)
 	public String hostamenity(Model model, HttpSession httpsession) {
 		int room_code = (Integer) httpsession.getAttribute("room_code");
-		/*System.out.println(room_code);*/
+		System.out.println(room_code);
 		
 		String[] str = {"TV","케이블TV","에어콘","난방","부엌(개인)","부엌(공용)","인터넷","와이파이","전기포트","전자렌지","밥솥","수건","식기(그릇)","다리미","헤어드라이기","냉장고"};
 		String[] str1 = {"욕조","세탁기(개인)","수영장","건조기","아침식사","무료 주차 포함","무료 헬스장","엘리베이터","초인종/인터폰","도어락","샴푸","취사","바비큐","대중교통","마당","세탁기(공용)","테라스","바다"};
@@ -126,23 +127,19 @@ public class HostController {
 		String[] str3 = {"화재감지기","구급 상자","안전 카드","소화기","실내흡연불가능"};
 		HostVO vo = new HostVO();
 		HostchkVO vo1 = hDAO.selectRoomAmenity(room_code);
-		/*System.out.println(vo1.getRoom_option());*/
+		System.out.println(vo1.getRoom_option());
 		
 		String a = vo1.getRoom_option();
-		/*System.out.println(a);*/
+		System.out.println(a);
 		
 		String[] room_option = a.split(";");
-		System.out.println(room_option);
+		
+		for(String tmp : room_option) {
+			System.out.println(tmp);
+		}
 		model.addAttribute("room_option", room_option);
 		//room_option = {"TV","dd"....}
-		
-		/*
-		 *  뺄 때.
-		 * String str = vo.getsdfsd();
-		 * str = a;b;d;c;g;f;
-		 * List<String> list = str.split(';');
-		 * 
-		 */
+		 
 		model.addAttribute("str", str);
 		model.addAttribute("str1", str1);
 		model.addAttribute("str2", str2);
@@ -298,7 +295,7 @@ public class HostController {
 		HostVO vo1 = hDAO.selectRoomInOut(room_code);
 		
 		System.out.println(vo1.getRoom_in());
-		/*if(vo.getRoom_in() == null) {
+		if(vo.getRoom_in() == null) {
 			if(vo.getRoom_out() == null) {
 				vo.setRoom_out("09:00:00");
 			}else {
@@ -311,7 +308,7 @@ public class HostController {
 			}else {
 				
 			};
-		};*/
+		};
 		
 		
 		System.out.println();

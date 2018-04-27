@@ -22,14 +22,14 @@ public class HostDAO {
 		return sqlsession.selectOne("Host.selectLastRoomcode");
 	}
 	
-	/*public void insertHostCreate(HostVO vo) {
+	public void insertHostCreate(HostVO vo) {
 		System.out.println(vo.toString());
 		sqlsession.selectOne("Host.insertHostCreate",vo);
-	}*/
-	
-	public int insertHostCreate(HostVO vo) {
-		return sqlsession.insert("Host.insertHostCreate",vo);
 	}
+	
+	/*public int insertHostCreate(HostVO vo) {
+		return sqlsession.insert("Host.insertHostCreate",vo);
+	}*/
 	public int updateHostName(HostVO vo) {
 		return sqlsession.update("Host.updateHostName", vo);
 	}

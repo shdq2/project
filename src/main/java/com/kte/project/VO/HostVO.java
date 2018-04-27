@@ -109,6 +109,8 @@ public class HostVO {
 	public void setRoom_img_date(String room_img_date) {
 		this.room_img_date = room_img_date;
 	}
+	
+	
 	public int getRoom_code() {
 		return room_code;
 	}

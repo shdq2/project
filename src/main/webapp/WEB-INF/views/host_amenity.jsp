@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+출처: http://darkhorizon.tistory.com/293 [너머]
 
 <!DOCTYPE html>
 <html>
@@ -45,36 +48,55 @@
 								<div class="panel-body">
 									<div class="col-lg-3">
 										<h3 class="checkbox-title">기본 시설</h3>
+										
 										<%-- <c:forEach var="tmp" items="${str}">
-												<c:forEach var="tmp1" items="${room_option}">
-													<c:if test="${tmp1 == tmp}">
+										<c:set var="loop_flag" value="false" />
+										<c:if test="${not loop_flag}">
+											<c:forEach var="tmp1" items="${room_option}">
+												
+													<c:if test="${tmp eq tmp1}">
 														<div class="checkbox checkbox-primary">
 															<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
 															<label >${tmp}</label>
+															<c:set var="loop_flag" value="true" />
 														</div>
 													</c:if>
-													<c:if test="${tmp1 != tmp}">
+													<c:if test="${tmp ne tmp1}">
 														<div class="checkbox checkbox-primary">
 															<input name="str[]" type="checkbox" value="${tmp}">
 															<label >${tmp}</label>
+															<c:set var="loop_flag" value="true" />
 														</div>
 													</c:if>
-												</c:forEach>
-										</c:forEach> --%>
-										<c:forEach var="tmp" items="${str}" varStatus="i">
-											<c:if test="${room_option[i.index] == tmp}">
-												<div class="checkbox checkbox-primary">
-													<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
-													<label >${tmp}</label>
-												</div>
+												
+											</c:forEach>
 											</c:if>
-											<c:if test="${room_option[i.index] != tmp}">
+										</c:forEach> --%>
+										
+										<c:forEach var="tmp" items="${str}" varStatus="status">
+										
+											<c:set var="a" value="0" />
+
+											<c:forEach var="i" begin="0" end="${fn:length(str)}">
+												<c:if test="${room_option[i] == tmp}">
+													<div class="checkbox checkbox-primary">
+														<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
+														<label >${tmp}</label>
+														<c:set var="a" value="1" />
+													</div>
+												</c:if>
+											</c:forEach>
+									
+											<c:if test="${a == 0}">
 												<div class="checkbox checkbox-primary">
 													<input name="str[]" type="checkbox" value="${tmp}">
 													<label >${tmp}</label>
 												</div>
 											</c:if>
+											
 										</c:forEach>
+										
+										
 									</div>
 									<hr class="hidden-lg">
 									<div class="col-lg-3">

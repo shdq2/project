@@ -8,11 +8,20 @@
 	</update>
 	
 	<insert id="insertHostCreate" parameterType="HostVO">
+		call room_insert(
+			#{room_code, mode=IN,jdbcType=VARCHAR},
+			#{create_building_type, mode=IN, jdbcType=VARCHAR},
+			#{create_room_type, mode=IN, jdbcType=VARCHAR},
+			#{create_basic_member, mode=IN, jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- <insert id="insertHostCreate" parameterType="HostVO">
 		INSERT INTO room(room_code, room_building_type, room_type, room_basic_member)
 			VALUES(#{room_code},#{create_building_type},#{create_room_type},#{create_basic_member});
 			
 		INSERT INTO room_option(room_code, ro_date) VALUES(#{room_code}, NOW());
-	</insert>
+	</insert> -->
 	
 	<select id="selectLastRoomcode" resultType="int">
 		SELECT MAX(room_code) FROM room
@@ -80,21 +89,6 @@
    		SELECT room_option, ro_plus, ro_special, ro_security FROM `room_option` WHERE room_code=#{room_code}
    </select>
 	
-	<!-- <select id="insertHostCreate" parameterType="HostVO" statementType="CALLABLE">
-		call room_insert(
-			#{room_code, mode=IN, jdbcType=VALCHAR},
-			#{create_building_type, mode=IN,jdbcType=VALCHAR},
-			#{create_room_type, mode=IN,jdbcType=VALCHAR},
-			#{create_basic_member, mode=IN,jdbcType=INTEGER}
-		)
-	</select> -->
 	
-	<!-- <select id="insertHostCreate" parameterType="HostVO" statementType="CALLABLE">
-		call room_insert(
-			'111221',
-			'b',
-			'c',
-			1
-		)
-	</select> -->
+	
 </mapper>	
