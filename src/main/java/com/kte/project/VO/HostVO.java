@@ -3,6 +3,7 @@ package com.kte.project.VO;
 public class HostVO {
 	
 	private int room_code = 0;
+	private String room_code1 = null;
 	
 	//host_name
 	private String name_title = null;
@@ -26,9 +27,95 @@ public class HostVO {
 	private byte[] room_img = null;
 	private String room_img_date = null;
 	
+	//host_inout
+	private String room_in = null;
+	private String room_out = null;
+	
+	
+	//host_price
+	private int room_min_day = 0;
+	private int room_max_day = 0;
+	private String room_price_show = null;
+	private int room_month_price = 0;
+	private int room_basic_deposit = 0;
+	private int room_basic_member = 0;
+	private String room_plus_price_apply = null;
+	private int room_plus_price = 0;
 	
 	
 	
+	
+	public int getRoom_basic_member() {
+		return room_basic_member;
+	}
+	public void setRoom_basic_member(int room_basic_member) {
+		this.room_basic_member = room_basic_member;
+	}
+	public String getRoom_plus_price_apply() {
+		return room_plus_price_apply;
+	}
+	public void setRoom_plus_price_apply(String room_plus_price_apply) {
+		this.room_plus_price_apply = room_plus_price_apply;
+	}
+	public int getRoom_plus_price() {
+		return room_plus_price;
+	}
+	public void setRoom_plus_price(int room_plus_price) {
+		this.room_plus_price = room_plus_price;
+	}
+	public int getRoom_month_price() {
+		return room_month_price;
+	}
+	public void setRoom_month_price(int room_month_price) {
+		this.room_month_price = room_month_price;
+	}
+	public int getRoom_basic_deposit() {
+		return room_basic_deposit;
+	}
+	public void setRoom_basic_deposit(int room_basic_deposit) {
+		this.room_basic_deposit = room_basic_deposit;
+	}
+	public String getRoom_price_show() {
+		return room_price_show;
+	}
+	public void setRoom_price_show(String room_price_show) {
+		this.room_price_show = room_price_show;
+	}
+	public int getRoom_min_day() {
+		return room_min_day;
+	}
+	public void setRoom_min_day(int room_min_day) {
+		this.room_min_day = room_min_day;
+	}
+	public int getRoom_max_day() {
+		return room_max_day;
+	}
+	public void setRoom_max_day(int room_max_day) {
+		this.room_max_day = room_max_day;
+	}
+	@Override
+	public String toString() {
+		return "HostVO [room_code=" + room_code + ", create_building_type=" + create_building_type
+				+ ", create_room_type=" + create_room_type + ", create_basic_member=" + create_basic_member + "]";
+	}
+	public String getRoom_code1() {
+		return room_code1;
+	}
+	public void setRoom_code1(String room_code1) {
+		this.room_code1 = room_code1;
+	}
+	public String getRoom_in() {
+		return room_in;
+	}
+	public void setRoom_in(String room_in) {
+		this.room_in = room_in;
+	}
+	public String getRoom_out() {
+		return room_out;
+	}
+	public void setRoom_out(String room_out) {
+		this.room_out = room_out;
+	}
 	public int getRoom_number() {
 		return room_number;
 	}
@@ -83,6 +170,8 @@ public class HostVO {
 	public void setRoom_img_date(String room_img_date) {
 		this.room_img_date = room_img_date;
 	}
+	
+	
 	public int getRoom_code() {
 		return room_code;
 	}

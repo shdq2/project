@@ -50,17 +50,16 @@
 							<div class="panel-body">
 								<table class="table">
 									<tr>
-										<td>번호</td>
-										<td>사진</td>
-										<td>수정/삭제</td>
+										<th>사진 번호</th>
+										<th>사진</th>
+										<th>삭제</th>
 									</tr>
-									<c:forEach var="vo" items="${list}">
+									<c:forEach var="vo" items="${list}" varStatus="i">
 										<tr>
-											<td>${vo.room_code}</td>
+											<td>${i.count}</td>
 											<td><img src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:200px; height:50px;"></td>
 											<td>
-												<a href="#" class="btn btn-xs btn-success btn_update">수정</a>
-												<a href="#" class="btn btn-xs btn-danger btn_delete">삭제</a>	
+												<a href="host_img_delete.do?room_img_code=${vo.room_img_code}" id="img_delete" class="btn btn-xs btn-danger btn_delete">삭제</a>	
 											</td>
 										</tr>
 									</c:forEach>
@@ -82,13 +81,18 @@
 	
 
 	
-	
+	<script src="resources/js/sweetalert.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
 	<script type="text/javascript">
 	
 	$(function(){
+		$('#img_delete').click(function(){
+			swal({
+				title: "삭제";
+			})
+		})
 	})
 	</script>
 

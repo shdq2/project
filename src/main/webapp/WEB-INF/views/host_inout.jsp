@@ -44,66 +44,47 @@
 								<h3 class="panel-title">게스트의 입/퇴실시간을 설정하세요.</h3>
 							</div>
 							<div class="panel-body">
-								<form method="POST"
-									action="http://www.mrmention.co.kr/user/rooms/3586/calendar"
-									accept-charset="UTF-8" id="editRoomForm">
-									<input name="_method" type="hidden" value="PUT"><input
-										name="_token" type="hidden"
-										value="mXHLWNYjQSKCEUj6aJpb9tMuBhT3O7po7YcjMe8y">
-
-									<div class="input-daterange  form-group">
+								<form:form method="POST" action="host_inout.do" modelAttribute="vo">
+									<div style="display:none">
+										<input type="text" value="${vo.room_code}">
+									</div>
+									<div class="form-group">
 
 										<div class="input-group">
-											<span class="input-group-addon"> <i aria-hidden="true"
-												class="icon wb-time"></i> 입실
-											</span> <select class="form-control" name="calendar[check_in_time]"><option
-													value="09:00:00">09:00:00</option>
-												<option value="10:00:00">10:00:00</option>
-												<option value="11:00:00">11:00:00</option>
-												<option value="12:00:00">12:00:00</option>
-												<option value="13:00:00">13:00:00</option>
-												<option value="14:00:00">14:00:00</option>
-												<option value="15:00:00">15:00:00</option>
-												<option value="16:00:00">16:00:00</option>
-												<option value="17:00:00">17:00:00</option>
-												<option value="18:00:00">18:00:00</option>
-												<option value="19:00:00">19:00:00</option>
-												<option value="20:00:00">20:00:00</option>
-												<option value="21:00:00">21:00:00</option>
-												<option value="22:00:00">22:00:00</option>
-												<option value="23:00:00">23:00:00</option>
-												<option value="00:00:00" selected="selected">00:00:00</option></select>
+											<span class="input-group-addon">입실</span> 
+											<form:select class="form-control" path="room_in">
+												<c:forEach items="${str}" var="tmp">
+													<c:if test="${vo.room_in eq tmp}">
+														<option value="${tmp}" selected="selected">${tmp}</option>
+													</c:if>
+													<c:if test="${vo.room_in ne tmp}">
+														<option value="${tmp}">${tmp}</option>
+													</c:if>
+												</c:forEach>
+											</form:select>
 										</div>
 
 										<div class="input-group">
-											<span class="input-group-addon"> <i aria-hidden="true"	class="icon wb-time"></i> 퇴실
-											</span> <select class="form-control" name="calendar[check_out_time]"><option
-													value="09:00:00">09:00:00</option>
-												<option value="10:00:00">10:00:00</option>
-												<option value="11:00:00">11:00:00</option>
-												<option value="12:00:00">12:00:00</option>
-												<option value="13:00:00">13:00:00</option>
-												<option value="14:00:00">14:00:00</option>
-												<option value="15:00:00">15:00:00</option>
-												<option value="16:00:00">16:00:00</option>
-												<option value="17:00:00">17:00:00</option>
-												<option value="18:00:00">18:00:00</option>
-												<option value="19:00:00">19:00:00</option>
-												<option value="20:00:00">20:00:00</option>
-												<option value="21:00:00">21:00:00</option>
-												<option value="22:00:00">22:00:00</option>
-												<option value="23:00:00">23:00:00</option>
-												<option value="00:00:00" selected="selected">00:00:00</option></select>
+											<span class="input-group-addon">퇴실</span> 
+											<form:select class="form-control" path="room_out">
+												<c:forEach items="${str}" var="tmp">
+													<c:if test="${vo.room_out eq tmp}">
+														<option value="${tmp}" selected="selected">${tmp}</option>
+													</c:if>
+													<c:if test="${vo.room_out ne tmp}">
+														<option value="${tmp}">${tmp}</option>
+													</c:if>
+												</c:forEach>
+											</form:select>
 										</div>
-
+										
 									</div>
 									<div class="form-group ">
-										<div class="col-sm-2 pull-right">
-											<input class="btn btn-primary btn-block" type="submit"
-												value="저장">
+										<div class="pull-right">
+											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
-								</form>
+								</form:form>
 							</div>
 						</div>
 					</div>

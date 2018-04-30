@@ -39,6 +39,7 @@
 					<div class="col-md-12 col-lg-10 col-xlg-7">
 						<div class="panel">
 						
+						<form:form action="host_price1.do" method="post" modelAttribute="vo">
 							<div class="panel-heading">
 								<h3 class="panel-title">회원님이 숙소에서 사용할 수 있는 편의시설들을 체크하세요.</h3>
 							</div>
@@ -47,7 +48,7 @@
 								<div class="form-group" >
 									<label  class="control-label col-sm-3">최소 숙박 일수</label>
 									<div class="col-sm-9">
-										<input type="number" class="form-control inline" min="1" style="width: calc(100% - 35px)" value="20"> 박
+										<form:input type="number" class="form-control inline" min="1" style="width: calc(100% - 35px)" path="room_min_day"/> 박
 										<p class="help-block">20박 이상 설정 시 숙소 상세정보에서 한달가격으로 표시됩니다.</p>
 									</div>
 								</div>
@@ -55,7 +56,7 @@
 								<div class="form-group">
 									<label  class="control-label col-sm-3">최대 숙박 일수</label>
 									<div class="col-sm-9">
-										<input type="number" class="form-control inline" min="2" style="width: calc(100% - 35px)" value="90"> 박
+										<form:input type="number" class="form-control inline" min="2" style="width: calc(100% - 35px)" path="room_max_day"/> 박
 										<p class="help-block">최대 365일까지 설정가능합니다.</p>
 									</div>
 								</div>
@@ -67,46 +68,59 @@
 
 							<div class="panel-body">
 								<div class="form-group">
-									<label class="control-label col-sm-3">가격 표시 방식</label>
+									<label class="control-label col-sm-3">금액 표시 방식</label>
 									<div class="col-sm-9">
-										<div class="radio-inline">
-											<input name="radio1" checked="checked" type="radio" value="0"> <label>한 달 가격으로 표시</label>
-										</div>
-										<div class="radio-inline">
-											<input name="radio1" type="radio" value="1"> <label>1박 가격으로 표시</label>
-										</div>
+										<c:if test="${vo.room_price_show eq 'month'}" > 
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" checked="checked"  value="month"/> <label>한 달 가격으로 표시</label>
+											</div>
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" value="day"/> <label>1박 가격으로 표시</label>
+											</div>
+										</c:if>
+										<c:if test="${vo.room_price_show eq 'day'}" > 
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" value="month"/> <label>한 달 가격으로 표시</label>
+											</div>
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" checked="checked"  value="day"/> <label>1박 가격으로 표시</label>
+											</div>
+										</c:if>
 										<span class="help-block"> 게스트들에게 어떤 방식으로 가격을 보여줄지 결정합니다. </span>
 									</div>
 								</div>
 
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
 								</div>
 							</div>
+						</form:form>
 
 							<div class="panel-heading">
 								<h3 class="panel-title">기본 요금 정보를 등록하세요.</h3>
 							</div>
 							
+						<form:form action="host_price2.do" method="post" modelAttribute="vo">				
 							<div class="panel-body">
-								<div class="form-group col-sm-12">
-									<label class="control-label col-sm-3">한 달 숙박 가격(29박 기준)</label>
-									<div class="col-sm-9">
-										<input class="form-control inline"style="width: calc(100% - 35px)" type="text" value="0"> 원
-										<span class="help-block"></span>
+									<div class="form-group col-sm-12">
+										<label class="control-label col-sm-3">한 달 숙박 가격(29박 기준)</label>
+										<div class="col-sm-9">
+											<form:input class="form-control inline" style="width: calc(100% - 35px)" type="text" value="${vo.room_month_price}" path="room_month_price"/> 원
+											<span class="help-block"></span>
+										</div>
 									</div>
-								</div>
-								<div class="form-group col-sm-12">
-									<label class="control-label col-sm-3">기본 보증금</label>
-									<div class="col-sm-9">
-										<input class="form-control inline"style="width: calc(100% - 35px)" type="text" value="0"> 원
-										<span class="help-block"></span>
+									<div class="form-group col-sm-12">
+										<label class="control-label col-sm-3">기본 보증금</label>
+										<div class="col-sm-9">
+											<form:input class="form-control inline" style="width: calc(100% - 35px)" type="text" value="${vo.room_basic_deposit}" path="room_basic_deposit"/> 원
+											<span class="help-block"></span> 
+										</div>
 									</div>
-								</div>
+								
 							</div>
 							
 							<div class="panel-heading">
@@ -117,21 +131,31 @@
 								<div class="form-group col-sm-12">
 									<label class="control-label col-sm-3">기본 임대 인원</label>
 									<div class="col-sm-9">
-										<input class="form-control inline" style="width: calc(100% - 35px)" type="number" value="2"> 명
+										<form:input class="form-control inline" style="width: calc(100% - 35px)" type="number" value="${vo.room_basic_member}" path="room_basic_member"/> 명
 										<span class="help-block"></span>
 									</div>
 								</div>
 								
 							
 								<div class="form-group col-sm-12">
-									<label class="control-label col-sm-3">가격 표시 방식</label>
+									<label class="control-label col-sm-3">추가 인원 금액 적용 방식</label>
 									<div class="form-group col-sm-9">
-										<div class="radio-inline">
-											<input name="radio2" checked="checked" type="radio"> <label>1박당 추가 요금 적용</label>
-										</div>
-										<div class="radio-inline">
-											<input name="radio2" type="radio"> <label>전체 금액에 더하여 적용</label>
-										</div>
+										<c:if test="${vo.room_plus_price_apply eq 1}">
+											<div class="radio-inline">
+												<input name="room_plus_price_apply" checked="checked" type="radio" value="1"/> <label>1박당 추가 요금 적용</label>
+											</div>
+											<div class="radio-inline">
+												<input name="room_plus_price_apply" type="radio" value="2"/> <label>전체 금액에 더하여 적용</label>
+											</div>
+										</c:if>
+										<c:if test="${vo.room_plus_price_apply eq 2}">
+											<div class="radio-inline">
+												<input name="radio2" type="radio" value="1"/> <label>1박당 추가 요금 적용</label>
+											</div>
+											<div class="radio-inline">
+												<input name="radio2" checked="checked" type="radio" value="2"/> <label>전체 금액에 더하여 적용</label>
+											</div>
+										</c:if>
 										<span class="help-block"> 게스트들에게 어떤 방식으로 가격을 보여줄지 결정합니다. </span>
 									</div>
 								</div>
@@ -139,20 +163,20 @@
 								<div class="form-group col-sm-12">
 									<label class="control-label col-sm-3">추가 인원 가격</label>
 									<div class="col-sm-9">
-										<input class="form-control inline"style="width: calc(100% - 35px)" type="text" value="0"> 원
+										<form:input class="form-control inline" style="width: calc(100% - 35px)" type="text" value="${vo.room_plus_price}" path="room_plus_price"/> 원
 										<span class="help-block">수용인원 초과 시 추가 인원 당 가격을 입력하세요.</span>
 									</div>
 								</div>
 								
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
 								</div>
 							</div>
-
+						</form:form>
 							<div class="panel-heading">
 								<h3 class="panel-title">예약금 수령을 위한 입금정보를 입력하세요. 
 									<span class="panel-desc"> 프로필정보에 입금정보가 저장되어있지 않습니다. </span>
@@ -217,7 +241,7 @@
 								
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>

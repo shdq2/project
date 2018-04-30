@@ -1,6 +1,5 @@
 package com.kte.project;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -38,6 +37,7 @@ public class HostController {
 		HostVO vo = new HostVO();
 		
 		int room_code = hDAO.selectRoomCode();
+		
 		vo.setRoom_code(room_code+1);
 		
 		model.addAttribute("vo", vo);
@@ -52,6 +52,8 @@ public class HostController {
 		int room_code = vo.getRoom_code();
 		httpsession.setAttribute("room_code", room_code);
 		System.out.println(httpsession.getAttribute("room_code"));
+		/*String a = Integer.toString(vo.getRoom_code());
+		vo.setRoom_code1(a);*/
 		hDAO.insertHostCreate(vo);
 		
 		return "redirect:/host_name.do";
@@ -114,20 +116,51 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_amenity.do", method=RequestMethod.GET)
-	public String hostamenity(Model model) {
-		
-		HostVO vo = new HostVO();
-		String[] str = {"TV","케이블TV","에어콘","난방","부엌(개인)","부엌(공용)","인터넷","와이파이","전기포트","전자렌지","밥솥","수건","식기(그릇)","다리미","헤어드라이기","냉장고"};
-		String[] str1 = {"욕조","세탁기(개인)","수영장","건조기","아침식사","무료 주차 포함","무료 헬스장","엘리베이터","초인종/인터폰","도어락","샴푸","취사","바비큐","대중교통","마당","세탁기(공용)","테라스","바다"};
-		String[] str2 = {"가족/어린이 환영","애완동물 가능","애완/반려동물 키우고 있음","휠체어 사용 가능"};
-		String[] str3 = {"화재감지기","구급 상자","안전 카드","소화기","실내흡연불가능"};
-		model.addAttribute("str", str);
-		model.addAttribute("str1", str1);
-		model.addAttribute("str2", str2);
-		model.addAttribute("str3", str3);
-		model.addAttribute("vo", vo);
-		
-		return "host_amenity";
+	public String hostamenity(Model model, HttpSession httpsession) {
+		try {
+			int room_code = (Integer) httpsession.getAttribute("room_code");
+			System.out.println(room_code);
+			
+			String[] str = {"TV","케이블TV","에어콘","난방","부엌(개인)","부엌(공용)","인터넷","와이파이","전기포트","전자렌지","밥솥","수건","식기(그릇)","다리미","헤어드라이기","냉장고"};
+			String[] str1 = {"욕조","세탁기(개인)","수영장","건조기","아침식사","무료 주차 포함","무료 헬스장","엘리베이터","초인종/인터폰","도어락","샴푸","취사","바비큐","대중교통","마당","세탁기(공용)","테라스","바다"};
+			String[] str2 = {"가족/어린이 환영","애완동물 가능","애완/반려동물 키우고 있음","휠체어 사용 가능"};
+			String[] str3 = {"화재감지기","구급 상자","안전 카드","소화기","실내흡연불가능"};
+			HostVO vo = new HostVO();
+			HostchkVO vo1 = hDAO.selectRoomAmenity(room_code);
+			
+			String a = vo1.getRoom_option();
+			String b = vo1.getRo_plus();
+			String c = vo1.getRo_special();
+			String d = vo1.getRo_security();
+			System.out.println(a);
+			System.out.println(b);
+			System.out.println(c);
+			System.out.println(d);
+			
+			String[] room_option = a.split(";");
+			String[] room_option1 = b.split(";");
+			String[] room_option2 = c.split(";");
+			String[] room_option3 = d.split(";");
+			
+			for(String tmp : room_option) {
+				System.out.println(tmp);
+			}
+			model.addAttribute("room_option", room_option);
+			model.addAttribute("room_option1", room_option1);
+			model.addAttribute("room_option2", room_option2);
+			model.addAttribute("room_option3", room_option3);
+			//room_option = {"TV","dd"....}
+			 
+			model.addAttribute("str", str);
+			model.addAttribute("str1", str1);
+			model.addAttribute("str2", str2);
+			model.addAttribute("str3", str3);
+			model.addAttribute("vo", vo);
+			
+			return "host_amenity";
+		} catch (Exception e) {
+			return "host_amenity";
+		}
 	}
 	
 	@RequestMapping(value="/host_amenity.do", method=RequestMethod.POST)
@@ -139,12 +172,42 @@ public class HostController {
 							  HttpSession httpsession) {
 		
 		int room_code = (Integer) httpsession.getAttribute("room_code");
+		int room_code1 = hDAO.selectOptionRoomCode();
+		String str = "";
+		String str1 = "";
+		String str2 = "";
+		String str3 = "";
 		
-		List<HostchkVO> list = new ArrayList<HostchkVO>();
+		HostchkVO vo1 = new HostchkVO();
 		for(String tmp : chk) {
-			HostchkVO vo1 = new HostchkVO();
-			vo1.setRoom_code(room_code);
-			vo1.setRoom_option(tmp);
+			str += tmp+ ";";
+		}
+		vo1.setRoom_option(str);
+		
+		for(String tmp : chk1) {
+			str1 += tmp+ ";";
+		}
+		vo1.setRo_plus(str1);
+		
+		for(String tmp : chk2) {
+			str2 += tmp+ ";";
+		}
+		vo1.setRo_special(str2);
+		
+		for(String tmp : chk3) {
+			str3 += tmp+ ";";
+		}
+		vo1.setRo_security(str3);
+		
+		System.out.println(vo1.getRo_security()+"1");
+		System.out.println(vo1.getRo_special()+"2");
+		
+		vo1.setRoom_code(room_code);
+		
+		if(room_code == room_code1) {
+			hDAO.updateRoomAmenity(vo1);
+		}else {
+			hDAO.insertRoomAmenity(vo1);
 		}
 		
 		return "redirect:/host_imgs.do";
@@ -153,7 +216,7 @@ public class HostController {
 	@RequestMapping(value="/host_imgs.do", method=RequestMethod.GET)
 	public String hostimgs(Model model,HttpSession httpsession) {
 		
-		int room_img_code = hDAO.selectRoomImgCode();
+		int room_img_code = hDAO.selectLastRoomImgCode();
 		
 		System.out.println(httpsession.getAttribute("room_code"));
 		
@@ -218,24 +281,103 @@ public class HostController {
 		}
 	}
 	
-	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
-	public String hostprice(Model model) {
+	@RequestMapping(value="/host_img_delete.do", method=RequestMethod.GET)
+	public String hostimgdelete(@RequestParam("room_img_code") int room_img_code) {
+		hDAO.deleteRoomImg(room_img_code);
 		
-		HostVO vo = new HostVO();
+		return "redirect:host_imgs.do";
+	}
+	
+	@RequestMapping(value="/host_price.do", method=RequestMethod.GET)
+	public String hostprice(Model model, HttpSession httpsession) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+		HostVO vo = hDAO.selectHostPrice(room_code);
 		
 		model.addAttribute("vo", vo);
 		
 		return "host_price";
 	}
 	
+	@RequestMapping(value="/host_price1.do", method=RequestMethod.POST)
+	public String hostprice1(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession,
+							@RequestParam("room_price_show") String room_price_show) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+
+		vo.setRoom_code(room_code);
+		vo.setRoom_price_show(room_price_show);
+		
+		hDAO.updateHostPrice_MinMax(vo);
+		
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price2.do", method=RequestMethod.POST)
+	public String hostprice2(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession,
+							 @RequestParam("room_plus_price_apply") String room_plus_price_apply) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+
+		vo.setRoom_code(room_code);
+		vo.setRoom_plus_price_apply(room_plus_price_apply);
+		
+		hDAO.updateHostPrice_Basic(vo);
+		
+		return "redirect:host_price.do";
+	}
+	
+	
 	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
-	public String hostcalendar(Model model) {
+	public String hostcalendar(Model model, HttpSession httpsession) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+		System.out.println(room_code);
 		
 		HostVO vo = new HostVO();
+		vo.setRoom_code(room_code);
+		System.out.println(vo.getRoom_code()+"!");
 		
+		HostVO vo1 = hDAO.selectRoomInOut(room_code);
+		
+		System.out.println(vo1.getRoom_in());
+		if(vo.getRoom_in() == null) {
+			if(vo.getRoom_out() == null) {
+				vo.setRoom_out("09:00:00");
+			}else {
+				
+			};
+			vo.setRoom_in("09:00:00");
+		}else{
+			if(vo.getRoom_out() == null) {
+				vo.setRoom_out("09:00:00");
+			}else {
+				
+			};
+		};
+		
+		
+		System.out.println();
+		
+		String[] str = {"09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00",
+						"17:00:00",	"18:00:00","19:00:00","20:00:00","21:00:00","22:00:00","23:00:00","00:00:00"};
+		
+		model.addAttribute("str",str);
 		model.addAttribute("vo", vo);
 		
 		return "host_inout";
+	}
+	
+	@RequestMapping(value="/host_inout.do", method=RequestMethod.POST)
+	public String hostcalendar(@ModelAttribute("vo") HostVO vo, HttpSession httpsession) {
+		
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		vo.setRoom_code(room_code);
+		
+		hDAO.updateRoomInOut(vo);
+		
+		return "redirect:host_inout.do";
 	}
 	
 }
