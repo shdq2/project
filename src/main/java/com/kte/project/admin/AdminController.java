@@ -44,7 +44,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/admin.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
 		
-		List<CustomVO> list = amdao.AdminUserMain();
+		List<CustomVO> list = amdao.AdminUserMain(6);
 		model.addAttribute("clist", list);
 		
 		int ucount = adao.usercount();

@@ -44,7 +44,7 @@ public class AdminReserController {
 	
 	@RequestMapping(value = "/admin/admin_reser.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http) {
-		List<ReservationVO> list = aredao.reservation_all();
+		List<ReservationVO> list = aredao.reservation_all(0);
 		
 		for(int i = 0;i<list.size();i++) {
 			String host_id = list.get(i).getHost_id();
@@ -55,7 +55,7 @@ public class AdminReserController {
 			
 		}
 		List<ReservationVO> list2 = aredao.state_count();
-		int tot = ((aredao.reser_count()-1/10));;	
+		int tot = ((aredao.reser_count()-1)/10)+1;	
 		
 		model.addAttribute("list2", list2);
 		model.addAttribute("list", list);

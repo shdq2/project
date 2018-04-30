@@ -18,8 +18,8 @@ public class adminreservationDAO {
 	@Resource(name="sqlSession")
 	private SqlSession sql = null;
 	
-	public List<ReservationVO> reservation_all() {
-		return sql.selectList("admin_reservation.reservation_all");
+	public List<ReservationVO> reservation_all(int page) {
+		return sql.selectList("admin_reservation.reservation_all",page);
 	}
 	
 	public int profile_img(String id) {
@@ -42,6 +42,10 @@ public class adminreservationDAO {
 		return sql.selectOne("admin_reservation.reser_count");
 	}
 	
+	public int reser_count_state(int state) {
+		return sql.selectOne("admin_reservation.reser_count_state",state);
+	}
+	
 	public CustomVO admin_show_profile(String id) {
 		return sql.selectOne("admin_reservation.admin_show_profile",id);
 	}
@@ -54,8 +58,8 @@ public class adminreservationDAO {
 		return sql.selectOne("admin_reservation.reser_member_count",id);
 	}
 	
-	public List<ReservationVO> reservation_all_sort(int state){
-		return sql.selectList("admin_reservation.reservation_all_sort",state);
+	public List<ReservationVO> reservation_all_sort(ReservationVO vo){
+		return sql.selectList("admin_reservation.reservation_all_sort",vo);
 	}
 	
 	public List<ReservationVO> reservation_search(ReservationVO vo){

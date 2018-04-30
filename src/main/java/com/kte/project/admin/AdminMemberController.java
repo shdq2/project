@@ -32,14 +32,18 @@ public class AdminMemberController {
 	private adminmemberDAO amdao = null; 
 	@Autowired
 	private adminroomDAO ardao = null;
-	
+	@Autowired
+	private adminDAO adao = null;
 	@RequestMapping(value = "/admin/admin_member.do", method = RequestMethod.GET)
 	public String member(Model model) {
-		List<CustomVO> list = amdao.AdminUserMain();
+		List<CustomVO> list = amdao.AdminUserMain(0);
 		for(int i=0;i<list.size();i++) {
 			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));
 		}
+		int count = adao.usercount();
+		int tot = ((count-1)/10)+1;
 		model.addAttribute("list", list);
+		model.addAttribute("tot", tot);
 		return "admin_member";
 	}
 	

@@ -3,8 +3,11 @@
 
 <mapper namespace="admin_member">
 		
-	<select id="AdminUserMain" resultType="customVO">
-		select * from custom where custom_block <![CDATA[<]]> 10 order by custom_date desc
+	<select id="AdminUserMain" resultType="customVO" parameterType="Int">
+		select c.*,b.bank_name from bank b 
+		inner join (select * from custom where custom_block <![CDATA[<]]> 10 order by custom_date desc) c
+		on b.bank_code = c.bank_code order by custom_date desc		
+		limit #{page},10
 	</select>
 
 	<select id="room_count" resultType="Int" parameterType="String">

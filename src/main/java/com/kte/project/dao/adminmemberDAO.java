@@ -18,8 +18,8 @@ public class adminmemberDAO {
 	private SqlSession sql = null;
 	
 
-	public List<CustomVO> AdminUserMain(){
-		return sql.selectList("admin_member.AdminUserMain");
+	public List<CustomVO> AdminUserMain(int page){
+		return sql.selectList("admin_member.AdminUserMain",page);
 	}
 	
 	public int room_count(String custom_id){

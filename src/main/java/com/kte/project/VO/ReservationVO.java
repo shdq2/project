@@ -34,7 +34,14 @@ public class ReservationVO {
 	private String type=null;
 	private String txt = null;
 	
+	private int reservation_people = 0;
 	
+	public int getReservation_people() {
+		return reservation_people;
+	}
+	public void setReservation_people(int reservation_people) {
+		this.reservation_people = reservation_people;
+	}
 	public String getTxt() {
 		return txt;
 	}

@@ -43,13 +43,20 @@ public class JSON_Admin_Controller {
 			HttpSession http,
 			@RequestParam("id")String id,
 			@RequestParam("block")int block) {
-		System.out.println("테스트 : " + id);
-		System.out.println("test : " + block);
 		CustomVO vo = new CustomVO();
 		vo.setCustom_id(id);
 		vo.setCustom_block(block);
 		int ret = amdao.member_block(vo);
 		return ret;
+	}
+	
+	@RequestMapping(value = "/admin/Json_member_page.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<CustomVO> member_page(Model model,
+			HttpSession http,
+			@RequestParam("page")int page) {
+		page = (page-1)*10;
+		List<CustomVO> list = amdao.AdminUserMain(page);
+		return list;
 	}
 	
 	@RequestMapping(value = "/admin/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
@@ -122,9 +129,9 @@ public class JSON_Admin_Controller {
 	@RequestMapping(value = "/admin/Json_select_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody ReservationVO select_reser(Model model,	
 			HttpSession http,
-			@RequestParam("code")int code) {	
-		ReservationVO vo = aredao.select_reser(code);
+			@RequestParam("code")int code) {
 		
+		ReservationVO vo = aredao.select_reser(code);		
 		return vo;
 	}
 	
@@ -145,17 +152,28 @@ public class JSON_Admin_Controller {
 	}
 	
 	@RequestMapping(value = "/admin/Json_reser_list.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody List<ReservationVO> reser_list(Model model,	
+	public @ResponseBody Map<String,Object> reser_list(Model model,	
 			HttpSession http,
-			@RequestParam("state")int state) {
+			@RequestParam("state")int state,
+			@RequestParam("page")int page) {
 			List<ReservationVO> list = new ArrayList<ReservationVO>();
+			Map<String,Object> map = new HashMap<String, Object>();
+			page = (page-1)*10;
+			int tot = 0;
 		if(state == -1) {
-			list = aredao.reservation_all();
+			list = aredao.reservation_all(page);
+			 tot = ((aredao.reser_count()-1)/10)+1;
 		}else {
-			list = aredao.reservation_all_sort(state);
+			ReservationVO vo = new ReservationVO();
+			vo.setState_count(state);
+			vo.setPage(page);;
+			list = aredao.reservation_all_sort(vo);
+			tot = ((aredao.reser_count_state(state)-1)/10)+1;
 		}
-		
-		return list;
+			
+		map.put("tot", tot);
+		map.put("list", list);
+		return map;
 	}
 	
 	@RequestMapping(value = "/admin/Json_reser_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})

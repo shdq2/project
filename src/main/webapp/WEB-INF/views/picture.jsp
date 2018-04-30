@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
 <!-- 안드로이드 주소창 -->
 <meta name="mobile-web-app-capable" content="yes">
 <!-- 아이폰 주소창 -->
@@ -55,7 +58,7 @@
 				<div class="file-box form-control">
 					<form enctype="multipart/form-data" method="post"  id="img_form" >
 						<label for ="upload" class="btn-file"><span class="glyphicon glyphicon-picture"> </span> 사진 추기하기</label>
-						<input type="file" id="upload" name="upload_img"/>
+						<input type="file" id="upload" name="upload_img" accept=".jpg, .jpeg, .png"/>
 					</form>
 				</div>
 				<div style="height:20px;"></div>
@@ -109,6 +112,9 @@
 		        $("#popup").bPopup(); 
 
 		})
+		$('.photo').each(function(idx){
+			
+		})
 		$('.file-drop').sortable({
 			update:function(){
 				var list2 = "";
@@ -118,16 +124,12 @@
 				})
 				
 				 $.get('Json_sortable.do?val2='+list2,function(data){
-					 var time = new Date().getTime();
-					 for(var i = 0;i<data.length;i++){
-						 $('.img_code').eq(i).val(data[i].img_code);
-					 }					 
+					 var time = new Date().getTime();										 
 					 $('.col-img').empty();
 					 $('.col-img').append(
 						'<img src="show_img.do?time='+time+'&code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
-					 );
-					 	 
-					 console.log(data[0].img_code);
+					 );					 	 
+					 
 					w_resize();
 				});
 				 
@@ -149,6 +151,7 @@
 					 );
 				}
 					for(var i = 0; i<data.length;i++){
+						console.log('추가 : ' + data[i].img_code);
         		   		$('.file-drop').append(
         		   				'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
 								'<div style="position:relative;width:100%;">'+
@@ -194,6 +197,7 @@
 							'<img src="show_img.do?code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
 					 );
         			for(var i = 0; i<data.length;i++){
+        				
         		   		$('.file-drop').append(
         		   			'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
 								'<div style="position:relative;width:100%;">'+

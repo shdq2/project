@@ -80,8 +80,9 @@
 							<table class="table table-reser" style="height:205px; margin:0px;">
 								<tr>
 									<th>숙소명</th>
-									<td colspan = "2" class="room_name">${i.room_name }</td>
-									<th style="text-align: center"><input type="button" value="숙소 정보 보기" class="form-control" /></th> 
+									<td class="room_name">${i.room_name }</td>
+									<th>인원</th>
+									<td><label class="reservation_people">${i.reservation_people }</label></td> 
 								</tr>
 								<tr> 
 									<th>입실일</th>
@@ -137,9 +138,9 @@
 				</div>
 			</div>	
 		</c:forEach>
-			<div id="pagination" style="width:100%;text-align: center"></div>
+			
 		</div>
-		
+		<div id="pagination" style="width:100%;text-align: center"></div>
 		</div>
 
 <%-- 
@@ -160,7 +161,6 @@
 	<script type="text/javascript" src="/project/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script type="text/javascript" src="/project/resources/js/admin_reser_list.js"></script>
-	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script>
 	function update_state(state,txt,code,idx,ix){
 			$.get('Json_update_state.do?state='+state+'&code='+code,function(data){
@@ -232,6 +232,7 @@
 	}
 
 		$(function(){
+			var state = -1;
 			var code = 0;
 			$('#search_btn').click(function(){
 				search_reser();
@@ -248,39 +249,9 @@
 			$('#pagination').twbsPagination({
 			      totalPages:${tot},
 			      visiblePages: 7,
-			      onPageClick: function (event, page) {
-					 $.get('json_wish.do?page='+page,function(data){
-						$('#table tbody').empty();
-						var leng = data.length;
-						for(var i=0;i<leng;i++){			
-							if(data[i].wish_chk == 0){
-								$('#table tbody').append(
-										'<tr class="wlist">'+
-										'<td class="wish_code">'+data[i].wish_code+'</td>'+
-										'<td>'+data[i].wish_name+'</td>'+
-										'<td>'+data[i].wish_region+'</td>'+
-										'<td>'+data[i].wish_msg+'</td>'+
-										'<td>'+data[i].wish_start+' ~ '+data[i].wish_end+'</td>'+				
-										'<td>'+data[i].wish_number+'</td>'+
-										'<td><span class="badge">new</span></td>'+
-									'</tr>'
-								);
-							}								
-							else{
-								$('#table tbody').append(
-										'<tr class="wlist">'+
-										'<td class="wish_code">'+data[i].wish_code+'</td>'+
-										'<td>'+data[i].wish_name+'</td>'+
-										'<td>'+data[i].wish_region+'</td>'+
-										'<td>'+data[i].wish_msg+'</td>'+
-										'<td>'+data[i].wish_start+' ~ '+data[i].wish_end+'</td>'+			
-										'<td>'+data[i].wish_number+'</td>'+
-										'<td></td>'+
-									'</tr>'
-								);
-							}
-						}
-					},'json'); 
+			      onPageClick: function (event, page) {		
+			    	  reser_list(state,page);
+			    	  
 			      }
 		   });
 			
@@ -515,16 +486,24 @@
 			
 			$('.div_menu').click(function(){
 				var idx = $(this).index('.div_menu');
-				var state = -1;
+				
 				if(idx == 0){
 					state = -1;
 				}
 				else {
 					state = idx-1;
 				}
-				reser_list(state);
 				
+				reser_list(state,1);
 			})
+			
+			$(document).on('click','.room_name',function(){			
+				var idx = $(this).index('.room_name');
+				var code = $('.reser_room_code').eq(idx).val();
+				console.log(code);
+				window.open('/project/room_detail.do?code='+code,'_blank');
+			})
+			
 		});
 							
 	
