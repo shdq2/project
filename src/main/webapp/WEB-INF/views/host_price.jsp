@@ -39,6 +39,7 @@
 					<div class="col-md-12 col-lg-10 col-xlg-7">
 						<div class="panel">
 						
+						<form:form action="host_price1.do" method="post" modelAttribute="vo">
 							<div class="panel-heading">
 								<h3 class="panel-title">회원님이 숙소에서 사용할 수 있는 편의시설들을 체크하세요.</h3>
 							</div>
@@ -47,7 +48,7 @@
 								<div class="form-group" >
 									<label  class="control-label col-sm-3">최소 숙박 일수</label>
 									<div class="col-sm-9">
-										<input type="number" class="form-control inline" min="1" style="width: calc(100% - 35px)" value="20"> 박
+										<form:input type="number" class="form-control inline" min="1" style="width: calc(100% - 35px)" path="room_min_day"/>박
 										<p class="help-block">20박 이상 설정 시 숙소 상세정보에서 한달가격으로 표시됩니다.</p>
 									</div>
 								</div>
@@ -55,7 +56,7 @@
 								<div class="form-group">
 									<label  class="control-label col-sm-3">최대 숙박 일수</label>
 									<div class="col-sm-9">
-										<input type="number" class="form-control inline" min="2" style="width: calc(100% - 35px)" value="90"> 박
+										<form:input type="number" class="form-control inline" min="2" style="width: calc(100% - 35px)" path="room_max_day"/>박
 										<p class="help-block">최대 365일까지 설정가능합니다.</p>
 									</div>
 								</div>
@@ -69,24 +70,35 @@
 								<div class="form-group">
 									<label class="control-label col-sm-3">가격 표시 방식</label>
 									<div class="col-sm-9">
-										<div class="radio-inline">
-											<input name="radio1" checked="checked" type="radio" value="0"> <label>한 달 가격으로 표시</label>
-										</div>
-										<div class="radio-inline">
-											<input name="radio1" type="radio" value="1"> <label>1박 가격으로 표시</label>
-										</div>
+										<c:if test="${vo.room_price_show eq 'month'}" > 
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" checked="checked"  value="month"/> <label>한 달 가격으로 표시</label>
+											</div>
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" value="day"/> <label>1박 가격으로 표시</label>
+											</div>
+										</c:if>
+										<c:if test="${vo.room_price_show eq 'day'}" > 
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" value="month"/> <label>한 달 가격으로 표시</label>
+											</div>
+											<div class="radio-inline">
+												<input name="room_price_show" type="radio" checked="checked"  value="day"/> <label>1박 가격으로 표시</label>
+											</div>
+										</c:if>
 										<span class="help-block"> 게스트들에게 어떤 방식으로 가격을 보여줄지 결정합니다. </span>
 									</div>
 								</div>
 
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
 								</div>
 							</div>
+						</form:form>
 
 							<div class="panel-heading">
 								<h3 class="panel-title">기본 요금 정보를 등록하세요.</h3>
@@ -146,7 +158,7 @@
 								
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
@@ -217,7 +229,7 @@
 								
 								<div class="panel-body">
 									<div class="form-group">
-										<div class="col-sm-2 pull-right margin-bottom-30">
+										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>

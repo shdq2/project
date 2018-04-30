@@ -32,6 +32,33 @@ public class HostVO {
 	private String room_out = null;
 	
 	
+	//host_price
+	private int room_min_day = 0;
+	private int room_max_day = 0;
+	private String room_price_show = null;
+	
+	
+	
+	
+	
+	public String getRoom_price_show() {
+		return room_price_show;
+	}
+	public void setRoom_price_show(String room_price_show) {
+		this.room_price_show = room_price_show;
+	}
+	public int getRoom_min_day() {
+		return room_min_day;
+	}
+	public void setRoom_min_day(int room_min_day) {
+		this.room_min_day = room_min_day;
+	}
+	public int getRoom_max_day() {
+		return room_max_day;
+	}
+	public void setRoom_max_day(int room_max_day) {
+		this.room_max_day = room_max_day;
+	}
 	@Override
 	public String toString() {
 		return "HostVO [room_code=" + room_code + ", create_building_type=" + create_building_type

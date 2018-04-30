@@ -88,6 +88,14 @@
    <select id="selectRoomAmenity" parameterType="int" resultType="HostchkVO">
    		SELECT room_option, ro_plus, ro_special, ro_security FROM `room_option` WHERE room_code=#{room_code}
    </select>
+   
+   <select id="selectHostPrice_MinMax" parameterType="int" resultType="HostVO">
+   		SELECT room_min_day, room_max_day, room_price_show FROM `room` WHERE room_code=#{room_code}
+   </select>
+   
+   <update id="updateHostPrice_MinMax" parameterType="HostVO">
+   		UPDATE `room` SET room_min_day=#{room_min_day}, room_max_day=#{room_max_day}, room_price_show=#{room_price_show} WHERE room_code=#{room_code}
+   </update>
 	
 	
 	

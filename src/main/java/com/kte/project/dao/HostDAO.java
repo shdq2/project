@@ -85,4 +85,14 @@ public class HostDAO {
 	public HostchkVO selectRoomAmenity(int room_code) {
 		return sqlsession.selectOne("Host.selectRoomAmenity", room_code);
 	}
+	
+	public HostVO selectHostPrice_MinMax(int room_code) {
+		return sqlsession.selectOne("Host.selectHostPrice_MinMax", room_code);
+	}
+	
+	public int updateHostPrice_MinMax(HostVO vo) {
+		return sqlsession.update("Host.updateHostPrice_MinMax", vo);
+	}
+	
+	
 }
