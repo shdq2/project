@@ -98,4 +98,7 @@ public class HostDAO {
 		return sqlsession.update("Host.updateHostPrice_Basic", vo);
 	}
 	
+	public int updateBusyDate(HostVO vo) {
+		return sqlsession.update("Host.updateBusyDate", vo);
+	}
 }

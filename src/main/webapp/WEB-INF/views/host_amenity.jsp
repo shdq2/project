@@ -79,7 +79,7 @@
 												<c:if test="${room_option[i] == tmp}">
 													<div class="checkbox checkbox-primary">
 														<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
-														<label >${tmp}</label>
+														<label>${tmp}</label>
 														<c:set var="a" value="1" />
 													</div>
 												</c:if>

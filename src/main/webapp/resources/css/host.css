@@ -130,7 +130,7 @@ small{
 
 .panel-title {
 	color: #6f7071 !important;
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
     display: block;
@@ -191,3 +191,10 @@ small{
 .inline {
     display: inline!important;
 }
+
+.term-button{
+	background-color:#A6A6A6;
+	color : white;
+}
+
+

@@ -60,7 +60,6 @@
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
-											<option>10이상</option>
 										</form:select>
 									</div>
 									<div class="form-group col-sm-4">
@@ -74,7 +73,6 @@
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
-											<option>10이상</option>
 										</form:select>
 									</div>
 									<div class="form-group col-sm-4">
@@ -88,7 +86,6 @@
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
-											<option>10이상</option>
 										</form:select>
 									</div>
 								</div>

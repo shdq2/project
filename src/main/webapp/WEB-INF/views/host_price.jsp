@@ -20,6 +20,10 @@
 	<link rel="stylesheet" href="resources/css/host.css">
 	<link rel="stylesheet" href="resources/css/checkbox.css">
 	<style>
+		/* 모달 창 제대로 띄우기 */
+		.modal-backdrop.in {
+			z-index: auto;
+		}
 	</style>
 </head>
 <body>
@@ -249,9 +253,7 @@
 							</div>
 							
 							<div class="panel-heading">
-								<h3 class="panel-title">요금 부과 방법을 선택하세요.
-									<span class="panel-desc"></span>
-								</h3>
+								<h3 class="panel-title">요금 부과 방법을 선택하세요.</h3>
 							</div>
 							
 							<div class="panel-body">
@@ -273,10 +275,49 @@
 							</div>
 							
 							<div class="panel-heading">
-								<h3 class="panel-title">기간별 세부 요금 설정
-									<span class="panel-desc"></span>
-								</h3>
+								<div class="row">
+									<div class="col-md-9">
+									<h3 class="panel-title">숙박 일수별 요금 설정</h3>
+									</div>
+									<div class="col-md-3">
+										<div align="center">
+											<input style="margin-top:6px" type="button" class="btn term-button" value="기간 추가"/>
+										</div>
+									</div>
+								</div>
 							</div>
+							
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="text-center">설정기간</th>
+										<th class="text-center" style="width:63%">설정내용</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td>
+											<table class="table">
+												<thead>
+													<tr>
+														<th class="text-center">숙박</th>
+														<th class="text-center">1박 금액</th>
+													</tr>
+												</thead>
+												<tbody>
+												<tr>
+													<td class="text-center" colspan="4">아직 등록 됨 </td>
+												</tr>
+												<tr>
+													<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn"/></td>
+												</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 							
 						</div> <!-- panel -->
 					</div>
@@ -285,25 +326,91 @@
 		</div>
 	</div>
 	
-	
+	<!-- modal창 -->
+	<div class="modal fade" id="term-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>성수기 기간 추가</h1>
+					<p>특정기간에 대한 할증 및 할인을 설정하고 싶다면, 해당 기간을 입력하세요.</p>
+				</div>
+				<form:form action="host_price4.do" modelAttribute="vo" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">이 날짜부터</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" path="busy_month_start">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month1">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" path="busy_day_start">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day1">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">이 날짜까지</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" path="busy_month_end">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month2">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" path="busy_day_end">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day2">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input type="checkbox" id="basic_chk"/>
+							<label>기본 설정</label>
+						</div>
+						<p style="font-size:13px"><font style="color:red">기본설정</font>은 할증/할인 기간에 해당되지 않는 기간에 적용됩니다.</p>
+					</div>
+					<div class="modal-footer">
+						<input style="width:100%" type="submit" class="btn btn-primary" value="추가"/>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
 	
 
 	
 	
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="resources/js/jquery-1.11.1.js"></script>
+	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
 	<script type="text/javascript">
+		$(function(){
 		
-	</script>
-	<script>
-		/* $('.test_div').click(function(){
-		var idx = $(this).index('.test_div');
-		var val = $('.test_val').eq(idx).val();
-		console.log(val);
-		
-		window.location.href=val;
-		})  */
+			$('.term-button').click(function(){
+				$('#term-modal').modal('show');
+			});
+			
+			$('#basic_chk').checked(function(){
+				if($('#basic_chk').checked == true ){
+					var m1 = $('#modal_month1').val();
+					var d1 = $('#modal_day1').val();
+					var m2 = $('#modal_month2').val();
+					var d2 = $('#modal_day2').val();
+					
+					$('#modal_month1').replace(m1, '1월');
+					$('#modal_day1').replace(d1, '31일');
+					$('#modal_month2').replace(m2, '12월');
+					$('#modal_day2').replace(d2, '31일');
+				}
+			});
+			
+		});
 	</script>
 </body>
 </html>

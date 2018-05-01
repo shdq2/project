@@ -41,10 +41,39 @@ public class HostVO {
 	private int room_basic_member = 0;
 	private String room_plus_price_apply = null;
 	private int room_plus_price = 0;
+	private String busy_month_start = null;
+	private String busy_day_start = null;
+	private String busy_month_end = null;
+	private String busy_day_end = null;
 	
 	
 	
 	
+	
+	public String getBusy_month_start() {
+		return busy_month_start;
+	}
+	public void setBusy_month_start(String busy_month_start) {
+		this.busy_month_start = busy_month_start;
+	}
+	public String getBusy_day_start() {
+		return busy_day_start;
+	}
+	public void setBusy_day_start(String busy_day_start) {
+		this.busy_day_start = busy_day_start;
+	}
+	public String getBusy_month_end() {
+		return busy_month_end;
+	}
+	public void setBusy_month_end(String busy_month_end) {
+		this.busy_month_end = busy_month_end;
+	}
+	public String getBusy_day_end() {
+		return busy_day_end;
+	}
+	public void setBusy_day_end(String busy_day_end) {
+		this.busy_day_end = busy_day_end;
+	}
 	public int getRoom_basic_member() {
 		return room_basic_member;
 	}
