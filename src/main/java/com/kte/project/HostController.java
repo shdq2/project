@@ -64,12 +64,16 @@ public class HostController {
 		
 		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
-		HostVO vo = new HostVO();
-		vo.setRoom_code(room_code);
-		
-		model.addAttribute("vo", vo);
-		
-		return "host_name";
+		if(room_code == 0) {
+			return "redirect:/host_create.do";
+		}else {
+			HostVO vo = new HostVO();
+			vo.setRoom_code(room_code);
+			
+			model.addAttribute("vo", vo);
+			
+			return "host_name";
+		}
 	}
 	
 	@RequestMapping(value="/host_name.do", method=RequestMethod.POST)
