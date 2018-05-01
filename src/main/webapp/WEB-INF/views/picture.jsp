@@ -88,15 +88,17 @@
 			</div>
 		</div>
       </div>
-   </div>
-   
+
 <div id="popup" class="Pstyle" > 
    <span class=" b-close glyphicon-remove" ></span> 
     <div class="content" style="height:100%;margin-top:5px;margin-bottom:15px;"> 
         <img src="" id="popimg" style="height:100%; width:100%; top:50px;"/> 
     </div>
 </div> 
-
+   </div>
+   <div id="loading_page" style="z-index: 9999;background-color:rgba(0,0,0,0.7);height:100%;width:100%;position:absolute;top:0px;left:0px;display:none;">
+   	<div id='load' style="width:50px;height:50px;background-image: url('resources/imgs/91.svg');background-repeat: no-repeat;background-size: 50px 50px;position:absolute;"></div>
+   </div>
    <script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
    <script type="text/javascript" src="resources/js/jquery.form.min.js"></script>
    <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
@@ -105,15 +107,24 @@
    <script type="text/javascript" src="resources/js/picture.js"></script>
    <script type="text/javascript" src="resources/js/jquery.bpopup.min.js"></script>
    <script>
-	$(function() {
-		$('.photo').click(function(){
-			var idx = $(this).index('.photo');
+	$(function() {		
+
+		$(window).ajaxStart(function(){
+			$('#loading_page').show();
+			$('#load').css({
+				top: $(document).scrollTop()+ ($(window).height() )/2 + 'px',
+	            left: ($(window).width() )/2 + 'px'
+			})
+		})
+		$(window).ajaxStop(function(){
+			$('#loading_page').hide();
+		})
+        
+		$(document).on('click','.picture-img',function(){		
+			var idx = $(this).index('.picture-img');
 			  popimg.src = ('show_img.do?code='+$('.img_code').eq(idx).val()); 
 		        $("#popup").bPopup(); 
 
-		})
-		$('.photo').each(function(idx){
-			
 		})
 		$('.file-drop').sortable({
 			update:function(){
@@ -128,11 +139,25 @@
 					 $('.col-img').empty();
 					 $('.col-img').append(
 						'<img src="show_img.do?time='+time+'&code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
-					 );					 	 
-					 
+					 );	
+					 $('.file-drop').empty();
+					 for(var i = 0; i<data.length;i++){        				
+	        		   		$('.file-drop').append(
+	        		   			'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
+									'<div style="position:relative;width:100%;">'+
+										'<div class="user-picture-list" style="position:relative;height:; ">'+
+											'<img src="show_img.do?time='+time+'&code='+data[i].img_code+'" class="picture-img" style="width:100%;" />'+
+										'</div>'+
+										'<div style="float:right;margin-top:30px;bottom: 15px;height:5px;position:relative;right:5px;display:block">'+
+											'<input type="hidden" value="'+data[i].img_code+'" class="img_code"/>'+
+											'<a href="#"  style="color:red"><span class="glyphicon glyphicon-remove rm_btn"></span></a>'+
+										'</div>'+
+									'</div>'+
+								'</div>'
+	        		   		);
+	    				}  
 					w_resize();
 				});
-				 
 			}
 		});
 		$( ".file-drop" ).disableSelection();
@@ -142,33 +167,29 @@
 				dataType: 'json',				
 				processData:false,
 				contentType:false,
-				success: function(data) {				
-				$('.file-drop').empty();
+				success: function(data) {		
+				
 				if(data.length == 1){
+					 $('.file-drop').empty();
 					 $('.col-img').empty();
 					 $('.col-img').append(
 							'<img src="show_img.do?code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
 					 );
 				}
-					for(var i = 0; i<data.length;i++){
-						console.log('추가 : ' + data[i].img_code);
-        		   		$('.file-drop').append(
-        		   				'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
-								'<div style="position:relative;width:100%;">'+
-									'<div class="user-picture-list" style="position:relative;height:; ">'+
-										'<img src="show_img.do?code='+data[i].img_code+'" class="picture-img" style="width:100%;" />'+	
-									'</div>'+
-									'<div style="float:right;margin-top:30px;bottom: 15px;height:5px;position:relative;right:5px;display:block">'+
-										'<input type="hidden" value="'+data[i].img_code+'" class="img_code"/>'+
-										'<a href="#"  style="color:red"><span class="glyphicon glyphicon-remove rm_btn"></span></a>'+
-									'</div>'+
+        			$('.file-drop').append(
+        		  			'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
+							'<div style="position:relative;width:100%;">'+
+								'<div class="user-picture-list" style="position:relative;height:; ">'+
+									'<img src="show_img.do?code='+data[data.length-1].img_code+'" class="picture-img" style="width:100%;" />'+	
 								'</div>'+
-							'</div>'
-        		   		);
-					}
-				
+								'<div style="float:right;margin-top:30px;bottom: 15px;height:5px;position:relative;right:5px;display:block">'+
+									'<input type="hidden" value="'+data[data.length-1].img_code+'" class="img_code"/>'+
+									'<a href="#"  style="color:red"><span class="glyphicon glyphicon-remove rm_btn"></span></a>'+
+								'</div>'+
+							'</div>'+
+						'</div>'
+        		   	);
 	        		w_resize();
-	
 				}   
 				,error: function(request,status,error) {        		    
 				alert("code:"+request.status+"n"+"message:"+request.responseText+"n"+"error:"+error);
@@ -176,10 +197,11 @@
 			});
         })
         $(document).on('click','.rm_btn',function(){
+        	var time = new Date().getTime();
         	var idx = $(this).index('.rm_btn');
         	var img_code = $('.img_code').eq(idx).val();
-        	
-        	$.get('Json_delete_profile.do?code='+img_code,function(data){
+        	console.log(img_code);
+        	 $.get('Json_delete_profile.do?code='+img_code,function(data){
         		$('.file-drop').empty();
         		if(data.length == 0){
         			$('.col-img').empty();
@@ -196,13 +218,12 @@
 					 $('.col-img').append(
 							'<img src="show_img.do?code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
 					 );
-        			for(var i = 0; i<data.length;i++){
-        				
+        			for(var i = 0; i<data.length;i++){        				
         		   		$('.file-drop').append(
         		   			'<div class="block-xs-12 block-sm-6 block-md-3 ui-state-default photo" >'+
 								'<div style="position:relative;width:100%;">'+
 									'<div class="user-picture-list" style="position:relative;height:; ">'+
-										'<img src="show_img.do?code='+data[i].img_code+'" class="picture-img" style="width:100%;" />'+
+										'<img src="show_img.do?time='+time+'&code='+data[i].img_code+'" class="picture-img" style="width:100%;" />'+
 									'</div>'+
 									'<div style="float:right;margin-top:30px;bottom: 15px;height:5px;position:relative;right:5px;display:block">'+
 										'<input type="hidden" value="'+data[i].img_code+'" class="img_code"/>'+
@@ -211,9 +232,9 @@
 								'</div>'+
 							'</div>'
         		   		);
-    				}	
-        			
-        		}
+        		   		console.log(data[i].img_code);
+    				}        			
+        		} 
         		w_resize();
 				
         	})

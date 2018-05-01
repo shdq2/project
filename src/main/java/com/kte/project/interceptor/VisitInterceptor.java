@@ -23,7 +23,6 @@ public class VisitInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("visit.do");
 			return false;
 		}
-			
 		else {
 			return true;
 		}

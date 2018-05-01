@@ -99,7 +99,7 @@ public class JsonController {
 			vo.setImg1(ilist.get(idx).getCustom_img());
 			cdao.profile_sortable(vo);
 		}
-		List<CustomVO> list = cdao.select_profile(id);
+		List<CustomVO> list = cdao.select_profile(id);		
 		return list;
 	}
 	

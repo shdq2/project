@@ -27,8 +27,21 @@ public class CustomVO {
 	private int img_code = 0;
 	private int reser_count = 0;
 	
+	private int start= 0;
+	private int end = 0;
 	
-	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public int getReser_count() {
 		return reser_count;
 	}

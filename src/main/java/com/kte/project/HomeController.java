@@ -84,7 +84,15 @@ public class HomeController {
 			}
 			ret1 = ret+"";
 			http.setAttribute("ret1", ret1);
-			return "redirect:/";
+			model.addAttribute("url", url);
+			if(url == null) {
+				model.addAttribute("url", "/project/");
+			}
+			
+			model.addAttribute("msg", "환영합니다");
+			model.addAttribute("ret", "y");
+			
+			return "alert";	
 		}
 		
 		
