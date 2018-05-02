@@ -315,7 +315,7 @@
 																<td class="text-center" colspan="4">아직 등록 됨 </td>
 															</tr>
 															<tr>
-																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn"/></td>
+																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn plus-option"/></td>
 															</tr>
 														</tbody>
 													</table>
@@ -513,6 +513,37 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="plus-option">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>옵션추가</h1>
+					<p>기간에 대한 옵션 설정</p>
+				</div>
+				<form:form action="host_price6.do" modelAttribute="vo" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="calendar[min_night]" class="control-label">최소 숙박 일수</label>
+							<input class="form-control inline" min="1" style="width: calc(100% - 35px)" type="number" value="20" id="calendar[min_night]"> 박
+							<p class="help-block">게스트가 최소로 예약할 수 있는 숙박일 수 입니다.</p>
+						</div>
+
+						<div class="form-group">
+							<label for="calendar[max_night]" class="control-label">최대 숙박 일수</label>
+							<input class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="90" id="calendar[max_night]"> 박
+							<p class="help-block">최대 365일까지 설정가능합니다.</p>
+						</div>
+					</div>
+					
+					<div class="modal-footer">
+						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+	
+	
 
 	
 	
@@ -529,6 +560,10 @@
 			
 			$('#term_fix_button').click(function(){
 				$('#term-fix-modal').modal('show');
+			});
+			
+			$('.plus-option').click(function(){
+				$('#plus-option').modal('show');
 			});
 			
 			
