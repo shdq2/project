@@ -37,11 +37,23 @@ public class RoomVO {
    private int region_no = 0;         //���� ��ȣ
 
    private int page = 0;
+   private String txt = null;
+   private int state = 0;
    
-   
-   
-   
-   public int getRoom_block() {
+     
+   public String getTxt() {
+	return txt;
+}
+public void setTxt(String txt) {
+	this.txt = txt;
+}
+public int getState() {
+	return state;
+}
+public void setState(int state) {
+	this.state = state;
+}
+public int getRoom_block() {
 	return room_block;
 }
 public void setRoom_block(int room_block) {

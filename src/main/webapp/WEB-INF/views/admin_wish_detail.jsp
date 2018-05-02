@@ -42,6 +42,10 @@
 			<th>인원</th>
 			<td>${vo.wish_number }</td>
 		</tr>
+		<tr>
+			<th>요청사항</th>
+			<td>${req }</td>
+		</tr>
 	</table>
 	<c:if test="${pre != 0}">
 		<a href="admin_wish_detail.do?code=${pre}" class="btn btn-info">이전글</a>

@@ -33,4 +33,11 @@
 	<select id="room_img" parameterType="String" resultMap="resultImg">
 		select room_img from room_img where room_img_code in (select min(room_img_code) from room_img where room_code=#{room_code})
 	</select>
+	
+	<select id="room_search" parameterType="roomVO" resultType="roomVO">
+		call room_search(
+			#{state,mode=IN},
+			#{txt,mode=IN}
+		)
+	</select>
 </mapper>

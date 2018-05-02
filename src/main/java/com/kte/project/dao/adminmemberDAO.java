@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 
 @Service
 public class adminmemberDAO {

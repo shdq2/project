@@ -40,4 +40,8 @@ public class adminroomDAO {
 	public RoomVO room_img(String room_code) {
 		return sql.selectOne("admin_room.room_img",room_code);
 	}
+	
+	public List<RoomVO> room_search(RoomVO vo){
+		return sql.selectList("admin_room.room_search",vo);
+	}
 }	

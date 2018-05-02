@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.WishVO;
+import com.kte.project.VO.WishchkVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
@@ -52,8 +53,22 @@ public class AdminWishController {
 		model.addAttribute("vo", vo);
 		model.addAttribute("pre", pre);
 		model.addAttribute("next", next);
+		
+		String req= "";
+		List<WishchkVO> list  = wdao.wish_require(code);
 		int wcount = wdao.wish_count();
 		http.setAttribute("_wcount", wcount);
+		if(list.size() == 0)
+			req = "없음";
+		else
+			for(int i=0;i<list.size();i++) {
+				if(i<list.size()-1)
+					req +=list.get(i).getWishc_title() + ", ";
+				else
+					req +=list.get(i).getWishc_title();
+			}
+			
+		model.addAttribute("req", req);
 		return "admin_wish_detail";
 	}
 }

@@ -499,9 +499,8 @@
 			
 			$(document).on('click','.room_name',function(){			
 				var idx = $(this).index('.room_name');
-				var code = $('.reser_room_code').eq(idx).val();
-				console.log(code);
-				window.open('/project/room_detail.do?code='+code,'_blank');
+				var code = $('.reser_room_code').eq(idx).val();				
+				window.location.href= '/project/room_detail.do?code='+code;
 			})
 			
 		});

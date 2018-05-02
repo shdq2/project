@@ -56,6 +56,9 @@ public class JSON_Admin_Controller {
 			@RequestParam("page")int page) {
 		page = (page-1)*10;
 		List<CustomVO> list = amdao.AdminUserMain(page);
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
+		}
 		return list;
 	}
 	
@@ -212,6 +215,19 @@ public class JSON_Admin_Controller {
 		vo.setRoom_code(code);
 		int ret = ardao.state_change(vo);
 		return ret;
+	}
+	
+	@RequestMapping(value = "/admin/Json_room_state_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<RoomVO> room_state_search(Model model,	
+			HttpSession http,			
+			@RequestParam("state")int state,
+			@RequestParam(value = "text",required=false)String txt) {
+		System.out.println(txt);
+		RoomVO vo= new RoomVO();
+		vo.setState(state);
+		vo.setTxt(txt);
+		List<RoomVO> list = ardao.room_search(vo);
+		return list;
 	}
 	//////////////////////////
 	

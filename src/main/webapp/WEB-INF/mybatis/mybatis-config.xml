@@ -14,7 +14,8 @@
 		<typeAlias type="com.kte.project.VO.CustomVO" alias="customVO" />
 		<typeAlias type="com.kte.project.VO.ReservationVO" alias="reservationVO" />
 		<typeAlias type="com.kte.project.VO.RoomVO" alias="roomVO" />
-		<typeAlias type="com.kte.project.VO.WishVO" alias="WishVO" />
+		<typeAlias type="com.kte.project.VO.WishVO" alias="wishVO" />
+		<typeAlias type="com.kte.project.VO.WishchkVO" alias="wishchkVO" />
 	</typeAliases>
 
 </configuration>

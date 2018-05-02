@@ -38,7 +38,7 @@ public class AdminMemberController {
 	public String member(Model model) {
 		List<CustomVO> list = amdao.AdminUserMain(0);
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));
+			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
 		}
 		int count = adao.usercount();
 		int tot = ((count-1)/10)+1;
@@ -68,8 +68,11 @@ public class AdminMemberController {
 		List<ReservationVO> rlist = amdao.reser_list(revo);
 		model.addAttribute("rlist", rlist);
 		
-		int rcount=amdao.reser_total(id);
+		int rcount=rlist.size();
 		model.addAttribute("rcount",rcount);
+		
+		
+		
 		return "admin_member_detail";
 	}
 }

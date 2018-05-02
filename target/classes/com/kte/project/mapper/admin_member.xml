@@ -21,4 +21,5 @@
 	<select id="admin_member_select" parameterType="String" resultType="customVO">
 		select * from custom where custom_id=#{id}
 	</select>
+
 </mapper>

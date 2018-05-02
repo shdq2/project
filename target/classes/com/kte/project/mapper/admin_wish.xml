@@ -11,7 +11,7 @@
 		select count(*) from wish
 	</select>
 	
-	<select id = "wish_list" resultType="WishVO" parameterType="Int">
+	<select id = "wish_list" resultType="wishVO" parameterType="Int">
 		select wish_code,wish_name,wish_region,wish_msg,wish_start,wish_end,wish_number,wish_chk from wish order by wish_code desc LIMIT #{page},10
 	</select>
 	
@@ -19,7 +19,7 @@
 		update wish set wish_chk = 1 where wish_code=#{code}
 	</update>
 	
-	<select id="wish_One" parameterType="Int" resultType="WishVO">
+	<select id="wish_One" parameterType="Int" resultType="wishVO">
 		select * from wish where wish_code=#{code}
 	</select>
 	<select id="wish_next" resultType="Int" parameterType="Int">
@@ -28,5 +28,9 @@
 	
 	<select id="wish_pre" resultType="Int" parameterType="Int">
 		select ifnull(max(wish_code),0) from wish where wish_code <![CDATA[<]]> #{code}
+	</select>
+	
+	<select id="wish_require" parameterType="Int" resultType="wishchkVO">
+		select wishc_title from wish_chk where wish_code = #{code}
 	</select>
 </mapper>

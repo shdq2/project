@@ -7,7 +7,7 @@
 	
 	<div class="col-md-9">
 	<div class="col-md-6" style="min-height: 300px;">
-	<div class="panel panel-default" style="height:280px;">
+	<div class="panel panel-default" style="height:310px;">
 						<div class="panel-heading" style="background-color: #BCE9B7;">
 							<h3 class="panel-title">프로필</h3>
 						</div>
@@ -36,14 +36,14 @@
 			<tr>
 				
 				<td>여행 횟수</td>
-				<td>0</td>
+				<td>${rcount }</td>
 			</tr> 
 		</table>
 	</div>
 	</div>	
 	</div>
 	<div class="col-md-6" style="min-height: 300px;">
-		<div class="panel panel-default" style="height:280px;">
+		<div class="panel panel-default" style="height:310px;">
 			<div class="panel-heading" style="background-color: #BCE9B7;">
 				<table style="width:100%">
 					<tr>
@@ -53,7 +53,7 @@
 					</tr>
 				</table>	
 			</div>
-			<div class="panel-body" style="height: 250px;">
+			<div class="panel-body" style="height: 300px;">
 				<table class="table table-striped room_table">
 					<thead>
 						<tr>
@@ -73,7 +73,13 @@
 									<td>${i.room_name }</td>
 									<td>${i.room_price }</td>
 									<td><input type="button" value="날짜 선택"></td>
-									<td></td>
+									<td>
+										<select class="room_state form-control" style="width:100px;">
+											<option value="0" <c:if test="${i.room_block == 0}">selected</c:if>>비공개</option>
+											<option value="1" <c:if test="${i.room_block == 1}">selected</c:if>>미완성</option>
+											<option value="2" <c:if test="${i.room_block == 2}">selected</c:if>>공개</option>
+										</select> 
+									</td>
 								</tr>
 							</c:forEach>
 						</c:if>

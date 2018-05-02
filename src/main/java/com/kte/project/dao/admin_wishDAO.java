@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.WishVO;
+import com.kte.project.VO.WishchkVO;
 
 @Service
 public class admin_wishDAO {
@@ -43,5 +44,9 @@ public class admin_wishDAO {
 	
 	public int wish_next(int code) {
 		return sql.selectOne("admin_wish.wish_next",code);
+	}
+	
+	public List<WishchkVO> wish_require(int code){
+		return sql.selectList("admin_wish.wish_require",code);
 	}
 }	
