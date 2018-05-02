@@ -45,11 +45,16 @@ public class HostVO {
 	private String busy_day_start = null;
 	private String busy_month_end = null;
 	private String busy_day_end = null;
+	private int price_code = 0;
 	
 	
 	
-	
-	
+	public int getPrice_code() {
+		return price_code;
+	}
+	public void setPrice_code(int price_code) {
+		this.price_code = price_code;
+	}
 	public String getBusy_month_start() {
 		return busy_month_start;
 	}

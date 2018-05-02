@@ -297,7 +297,14 @@ public class HostController {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
 		HostVO vo = hDAO.selectHostPrice(room_code);
+		List<HostVO> list = hDAO.selectLongPrice(room_code);
 		
+		System.out.println("a");
+		for(HostVO tmp : list) {
+			System.out.println(tmp.getBusy_month_start());
+		}
+		
+		model.addAttribute("list",list);
 		model.addAttribute("vo", vo);
 		
 		return "host_price";
@@ -331,13 +338,16 @@ public class HostController {
 		return "redirect:host_price.do";
 	}
 	
+	//modal창에 잇는 기간 받는 것.
 	@RequestMapping(value="/host_price4.do", method=RequestMethod.POST)
 	public String hostprice4(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession) {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
 		vo.setRoom_code(room_code);
 		
-		hDAO.updateBusyDate(vo);
+		int price_code = hDAO.selectLongPricecode();
+		vo.setPrice_code(price_code+1);
+		hDAO.insertLongPrice(vo);
 		
 		
 		return "redirect:host_price.do";

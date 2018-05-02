@@ -135,6 +135,7 @@ small{
     font-weight: 300;
     display: block;
     padding: 15px 20px;
+    font-weight:strong;
 }
  
 .panel-body .control-label{
@@ -197,4 +198,31 @@ small{
 	color : white;
 }
 
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid transparent;
+}
+
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.list-group-full .list-group-item {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.price-label{
+	font-size: 30px;
+}
+
+#remove_btn{
+	color : red;
+	margin-left : 5px;
+}
 
