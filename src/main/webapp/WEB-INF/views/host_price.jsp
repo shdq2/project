@@ -261,10 +261,10 @@
 									<label class="control-label col-sm-3">요금 부과 방법 선택</label>
 									<div class="form-group col-sm-9">
 										<div class="radio-inline">
-											<input name="radio2" checked="checked" type="radio"> <label>중/중기 예약 위주 숙소 - 할인/할증 설정</label>
+											<input name="radio2" id="radio2-1" checked="checked" type="radio"> <span>중/중기 예약 위주 숙소 - 할인/할증 설정</span>
 										</div>
 										<div class="radio-inline">
-											<input name="radio2" type="radio"> <label>단기 예약 위주 숙소 - 주말 가격 설정</label>
+											<input name="radio2" id="radio2-2" type="radio"> <span>단기 예약 위주 숙소 - 주말 가격 설정</span>
 										</div>
 										<p class="help-block" style="color:#76838f;font-size:14px;">
 	                                        <span style="color: red;">할인/할증 설정 : </span>숙박 시기 및 기간별 가격을 따로 적용할 수 있습니다.<br>
@@ -274,50 +274,131 @@
 								</div>
 							</div>
 							
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-md-9">
-									<h3 class="panel-title">숙박 일수별 요금 설정</h3>
+							<div id="discount_show">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-md-9">
+										<h3 class="panel-title">숙박 일수별 요금 설정</h3>
+										</div>
+										<div class="col-md-3">
+											<div align="center">
+												<input style="margin-top:6px" type="button" class="btn term-button" value="기간 추가"/>
+											</div>
+										</div>
 									</div>
-									<div class="col-md-3">
-										<div align="center">
-											<input style="margin-top:6px" type="button" class="btn term-button" value="기간 추가"/>
+								</div>
+								
+								<table class="table">
+									<thead>
+										<tr>
+											<td class="text-center">설정기간</td>
+											<td class="text-center" style="width:63%">설정내용</td>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${list}" var="vo" varStatus="i">
+											<tr>
+												<td>
+													<a href="#">${vo.busy_month_start}${vo.busy_day_start} - ${vo.busy_month_end}${vo.busy_day_end}</a>
+												</td>
+												<td>
+													<table class="table">
+														<thead>
+															<tr>
+																<td class="text-center">숙박</td>
+																<td class="text-center">1박 금액</td>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td class="text-center" colspan="4">아직 등록 됨 </td>
+															</tr>
+															<tr>
+																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn"/></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								<div class="panel-body">
+									<div class="form-group ">
+										<div class="pull-right">
+											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
 								</div>
 							</div>
+
+							<div id="weekend_show" style="display: none">
+								<div class="panel panel-bordered">
+										<div class="panel-heading">
+											<h3 class="panel-title">주말 가격 설정 
+											<span class="panel-desc">일자별로 가격 변동이 있을 시 평일 가격과 별도로 가격을 설정하세요.</span>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<div class="form-group">
+												<div class="control-label col-sm-3 checkbox checkbox-primary">
+													<div style="margin-left:60px">
+														<input type="checkbox" id="fri_price" name="fri_price_agree" class="weekend_price" /> 
+														<label for="fri_price">금요일</label>
+													</div>
+												</div>
+
+												<div class="col-sm-9">
+													<input id="fri_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled"	type="number"> 원 
+													<span class="help-block" id="month-price" style="font-size: 13px;">금요일 1박 가격을 입력하세요.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="col-sm-3 control-label  checkbox checkbox-primary">
+													<div style="margin-left:60px">
+														<input type="checkbox" id="sat_price" name="sat_price_agree" /> 
+														<label for="sat_price">토요일</label>
+													</div>
+												</div>
+												<div class="col-sm-9">
+													<input id="sat_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled"	name="price[sat_price]" type="number"> 원 
+													<span class="help-block" id="month-price" style="font-size: 13px;">토요일 1박 가격을 입력하세요.</span>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<div class="control-label col-sm-3  checkbox checkbox-primary">
+													<div style="margin-left:60px">
+														<input type="checkbox" id="sun_price" name="sun_price_agree" class="weekend_price" /> 
+														<label for="sun_price">일요일</label>
+													</div>
+												</div>
+												<div class="col-sm-9">
+													<input id="sun_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled" name="price[sun_price]" type="number"> 원
+													<span class="help-block" id="month-price" style="font-size: 13px;">일요일 1박 가격을 입력하세요.</span>
+												</div>
+											</div>
+										</div>
+								</div>
+								<div class="panel-header">
+									<h3 class="panel-title">도움말</h3>
+								</div>
+								<ul class="list-group list-group-full" style="padding-left: 50px">
+									<li class="list-group-item" style="padding-bottom: 5px">1. 금, 토, 일요일 중 요금을 별도로 설정하고자 하는 기간에 체크하여 가격을 설정하세요.</li>
+									<li class="list-group-item" style="padding-bottom: 5px">2. 주말가격은 기본설정보다 우선하여 적용됩니다.</li>
+									<li class="list-group-item" style="padding-bottom: 5px">3. 예약 계산기에서 미리 숙박 가격을 계산해보세요.</li>
+								</ul>
+								<div class="panel-body">
+									<div class="form-group ">
+										<div class="pull-right">
+											<input class="btn btn-primary btn-block" type="submit" value="저장">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 							
-							<table class="table">
-								<thead>
-									<tr>
-										<th class="text-center">설정기간</th>
-										<th class="text-center" style="width:63%">설정내용</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td></td>
-										<td>
-											<table class="table">
-												<thead>
-													<tr>
-														<th class="text-center">숙박</th>
-														<th class="text-center">1박 금액</th>
-													</tr>
-												</thead>
-												<tbody>
-												<tr>
-													<td class="text-center" colspan="4">아직 등록 됨 </td>
-												</tr>
-												<tr>
-													<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn"/></td>
-												</tr>
-												</tbody>
-											</table>
-										</td>
-									</tr>
-								</tbody>
-							</table>
 						</div> <!-- panel -->
 					</div>
 				</div>
@@ -333,48 +414,50 @@
 					<h1>성수기 기간 추가</h1>
 					<p>특정기간에 대한 할증 및 할인을 설정하고 싶다면, 해당 기간을 입력하세요.</p>
 				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label class="control-label">이 날짜부터</label>
-						<div class="from-inline">
-							<select class="form-control inline" style="width:calc((100% - 30px)/2)">
-								<c:forEach var="i" end="12" begin="1">
-									<option>${i}월</option>
-								</c:forEach>
-							</select>
-							<span style="margin:0 5px">/</span>
-							<select class="form-control inline" style="width:calc((100% - 30px)/2)">
-								<c:forEach var="i" end="31" begin="1">
-									<option>${i}일</option>
-								</c:forEach>
-							</select>
+				<form:form action="host_price4.do" modelAttribute="vo" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">이 날짜부터</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_month_start" path="busy_month_start">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month1">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_day_start" path="busy_day_start">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day1">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label">이 날짜까지</label>
-						<div class="from-inline">
-							<select class="form-control inline" style="width:calc((100% - 30px)/2)">
-								<c:forEach var="i" end="12" begin="1">
-									<option>${i}월</option>
-								</c:forEach>
-							</select>
-							<span style="margin:0 5px">/</span>
-							<select class="form-control inline" style="width:calc((100% - 30px)/2)">
-								<c:forEach var="i" end="31" begin="1">
-									<option>${i}일</option>
-								</c:forEach>
-							</select>
+						<div class="form-group">
+							<label class="control-label">이 날짜까지</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_month_end" path="busy_month_end">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month2">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_day_end" path="busy_day_end">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day2">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
 						</div>
+						<div class="checkbox checkbox-primary">
+							<input type="checkbox" id="basic_chk"/>
+							<label for="basic_chk">기본 설정</label>
+						</div>
+						<p style="font-size:13px"><font style="color:red">기본설정</font>은 할증/할인 기간에 해당되지 않는 기간에 적용됩니다.</p>
 					</div>
-					<div class="checkbox checkbox-primary">
-						<input type="checkbox"/>
-						<label>기본 설정</label>
+					<div class="modal-footer">
+						<input style="width:100%" type="submit" class="btn btn-primary" value="추가"/>
 					</div>
-					<p style="font-size:13px"><font style="color:red">기본설정</font>은 할증/할인 기간에 해당되지 않는 기간에 적용됩니다.</p>
-				</div>
-				<div class="modal-footer">
-					<input style="width:100%" type="submit" class="btn btn-primary" value="추가"/>
-				</div>
+				</form:form>
 			</div>
 		</div>
 	</div>
@@ -388,9 +471,68 @@
 	<script src="resources/js/topbar.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			
 			$('.term-button').click(function(){
 				$('#term-modal').modal('show');
 			});
+			
+			$('#basic_chk').change(function(){
+				if($('#basic_chk').is(':checked')){
+					$('#busy_month_start').val('1월').attr('disabled', true);
+					$('#busy_day_start').val('1일').attr('disabled', true);
+					$('#busy_month_end').val('12월').attr('disabled', true);
+					$('#busy_day_end').val('31일').attr('disabled', true);
+				}else{
+					$('#busy_month_start').val('1월').attr('disabled', false);
+					$('#busy_day_start').val('1일').attr('disabled', false);
+					$('#busy_month_end').val('1월').attr('disabled', false);
+					$('#busy_day_end').val('1일').attr('disabled', false);
+				}
+			});
+			
+			$('#radio2-1').click(function(){
+				if($('#radio2-1').is(':checked')){
+					$('#discount_show').show();
+					$('#weekend_show').hide();
+				}else{
+					$('#discount_show').hide();
+					$('#weekend_show').show();
+				}
+			})
+			
+			$('#radio2-2').click(function(){
+				
+				if($('#radio2-2').is(':checked')){
+					$('#discount_show').hide();
+					$('#weekend_show').show();
+				}else{
+					$('#discount_show').show();
+					$('#weekend_show').hide();
+				}
+			})
+			
+			$('#fri_price').click(function(){
+				if($('#fri_price').is(':checked')){
+					$('#fri_price_text').attr('disabled', false);
+				}else{
+					$('#fri_price_text').attr('disabled', true);
+				}
+			})
+			$('#sat_price').click(function(){
+				if($('#sat_price').is(':checked')){
+					$('#sat_price_text').attr('disabled', false);
+				}else{
+					$('#sat_price_text').attr('disabled', true);
+				}
+			})
+			$('#sun_price').click(function(){
+				if($('#sun_price').is(':checked')){
+					$('#sun_price_text').attr('disabled', false);
+				}else{
+					$('#sun_price_text').attr('disabled', true);
+				}
+			})
+			
 		});
 	</script>
 </body>

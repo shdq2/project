@@ -90,7 +90,8 @@
    </select>
    
    <select id="selectHostPrice" parameterType="int" resultType="HostVO">
-   		SELECT room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, room_plus_price_apply, room_plus_price  FROM `room` WHERE room_code=#{room_code}
+   		SELECT room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
+   			room_plus_price_apply, room_plus_price FROM `room` WHERE room_code=#{room_code}
    </select>
    
    <update id="updateHostPrice_MinMax" parameterType="HostVO">
@@ -100,6 +101,18 @@
    <update id="updateHostPrice_Basic" parameterType="HostVO">
    		UPDATE `room` SET room_month_price=#{room_month_price}, room_basic_deposit=#{room_basic_deposit}, room_basic_member=#{room_basic_member}, room_plus_price_apply=#{room_plus_price_apply}, room_plus_price=#{room_plus_price} WHERE room_code=#{room_code}
    </update>
+   
+   <select id="selectLongPricecode" resultType="int">
+   		SELECT MAX(price_code) FROM `room_long_price`
+   </select>
+   
+   <insert id="insertLongPrice" parameterType="HostVO">
+   		INSERT INTO `room_long_price`(price_code, room_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end) VALUES(#{price_code}, #{room_code}, #{busy_month_start}, #{busy_day_start}, #{busy_month_end}, #{busy_day_end})
+   </insert>
+   
+   <select id="selectLongPrice" parameterType="int" resultType="HostVO">
+   		SELECT busy_month_start, busy_day_start, busy_month_end, busy_day_end FROM `room_long_price` WHERE room_code=#{room_code}
+   </select>
 	
 	
 	

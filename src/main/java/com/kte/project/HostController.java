@@ -297,7 +297,14 @@ public class HostController {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
 		HostVO vo = hDAO.selectHostPrice(room_code);
+		List<HostVO> list = hDAO.selectLongPrice(room_code);
 		
+		System.out.println("a");
+		for(HostVO tmp : list) {
+			System.out.println(tmp.getBusy_month_start());
+		}
+		
+		model.addAttribute("list",list);
 		model.addAttribute("vo", vo);
 		
 		return "host_price";
@@ -322,8 +329,8 @@ public class HostController {
 							 @RequestParam("room_plus_price_apply") String room_plus_price_apply) {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
-
 		vo.setRoom_code(room_code);
+		
 		vo.setRoom_plus_price_apply(room_plus_price_apply);
 		
 		hDAO.updateHostPrice_Basic(vo);
@@ -331,9 +338,24 @@ public class HostController {
 		return "redirect:host_price.do";
 	}
 	
+	//modal창에 잇는 기간 받는 것.
+	@RequestMapping(value="/host_price4.do", method=RequestMethod.POST)
+	public String hostprice4(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession) {
+		
+		int room_code = (Integer)httpsession.getAttribute("room_code");
+		vo.setRoom_code(room_code);
+		
+		int price_code = hDAO.selectLongPricecode();
+		vo.setPrice_code(price_code+1);
+		hDAO.insertLongPrice(vo);
+		
+		
+		return "redirect:host_price.do";
+	}
+		
 	
 	@RequestMapping(value="/host_inout.do", method=RequestMethod.GET)
-	public String hostcalendar(Model model, HttpSession httpsession) {
+	public String hostinout(Model model, HttpSession httpsession) {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
 		System.out.println(room_code);
@@ -373,7 +395,7 @@ public class HostController {
 	}
 	
 	@RequestMapping(value="/host_inout.do", method=RequestMethod.POST)
-	public String hostcalendar(@ModelAttribute("vo") HostVO vo, HttpSession httpsession) {
+	public String hostinout(@ModelAttribute("vo") HostVO vo, HttpSession httpsession) {
 		
 		int room_code = (Integer) httpsession.getAttribute("room_code");
 		
@@ -382,6 +404,12 @@ public class HostController {
 		hDAO.updateRoomInOut(vo);
 		
 		return "redirect:host_inout.do";
+	}
+	
+	@RequestMapping(value="/host_calendar.do", method=RequestMethod.GET)
+	public String hostcalendar(Model model, HttpSession httpsession) {
+		
+		return "host_calendar";
 	}
 	
 }

@@ -78,8 +78,8 @@
 											<c:forEach var="i" begin="0" end="${fn:length(str)}">
 												<c:if test="${room_option[i] == tmp}">
 													<div class="checkbox checkbox-primary">
-														<input name="str[]" checked="checked" type="checkbox" value="${tmp}">
-														<label>${tmp}</label>
+														<input name="str[]" checked="checked" type="checkbox" id="${tmp}" value="${tmp}">
+														<label for="${tmp}">${tmp}</label>
 														<c:set var="a" value="1" />
 													</div>
 												</c:if>
@@ -87,8 +87,8 @@
 									
 											<c:if test="${a == 0}">
 												<div class="checkbox checkbox-primary">
-													<input name="str[]" type="checkbox" value="${tmp}">
-													<label >${tmp}</label>
+													<input name="str[]" type="checkbox" id="${tmp}" value="${tmp}">
+													<label for="${tmp}">${tmp}</label>
 												</div>
 											</c:if>
 											
@@ -107,8 +107,8 @@
 											<c:forEach var="i" begin="0" end="${fn:length(str1)}">
 												<c:if test="${room_option1[i] == tmp}">
 													<div class="checkbox checkbox-primary">
-														<input name="str1[]" checked="checked" type="checkbox" value="${tmp}">
-														<label >${tmp}</label>
+														<input name="str1[]" checked="checked" type="checkbox" id="${tmp}" value="${tmp}">
+														<label for="${tmp}">${tmp}</label>
 														<c:set var="a" value="1" />
 													</div>
 												</c:if>
@@ -116,8 +116,8 @@
 									
 											<c:if test="${a == 0}">
 												<div class="checkbox checkbox-primary">
-													<input name="str1[]" type="checkbox" value="${tmp}">
-													<label >${tmp}</label>
+													<input name="str1[]" type="checkbox" id="${tmp}" value="${tmp}">
+													<label for="${tmp}">${tmp}</label>
 												</div>
 											</c:if>
 											
@@ -140,8 +140,8 @@
 											<c:forEach var="i" begin="0" end="${fn:length(str2)}">
 												<c:if test="${room_option2[i] == tmp}">
 													<div class="checkbox checkbox-primary">
-														<input name="str2[]" checked="checked" type="checkbox" value="${tmp}">
-														<label >${tmp}</label>
+														<input name="str2[]" checked="checked" type="checkbox" id="${tmp}" value="${tmp}">
+														<label for="${tmp}">${tmp}</label>
 														<c:set var="a" value="1" />
 													</div>
 												</c:if>
@@ -149,8 +149,8 @@
 									
 											<c:if test="${a == 0}">
 												<div class="checkbox checkbox-primary">
-													<input name="str2[]" type="checkbox" value="${tmp}">
-													<label >${tmp}</label>
+													<input name="str2[]" type="checkbox" id="${tmp}" value="${tmp}">
+													<label for="${tmp}">${tmp}</label>
 												</div>
 											</c:if>
 											
@@ -166,8 +166,8 @@
 											<c:forEach var="i" begin="0" end="${fn:length(str3)}">
 												<c:if test="${room_option3[i] == tmp}">
 													<div class="checkbox checkbox-primary">
-														<input name="str3[]" checked="checked" type="checkbox" value="${tmp}">
-														<label >${tmp}</label>
+														<input name="str3[]" checked="checked" type="checkbox" id="${tmp}" value="${tmp}">
+														<label for="${tmp}">${tmp}</label>
 														<c:set var="a" value="1" />
 													</div>
 												</c:if>
@@ -175,8 +175,8 @@
 									
 											<c:if test="${a == 0}">
 												<div class="checkbox checkbox-primary">
-													<input name="str3[]" type="checkbox" value="${tmp}">
-													<label >${tmp}</label>
+													<input name="str3[]" type="checkbox" id="${tmp}" value="${tmp}">
+													<label for="${tmp}">${tmp}</label>
 												</div>
 											</c:if>
 											

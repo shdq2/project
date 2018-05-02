@@ -98,4 +98,15 @@ public class HostDAO {
 		return sqlsession.update("Host.updateHostPrice_Basic", vo);
 	}
 	
+	public int selectLongPricecode() {
+		return sqlsession.selectOne("Host.selectLongPricecode");
+	}
+	
+	public int insertLongPrice(HostVO vo) {
+		return sqlsession.insert("Host.insertLongPrice", vo);
+	}
+	
+	public List<HostVO> selectLongPrice(int room_code){
+		return sqlsession.selectList("Host.selectLongPrice", room_code);
+	}
 }

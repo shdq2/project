@@ -130,11 +130,12 @@ small{
 
 .panel-title {
 	color: #6f7071 !important;
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
     display: block;
     padding: 15px 20px;
+    font-weight:strong;
 }
  
 .panel-body .control-label{
@@ -197,4 +198,25 @@ small{
 	color : white;
 }
 
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid transparent;
+}
 
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.list-group-full .list-group-item {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.price-label{
+	font-size: 30px;
+}
