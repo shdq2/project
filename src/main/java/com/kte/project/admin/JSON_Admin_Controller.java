@@ -83,9 +83,14 @@ public class JSON_Admin_Controller {
 		vo.setPage(p);
 		int total = ardao.total_room_count(id);
 		int tot = ((total-1)/4)+1;
-		List<RoomVO> list = ardao.roomList(vo);
+		List<RoomVO> list = ardao.roomList(vo);		
+		for(int i=0;i<list.size();i++) {
+			int num = total - (page-1)*4-i;			
+			list.get(i).setRoom_count(num);
+		}
 		map.put("data", list);
 		map.put("page", tot);
+		
 		return map;
 	}
 	
@@ -105,6 +110,10 @@ public class JSON_Admin_Controller {
 		int total = amdao.reser_total(id);
 		int tot = ((total-1)/6)+1;
 		List<ReservationVO> list = amdao.reser_list(vo);
+		for(int i=0;i<list.size();i++) {
+			int num = total - (page-1)*4-i;			
+			list.get(i).setReser_count(num);
+		}
 		map.put("data", list);
 		map.put("page", tot);
 		return map;
@@ -197,19 +206,33 @@ public class JSON_Admin_Controller {
 	//////////////////// json room///////////////
 	
 	@RequestMapping(value = "/admin/json_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody List<RoomVO> room(Model model,	
+	public @ResponseBody Map<String,Object> room(Model model,	
 			HttpSession http,
-			@RequestParam("page")int p) {		
-		int page = (p-1)*10;
-		List<RoomVO> list = ardao.allroomList(page);
-		return list;
+			@RequestParam("page")int p,
+			@RequestParam(value="id",defaultValue="")String id) {		
+		Map<String,Object> map = new HashMap<String, Object>();
+		int page = (p-1)*10;		
+		ReservationVO rvo = new ReservationVO(); // reservationVO에 page와 hostid가 둘다 존재하여 사용
+		rvo.setHost_id(id);
+		rvo.setPage(page);		
+		List<RoomVO> list = ardao.allroomList(rvo);
+		RoomVO vo = new RoomVO();		
+		vo.setState(-1);
+		vo.setTxt("");
+		
+		int ret = ardao.room_search_count(vo);
+		ret = (ret-1)/10+1;
+		map.put("list", list);
+		map.put("ret", ret);
+		return map;
 	}
 	
 	@RequestMapping(value = "/admin/json_room_state_change.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int room_state_change(Model model,	
 			HttpSession http,
 			@RequestParam("code")String code,
-			@RequestParam("value")int value) {		
+			@RequestParam("value")int value) {	
+		
 		RoomVO vo= new RoomVO();
 		vo.setRoom_block(value);
 		vo.setRoom_code(code);
@@ -218,16 +241,24 @@ public class JSON_Admin_Controller {
 	}
 	
 	@RequestMapping(value = "/admin/Json_room_state_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody List<RoomVO> room_state_search(Model model,	
+	public @ResponseBody Map<String,Object> room_state_search(Model model,	
 			HttpSession http,			
 			@RequestParam("state")int state,
-			@RequestParam(value = "text",required=false)String txt) {
-		System.out.println(txt);
+			@RequestParam(value = "text",required=false)String txt,
+			@RequestParam(value = "page",defaultValue="1")int p) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		int page = (p-1)*10;
 		RoomVO vo= new RoomVO();
 		vo.setState(state);
 		vo.setTxt(txt);
+		vo.setPage(page);
 		List<RoomVO> list = ardao.room_search(vo);
-		return list;
+		int ret = ardao.room_search_count(vo); 
+		ret = (ret-1)/10+1;
+		map.put("list", list);
+		map.put("ret", ret);
+		return map;
 	}
 	//////////////////////////
 	

@@ -69,11 +69,12 @@
 							<c:set var="leng" value="${fn:length(list) }" />
 							<c:forEach var="i" items="${list }" varStatus="j">
 								<tr class="rlist">
-									<td>${i.room_code - 111110 }</td>
+									<td>${i.room_count }</td>
 									<td>${i.room_name }</td>
-									<td>${i.room_price }</td>
+									<td>${i.room_day} 원</td>
 									<td><input type="button" value="날짜 선택"></td>
 									<td>
+									<input type="hidden" class="room_code" value="${i.room_code }" />
 										<select class="room_state form-control" style="width:100px;">
 											<option value="0" <c:if test="${i.room_block == 0}">selected</c:if>>비공개</option>
 											<option value="1" <c:if test="${i.room_block == 1}">selected</c:if>>미완성</option>
@@ -142,7 +143,7 @@
 						<c:if test="${!empty rlist }">
 							<c:forEach var="i" items="${rlist }">
 								<tr class="tlist">
-									<td>${i.reservation_code }</td>
+									<td>${i.reser_count }</td>
 									<td>${i.room_name }</td>
 									<td>${i.reservation_start } ~ ${i.reservation_end } ( ${i.reser_day }박 ${i.reser_day+1 }일 )</td>
 									<td>${i.reser_title }</td>
@@ -184,7 +185,18 @@
 			var id = '${param.id}';			
 			var count='${count}';
 			var rcount='${rcount}';
-			
+			$('.room_state').change(function(){
+				var idx = $(this).index('.room_state');
+				 var code = $('.room_code').eq(idx).val();
+				 console.log(code);
+				 var value = $('.room_state').eq(idx).val();
+				 $.get('json_room_state_change.do?value='+value+'&code='+code,function(data){
+					 if(data == 1)
+					 	console.log("정상적으로 수행 되었습니다");
+					 else
+						console.log("정상적으로 수행되지 않았습니다");
+				 })
+			})
 			if(count<=4){
 				$('.room_left').addClass("disabled");
 				$('.room_left').removeClass("left_btn");

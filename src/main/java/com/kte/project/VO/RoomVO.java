@@ -15,8 +15,6 @@ public class RoomVO {
    private String ro_security = null;   // 占쏙옙占쏙옙 占쏙옙占싫삼옙占쏙옙
    private String ro_date = null;      // 占심쇽옙 占쏙옙占� 占쏙옙占쏙옙
 
-
-
    private String room_name = null;   //占쏙옙占쏙옙 占싱몌옙
    private String room_content = null;   //占쏙옙占쏙옙 占쏙옙占쏙옙
    private String room_price = null;   //占쏙옙占쏙옙 占쏙옙占쏙옙 (1占쌘깍옙占쏙옙)
@@ -39,9 +37,16 @@ public class RoomVO {
    private int page = 0;
    private String txt = null;
    private int state = 0;
+   private int room_count = 0;
    
      
-   public String getTxt() {
+   public int getRoom_count() {
+	return room_count;
+}
+public void setRoom_count(int room_count) {
+	this.room_count = room_count;
+}
+public String getTxt() {
 	return txt;
 }
 public void setTxt(String txt) {

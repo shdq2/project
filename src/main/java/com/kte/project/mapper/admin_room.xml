@@ -13,11 +13,12 @@
 		select count(*) from room where custom_id=#{id}
 	</select>
 	
-	<select id="all_room" resultType="roomVO">
+	<select id="all_room" resultType="roomVO" parameterType="reservationVO">
 		select c.custom_name,r.room_name,r.room_day,r.room_block,r.room_code from custom c 
 		inner join
 		(select * from room ) r 
 		on c.custom_id = r.custom_id
+		where r.custom_id like concat(#{host_id},'%')
 		order by room_code desc
 		Limit #{page},10
 	</select>
@@ -36,6 +37,14 @@
 	
 	<select id="room_search" parameterType="roomVO" resultType="roomVO">
 		call room_search(
+			#{state,mode=IN},
+			#{txt,mode=IN},
+			#{page,mode=IN}
+		)
+	</select>
+	
+	<select id="room_search_count" parameterType="roomVO" resultType="Int">
+		call room_search_count(
 			#{state,mode=IN},
 			#{txt,mode=IN}
 		)

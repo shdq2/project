@@ -36,6 +36,15 @@ public class ReservationVO {
 	
 	private int reservation_people = 0;
 	
+	private int reser_count = 0;
+	
+	
+	public int getReser_count() {
+		return reser_count;
+	}
+	public void setReser_count(int reser_count) {
+		this.reser_count = reser_count;
+	}
 	public int getReservation_people() {
 		return reservation_people;
 	}

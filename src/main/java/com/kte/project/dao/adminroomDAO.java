@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 import com.kte.project.VO.RoomVO;
 
 @Service
@@ -25,8 +26,8 @@ public class adminroomDAO {
 		return sql.selectOne("admin_room.total_room_count",id);
 	}
 
-	public List<RoomVO> allroomList(int page){
-		return sql.selectList("admin_room.all_room",page);
+	public List<RoomVO> allroomList(ReservationVO vo){
+		return sql.selectList("admin_room.all_room",vo);
 	}
 	
 	public int room_count() {
@@ -43,5 +44,9 @@ public class adminroomDAO {
 	
 	public List<RoomVO> room_search(RoomVO vo){
 		return sql.selectList("admin_room.room_search",vo);
+	}
+	
+	public int room_search_count(RoomVO vo){
+		return sql.selectOne("admin_room.room_search_count",vo);
 	}
 }	

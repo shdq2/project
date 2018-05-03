@@ -93,7 +93,9 @@ function reser_list(state,page){
 									'</tr>'+
 									'<tr>'+
 										'<th colspan="2" style="width:50%"><a href="admin_member_detail.do?id='+data[i].host_id+'" class="form-control member_info">회원 정보 보기</a></th>'+									
-										'<th colspan="2" style="width:50%"><input type="button" value="등록된 다른 숙소 보기" class="form-control"/></th>'+
+										'<th colspan="2" style="width:50%">'+
+										'<a href="admin_room.do?id='+data[i].host_id+'" class="form-control">등록된 다른 숙소 보기</a>'+
+										'</th>'+
 									'</tr>'+
 								'</table>'+
 							'</div>'+			
@@ -238,7 +240,7 @@ function destroy_page(state){
 	    										'</tr>'+
 	    										'<tr>'+
 	    											'<th colspan="2" style="width:50%"><a href="admin_member_detail.do?id='+data[i].host_id+'" class="form-control member_info">회원 정보 보기</a></th>'+									
-	    											'<th colspan="2" style="width:50%"><input type="button" value="등록된 다른 숙소 보기" class="form-control"/></th>'+
+	    											'<th colspan="2" style="width:50%"><a href="admin_room.do?id='+data[i].host_id+'" class="form-control">등록된 다른 숙소 보기</a></th>'+
 	    										'</tr>'+
 	    									'</table>'+
 	    								'</div>'+			
@@ -382,7 +384,9 @@ function search_reser(){
 										'</tr>'+
 										'<tr>'+
 											'<th colspan="2" style="width:50%"><a href="admin_member_detail.do?id='+data[i].host_id+'" class="form-control member_info">회원 정보 보기</a></th>'+									
-											'<th colspan="2" style="width:50%"><input type="button" value="등록된 다른 숙소 보기" class="form-control"/></th>'+
+											'<th colspan="2" style="width:50%">'+
+											'<a href="admin_room.do?id='+data[i].host_id+'" class="form-control">등록된 다른 숙소 보기</a>'+
+											'</th>'+
 										'</tr>'+
 									'</table>'+
 								'</div>'+			

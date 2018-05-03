@@ -34,8 +34,9 @@
 			</thead>
 			<tbody>
 				
-			</tbody>
+			</tbody>			
 		</table>
+		<div id="tf" style="width:100%;height:30px;display:none;">저장된 값이 없습니다</div>
 		<div style="width:100%;text-align: center">
 			<ul id="pagination" class="pagination-sm"></ul>
 		</div>
@@ -61,10 +62,13 @@
 	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script>
-	function room_list(data){
+	function room_list(data1){
+		var data = data1.list;
+		var ret = data1.ret;
 		var leng = data.length;
+		
 		 var src = "";
-
+		console.log(data);
 		 $('.table tbody').empty();
 		 for(var i=0;i<leng;i++){
 			 if(data[i].room_block == 0){
@@ -96,28 +100,56 @@
 				'</tr>'
 			 );
 			 
-			 $('.room_state').eq(i).val(data[i].room_block).attr("selected","true");
+			 $('.room_state').eq(i).val(data[i].room_block).attr("selected","true");			 
 		 }
+		 
 	}
+	function destroy_page(data1,state,txt){
+		var data = data1.list;
+		var ret = data1.ret;
+		if(data.length != 0 ){
+			$('#tf').css('display','none');
+			$('#pagination').twbsPagination('destroy');
+			 
+			$('#pagination').twbsPagination({
+			     totalPages:ret,
+			     visiblePages: 7,
+			     onPageClick: function (event, page) {
+					 $.get('Json_room_state_search.do?page='+page+'&state='+state+'&text='+txt,function(data){
+						room_list(data);
+					 });
+			     }
+			})
+		}else{
+			$('#tf').css('display','block');
+		}
+	}
+
 		$(function(){
 			
+			$(window).keydown(function(event){
+				if(event.keyCode==116){
+					window.location.href="admin_room.do";
+				}	
+			})
+			var id="${url_id}";
+			console.log(id);
 			$('#state').change(function(){
 				var state = $('#state').val();
 				$.get('Json_room_state_search.do?state='+state,function(data){
 					room_list(data);
+					destroy_page(data,state,"");
 				})
 			})
 			
 			$('#search_btn').click(function(){
 				var type = $('#type').val();
 				var txt = $('#search').val();
-				console.log(txt);
-				console.log(type);
 				$.get('Json_room_state_search.do?state='+type+'&text='+txt,function(data){
-					console.log(data);
 					room_list(data);
+					destroy_page(data,type,txt);
+					
 				})
-				
 			})
 			//활성화된 메뉴 처리
 			$('.room_menu').addClass("active");
@@ -126,11 +158,10 @@
 			      totalPages:${count},
 			      visiblePages: 7,
 			      onPageClick: function (event, page) {
-					 $.get('json_room.do?page='+page,function(data){
+					 $.get('json_room.do?page='+page+'&id='+id,function(data){
 						 room_list(data);
-					 },'json');
-					 
-					 
+						 
+					 },'json');				 
 			      }
 		   });
 			

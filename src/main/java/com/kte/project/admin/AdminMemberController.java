@@ -1,6 +1,7 @@
 package com.kte.project.admin;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,27 +52,34 @@ public class AdminMemberController {
 	public String admin_member_detail(Model model,
 			@RequestParam("id")String id) {
 		CustomVO vo = amdao.admin_member_select(id);
+		int count = ardao.total_room_count(id);
 		model.addAttribute("vo", vo);
 		RoomVO rvo = new RoomVO();
 		rvo.setCustom_id(id);
 		rvo.setPage(0);
 		List<RoomVO> list = ardao.roomList(rvo);
+		for(int i=0;i<list.size();i++) {
+			int num = count - i;			
+			list.get(i).setRoom_count(num);
+		}
 		model.addAttribute("list", list);
 		
-		int count = ardao.total_room_count(id);
+		
 		model.addAttribute("count", count);
 		
 		ReservationVO revo = new ReservationVO();
 		revo.setCustom_id(id);
-		revo.setPage(0);
+		revo.setPage(0);		
 		
 		List<ReservationVO> rlist = amdao.reser_list(revo);
 		model.addAttribute("rlist", rlist);
 		
 		int rcount=rlist.size();
+		for(int i=0;i<rlist.size();i++) {
+			int num = rcount - i;			
+			rlist.get(i).setReser_count(num);
+		}
 		model.addAttribute("rcount",rcount);
-		
-		
 		
 		return "admin_member_detail";
 	}

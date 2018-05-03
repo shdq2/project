@@ -46,13 +46,22 @@ public class AdminRoomController {
 	private adminroomDAO ardao = null;
 	
 	@RequestMapping(value = "/admin/admin_room.do", method = RequestMethod.GET)
-	public String home(Model model,HttpSession http) {
-		int count = ardao.room_count();
-		count = ((count-1)/10)+1;
+	public String home(Model model,HttpSession http,
+			@RequestParam(value="id",defaultValue="")String id) {
+		int count =0;
+		if(id =="") {
+			count = ardao.room_count();
+		}else {
+			RoomVO vo = new RoomVO();		
+			vo.setTxt(id);
+			vo.setState(5);
+			count = ardao.room_search_count(vo);	
+		}
 		
-		model.addAttribute("count", count);
-		List<RoomVO> list = ardao.allroomList(1);
-		model.addAttribute("list",list);
+		count = ((count-1)/10)+1;		
+		model.addAttribute("count", count);		
+		model.addAttribute("url_id", id);		
+		
 		return "admin_room";
 	}
 	
