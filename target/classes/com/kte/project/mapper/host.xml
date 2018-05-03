@@ -110,10 +110,24 @@
    		INSERT INTO `room_long_price`(price_code, room_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end) VALUES(#{price_code}, #{room_code}, #{busy_month_start}, #{busy_day_start}, #{busy_month_end}, #{busy_day_end})
    </insert>
    
+   <update id="updateLongPrice" parameterType="HostVO">
+   		UPDATE `room_long_price` SET busy_month_start=#{busy_month_start}, busy_day_start=#{busy_day_start}, busy_month_end=#{busy_month_end}, busy_day_end=#{busy_day_end}
+   </update>
+   
    <select id="selectLongPrice" parameterType="int" resultType="HostVO">
-   		SELECT busy_month_start, busy_day_start, busy_month_end, busy_day_end FROM `room_long_price` WHERE room_code=#{room_code}
+   		SELECT price_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end FROM `room_long_price` WHERE room_code=#{room_code}
    </select>
 	
+	<delete id="deletePriceDel1" parameterType="int">
+		DELETE FROM `room_long_price` WHERE price_code=#{price_code}
+	</delete> 
 	
+	<select id="selectRtCode" resultType="int">
+		SELECT MAX(rt_code) FROM `room_term_plus` 
+	</select>
+	
+	<insert id="insertRoomTermPlus" parameterType="HostVO">
+		INSERT INTO `room_term_plus`(rt_code, rt_day, rt_price, price_code, rt_date) VALUES(#{rt_code},#{rt_day},#{rt_price},#{price_code},NOW())
+	</insert>
 	
 </mapper>	

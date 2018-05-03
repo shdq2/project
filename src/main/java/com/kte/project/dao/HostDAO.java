@@ -105,8 +105,23 @@ public class HostDAO {
 	public int insertLongPrice(HostVO vo) {
 		return sqlsession.insert("Host.insertLongPrice", vo);
 	}
+	public int updateLongPrice(HostVO vo) {
+		return sqlsession.update("Host.updateLongPrice", vo);
+	}
 	
 	public List<HostVO> selectLongPrice(int room_code){
 		return sqlsession.selectList("Host.selectLongPrice", room_code);
+	}
+	
+	public int deletePriceDel1(int price_code) {
+		return sqlsession.delete("Host.deletePriceDel1", price_code);
+	}
+	
+	public int selectRtCode() {
+		return sqlsession.selectOne("Host.selectRtCode");
+	}
+	
+	public int insertRoomTermPlus(HostVO vo) {
+		return sqlsession.insert("Host.insertRoomTermPlus", vo);
 	}
 }

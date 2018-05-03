@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.first_screen {
+    display:block;
+}
+.second_screen,
+.third_screen,
+.last_screen{
+    display:none;
+}
+.first_screen,
+.second_screen,
+.third_screen,
+.last_screen{
+    padding-top:50px;
+    height:500px;
+    background:#f33;
+    display:block;
+    text-align:center;
+}
+.second_screen {
+    background:yellow;
+}
+.third_screen {
+    color:#fff;
+    background:#333;
+}
+.last_screen {
+    color:#fff;
+    background:blue;
+}

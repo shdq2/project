@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -262,7 +262,7 @@
 									<div class="form-group col-sm-9">
 										<div class="radio-inline">
 											<input name="radio2" id="radio2-1" checked="checked" type="radio"> <span>중/중기 예약 위주 숙소 - 할인/할증 설정</span>
-										</div>
+										</div><br/>
 										<div class="radio-inline">
 											<input name="radio2" id="radio2-2" type="radio"> <span>단기 예약 위주 숙소 - 주말 가격 설정</span>
 										</div>
@@ -298,8 +298,10 @@
 									<tbody>
 										<c:forEach items="${list}" var="vo" varStatus="i">
 											<tr>
-												<td>
-													<a href="#">${vo.busy_month_start}${vo.busy_day_start} - ${vo.busy_month_end}${vo.busy_day_end}</a>
+												<td align="center" style="vertical-align:middle">
+													<a href="#" class="term_fix_button">${vo.busy_month_start}/${vo.busy_day_start} - ${vo.busy_month_end}/${vo.busy_day_end}</a>
+													<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
+													<input type="text" id="price_code" value="${vo.price_code}" style="display:none"/>
 												</td>
 												<td>
 													<table class="table">
@@ -314,7 +316,7 @@
 																<td class="text-center" colspan="4">아직 등록 됨 </td>
 															</tr>
 															<tr>
-																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn"/></td>
+																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn plus-option"/></td>
 															</tr>
 														</tbody>
 													</table>
@@ -404,9 +406,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	
-	<!-- modal창 -->
+	<!-------------------------- modal창 ------------------------------>
 	<div class="modal fade" id="term-modal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -414,8 +415,8 @@
 					<h1>성수기 기간 추가</h1>
 					<p>특정기간에 대한 할증 및 할인을 설정하고 싶다면, 해당 기간을 입력하세요.</p>
 				</div>
-				<form:form action="host_price4.do" modelAttribute="vo" method="post">
-					<div class="modal-body">
+				<form:form action="host_price_modal1.do" modelAttribute="vo" method="post">
+					<div class="modal-body"> 
 						<div class="form-group">
 							<label class="control-label">이 날짜부터</label>
 							<div class="from-inline">
@@ -462,6 +463,87 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="term-fix-modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>할증/할인 기간변경</h1>
+					<p>특정기간에 대한 할증 및 할인을 설정하고 싶다면, 해당 기간을 입력하세요.</p>
+				</div>
+				<form:form action="host_price_modal2.do" modelAttribute="vo" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="control-label">이 날짜부터</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_month_start1" path="busy_month_start">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month1">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_day_start1" path="busy_day_start">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day1">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">이 날짜까지</label>
+							<div class="from-inline">
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_month_end1" path="busy_month_end">
+									<c:forEach var="i" end="12" begin="1">
+										<option id="modal_month2">${i}월</option>
+									</c:forEach>
+								</form:select>
+								<span style="margin:0 5px">/</span>
+								<form:select class="form-control inline" style="width:calc((100% - 30px)/2)" id="busy_day_end1" path="busy_day_end">
+									<c:forEach var="i" end="31" begin="1">
+										<option id="modal_day2">${i}일</option>
+									</c:forEach>
+								</form:select>
+							</div>
+						</div>
+					</div>
+					<form:input type="text" id="price_code1" value="a" style="display:none" path="price_code"/>
+					<div class="modal-footer">
+						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="plus-option">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>옵션추가</h1>
+					<p id="plus_option_date"></p>
+				</div>
+				<form:form action="host_price_modal3.do" modelAttribute="vo" method="post">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="calendar[min_night]" class="control-label">최소 숙박 일수</label>
+							<form:input path="rt_day" class="form-control inline" min="1" style="width: calc(100% - 35px)" type="number" value="20" id="calendar[min_night]"/> 박
+						</div>
+
+						<div class="form-group">
+							<label for="calendar[max_night]" class="control-label">1박 금액</label>
+							<form:input path="rt_price" class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="90" id="calendar[max_night]"/> 박
+							<p class="help-block">1박당 금액에 적용됩니다.</p>
+						</div>
+					</div>
+					<form:input type="text" id="price_code2" value="a" style="display:none" path="price_code"/>
+					<div class="modal-footer">
+						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
+					</div>
+				</form:form>
+			</div>
+		</div>
+	</div>
+	
+	
 
 	
 	
@@ -469,12 +551,60 @@
 	<script src="resources/js/bootstrap.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/sweetalert.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			
+			//삭제 버튼
+			$('.term_fix_del').click(function(){
+				var a = $('#price_code').val();
+				swal({
+					title: "삭제",
+					text: "정말 삭제하시겠습니까?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				})
+				.then((willDelete) => {
+					if(willDelete){
+						window.location.href='host_price_del1.do?price_code='+a
+					}
+				});
+			});
+			
+			//최초 기간 넣기 (modal1)
 			$('.term-button').click(function(){
 				$('#term-modal').modal('show');
 			});
+			
+			//기간 수정 (modal2)
+			$('.term_fix_button').click(function(){
+				var p_code = $('#price_code').val();
+				var a = $(this).text();
+				var b = a.split(' - ');
+				var ba = b[0].split('/');
+				var bb = b[1].split('/');
+				/* alert(ba[0]+ba[1]+bb[0]+bb[1]);	 */
+				
+				$('#price_code1').val(p_code); 
+				$('#busy_month_start1').val(ba[0]);
+				$('#busy_day_start1').val(ba[1]);
+				$('#busy_month_end1').val(bb[0]);
+				$('#busy_day_end1').val(bb[1]);
+				
+				$('#term-fix-modal').modal('show');
+			});
+			
+			//기간에 대한 옵션 (modal3)
+			$('.plus-option').click(function(){
+				var p_code = $('#price_code').val();
+				var a = $('.term_fix_button').text();
+				/* alert(a); */
+				$('#price_code2').val(p_code);
+				$('#plus_option_date').text(a+' 기간동안에 대한 옵션설정');
+				$('#plus-option').modal('show');
+			});
+			
 			
 			$('#basic_chk').change(function(){
 				if($('#basic_chk').is(':checked')){

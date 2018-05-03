@@ -299,7 +299,6 @@ public class HostController {
 		HostVO vo = hDAO.selectHostPrice(room_code);
 		List<HostVO> list = hDAO.selectLongPrice(room_code);
 		
-		System.out.println("a");
 		for(HostVO tmp : list) {
 			System.out.println(tmp.getBusy_month_start());
 		}
@@ -339,8 +338,8 @@ public class HostController {
 	}
 	
 	//modal창에 잇는 기간 받는 것.
-	@RequestMapping(value="/host_price4.do", method=RequestMethod.POST)
-	public String hostprice4(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession) {
+	@RequestMapping(value="/host_price_modal1.do", method=RequestMethod.POST)
+	public String hostpricemodal1(@ModelAttribute("HostVO") HostVO vo, HttpSession httpsession) {
 		
 		int room_code = (Integer)httpsession.getAttribute("room_code");
 		vo.setRoom_code(room_code);
@@ -349,6 +348,38 @@ public class HostController {
 		vo.setPrice_code(price_code+1);
 		hDAO.insertLongPrice(vo);
 		
+		
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price_modal2.do", method=RequestMethod.POST)
+	public String hostpricemodal2(@ModelAttribute("HostVO") HostVO vo) {
+		
+		System.out.println(vo.getPrice_code());
+		
+		hDAO.updateLongPrice(vo);
+		
+		
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price_modal3.do", method=RequestMethod.POST)
+	public String hostpricemodal3(@ModelAttribute("HostVO") HostVO vo) {
+		
+		int rt_code = hDAO.selectRtCode();
+		vo.setRt_code(rt_code+1);
+		
+		hDAO.insertRoomTermPlus(vo);
+		
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price_del1.do", method=RequestMethod.GET)
+	public String hostpricedel1(@RequestParam("price_code") int price_code) {
+		
+		System.out.println(price_code);
+		
+		hDAO.deletePriceDel1(price_code);
 		
 		return "redirect:host_price.do";
 	}
