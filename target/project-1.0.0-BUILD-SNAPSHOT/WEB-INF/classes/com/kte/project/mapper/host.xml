@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Host">
+
+	<update id="updateHostName" parameterType="HostVO">
+		UPDATE room SET room_name=#{name_title}, room_content=#{name_content} WHERE room_code=#{room_code};
+	</update>
+	
+	<insert id="insertHostCreate" parameterType="HostVO">
+		call room_insert(
+			#{room_code, mode=IN,jdbcType=VARCHAR},
+			#{create_building_type, mode=IN, jdbcType=VARCHAR},
+			#{create_room_type, mode=IN, jdbcType=VARCHAR},
+			#{create_basic_member, mode=IN, jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- <insert id="insertHostCreate" parameterType="HostVO">
+		INSERT INTO room(room_code, room_building_type, room_type, room_basic_member)
+			VALUES(#{room_code},#{create_building_type},#{create_room_type},#{create_basic_member});
+			
+		INSERT INTO room_option(room_code, ro_date) VALUES(#{room_code}, NOW());
+	</insert> -->
+	
+	<select id="selectLastRoomcode" resultType="int">
+		SELECT MAX(room_code) FROM room
+	</select>
+	
+	<insert id="insertHostImg" parameterType="HostVO">
+		INSERT INTO room_img(room_img_code, room_code, room_img, room_img_date) VALUES(#{room_img_code}, #{room_code}, #{room_img, jdbcType=BLOB}, NOW());
+	</insert>
+	
+	<select id="selectLastRoomImgcode" resultType="int">
+		SELECT MAX(room_img_code) FROM room_img
+	</select>
+	
+	<!-- 사진 뿌리기 위한 list -->
+	<select id="selectRoomImgList" parameterType="int" resultType="HostVO">
+		SELECT room_img_code, room_code FROM `room_img` WHERE room_code=#{room_code}
+	</select>
+	
+	<!-- 사진받아오기 -->
+	<resultMap type="HostVO" id="selectRoomImg">
+	    <result column ="room_img_code" property="room_img_code" />
+	    <result column ="room_img" property="room_img" jdbcType="BLOB" />
+    </resultMap>
+   
+   <select id="selectRoomImg" parameterType="int" resultMap="selectRoomImg">
+      SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_code}
+   </select>
+   
+   <delete id="deleteRoomImg" parameterType="int">
+   	 DELETE room_img FROM `room_img` WHERE room_img_code=#{room_img_code}
+   </delete>
+   
+   <select id="selectHostBasic" parameterType="int" resultType="HostVO">
+   		SELECT room_code, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
+   </select> 
+   
+   <update id="updateHostBasic" parameterType="HostVO">
+    	UPDATE room 
+    		SET room_number=#{room_number}, room_bed_number=#{room_bed_number},room_bath_number=#{room_bath_number},
+    			room_type=#{room_type},room_building_type=#{room_building_type}, room_space=#{room_space} 
+    		WHERE room_code=#{room_code}
+   </update>
+   
+   <update id="updateRoomInOut" parameterType="HostVO">
+   		UPDATE room SET room_in=#{room_in}, room_out=#{room_out} WHERE room_code=#{room_code}
+   </update>
+   
+   <insert id="insertRoomAmenity" parameterType="HostchkVO">
+   		INSERT INTO room_option(room_code, room_option, ro_plus, ro_special, ro_security, ro_date) VALUES(#{room_code},#{room_option},#{ro_plus},#{ro_special},#{ro_security},NOW())
+   </insert>
+   
+   <update id="updateRoomAmenity" parameterType="HostchkVO">
+   		UPDATE room_option SET room_option=#{room_option}, ro_plus=#{ro_plus}, ro_special=#{ro_special}, ro_security=#{ro_security}, ro_date=NOW() WHERE room_code=#{room_code}
+   </update>
+   
+   <select id="selectOptionRoomCode" resultType="int">
+   		SELECT MAX(room_code) FROM room_option
+   </select>
+   
+   <select id="selectRoomInOut" parameterType="int" resultType="HostVO">
+   		SELECT room_in, room_out FROM `room` WHERE room_code=#{room_code}
+   </select>
+   
+   <select id="selectRoomAmenity" parameterType="int" resultType="HostchkVO">
+   		SELECT room_option, ro_plus, ro_special, ro_security FROM `room_option` WHERE room_code=#{room_code}
+   </select>
+   
+   <select id="selectHostPrice" parameterType="int" resultType="HostVO">
+   		SELECT room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
+   			room_plus_price_apply, room_plus_price FROM `room` WHERE room_code=#{room_code}
+   </select>
+   
+   <update id="updateHostPrice_MinMax" parameterType="HostVO">
+   		UPDATE `room` SET room_min_day=#{room_min_day}, room_max_day=#{room_max_day}, room_price_show=#{room_price_show} WHERE room_code=#{room_code}
+   </update>
+   
+   <update id="updateHostPrice_Basic" parameterType="HostVO">
+   		UPDATE `room` SET room_month_price=#{room_month_price}, room_basic_deposit=#{room_basic_deposit}, room_basic_member=#{room_basic_member}, room_plus_price_apply=#{room_plus_price_apply}, room_plus_price=#{room_plus_price} WHERE room_code=#{room_code}
+   </update>
+   
+   <select id="selectLongPricecode" resultType="int">
+   		SELECT MAX(price_code) FROM `room_long_price`
+   </select>
+   
+   <insert id="insertLongPrice" parameterType="HostVO">
+   		INSERT INTO `room_long_price`(price_code, room_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end) VALUES(#{price_code}, #{room_code}, #{busy_month_start}, #{busy_day_start}, #{busy_month_end}, #{busy_day_end})
+   </insert>
+   
+   <select id="selectLongPrice" parameterType="int" resultType="HostVO">
+   		SELECT price_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end FROM `room_long_price` WHERE room_code=#{room_code}
+   </select>
+	
+	
+	
+</mapper>	

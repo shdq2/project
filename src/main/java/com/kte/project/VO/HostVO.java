@@ -31,7 +31,6 @@ public class HostVO {
 	private String room_in = null;
 	private String room_out = null;
 	
-	
 	//host_price
 	private int room_min_day = 0;
 	private int room_max_day = 0;
@@ -46,9 +45,38 @@ public class HostVO {
 	private String busy_month_end = null;
 	private String busy_day_end = null;
 	private int price_code = 0;
+	private int rt_code = 0;
+	private int rt_day = 0;
+	private int rt_price = 0;
+	private String rt_date = null;
 	
 	
 	
+	
+	public String getRt_date() {
+		return rt_date;
+	}
+	public void setRt_date(String rt_date) {
+		this.rt_date = rt_date;
+	}
+	public int getRt_code() {
+		return rt_code;
+	}
+	public void setRt_code(int rt_code) {
+		this.rt_code = rt_code;
+	}
+	public int getRt_day() {
+		return rt_day;
+	}
+	public void setRt_day(int rt_day) {
+		this.rt_day = rt_day;
+	}
+	public int getRt_price() {
+		return rt_price;
+	}
+	public void setRt_price(int rt_price) {
+		this.rt_price = rt_price;
+	}
 	public int getPrice_code() {
 		return price_code;
 	}
