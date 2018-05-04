@@ -2,6 +2,7 @@ package com.kte.project.VO;
 
 public class HostVO {
 	
+	private String custom_id = null;
 	private int room_code = 0;
 	private String room_code1 = null;
 	
@@ -53,6 +54,12 @@ public class HostVO {
 	
 	
 	
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
 	public String getRt_date() {
 		return rt_date;
 	}

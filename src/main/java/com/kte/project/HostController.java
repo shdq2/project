@@ -1,5 +1,6 @@
 package com.kte.project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -33,13 +34,15 @@ public class HostController {
 		
 		System.out.println(httpsession.getAttribute("room_code"));
 		httpsession.removeAttribute("room_code"); // 세션에 있는 것 삭제
-
+		String id = (String) httpsession.getAttribute("custom_id");
+		
 		HostVO vo = new HostVO();
 		
 		int room_code = hDAO.selectRoomCode();
 		
 		vo.setRoom_code(room_code+1);
-		
+		vo.setCustom_id(id);
+		System.out.println(vo.getCustom_id());
 		model.addAttribute("vo", vo);
 		
 		return "host_create";
@@ -299,11 +302,18 @@ public class HostController {
 		HostVO vo = hDAO.selectHostPrice(room_code);
 		List<HostVO> list = hDAO.selectLongPrice(room_code);
 		
+		List<List<HostVO>> list2 = new ArrayList<List<HostVO>>();
 		for(HostVO tmp : list) {
-			System.out.println(tmp.getBusy_month_start());
+			System.out.println(tmp.getPrice_code());
+			List<HostVO> list1 = hDAO.selectRoomTermPlus(tmp.getPrice_code());
+			for(HostVO tmp1 : list1) {
+				System.out.println(tmp1.getRt_day());
+			}
+			list2.add(list1);
 		}
 		
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		model.addAttribute("vo", vo);
 		
 		return "host_price";
@@ -377,10 +387,24 @@ public class HostController {
 	@RequestMapping(value="/host_price_del1.do", method=RequestMethod.GET)
 	public String hostpricedel1(@RequestParam("price_code") int price_code) {
 		
-		System.out.println(price_code);
+		try {
+			hDAO.deletePriceDel1_1(price_code);
+		} catch (Exception e) {
+			return "redirect:host_price.do";
+		}
+		hDAO.deletePriceDel1_2(price_code);
+		return "redirect:host_price.do";
+	}
+	
+	@RequestMapping(value="/host_price_del2.do", method=RequestMethod.GET)
+	public String hostpricedel2(@RequestParam("rt_code") int rt_code) {
 		
-		hDAO.deletePriceDel1(price_code);
-		
+		try {
+			System.out.println(rt_code);
+			hDAO.deletePriceDel2(rt_code);
+		} catch (Exception e) {
+			return "redirect:host_price.do";
+		}
 		return "redirect:host_price.do";
 	}
 		
@@ -441,6 +465,12 @@ public class HostController {
 	public String hostcalendar(Model model, HttpSession httpsession) {
 		
 		return "host_calendar";
+	}
+	
+	@RequestMapping(value="/host_list.do", method=RequestMethod.GET)
+	public String hostlist(Model model, HttpSession httpsession) {
+		
+		return "host_list";
 	}
 	
 }

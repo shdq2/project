@@ -113,8 +113,17 @@ public class HostDAO {
 		return sqlsession.selectList("Host.selectLongPrice", room_code);
 	}
 	
-	public int deletePriceDel1(int price_code) {
-		return sqlsession.delete("Host.deletePriceDel1", price_code);
+	public int deletePriceDel1_1(int price_code) {
+		return sqlsession.delete("Host.deletePriceDel1_1", price_code);
+	}
+	
+	public int deletePriceDel1_2(int price_code) {
+		return sqlsession.delete("Host.deletePriceDel1_2", price_code);
+	}
+	
+	public int deletePriceDel2(int rt_code) {
+		System.out.println(rt_code);
+		return sqlsession.delete("Host.deletePriceDel2", rt_code);
 	}
 	
 	public int selectRtCode() {
@@ -123,5 +132,9 @@ public class HostDAO {
 	
 	public int insertRoomTermPlus(HostVO vo) {
 		return sqlsession.insert("Host.insertRoomTermPlus", vo);
+	}
+	
+	public List<HostVO> selectRoomTermPlus(int price_code){
+		return sqlsession.selectList("Host.selectRoomTermPlus", price_code);
 	}
 }

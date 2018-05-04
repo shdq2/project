@@ -39,7 +39,7 @@ public class LoginController {
                httpsession.setAttribute("custom_id",cvo.getCustom_id());
                httpsession.setAttribute("custom_name",cvo.getCustom_name());
                
-               return "redirect:admin.do";
+               /*return "redirect:admin.do";*/
             }else {
                httpsession.setAttribute("custom",cvo);
                httpsession.setAttribute("custom_id",cvo.getCustom_id());
@@ -63,7 +63,7 @@ public class LoginController {
          System.out.println("존재하지 않는 아이디");
       }
       
-      return "redirect:host.do";
+      return "redirect:host_list.do";
    }
    
    @RequestMapping(value="/logout.do", method = RequestMethod.GET)

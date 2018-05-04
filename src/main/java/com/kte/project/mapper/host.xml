@@ -47,11 +47,11 @@
     </resultMap>
    
    <select id="selectRoomImg" parameterType="int" resultMap="selectRoomImg">
-      SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_code}
+    	SELECT room_img, room_img_code FROM `room_img` WHERE room_img_code=#{room_img_code}
    </select>
    
    <delete id="deleteRoomImg" parameterType="int">
-   	 DELETE room_img FROM `room_img` WHERE room_img_code=#{room_img_code}
+   		DELETE room_img FROM `room_img` WHERE room_img_code=#{room_img_code}
    </delete>
    
    <select id="selectHostBasic" parameterType="int" resultType="HostVO">
@@ -118,9 +118,22 @@
    		SELECT price_code, busy_month_start, busy_day_start, busy_month_end, busy_day_end FROM `room_long_price` WHERE room_code=#{room_code}
    </select>
 	
-	<delete id="deletePriceDel1" parameterType="int">
-		DELETE FROM `room_long_price` WHERE price_code=#{price_code}
+	<!-- <delete id="deletePriceDel1" parameterType="int">
+		DELETE FROM `room_long_price` WHERE price_code=#{price_code};
+		DELETE FROM `room_term_plus` WHERE price_code=#{price_code};
+	</delete> --> 
+	
+	<delete id="deletePriceDel1_1" parameterType="int">
+		DELETE FROM `room_term_plus` WHERE price_code=#{price_code}
 	</delete> 
+	
+	<delete id="deletePriceDel1_2" parameterType="int">
+		DELETE FROM `room_long_price` WHERE price_code=#{price_code}
+	</delete>
+	
+	<delete id="deletePriceDel2" parameterType="int">
+		DELETE FROM `room_term_plus` WHERE rt_code=#{rt_code}
+	</delete>
 	
 	<select id="selectRtCode" resultType="int">
 		SELECT MAX(rt_code) FROM `room_term_plus` 
@@ -129,5 +142,9 @@
 	<insert id="insertRoomTermPlus" parameterType="HostVO">
 		INSERT INTO `room_term_plus`(rt_code, rt_day, rt_price, price_code, rt_date) VALUES(#{rt_code},#{rt_day},#{rt_price},#{price_code},NOW())
 	</insert>
+	
+	<select id="selectRoomTermPlus" parameterType="int" resultType="HostVO">
+		SELECT rt_code, rt_day, rt_price, price_code FROM `room_term_plus` WHERE price_code=#{price_code}
+	</select>
 	
 </mapper>	

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -301,22 +302,42 @@
 												<td align="center" style="vertical-align:middle">
 													<a href="#" class="term_fix_button">${vo.busy_month_start}/${vo.busy_day_start} - ${vo.busy_month_end}/${vo.busy_day_end}</a>
 													<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
-													<input type="text" id="price_code" value="${vo.price_code}" style="display:none"/>
+													<input type="text" class="price_code" value="${vo.price_code}" style="display:none"/> 
 												</td>
 												<td>
 													<table class="table">
 														<thead>
 															<tr>
 																<td class="text-center">숙박</td>
-																<td class="text-center">1박 금액</td>
+																<td class="text-center">1박 금액(원)</td>
+																<td class="text-center">삭제</td>
+																<!-- <td class="text-center">수정</td> -->
 															</tr>
 														</thead>
 														<tbody>
+															<c:forEach var="list" items="${list2}">
+																<c:if test="${list ne null}">
+																	<c:forEach var="vo1" items="${list}">
+																		<c:if test="${vo.price_code eq vo1.price_code}">
+																			<input type="text" value="${vo1.rt_code}" id="index_of_rtcode" class="index_of_rtcode" style="display:none"/>
+																			<tr>
+																				<td class="text-center">${vo1.rt_day} 박 이상 숙박 시</td>
+																				<td class="text-center">${vo1.rt_price}</td> 
+																				<td class="text-center">
+																					<a href="#" class="term_fix_del1" id="term_fix_del1">
+																						<i class="glyphicon glyphicon-remove" id="remove_btn1"></i>
+																					</a>
+																				</td>
+																				<!-- <td class="text-center"><i class="glyphicon glyphicon-pencil" id="revise_btn"></i></td> -->
+																			</tr>
+																		</c:if>
+																	</c:forEach>
+																</c:if>
+															</c:forEach>
 															<tr>
-																<td class="text-center" colspan="4">아직 등록 됨 </td>
-															</tr>
-															<tr>
-																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn plus-option"/></td>
+																<td colspan="4">
+																	<input style="width: 100%" type="button" value="이 기간에 설정 추가" class="btn plus-option" />
+																</td>
 															</tr>
 														</tbody>
 													</table>
@@ -325,13 +346,13 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								<div class="panel-body">
+								<!-- <div class="panel-body">
 									<div class="form-group ">
 										<div class="pull-right">
 											<input class="btn btn-primary btn-block" type="submit" value="저장">
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 
 							<div id="weekend_show" style="display: none">
@@ -505,7 +526,7 @@
 							</div>
 						</div>
 					</div>
-					<form:input type="text" id="price_code1" value="a" style="display:none" path="price_code"/>
+					<form:input type="text" id="price_code1" value="a" path="price_code"/>
 					<div class="modal-footer">
 						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
 					</div>
@@ -530,11 +551,11 @@
 
 						<div class="form-group">
 							<label for="calendar[max_night]" class="control-label">1박 금액</label>
-							<form:input path="rt_price" class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="90" id="calendar[max_night]"/> 박
+							<form:input path="rt_price" class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="90" id="calendar[max_night]"/> 원
 							<p class="help-block">1박당 금액에 적용됩니다.</p>
 						</div>
 					</div>
-					<form:input type="text" id="price_code2" value="a" style="display:none" path="price_code"/>
+					<form:input type="text" id="price_code2" value="a"  path="price_code" style="display:none"/>
 					<div class="modal-footer">
 						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
 					</div>
@@ -557,7 +578,9 @@
 			
 			//삭제 버튼
 			$('.term_fix_del').click(function(){
-				var a = $('#price_code').val();
+				 var idx = $(this).index('.term_fix_del');
+				 var pc = $('.price_code').eq(idx).val();
+				/* alert(pc); */
 				swal({
 					title: "삭제",
 					text: "정말 삭제하시겠습니까?",
@@ -567,7 +590,26 @@
 				})
 				.then((willDelete) => {
 					if(willDelete){
-						window.location.href='host_price_del1.do?price_code='+a
+						window.location.href='host_price_del1.do?price_code='+pc
+					}
+				});
+			});
+			
+			//삭제 버튼1
+			$('.term_fix_del1').click(function(){
+				 var idx = $(this).index('.term_fix_del1');
+				 var rtc = $('.index_of_rtcode').eq(idx).val();
+				/* alert(rtc); */
+				swal({
+					title: "삭제",
+					text: "정말 삭제하시겠습니까?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				})
+				.then((willDelete) => {
+					if(willDelete){
+						window.location.href='host_price_del2.do?rt_code='+rtc
 					}
 				});
 			});
@@ -579,28 +621,41 @@
 			
 			//기간 수정 (modal2)
 			$('.term_fix_button').click(function(){
-				var p_code = $('#price_code').val();
-				var a = $(this).text();
-				var b = a.split(' - ');
-				var ba = b[0].split('/');
-				var bb = b[1].split('/');
-				/* alert(ba[0]+ba[1]+bb[0]+bb[1]);	 */
-				
-				$('#price_code1').val(p_code); 
-				$('#busy_month_start1').val(ba[0]);
-				$('#busy_day_start1').val(ba[1]);
-				$('#busy_month_end1').val(bb[0]);
-				$('#busy_day_end1').val(bb[1]);
-				
-				$('#term-fix-modal').modal('show');
-			});
+	             var idx = $(this).index('.term_fix_button');
+	             var pc = $('.price_code').eq(idx).val();
+	             $('#price_code1').val(pc);
+	             /*
+	               var arr = new Array(); //js 배열 생성
+	               <c:forEach var="vo" items="${list}">
+	                  arr.push("${vo.price_code}");
+	               </c:forEach> 
+	             
+	                $('#price_code1').val(arr[idx]);
+	              */
+	             
+	               
+                 var a = $(this).text();
+				 var b = a.split(' - ');
+				 var ba = b[0].split('/');
+			     var bb = b[1].split('/');
+					
+					$('#busy_month_start1').val(ba[0]);
+					$('#busy_day_start1').val(ba[1]);
+					$('#busy_month_end1').val(bb[0]);
+					$('#busy_day_end1').val(bb[1]);
+	             
+	               $('#term-fix-modal').modal('show');
+	            });
 			
 			//기간에 대한 옵션 (modal3)
 			$('.plus-option').click(function(){
-				var p_code = $('#price_code').val();
-				var a = $('.term_fix_button').text();
+				 var idx = $(this).index('.plus-option');
+				 var pc = $('.price_code').eq(idx).val();
+		             $('#price_code2').val(pc);
+				 
+		         var a = $('.term_fix_button').eq(idx).text();
 				/* alert(a); */
-				$('#price_code2').val(p_code);
+				
 				$('#plus_option_date').text(a+' 기간동안에 대한 옵션설정');
 				$('#plus-option').modal('show');
 			});
