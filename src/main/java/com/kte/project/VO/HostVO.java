@@ -2,12 +2,13 @@ package com.kte.project.VO;
 
 public class HostVO {
 	
+	private String custom_id = null;
 	private int room_code = 0;
 	private String room_code1 = null;
 	
 	//host_name
-	private String name_title = null;
-	private String name_content = null;
+	private String room_name = null;
+	private String room_content = null;
 	
 	//host_create
 	private String create_building_type = null;
@@ -49,10 +50,57 @@ public class HostVO {
 	private int rt_day = 0;
 	private int rt_price = 0;
 	private String rt_date = null;
+	private String bank_name = null;
+	private int bank_num = 0;
+	private String bank_depositor = null;
+	private int fri_price = 0;
+	private int sat_price = 0;
+	private int sun_price = 0;
 	
 	
 	
-	
+	public int getFri_price() {
+		return fri_price;
+	}
+	public void setFri_price(int fri_price) {
+		this.fri_price = fri_price;
+	}
+	public int getSat_price() {
+		return sat_price;
+	}
+	public void setSat_price(int sat_price) {
+		this.sat_price = sat_price;
+	}
+	public int getSun_price() {
+		return sun_price;
+	}
+	public void setSun_price(int sun_price) {
+		this.sun_price = sun_price;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public int getBank_num() {
+		return bank_num;
+	}
+	public void setBank_num(int bank_num) {
+		this.bank_num = bank_num;
+	}
+	public String getBank_depositor() {
+		return bank_depositor;
+	}
+	public void setBank_depositor(String bank_depositor) {
+		this.bank_depositor = bank_depositor;
+	}
+	public String getCustom_id() {
+		return custom_id;
+	}
+	public void setCustom_id(String custom_id) {
+		this.custom_id = custom_id;
+	}
 	public String getRt_date() {
 		return rt_date;
 	}
@@ -258,18 +306,19 @@ public class HostVO {
 	public void setCreate_basic_member(String create_basic_member) {
 		this.create_basic_member = create_basic_member;
 	}
-	public String getName_title() {
-		return name_title;
+	public String getRoom_name() {
+		return room_name;
 	}
-	public void setName_title(String name_title) {
-		this.name_title = name_title;
+	public void setRoom_name(String room_name) {
+		this.room_name = room_name;
 	}
-	public String getName_content() {
-		return name_content;
+	public String getRoom_content() {
+		return room_content;
 	}
-	public void setName_content(String name_content) {
-		this.name_content = name_content;
+	public void setRoom_content(String room_content) {
+		this.room_content = room_content;
 	}
+	
 
 	
 }

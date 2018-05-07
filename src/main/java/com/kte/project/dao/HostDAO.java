@@ -113,8 +113,17 @@ public class HostDAO {
 		return sqlsession.selectList("Host.selectLongPrice", room_code);
 	}
 	
-	public int deletePriceDel1(int price_code) {
-		return sqlsession.delete("Host.deletePriceDel1", price_code);
+	public int deletePriceDel1_1(int price_code) {
+		return sqlsession.delete("Host.deletePriceDel1_1", price_code);
+	}
+	
+	public int deletePriceDel1_2(int price_code) {
+		return sqlsession.delete("Host.deletePriceDel1_2", price_code);
+	}
+	
+	public int deletePriceDel2(int rt_code) {
+		System.out.println(rt_code);
+		return sqlsession.delete("Host.deletePriceDel2", rt_code);
 	}
 	
 	public int selectRtCode() {
@@ -127,5 +136,51 @@ public class HostDAO {
 	
 	public List<HostVO> selectRoomTermPlus(int price_code){
 		return sqlsession.selectList("Host.selectRoomTermPlus", price_code);
+	}
+	
+	public int updateHostPrice_Bank(HostVO vo) {
+		return sqlsession.update("Host.updateHostPrice_Bank", vo);
+	}
+	
+	public int updateHostPrice_Weekend(HostVO vo) {
+		return sqlsession.update("Host.updateHostPrice_Weekend", vo);
+	}
+	
+	public List<HostVO> selectRoomList (String custom_id) {
+		return sqlsession.selectList("Host.selectRoomList", custom_id);
+	}
+	public int selectLastListImgCode(int room_code) {
+		return sqlsession.selectOne("Host.selectLastListImgCode", room_code);
+	}
+	public int host_list_del1(int room_code) {
+		return sqlsession.delete("Host.host_list_del1", room_code);
+	}
+	public int host_list_del2(int room_code) {
+		return sqlsession.delete("Host.host_list_del2", room_code);
+	}
+	public int host_list_del3(int room_code) {
+		return sqlsession.delete("Host.host_list_del3", room_code);
+	}
+	public int host_list_del4(int room_code) {
+		return sqlsession.delete("Host.host_list_del4", room_code);
+	}
+	public int host_list_del5(int room_code) {
+		return sqlsession.delete("Host.host_list_del5", room_code);
+	}
+	public int host_list_del6(int room_code) {
+		return sqlsession.delete("Host.host_list_del6", room_code);
+	}
+	public int host_list_del7(int room_code) {
+		return sqlsession.delete("Host.host_list_del7", room_code);
+	}
+	
+	public int insertRoomSetConfirm(int room_code) {
+		return sqlsession.insert("Host.insertRoomSetConfirm", room_code);
+	}
+	public int updateRoomSetConfirm1(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm1", room_code);
+	}
+	public int updateRoomSetConfirm2(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm2", room_code);
 	}
 }

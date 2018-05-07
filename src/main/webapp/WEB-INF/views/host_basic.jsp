@@ -37,7 +37,7 @@
 				
 					<div class="col-md-12 col-lg-8">
 					<form:form action="host_basic.do" method="post" modelAttribute="vo">
-						<div style="display:hidden">
+						<div style="display:none">
 							<form:input type="text" path="room_code"/>
 						</div>
 					
@@ -52,12 +52,13 @@
 									<div class="form-group col-sm-4">
 										<label class="control-label">침실수</label>
 										<form:select class="form-control" required="required" path="room_number">
+											<option selected="selected" value="">선택</option>
 											<c:forEach var="i" begin="0" end="10">
-												<c:if test="${vo.room_number != i}">
-													<option value="${i}">${i}</option>
-												</c:if>
 												<c:if test="${vo.room_number == i}">
 													<option selected="selected" value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${vo.room_number != i}">
+													<option value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
 										</form:select>
@@ -65,11 +66,12 @@
 									<div class="form-group col-sm-4">
 										<label class="control-label">침대수</label>
 										<form:select class="form-control" required="required" path="room_bed_number">
+											<option selected="selected" value="">선택</option>
 											<c:forEach var="i" begin="0" end="10">
-												<c:if test="${vo.room_bath_number != i}">
+												<c:if test="${vo.room_bed_number != i}">
 													<option value="${i}">${i}</option>
 												</c:if>
-												<c:if test="${vo.room_bath_number == i}">
+												<c:if test="${vo.room_bed_number == i}">
 													<option selected="selected" value="${i}">${i}</option>
 												</c:if>
 											</c:forEach>
@@ -78,6 +80,7 @@
 									<div class="form-group col-sm-4">
 										<label class="control-label">욕실수</label>
 										<form:select class="form-control" required="required" path="room_bath_number">
+											<option selected="selected" value="">선택</option>
 											<c:forEach var="i" begin="0" end="10">
 												<c:if test="${vo.room_bath_number != i}">
 													<option value="${i}">${i}</option>
@@ -127,12 +130,12 @@
 									<div class="form-group col-sm-4">
 										<label class="control-label">건물평수</label>
 										<form:select class="form-control" required="required" path="room_space">
-											<option>모름</option>
-											<c:forEach var="i" begin="1" end="50">
-												<c:if test="${vo.room_space == i}">
+											<option selected="selected" value="">선택</option>
+											<c:forEach var="i" begin="1" end="70">
+												<c:if test="${vo.room_space != i}">
 													<option value="${i}">${i}</option>
 												</c:if>
-												<c:if test="${vo.room_space != i}">
+												<c:if test="${vo.room_space == i}">
 													<option value="${i}" selected="selected">${i}</option>
 												</c:if>
 											</c:forEach>

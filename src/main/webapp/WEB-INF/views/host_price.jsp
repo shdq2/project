@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -186,52 +187,29 @@
 									<span class="panel-desc"> 프로필정보에 입금정보가 저장되어있지 않습니다. </span>
 								</h3>
 							</div>
-
+						<form:form action="host_price3.do" modelAttribute="vo" method="post">
 							<div class="panel-body">
 								<div class="form-group col-sm-12">
 									<label for="bank_name" class="control-label col-sm-3">은행선택</label>
 									<div class="col-sm-9">
-										<select class="form-control inline" id="bank_name" name="bank_name">
+										<form:select class="form-control inline" id="bank_name" name="bank_name" path="bank_name">
 											<option selected="selected"	value="">선택하세요.</option>
-											<option value="한국산업은행">한국산업은행</option>
-											<option value="기업은행">기업은행</option>
-											<option value="국민은행(주택은행)">국민은행(주택은행)</option>
-											<option value="외환은행">외환은행</option>
-											<option value="수협중앙회">수협중앙회</option>
-											<option value="농협중앙회">농협중앙회</option>
-											<option value="단위농협">단위농협</option>
-											<option value="축협중앙회">축협중앙회</option>
-											<option value="우리은행">우리은행</option>
-											<option value="신한은행(조흥은행)">신한은행(조흥은행)</option>
-											<option value="제일은행">제일은행</option>
-											<option value="하나은행(서울은행)">하나은행(서울은행)</option>
-											<option value="신한은행">신한은행</option>
-											<option value="한국씨티은행(한미은행)">한국씨티은행(한미은행)</option>
-											<option value="대구은행">대구은행</option>
-											<option value="부산은행">부산은행</option>
-											<option value="광주은행">광주은행</option>
-											<option value="제주은행">제주은행</option>
-											<option value="전북은행">전북은행</option>
-											<option value="강원은행">강원은행</option>
-											<option value="경남은행">경남은행</option>
-											<option value="비씨카드">비씨카드</option>
-											<option value="씨티은행">씨티은행</option>
-											<option value="홍콩상하이은행">홍콩상하이은행</option>
-											<option value="우체국">우체국</option>
-											<option value="하나은행">하나은행</option>
-											<option value="평화은행">평화은행</option>
-											<option value="신세계">신세계</option>
-											<option value="신한은행(조흥 통합)">신한은행(조흥 통합)</option>
-											<option value="신협">신협</option>
-											<option value="새마을금고">새마을금고</option>
-										</select>
+											<c:forEach var="tmp" items="${str}">
+												<c:if test="${vo.bank_name eq tmp}">
+													<option selected="selected" value="${tmp}">${tmp}</option>
+												</c:if>
+												<c:if test="${vo.bank_name eq null}">
+													<option value="${tmp}">${tmp}</option>
+												</c:if>
+											</c:forEach>
+										</form:select>
 									</div>
 								</div>
 
 								<div class="form-group col-sm-12">
 									<label for="bank_num" class="control-label col-sm-3">계좌번호</label>
 									<div class="col-sm-9">
-										<input class="form-control" name="bank_num" type="number" id="bank_num">
+										<form:input class="form-control" name="bank_num" type="number" id="bank_num" path="bank_num"/>
 										<p class="help-block">숫자만 입력해주세요.</p>
 									</div>
 								</div>
@@ -239,7 +217,7 @@
 								<div class="form-group col-sm-12">
 									<label for="bank_depositor" class="control-label col-sm-3">예금주명</label>
 									<div class="col-sm-9">
-										<input class="form-control" name="bank_depositor" type="text" id="bank_depositor">
+										<form:input class="form-control" name="bank_depositor" type="text" id="bank_depositor" path="bank_depositor"/>
 									</div>
 								</div>
 								
@@ -251,6 +229,7 @@
 									</div>
 								</div>
 							</div>
+						</form:form>
 							
 							<div class="panel-heading">
 								<h3 class="panel-title">요금 부과 방법을 선택하세요.</h3>
@@ -301,22 +280,42 @@
 												<td align="center" style="vertical-align:middle">
 													<a href="#" class="term_fix_button">${vo.busy_month_start}/${vo.busy_day_start} - ${vo.busy_month_end}/${vo.busy_day_end}</a>
 													<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
-													<input type="text" id="price_code" value="${vo.price_code}"/> 
+													<input type="text" class="price_code" value="${vo.price_code}" style="display:none"/> 
 												</td>
 												<td>
 													<table class="table">
 														<thead>
 															<tr>
 																<td class="text-center">숙박</td>
-																<td class="text-center">1박 금액</td>
+																<td class="text-center">1박 금액(원)</td>
+																<td class="text-center">삭제</td>
+																<!-- <td class="text-center">수정</td> -->
 															</tr>
 														</thead>
 														<tbody>
+															<c:forEach var="list" items="${list2}">
+																<c:if test="${list ne null}">
+																	<c:forEach var="vo1" items="${list}">
+																		<c:if test="${vo.price_code eq vo1.price_code}">
+																			<input type="text" value="${vo1.rt_code}" id="index_of_rtcode" class="index_of_rtcode" style="display:none"/>
+																			<tr>
+																				<td class="text-center">${vo1.rt_day} 박 이상 숙박 시</td>
+																				<td class="text-center">${vo1.rt_price}</td> 
+																				<td class="text-center">
+																					<a href="#" class="term_fix_del1" id="term_fix_del1">
+																						<i class="glyphicon glyphicon-remove" id="remove_btn1"></i>
+																					</a>
+																				</td>
+																				<!-- <td class="text-center"><i class="glyphicon glyphicon-pencil" id="revise_btn"></i></td> -->
+																			</tr>
+																		</c:if>
+																	</c:forEach>
+																</c:if>
+															</c:forEach>
 															<tr>
-																<td class="text-center" colspan="4">등록 된 정보 없음</td>
-															</tr>
-															<tr>
-																<td colspan="4"><input style="width:100%" type="button" value="이 기간에 설정 추가" class="btn plus-option"/></td>
+																<td colspan="4">
+																	<input style="width: 100%" type="button" value="이 기간에 설정 추가" class="btn plus-option" />
+																</td>
 															</tr>
 														</tbody>
 													</table>
@@ -333,75 +332,108 @@
 									</div>
 								</div> -->
 							</div>
-
-							<div id="weekend_show" style="display: none">
-								<div class="panel panel-bordered">
-										<div class="panel-heading">
-											<h3 class="panel-title">주말 가격 설정 
-											<span class="panel-desc">일자별로 가격 변동이 있을 시 평일 가격과 별도로 가격을 설정하세요.</span>
-											</h3>
-										</div>
-										<div class="panel-body">
-											<div class="form-group">
-												<div class="control-label col-sm-3 checkbox checkbox-primary">
-													<div style="margin-left:60px">
-														<input type="checkbox" id="fri_price" name="fri_price_agree" class="weekend_price" /> 
-														<label for="fri_price">금요일</label>
+							
+							<form:form action="host_price4.do" modelAttribute="vo" method="post">
+								<div id="weekend_show" style="display: none">
+									<div class="panel panel-bordered">
+											<div class="panel-heading">
+												<h3 class="panel-title">주말 가격 설정 
+												<span class="panel-desc">일자별로 가격 변동이 있을 시 평일 가격과 별도로 가격을 설정하세요.</span>
+												</h3>
+											</div>
+											
+											<div class="panel-body">
+												<div class="form-group">
+													<div class="control-label col-sm-3 checkbox checkbox-primary">
+														<div style="margin-left:60px">
+															<c:if test="${vo.fri_price == 0}">
+																<input type="checkbox" id="fri_price" name="fri_price_agree" class="weekend_price"  />
+															</c:if> 
+															<c:if test="${vo.fri_price != 0}">
+																<input type="checkbox" id="fri_price" name="fri_price_agree" class="weekend_price" checked="checked"/>
+															</c:if> 
+															<label for="fri_price">금요일</label>
+														</div>
+													</div>
+	
+													<div class="col-sm-9">
+														<c:if test="${vo.fri_price == 0}">
+															<form:input path="fri_price" id="fri_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled" type="number"/> 원
+														</c:if> 
+														<c:if test="${vo.fri_price != 0}">
+															<form:input path="fri_price" id="fri_price_text" class="form-control inline" style="width: calc(100% - 35px)" type="number"/> 원
+														</c:if>
+														<span class="help-block" id="month-price" style="font-size: 13px;">금요일 1박 가격을 입력하세요.</span>
 													</div>
 												</div>
-
-												<div class="col-sm-9">
-													<input id="fri_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled"	type="number"> 원 
-													<span class="help-block" id="month-price" style="font-size: 13px;">금요일 1박 가격을 입력하세요.</span>
-												</div>
-											</div>
-
-											<div class="form-group">
-												<div class="col-sm-3 control-label  checkbox checkbox-primary">
-													<div style="margin-left:60px">
-														<input type="checkbox" id="sat_price" name="sat_price_agree" /> 
-														<label for="sat_price">토요일</label>
+	
+												<div class="form-group">
+													<div class="col-sm-3 control-label  checkbox checkbox-primary">
+														<div style="margin-left:60px">
+															<c:if test="${vo.sat_price == 0}">
+																<input type="checkbox" id="sat_price" name="sat_price_agree" />
+															</c:if> 
+															<c:if test="${vo.sat_price != 0}">
+																<input type="checkbox" id="sat_price" name="sat_price_agree" checked="checked"/>
+															</c:if> 
+															<label for="sat_price">토요일</label>
+														</div>
+													</div>
+													<div class="col-sm-9">
+														<c:if test="${vo.sat_price == 0}">
+															<form:input path="sat_price" id="sat_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled" name="price[sat_price]" type="number"/> 원 
+														</c:if>
+														<c:if test="${vo.sat_price != 0}">
+															<form:input path="sat_price" id="sat_price_text" class="form-control inline" style="width: calc(100% - 35px)"  name="price[sat_price]" type="number"/> 원 
+														</c:if>
+														<span class="help-block" id="month-price" style="font-size: 13px;">토요일 1박 가격을 입력하세요.</span>
 													</div>
 												</div>
-												<div class="col-sm-9">
-													<input id="sat_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled"	name="price[sat_price]" type="number"> 원 
-													<span class="help-block" id="month-price" style="font-size: 13px;">토요일 1박 가격을 입력하세요.</span>
-												</div>
-											</div>
-
-											<div class="form-group">
-												<div class="control-label col-sm-3  checkbox checkbox-primary">
-													<div style="margin-left:60px">
-														<input type="checkbox" id="sun_price" name="sun_price_agree" class="weekend_price" /> 
-														<label for="sun_price">일요일</label>
+	
+												<div class="form-group">
+													<div class="control-label col-sm-3  checkbox checkbox-primary">
+														<div style="margin-left:60px">
+															<c:if test="${vo.sun_price == 0}">
+																<input type="checkbox" id="sun_price" name="sun_price_agree" class="weekend_price" />
+															</c:if> 
+															<c:if test="${vo.sun_price != 0}">
+																<input type="checkbox" id="sun_price" name="sun_price_agree" class="weekend_price" checked="checked"/>
+															</c:if> 
+															<label for="sun_price">일요일</label>
+														</div>
+													</div>
+													<div class="col-sm-9">
+														<c:if test="${vo.sun_price == 0}">
+															<form:input path="sun_price" id="sun_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled" name="price[sun_price]" type="number"/> 원
+														</c:if>
+														<c:if test="${vo.sun_price != 0}">
+															<form:input path="sun_price" id="sun_price_text" class="form-control inline" style="width: calc(100% - 35px)" name="price[sun_price]" type="number"/> 원
+														</c:if>
+														<span class="help-block" id="month-price" style="font-size: 13px;">일요일 1박 가격을 입력하세요.</span>
 													</div>
 												</div>
-												<div class="col-sm-9">
-													<input id="sun_price_text" class="form-control inline" style="width: calc(100% - 35px)" disabled="disabled" name="price[sun_price]" type="number"> 원
-													<span class="help-block" id="month-price" style="font-size: 13px;">일요일 1박 가격을 입력하세요.</span>
-												</div>
 											</div>
-										</div>
-								</div>
-								<div class="panel-header">
-									<h3 class="panel-title">도움말</h3>
-								</div>
-								<ul class="list-group list-group-full" style="padding-left: 50px">
-									<li class="list-group-item" style="padding-bottom: 5px">1. 금, 토, 일요일 중 요금을 별도로 설정하고자 하는 기간에 체크하여 가격을 설정하세요.</li>
-									<li class="list-group-item" style="padding-bottom: 5px">2. 주말가격은 기본설정보다 우선하여 적용됩니다.</li>
-									<li class="list-group-item" style="padding-bottom: 5px">3. 예약 계산기에서 미리 숙박 가격을 계산해보세요.</li>
-								</ul>
-								<div class="panel-body">
-									<div class="form-group ">
-										<div class="pull-right">
-											<input class="btn btn-primary btn-block" type="submit" value="저장">
+									</div>
+									<div class="panel-header">
+										<h3 class="panel-title">도움말</h3>
+									</div>
+									<ul class="list-group list-group-full" style="padding-left: 50px">
+										<li class="list-group-item" style="padding-bottom: 5px">1. 금, 토, 일요일 중 요금을 별도로 설정하고자 하는 기간에 체크하여 가격을 설정하세요.</li>
+										<li class="list-group-item" style="padding-bottom: 5px">2. 주말가격은 기본설정보다 우선하여 적용됩니다.</li>
+										<li class="list-group-item" style="padding-bottom: 5px">3. 예약 계산기에서 미리 숙박 가격을 계산해보세요.</li>
+									</ul>
+									<div class="panel-body">
+										<div class="form-group ">
+											<div class="pull-right">
+												<input class="btn btn-primary btn-block" type="submit" value="저장">
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-							
-						</div> <!-- panel -->
+							</form:form>
+						
+						</div><!-- panel -->
+						</div> 
 					</div>
 				</div>
 			</div>
@@ -530,11 +562,11 @@
 
 						<div class="form-group">
 							<label for="calendar[max_night]" class="control-label">1박 금액</label>
-							<form:input path="rt_price" class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="90" id="calendar[max_night]"/> 박
+							<form:input path="rt_price" class="form-control inline" min="2" style="width: calc(100% - 35px)" name="calendar[max_night]" type="number" value="0" id="calendar[max_night]"/> 원
 							<p class="help-block">1박당 금액에 적용됩니다.</p>
 						</div>
 					</div>
-					<form:input type="text" id="price_code2" value="a"  path="price_code"/>
+					<form:input type="text" id="price_code2" value="a"  path="price_code" style="display:none"/>
 					<div class="modal-footer">
 						<input style="width:100%" type="submit" class="btn btn-primary" value="저장"/>
 					</div>
@@ -557,8 +589,9 @@
 			
 			//삭제 버튼
 			$('.term_fix_del').click(function(){
-				var a = $('#price_code').val();
-				alert(a);
+				 var idx = $(this).index('.term_fix_del');
+				 var pc = $('.price_code').eq(idx).val();
+				/* alert(pc); */
 				swal({
 					title: "삭제",
 					text: "정말 삭제하시겠습니까?",
@@ -568,7 +601,26 @@
 				})
 				.then((willDelete) => {
 					if(willDelete){
-						window.location.href='host_price_del1.do?price_code='+a
+						window.location.href='host_price_del1.do?price_code='+pc
+					}
+				});
+			});
+			
+			//삭제 버튼1
+			$('.term_fix_del1').click(function(){
+				 var idx = $(this).index('.term_fix_del1');
+				 var rtc = $('.index_of_rtcode').eq(idx).val();
+				/* alert(rtc); */
+				swal({
+					title: "삭제",
+					text: "정말 삭제하시겠습니까?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				})
+				.then((willDelete) => {
+					if(willDelete){
+						window.location.href='host_price_del2.do?rt_code='+rtc
 					}
 				});
 			});
@@ -580,28 +632,41 @@
 			
 			//기간 수정 (modal2)
 			$('.term_fix_button').click(function(){
-				var p_code = $('#price_code').text();
-				var a = $(this).text();
-				var b = a.split(' - ');
-				var ba = b[0].split('/');
-				var bb = b[1].split('/');
-				/* alert(ba[0]+ba[1]+bb[0]+bb[1]);	 */
-				
-				$('#price_code1').val(p_code); 
-				$('#busy_month_start1').val(ba[0]);
-				$('#busy_day_start1').val(ba[1]);
-				$('#busy_month_end1').val(bb[0]);
-				$('#busy_day_end1').val(bb[1]);
-				
-				$('#term-fix-modal').modal('show');
-			});
+	             var idx = $(this).index('.term_fix_button');
+	             var pc = $('.price_code').eq(idx).val();
+	             $('#price_code1').val(pc);
+	             /*
+	               var arr = new Array(); //js 배열 생성
+	               <c:forEach var="vo" items="${list}">
+	                  arr.push("${vo.price_code}");
+	               </c:forEach> 
+	             
+	                $('#price_code1').val(arr[idx]);
+	              */
+	             
+	               
+                 var a = $(this).text();
+				 var b = a.split(' - ');
+				 var ba = b[0].split('/');
+			     var bb = b[1].split('/');
+					
+					$('#busy_month_start1').val(ba[0]);
+					$('#busy_day_start1').val(ba[1]);
+					$('#busy_month_end1').val(bb[0]);
+					$('#busy_day_end1').val(bb[1]);
+	             
+	               $('#term-fix-modal').modal('show');
+	            });
 			
 			//기간에 대한 옵션 (modal3)
 			$('.plus-option').click(function(){
-				var p_code = $('#price_code').val();
-				var a = $('.term_fix_button').text();
+				 var idx = $(this).index('.plus-option');
+				 var pc = $('.price_code').eq(idx).val();
+		             $('#price_code2').val(pc);
+				 
+		         var a = $('.term_fix_button').eq(idx).text();
 				/* alert(a); */
-				$('#price_code2').val(p_code);
+				
 				$('#plus_option_date').text(a+' 기간동안에 대한 옵션설정');
 				$('#plus-option').modal('show');
 			});
@@ -629,7 +694,7 @@
 					$('#discount_show').hide();
 					$('#weekend_show').show();
 				}
-			})
+			});
 			
 			$('#radio2-2').click(function(){
 				
@@ -640,29 +705,47 @@
 					$('#discount_show').show();
 					$('#weekend_show').hide();
 				}
-			})
+			});
+			
+			if($('#fri_price_text').val() == 0){
+				var a = $('#fri_price_text').val();
+				$('#fri_price_text').attr('disabled', true);
+			}
+			
+			if($('#sat_price_text').val() == 0){
+				var a = $('#sat_price_text').val();
+				$('#sat_price_text').attr('disabled', true);
+			}
+			
+			if($('#sun_price_text').val() == 0){
+				var a = $('#sun_price_text').val();
+				$('#sun_price_text').attr('disabled', true);
+			}
 			
 			$('#fri_price').click(function(){
 				if($('#fri_price').is(':checked')){
-					$('#fri_price_text').attr('disabled', false);
+					$('#fri_price_text').attr('disabled', false); 
 				}else{
 					$('#fri_price_text').attr('disabled', true);
+					$('#fri_price_text').val(0);
 				}
-			})
+			});
 			$('#sat_price').click(function(){
 				if($('#sat_price').is(':checked')){
 					$('#sat_price_text').attr('disabled', false);
 				}else{
 					$('#sat_price_text').attr('disabled', true);
+					$('#sat_price_text').val(0);
 				}
-			})
+			});
 			$('#sun_price').click(function(){
 				if($('#sun_price').is(':checked')){
 					$('#sun_price_text').attr('disabled', false);
 				}else{
 					$('#sun_price_text').attr('disabled', true);
+					$('#sun_price_text').val(0);
 				}
-			})
+			});
 			
 		});
 	</script>

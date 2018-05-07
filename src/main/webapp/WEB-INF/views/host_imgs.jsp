@@ -41,10 +41,10 @@
 							</div>
 							<div class="panel-body">
 								<form:form action="host_imgs.do" method="post" modelAttribute="vo" enctype="multipart/form-data">
-									<form:input type="text" path="room_img_code" /><br/>
+									<form:input type="text" path="room_img_code" style="display:none"/>
 								<!-- 	<label for="img1" style="border:1px solid;border-radius: 6px">사진추가하기</label> -->
 									<input type="file" name="img1" id="img1" /><!-- style="display:none" -->
-									<input type="submit" class="btn btn-success" value="사진 올리기">
+									<input type="submit" class="btn btn-success" value="사진 올리기" style="margin-top:10px">
 								</form:form>
 							</div>
 							<div class="panel-body">
@@ -57,7 +57,7 @@
 									<c:forEach var="vo" items="${list}" varStatus="i">
 										<tr>
 											<td>${i.count}</td>
-											<td><img src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:200px; height:50px;"></td>
+											<td><img src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:100px; height:100px;"></td>
 											<td>
 												<a href="host_img_delete.do?room_img_code=${vo.room_img_code}" id="img_delete" class="btn btn-xs btn-danger btn_delete">삭제</a>	
 											</td>

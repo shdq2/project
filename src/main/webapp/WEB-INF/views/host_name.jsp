@@ -44,11 +44,11 @@
 									<form:input type="hidden" path="room_code" />
 									<div class="form-group">
 										<label class="control-label">숙소이름</label> 
-										<form:input class="form-control" required="required" type="text" path="name_title"></form:input>
+										<form:input class="form-control" required="required" type="text" path="room_name"></form:input>
 									</div>
 									<div class="form-group">
 										<label class="control-label">숙소소개</label>
-										<form:textarea style="resize:none" path="name_content" class="form-control" required="required" cols="50" rows="10"></form:textarea>
+										<form:textarea style="resize:none" path="room_content" class="form-control" required="required" cols="50" rows="10"></form:textarea>
 									</div>
 									<div class="form-group">
 										<div class="pull-right button-next">
