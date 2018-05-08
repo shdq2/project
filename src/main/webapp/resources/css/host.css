@@ -23,7 +23,7 @@
     
 }
 
-.host-side > a > span {
+.host-side{
 	font-family: 'Noto Sans KR', sans-serif; 
     color: #6f7071 !important;
 }
@@ -234,3 +234,6 @@ small{
 	color : #8C8C8C;
 }
 
+.border-circle {
+	width:10px;
+}

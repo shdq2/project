@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kte.project.VO.HostConfirmVO;
 import com.kte.project.VO.HostVO;
 import com.kte.project.VO.HostchkVO;
 
@@ -20,6 +21,10 @@ public class HostDAO {
 	
 	public int selectRoomCode() {
 		return sqlsession.selectOne("Host.selectLastRoomcode");
+	}
+	
+	public HostVO selectRoomName(int room_code) {
+		return sqlsession.selectOne("Host.selectRoomName", room_code);
 	}
 	
 	public void insertHostCreate(HostVO vo) {
@@ -182,5 +187,29 @@ public class HostDAO {
 	}
 	public int updateRoomSetConfirm2(int room_code) {
 		return sqlsession.update("Host.updateRoomSetConfirm2", room_code);
+	}
+	public int updateRoomSetConfirm3(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm3", room_code);
+	}
+	public int updateRoomSetConfirm4(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm4", room_code);
+	}
+	public int updateRoomSetConfirm5(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm5", room_code);
+	}
+	public int updateRoomSetConfirm6(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm6", room_code);
+	}
+	public int updateRoomSetConfirm7(int room_code) {
+		return sqlsession.update("Host.updateRoomSetConfirm7", room_code);
+	}
+	public HostConfirmVO selectRoomSetConfirm(int room_code) {
+		return sqlsession.selectOne("Host.selectRoomSetConfirm", room_code);
+	}
+	public int updateRoomAddr(HostVO vo) {
+		return sqlsession.update("Host.updateRoomAddr", vo);
+	}
+	public HostVO selectRoomAddr(int room_code) {
+		return sqlsession.selectOne("Host.selectRoomAddr", room_code);
 	}
 }

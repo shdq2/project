@@ -50,23 +50,24 @@
 							<div class="panel-body">
 								<table class="table">
 									<tr>
-										<th>사진 번호</th>
+										<th style="width:10%; text-align:center">사진 번호</th>
 										<th>사진</th>
 										<th>삭제</th>
 									</tr>
 									<c:forEach var="vo" items="${list}" varStatus="i">
 										<tr>
-											<td>${i.count}</td>
-											<td><img src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:100px; height:100px;"></td>
+											<td style="width:10%; text-align:center">${i.count}</td>
+											<td><img class="count" src="host_imgs_img.do?room_img_code=${vo.room_img_code}" style="width:100px; height:100px;"></td>
 											<td>
-												<a href="host_img_delete.do?room_img_code=${vo.room_img_code}" id="img_delete" class="btn btn-xs btn-danger btn_delete">삭제</a>	
+												<a href="#" class="btn btn-xs btn-danger btn_delete img_delete">삭제</a>
+												<input type="text" class="room_img_code" value="${vo.room_img_code}" style="display:none"/>
 											</td>
 										</tr>
 									</c:forEach>
 								</table>
 								<div class="form-group">
 									<div class="pull-right button-next">
-										<a href="host_price.do" class="btn btn-primary btn-block" >다음</a>
+										<a href="host_img_next.do" class="btn btn-primary btn-block" >다음</a>
 									</div>
 								</div>
 							</div>
@@ -77,7 +78,15 @@
 		</div>
 	</div>
 	
-	
+	<div style="display:none">
+		<input type="text" id="confirm_name" value="${cVO.confirm_name}"/>
+		<input type="text" id="confirm_basic" value="${cVO.confirm_basic}"/>
+		<input type="text" id="confirm_location" value="${cVO.confirm_location}"/>
+		<input type="text" id="confirm_amenity" value="${cVO.confirm_amenity}"/>
+		<input type="text" id="confirm_img" value="${cVO.confirm_img}"/>
+		<input type="text" id="confirm_price" value="${cVO.confirm_price}"/>
+		<input type="text" id="confirm_inout" value="${cVO.confirm_inout}"/>
+	</div>
 	
 
 	
@@ -85,15 +94,26 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/hostside.js"></script>
 	<script type="text/javascript">
 	
-	$(function(){
-		$('#img_delete').click(function(){
+		$('.img_delete').click(function(){
+			var idx = $(this).index('.img_delete');
+			var ic = $('.room_img_code').eq(idx).val();
 			swal({
-				title: "삭제";
+				title: "삭제",
+				text: "정말 삭제하시겠습니까?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
 			})
-		})
-	})
+			.then((willDelete) => {
+				if(willDelete){
+					window.location.href='host_img_delete.do?room_img_code='+ic
+				}
+			});
+		});
+			
 	</script>
 
 </body>

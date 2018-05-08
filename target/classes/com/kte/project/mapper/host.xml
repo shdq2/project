@@ -6,6 +6,10 @@
 	<select id="selectRoomList" parameterType="String" resultType="HostVO">
 		SELECT room_content, room_name, room_code FROM `room` WHERE custom_id=#{custom_id} ORDER BY room_date DESC;
 	</select>
+	
+	<select id="selectRoomName" parameterType="int" resultType="HostVO">
+		SELECT room_content, room_name FROM `room` WHERE room_code=#{room_code}; 
+	</select>
 
 	<update id="updateHostName" parameterType="HostVO">
 		UPDATE room SET room_name=#{room_name}, room_content=#{room_content} WHERE room_code=#{room_code};
@@ -202,6 +206,33 @@
 	<update id="updateRoomSetConfirm2" parameterType="int">
 		UPDATE `room_set_confirm` SET confirm_basic=1 WHERE room_code=#{room_code}
 	</update>
+	<update id="updateRoomSetConfirm3" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_location=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm4" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_amenity=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm5" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_img=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm6" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_price=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm7" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_inout=1 WHERE room_code=#{room_code}
+	</update>
+	
+	<select id="selectRoomSetConfirm" parameterType="int" resultType="HostConfirmVO">
+		SELECT confirm_name, confirm_basic, confirm_location, confirm_amenity, confirm_img,confirm_price, confirm_inout FROM `room_set_confirm` WHERE room_code=#{room_code};
+	</select>
+	
+	<update id="updateRoomAddr" parameterType="HostVO">
+		UPDATE `room` SET room_addr=#{room_addr} WHERE room_code=#{room_code}
+	</update>
+	
+	<select id="selectRoomAddr" parameterType="int" resultType="HostVO">
+		SELECT room_addr FROM `room` WHERE room_code=#{room_code}
+	</select>
 	
 	
 </mapper>	

@@ -57,8 +57,16 @@ public class HostVO {
 	private int sat_price = 0;
 	private int sun_price = 0;
 	
+	//host_location
+	private String room_addr = null;
 	
 	
+	public String getRoom_addr() {
+		return room_addr;
+	}
+	public void setRoom_addr(String room_addr) {
+		this.room_addr = room_addr;
+	}
 	public int getFri_price() {
 		return fri_price;
 	}
