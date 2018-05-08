@@ -60,4 +60,6 @@ private SqlSession sqlsession = null;
 	public int profile_sortable(SortableVO vo) {
 		return sqlsession.update("custom.profile_sortable",vo);
 	}
+	
+	
 }

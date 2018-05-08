@@ -7,6 +7,7 @@ function reser_list(state,page){
 		destroy_page(state);
 		$('.reser_list').empty();
 		for(var i=0;i<leng;i++){
+			
 			$('.reser_list').append(
 					'<div class="reser_item">'+
 					'<div class="reser_profile">'+
@@ -46,7 +47,7 @@ function reser_list(state,page){
 						'</ul>'+
 						'<div class="detail_content" style="width:100%;height:170px;">'+
 							'<div class="img-div">'+
-								'<img src="admin_room_img.do?id='+data[i].room_img_code+'"/>'+
+								'<img src="admin_room_img.do?id='+data[i].room_code+'"/>'+
 							'</div>'+
 							'<div style="float:left" class="detail_infomation" style="">'+
 								'<table class="table table-reser" style="height:205px; margin:0px;">'+
@@ -193,7 +194,7 @@ function destroy_page(state){
 	    							'</ul>'+
 	    							'<div class="detail_content" style="width:100%;height:170px;">'+
 	    								'<div class="img-div">'+
-	    									'<img src="admin_room_img.do?id='+data[i].room_img_code+'"/>'+
+	    									'<img src="admin_room_img.do?id='+data[i].room_code+'"/>'+
 	    								'</div>'+
 	    								'<div style="float:left" class="detail_infomation" style="">'+
 	    									'<table class="table table-reser" style="height:205px; margin:0px;">'+
@@ -337,7 +338,7 @@ function search_reser(){
 							'</ul>'+
 							'<div class="detail_content" style="width:100%;height:170px;">'+
 								'<div class="img-div">'+
-									'<img src="admin_room_img.do?id='+data[i].room_img_code+'"/>'+
+									'<img src="admin_room_img.do?id='+data[i].room_code+'"/>'+
 								'</div>'+
 								'<div style="float:left" class="detail_infomation" style="">'+
 									'<table class="table table-reser" style="height:205px; margin:0px;">'+

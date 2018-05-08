@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
@@ -36,21 +38,29 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,HttpSession http) {
-		CustomVO vo = (CustomVO)http.getAttribute("custom");
+		CustomVO vo = (CustomVO)http.getAttribute("custom");		
 		if(vo == null) {
 			String id = http.getId();
-			http.setAttribute("custom_id", id);	
+			vdao.visit_insert(id);
+			
 		}
-		int ret = vdao.visit_chk((String)http.getAttribute("custom_id"));
-		if(ret == 0) {
-			return "redirect:visit.do";
-		}else {
-			return "home";
-		}
-		
+		http.setAttribute("chk", "1");
+		String url = (String)http.getAttribute("path");
+		if(url != null)
+			return "redirect:"+url;
+		else
+			return "redirect:main.do";
 	}
-	
-	@RequestMapping(value = "visit.do", method = RequestMethod.GET)
+	@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public String main(Locale locale, Model model,HttpSession http) {
+		if((String)http.getAttribute("chk") == null) {
+			return "redirect:/";
+		}else {			
+			CustomVO vo = (CustomVO)http.getAttribute("custom");
+			return "home";	
+		}
+	}
+	/*@RequestMapping(value = "visit.do", method = RequestMethod.GET)
 	public String visit(Locale locale, Model model,HttpSession http) {
 		String url = (String)http.getAttribute("_url");
 		CustomVO vo = (CustomVO)http.getAttribute("custom");
@@ -96,7 +106,7 @@ public class HomeController {
 		}
 		
 		
-	}
+	}*/
 	
 	@RequestMapping(value = "block.do", method = RequestMethod.GET)
 	public String block(Model model,HttpSession http) {

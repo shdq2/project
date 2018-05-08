@@ -17,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.CustomVO;
+import com.kte.project.VO.ReservationVO;
 import com.kte.project.VO.SortableVO;
 import com.kte.project.dao.CustomDAO;
 import com.kte.project.dao.RegisterDAO;
+import com.kte.project.dao.guestDAO;
 
 @RestController
 public class JsonController {
@@ -27,6 +29,24 @@ public class JsonController {
 	private RegisterDAO rdao = null;
 	@Autowired
 	private CustomDAO cdao = null;
+	@Autowired
+	private guestDAO gdao = null;
+	
+	@RequestMapping(value = "/Json_guest_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<ReservationVO> select_reser_guest(Model model,
+		HttpSession http,
+		@RequestParam("state")int state) {		
+		List<ReservationVO> list = new ArrayList<ReservationVO>();
+		if(state == -1) {
+			list = gdao.guest_reser_list("a@a.ab");
+		}else {
+			ReservationVO vo = new ReservationVO();
+			vo.setCustom_id("a@a.ab");
+			vo.setState_count(state);
+			list = gdao.select_guest_reser_list(vo);
+		}
+		return list;
+	}
 	
 	@RequestMapping(value = "/Json_id_check.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Boolean id_check(Model model,

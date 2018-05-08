@@ -24,7 +24,7 @@
 			
 			<beans:bean class="com.kte.project.interceptor.UrlInterceptor"></beans:bean>
 		</interceptor>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/block**"/>
 			<exclude-mapping path="/admin/**"/>
@@ -39,7 +39,7 @@
 			<exclude-mapping path="/resources/**"/>
 			
 			<beans:bean class="com.kte.project.interceptor.VisitInterceptor"></beans:bean>
-		</interceptor>
+		</interceptor> -->
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/admin**"/>

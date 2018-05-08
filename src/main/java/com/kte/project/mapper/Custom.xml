@@ -68,4 +68,9 @@
 	<update id="phone_edit" parameterType="customVO">
 		update custom set custom_phone=#{custom_phone} 
 		where custom_id=#{custom_id}
-	</update></mapper>
+	</update>
+	
+	<select id="guest_reser_list" resultType="reservationVO">
+		select reser_title,reser_code from reservation_state
+	</select>
+</mapper>

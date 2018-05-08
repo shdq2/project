@@ -3,7 +3,9 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under the MIT license
  */
-
+function close_event(){
+	alert('test');
+}
 if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }

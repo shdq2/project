@@ -10,7 +10,9 @@
 		<div class="form-inline" style="text-align: right;margin-bottom:10px;">
 			<select id="type" class="form-control">
 				<option value="host">호스트 아이디</option>
+				<option value="host_name">호스트명</option>
 				<option value="guest">게스트 아이디</option>
+				<option value="guest_name">게스트명</option>
 				<option value="room">숙소명</option>
 			</select>
 			<input type="text" placeholder="검색어 입력" class="form-control" id="search_txt"/>

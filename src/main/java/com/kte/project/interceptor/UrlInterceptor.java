@@ -20,6 +20,8 @@ public class UrlInterceptor extends HandlerInterceptorAdapter {
 		String root = request.getContextPath();
 		String path = request.getServletPath();
 		String query = request.getQueryString();
+		
+		
 		http.setAttribute("_path", path);
 		if(query == null) {
 			http.setAttribute("_url", root+path);

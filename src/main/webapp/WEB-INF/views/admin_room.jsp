@@ -17,6 +17,7 @@
 			<select class="form-control" id="type">
 				<option value="3">숙소명</option>
 				<option value="4">호스트명</option>
+				<option value="5">호스트아이디</option>
 			</select>
 			<input type="text" class="form-control" id="search"/>
 			<input type="button" class="btn btn-success" value="검색" id="search_btn"/>
@@ -36,7 +37,7 @@
 				
 			</tbody>			
 		</table>
-		<div id="tf" style="width:100%;height:30px;display:none;">저장된 값이 없습니다</div>
+		<div id="tf" style="width:100%;height:30px;display:none;">등록된 숙소가 없습니다</div>
 		<div style="width:100%;text-align: center">
 			<ul id="pagination" class="pagination-sm"></ul>
 		</div>
@@ -68,7 +69,6 @@
 		var leng = data.length;
 		
 		 var src = "";
-		console.log(data);
 		 $('.table tbody').empty();
 		 for(var i=0;i<leng;i++){
 			 if(data[i].room_block == 0){
@@ -133,7 +133,6 @@
 				}	
 			})
 			var id="${url_id}";
-			console.log(id);
 			$('#state').change(function(){
 				var state = $('#state').val();
 				$.get('Json_room_state_search.do?state='+state,function(data){
