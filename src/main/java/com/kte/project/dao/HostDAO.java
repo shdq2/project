@@ -178,6 +178,9 @@ public class HostDAO {
 	public int host_list_del7(int room_code) {
 		return sqlsession.delete("Host.host_list_del7", room_code);
 	}
+	public int host_list_del8(int room_code) {
+		return sqlsession.delete("Host.host_list_del8", room_code);
+	}
 	
 	public int insertRoomSetConfirm(int room_code) {
 		return sqlsession.insert("Host.insertRoomSetConfirm", room_code);
@@ -211,5 +214,13 @@ public class HostDAO {
 	}
 	public HostVO selectRoomAddr(int room_code) {
 		return sqlsession.selectOne("Host.selectRoomAddr", room_code);
+	}
+	
+	public int updateHostBlock(int room_code) {
+		return sqlsession.update("Host.updateHostBlock", room_code);
+	}
+	
+	public int selectRoomBlock(int room_code) {
+		return sqlsession.selectOne("Host.selectRoomBlock", room_code);
 	}
 }

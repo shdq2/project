@@ -185,7 +185,7 @@
 									</div>
 								</div>
 								<div class="panel-body" style="padding-right:50px">
-									<input type="submit" value="다음" class="btn btn-primary pull-right" >
+									<input type="submit" value="다음" class="btn btn-primary pull-right btn_next" >
 								</div>
 							</form:form>
 						</div>

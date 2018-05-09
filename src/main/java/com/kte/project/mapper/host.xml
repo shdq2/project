@@ -64,7 +64,7 @@
    </delete>
    
    <select id="selectHostBasic" parameterType="int" resultType="HostVO">
-   		SELECT room_code, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
+   		SELECT room_code, room_space, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
    </select> 
    
    <update id="updateHostBasic" parameterType="HostVO">
@@ -194,7 +194,10 @@
 	</delete> 
 	<delete id="host_list_del7" parameterType="int">
 		DELETE FROM `room_set_confirm` WHERE room_code=#{room_code}
-	</delete> 
+	</delete>
+	<delete id="host_list_del8" parameterType="int">
+		DELETE FROM `room_addr` WHERE room_code=#{room_code}
+	</delete>  
 	
 	<insert id="insertRoomSetConfirm" parameterType="int">
 		INSERT INTO `room_set_confirm`(room_code, confirm_name,confirm_basic,confirm_location,confirm_amenity,confirm_img,confirm_price,confirm_inout) VALUES(#{room_code},0,0,0,0,0,0,0)
@@ -227,12 +230,19 @@
 	</select>
 	
 	<update id="updateRoomAddr" parameterType="HostVO">
-		UPDATE `room` SET room_addr=#{room_addr} WHERE room_code=#{room_code}
+		UPDATE `room_addr` SET room_addr=#{room_addr}, map_lat=#{map_lat}, map_lng=#{map_lng} WHERE room_code=#{room_code}
 	</update>
 	
 	<select id="selectRoomAddr" parameterType="int" resultType="HostVO">
-		SELECT room_addr FROM `room` WHERE room_code=#{room_code}
+		SELECT room_addr, map_lat, map_lng FROM `room_addr` WHERE room_code=#{room_code}
 	</select>
 	
+	<update id="updateHostBlock" parameterType="int">
+		UPDATE `room` SET room_block=2 WHERE room_code=#{room_code}
+	</update>
+	
+	<select id="selectRoomBlock" parameterType="int" resultType="int">
+		SELECT room_block FROM `room` WHERE room_code=#{room_code}
+	</select>
 	
 </mapper>	

@@ -51,6 +51,7 @@
 												<td>관리</td>
 											</tr>
 										</thead>
+										
 										<c:if test="${empty list}">
 											<tbody>
 												<tr>
@@ -58,6 +59,7 @@
 												</tr>
 											</tbody>
 										</c:if>
+									
 										<tbody>
 											<c:forEach var="tmp" items="${list}" varStatus="i">
 												<tr>
@@ -72,7 +74,21 @@
 															<img src="resources/imgs/default.png" style="width:100px; height:100px;">
 														</td>
 													</c:if>
-													<td style="width:10%"></td>
+													<c:if test="${tmp.room_block eq 2}">
+														<td style="width:10%">
+															<span class="btn btn-success btn-xs" id="btn-complete">완료</span>
+														</td>
+													</c:if>
+													<c:if test="${tmp.room_block eq 1}">
+														<td style="width:10%">
+															<input type="button" class="btn btn-xs btn-warning" id="btn-cut" value="차단"/>
+														</td>
+													</c:if>
+													<c:if test="${tmp.room_block eq 0}">
+														<td style="width:10%">
+															<input type="button" class="btn btn-xs" id="btn-incomplete" value="미완성"/>
+														</td>
+													</c:if>
 													<c:if test="${tmp.room_name eq null}">
 														<td>없음</td>
 													</c:if>
@@ -87,7 +103,7 @@
 													</c:if>
 													<td>
 														<a href="host_list_revise.do?room_code=${tmp.room_code}" class="btn btn-sm btn-warning">수정</a><br>
-														<a href="#" class="btn btn-sm btn-danger del_list" style="margin-top:5px">삭제</a>
+														<a href="#" class="btn btn-sm  del_list" id="del_list"style="margin-top:5px">삭제</a>
 														<input type="text" class="room_code" value="${tmp.room_code}" style="display:none"/>
 													</td>
 												</tr>

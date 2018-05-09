@@ -237,3 +237,51 @@ small{
 .border-circle {
 	width:10px;
 }
+
+.p-r-title {
+   padding: 20px 30px 20px 30px;
+   margin: 0;
+   color: #6f7071;
+    font-size: 1.2em;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display: block;
+    background: white;
+}
+
+.p-r-body {
+   padding: 20px 30px 20px 30px;
+   margin: 0;
+   margin-top: 1px;
+    text-align: left;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: block;
+    background: white;
+}
+
+.p-r-body div {
+   padding-left: 3px;
+   padding-right: 3px;
+}
+
+.p-r-body div i {
+   width: auto;
+   display: inline-block;
+   vertical-align: baseline;
+}
+
+#del_list{
+	background-color: #f96868!important;
+	color : #FFFFFF;
+}
+#btn-complete{
+	background-color: 
+}
+#btn-incomplete{
+	background-color: #A50D73!important;
+	color : #FFFFFF;
+}

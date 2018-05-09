@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -433,12 +434,27 @@
 							</form:form>
 						<div class="panel-body">
 							<div class="pull-right">
-								<a href="host_price_next.do" class="btn btn-primary btn-block" style="width:100px">다음</a>
+								<!-- <input type="button" class="btn btn-primary btn-block btn_next_price" id="btn_next_price" style="width:100px" value="다음"/> -->
+								<a href="host_price_next.do" class="btn btn-primary btn-block btn_next" style="width:100px">다음</a>
 							</div>
 						</div>
 						</div><!-- panel -->
-						</div> 
-					</div>
+						</div> <!--=====================================-->
+						
+					<%-- <div class="col-md-12 col-lg-10 col-xlg-7">
+						<h3 class="p-r-title">
+							<span class="panel-desc">기본금액 (특정 기간은 다를 수 있음)</span><br />
+							<span class="font-size-30 red-600" style="color: #A50D73; font-size: 30px; font-weight: bolder">
+							<span style="font-weight: bold;">₩</span> 
+							<fmt:formatNumber value="${vo.room_day}" pattern="#,###" /> <small>(1박)</small>
+							</span><br />
+							<br /> <small>※ <small style="color: #A50D73; font-size: 16px;">최소 1박</small> 부터 이용 가능한
+								숙소
+							</small><br /> <small>※ 위 금액은 비수기, 성수기에 따라 금액이 상이할 수 있습니다.</small>
+						</h3>
+					</div> --%>
+						
+				</div>
 				</div>
 			</div>
 		</div>
@@ -760,7 +776,42 @@
 				}
 			});
 			
+			 $('.daterange').daterangepicker({
+                 autoApply:true,
+                 locale: {
+                    'format':'YYYY/MM/DD',
+                    'daysOfWeek': [
+                          "일",
+                          "월",
+                          "화",
+                          "수",
+                          "목",
+                          "금",
+                          "토"
+                      ],
+                    'monthNames': [
+                          "1월",
+                          "2월",
+                          "3월",
+                          "4월",
+                          "5월",
+                          "6월",
+                          "7월",
+                          "8월",
+                          "9월",
+                          "10월",
+                          "11월",
+                          "12월"
+                      ]
+                 },
+                 'minDate': new Date()
+              }, function(start, end) {
+                 console.log('start : ' + start.format('YYYY-MM-DD'));
+                 console.log('end : ' + end.format('YYYY-MM-DD'));
+              });
+			
 		});
 	</script>
+	
 </body>
 </html>

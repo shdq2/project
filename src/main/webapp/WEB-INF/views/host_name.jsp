@@ -52,7 +52,7 @@
 									</div>
 									<div class="form-group">
 										<div class="pull-right button-next">
-											<input class="btn btn-primary btn-block" type="submit" value="다음">
+											<input class="btn btn-primary btn-block btn_next" type="submit" value="다음">
 										</div>
 									</div>
 								</form:form>

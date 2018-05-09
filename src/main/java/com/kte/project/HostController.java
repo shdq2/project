@@ -114,7 +114,7 @@ public class HostController {
 		HostVO vo = hDAO.selectHostBasic(room_code);
 		String[] str = {"원룸","1.5룸","투룸(방1개 + 거실1)","투룸(방2개)","쓰리룸이상","복층","호텔","리조트"};
 		String[] str1 = {"빌라","원룸","펜션","민박","아파트","오피스텔","레지던스","쉐어하우스","단독주택(독채)","단독주택(일부 사용)","게스트하우스(개인실)","게스트하우스(도미토리)"};
-		
+		System.out.println(vo.getRoom_space());
 		model.addAttribute("str",str);
 		model.addAttribute("str1",str1);
 		model.addAttribute("vo", vo);
@@ -154,7 +154,7 @@ public class HostController {
 		hDAO.updateRoomAddr(vo);
 		hDAO.updateRoomSetConfirm3(room_code);
 		
-		return "redirect:host_location.do";
+		return "redirect:host_amenity.do";
 	}
 	
 	/*@RequestMapping(value="/host_location.do", method=RequestMethod.POST)
@@ -658,6 +658,7 @@ public class HostController {
 		return "host_calendar";
 	}
 	
+	
 	@RequestMapping(value="/host_list.do", method=RequestMethod.GET)
 	public String hostlist(Model model, HttpSession httpsession) {
 		
@@ -678,14 +679,25 @@ public class HostController {
 			   String getse = se.nextElement()+"";
 			   System.out.println("@@@@@@@ session : "+getse+" : "+ httpsession.getAttribute(getse));
 			  }
+			for(HostVO tmp1 : list) {
+				int room_code = tmp1.getRoom_code();
+				HostConfirmVO cVO = hDAO.selectRoomSetConfirm(room_code);
+				int confirm = cVO.getConfirm_amenity()+cVO.getConfirm_basic()+cVO.getConfirm_img()+cVO.getConfirm_inout()+cVO.getConfirm_location()+cVO.getConfirm_name()+cVO.getConfirm_price();
+				if(confirm == 7) {
+					hDAO.updateHostBlock(room_code);
+				}
+			}
 
 			for(HostVO tmp : list) {
-				System.out.println(tmp.getRoom_code());
+				int room_code = tmp.getRoom_code();
 				try {
+					int block = hDAO.selectRoomBlock(room_code);
+					System.out.println(block);
+					tmp.setRoom_block(block);
 					int a = hDAO.selectLastListImgCode(tmp.getRoom_code());
 					tmp.setRoom_img_code(a);
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println("ERROR : "+ e.getMessage());
 				}
 			}
 			
@@ -713,6 +725,7 @@ public class HostController {
 		System.out.println(room_code);
 		
 		try {
+			hDAO.host_list_del8(room_code);
 			hDAO.host_list_del7(room_code);
 			hDAO.host_list_del1(room_code);
 			hDAO.host_list_del2(room_code);
@@ -727,5 +740,13 @@ public class HostController {
 		return "redirect:host_list.do";
 	}
 	
+	@RequestMapping(value="/host_block.do", method=RequestMethod.GET)
+	public String hostlistdel(Model model, HttpSession httpsession) {
+		int room_code = (Integer) httpsession.getAttribute("room_code");
+		
+		hDAO.updateHostBlock(room_code);
+		
+		return "redirect:host_list.do";
+	}
 	
 }

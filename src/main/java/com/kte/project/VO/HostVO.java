@@ -5,6 +5,7 @@ public class HostVO {
 	private String custom_id = null;
 	private int room_code = 0;
 	private String room_code1 = null;
+	private int room_block = 0;
 	
 	//host_name
 	private String room_name = null;
@@ -59,8 +60,28 @@ public class HostVO {
 	
 	//host_location
 	private String room_addr = null;
+	private double map_lat = 0;
+	private double map_lng = 0;
 	
 	
+	public int getRoom_block() {
+		return room_block;
+	}
+	public void setRoom_block(int room_block) {
+		this.room_block = room_block;
+	}
+	public double getMap_lat() {
+		return map_lat;
+	}
+	public void setMap_lat(double map_lat) {
+		this.map_lat = map_lat;
+	}
+	public double getMap_lng() {
+		return map_lng;
+	}
+	public void setMap_lng(double map_lng) {
+		this.map_lng = map_lng;
+	}
 	public String getRoom_addr() {
 		return room_addr;
 	}

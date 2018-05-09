@@ -36,7 +36,7 @@
 				<div class="row">
 				
 					<div class="col-md-12 col-lg-8">
-					<form:form action="host_basic.do" method="post" modelAttribute="vo">
+					<form:form action="host_basic.do" method="post" modelAttribute="vo" id= "form">
 						<div style="display:none">
 							<form:input type="text" path="room_code"/>
 						</div>
@@ -139,13 +139,13 @@
 													<option value="${i}" selected="selected">${i}</option>
 												</c:if>
 											</c:forEach>
-											<option>50이상</option>
+											<option>70이상</option>
 										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="pull-right button-next" style="padding-top:10px;">
-										<input class="btn btn-primary btn-block" type="submit" value="다음">
+										<input class="btn btn-primary btn-block btn_next" type="submit" value="다음">
 									</div>
 								</div>
 							</div>

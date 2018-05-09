@@ -15,7 +15,7 @@
 			</a>
 			<a href="#">
 				<span class="pull-left" style="color:#f2a654!important; margin-right:20px" ><i class="glyphicon glyphicon-play"></i></span>
-				<span class="pull-left1">승인대기</span>
+				<span class="pull-left1">차단</span>
 			</a>
 			<a href="#">
 				<span class="pull-left" style="color:#46be8a!important; margin-right:20px" ><i class="glyphicon glyphicon-play"></i></span>
