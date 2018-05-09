@@ -37,11 +37,12 @@ public class JsonController {
 		HttpSession http,
 		@RequestParam("state")int state) {		
 		List<ReservationVO> list = new ArrayList<ReservationVO>();
+		String id = (String)http.getAttribute("custom_id");
 		if(state == -1) {
-			list = gdao.guest_reser_list("a@a.ab");
+			list = gdao.guest_reser_list(id);
 		}else {
 			ReservationVO vo = new ReservationVO();
-			vo.setCustom_id("a@a.ab");
+			vo.setCustom_id(id);
 			vo.setState_count(state);
 			list = gdao.select_guest_reser_list(vo);
 		}

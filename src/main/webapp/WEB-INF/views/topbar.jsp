@@ -10,7 +10,7 @@
 	<div class="topbar-menu">
 		<button class="topbar-bmenu"></button>
 	</div>
-	<a href="/project/" class="topbar-logo"><img src="resources/imgs/logo.png" /></a>
+	<a href="/project/main.do" class="topbar-logo"><img src="resources/imgs/logo.png" /></a>
 	<div class="topbar-buttons">
 		<ul class="topbar-ul">
 			<img src="resources/imgs/korean_flag.png" id="topbar-flag" />

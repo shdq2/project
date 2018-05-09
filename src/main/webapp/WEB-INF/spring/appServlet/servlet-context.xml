@@ -19,6 +19,10 @@
 			<exclude-mapping path="/block**"/>
 			<exclude-mapping path="/visit**"/>
 			<exclude-mapping path="/json**"/>
+			<exclude-mapping path="/alert**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/admin/**"/>
+			<exclude-mapping path="/admin**"/>
 			<exclude-mapping path="/resources**"/>
 			<exclude-mapping path="/resources/**"/>
 			

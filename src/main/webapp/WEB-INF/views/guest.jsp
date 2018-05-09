@@ -25,7 +25,7 @@
    
    <div class="guest-container">
       <div class="guest-nav">
-         <a href="profile.do" id="guest-list-1"> 
+         <a href="guest.do" id="guest-list-1"> 
             <i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">전체 여행보기</span>
          </a>
          <a href="profileEdit.do" id="guest-list-2">
@@ -35,7 +35,7 @@
       </div>
       
       <div class="guest-main">
-      	<div class="block-xs-9" >
+      	<div class="block-xs-12 block-md-9" >
          <div class="main-header">
 			<h3>여행목록</h3>
 			<p>Travel List</p>
@@ -69,11 +69,14 @@
 							<c:forEach var="i" items="${rlist }">
 								<tr>
 									<td><img src="admin/admin_room_img.do?id=${i.room_code }" style="width:80px;height:80px;margin:1px;" /></td>
-									<td>${i.room_name }</td>
+									<td>
+									<input type="hidden" value="${i.reservation_code }" />
+									${i.room_name }
+									</td>
 									<td>${i.host_name }</td>
 									<td>${i.reservation_start }
-									(<label style="<c:if test="${i.dayofweek_start == '토' }">color:blue;</c:if><c:if test="${i.dayofweek_start == '일' }">color:red;</c:if>"> ${i.dayofweek_start } </label>) ~ <br />${i.reservation_end }
-									(<label style="<c:if test="${i.dayofweek_end == '토' }">color:blue;</c:if><c:if test="${i.dayofweek_end == '일' }">color:red;</c:if>">  ${i.dayofweek_end }</label> ) <br />(${i.reser_day }박 ${i.reser_day+1 } 일)</td>
+									( <label style="<c:if test="${i.dayofweek_start == '토' }">color:blue;</c:if><c:if test="${i.dayofweek_start == '일' }">color:red;</c:if>"> ${i.dayofweek_start } </label> ) ~ <br />${i.reservation_end }
+									( <label style="<c:if test="${i.dayofweek_end == '토' }">color:blue;</c:if><c:if test="${i.dayofweek_end == '일' }">color:red;</c:if>">  ${i.dayofweek_end }</label> ) <br />(${i.reser_day }박 ${i.reser_day+1 } 일)</td>
 									<td>${i.reser_title }</td>
 								</tr>
 							</c:forEach>
@@ -104,6 +107,24 @@
 		$('.div_menu p').eq(5).css('color','#757575');
 		$('.div_menu p').eq(6).css('color','#B70000');
 		$('.div menu p').css('font-style','italic');
+		
+		
+		$(document).on('click','.table tbody tr',function(){		
+			var idx = $(this).index('.table tbody tr');
+			var code = $('.table tbody tr input[type=hidden]').eq(idx).val();
+			window.location.href="reser_detail.do?code="+code;
+		})
+		
+		
+		$('.table tbody tr').each(function(index){
+			$(document).on('mouseover','.table tbody tr',function(e){
+				$(this).css('background-color','#efefef');
+			});
+			$(document).on('mouseout','.table tbody tr',function(e){
+				$(this).css('background-color','');
+			});
+		});
+		
 		$('.div_menu').click(function(){
 			var idx = $(this).index('.div_menu');
 			
@@ -121,7 +142,8 @@
 						$('.table tbody').append(
 							'<tr>'+
 								'<td><img src="admin/admin_room_img.do?id='+data[i].room_code+'" style="width:80px;height:80px;margin:1px;" /></td>'+
-								'<td>'+data[i].room_name+'</td>'+
+								'<td><input type="hidden" value="'+data[i].reservation_code+'" />'+
+								data[i].room_name+'</td>'+
 								'<td>'+data[i].host_name+'</td>'+
 								'<td>'+data[i].reservation_start+
 								'( <label class="dayofweek">'+data[i].dayofweek_start+'</label> ) ~ <br />'+data[i].reservation_end+

@@ -23,7 +23,7 @@ public class BlockInterceptor extends HandlerInterceptorAdapter {
 		}else {
 			String block = (String)http.getAttribute("block");
 			if(block == null) {
-				response.sendRedirect("block.do");
+				response.sendRedirect("/project/block.do");
 				return false;
 			}
 			if(block == "1") {				

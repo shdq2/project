@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -32,20 +33,27 @@ public class AdminWishController {
 	private admin_wishDAO wdao = null;
 	
 	@RequestMapping(value = "/admin/admin_wish.do", method = RequestMethod.GET)
-	public String home(Model model,HttpSession http) {
-		List<WishVO> list = wdao.wish_list(0);
-		model.addAttribute("wlist", list);
-		int tot = ((wdao.wish_all()-1)/10)+1;
-		model.addAttribute("tot", tot);
-		int wcount = wdao.wish_count();
-		http.setAttribute("_wcount", wcount);
-		return "admin_wish";
+	public String home(Model model,HttpSession http,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
+			List<WishVO> list = wdao.wish_list(0);
+			model.addAttribute("wlist", list);
+			int tot = ((wdao.wish_all()-1)/10)+1;
+			model.addAttribute("tot", tot);
+			int wcount = wdao.wish_count();
+			http.setAttribute("_wcount", wcount);
+			return "admin_wish";
+		}
 	}
 	
 
 	@RequestMapping(value = "/admin/admin_wish_detail.do", method = RequestMethod.GET)
 	public String wish_detail(Model model,HttpSession http,
-			@RequestParam("code")int code) {
+			@RequestParam("code")int code,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
 		wdao.wish_update(code);
 		WishVO vo = wdao.wish_One(code);
 		int pre = wdao.wish_pre(code);
@@ -70,5 +78,6 @@ public class AdminWishController {
 			
 		model.addAttribute("req", req);
 		return "admin_wish_detail";
+		}
 	}
 }

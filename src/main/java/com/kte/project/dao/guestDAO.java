@@ -29,4 +29,12 @@ private SqlSession sqlsession = null;
 	public List<ReservationVO> select_guest_reser_list(ReservationVO vo){
 		return sqlsession.selectList("guest.select_guest_reser_list",vo);
 	}
+	
+	public ReservationVO select_guest_reser(int code) {
+		return sqlsession.selectOne("guest.select_guest_reser",code);
+	}
+	
+	public CustomVO host_info(String id) {
+		return sqlsession.selectOne("guest.host_info",id);
+	}
 }

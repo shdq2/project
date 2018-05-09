@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -36,21 +37,29 @@ public class AdminMemberController {
 	@Autowired
 	private adminDAO adao = null;
 	@RequestMapping(value = "/admin/admin_member.do", method = RequestMethod.GET)
-	public String member(Model model) {
-		List<CustomVO> list = amdao.AdminUserMain(0);
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
+	public String member(Model model,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
+			List<CustomVO> list = amdao.AdminUserMain(0);
+			for(int i=0;i<list.size();i++) {
+				list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
+			}
+			int count = adao.usercount();
+			int tot = ((count-1)/10)+1;
+			model.addAttribute("list", list);
+			model.addAttribute("tot", tot);
+			return "admin_member";	
 		}
-		int count = adao.usercount();
-		int tot = ((count-1)/10)+1;
-		model.addAttribute("list", list);
-		model.addAttribute("tot", tot);
-		return "admin_member";
+		
 	}
 	
 	@RequestMapping(value = "/admin/admin_member_detail.do", method = RequestMethod.GET)
-	public String admin_member_detail(Model model,
+	public String admin_member_detail(Model model,HttpServletRequest request,
 			@RequestParam("id")String id) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
 		CustomVO vo = amdao.admin_member_select(id);
 		int count = ardao.total_room_count(id);
 		model.addAttribute("vo", vo);
@@ -82,5 +91,6 @@ public class AdminMemberController {
 		model.addAttribute("rcount",rcount);
 		
 		return "admin_member_detail";
+		}
 	}
 }

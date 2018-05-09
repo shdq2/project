@@ -47,7 +47,10 @@ public class AdminRoomController {
 	
 	@RequestMapping(value = "/admin/admin_room.do", method = RequestMethod.GET)
 	public String home(Model model,HttpSession http,
-			@RequestParam(value="id",defaultValue="")String id) {
+			@RequestParam(value="id",defaultValue="")String id,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
 		int count =0;
 		if(id =="") {
 			count = ardao.room_count();
@@ -63,6 +66,7 @@ public class AdminRoomController {
 		model.addAttribute("url_id", id);		
 		
 		return "admin_room";
+		}
 	}
 	
 	@SuppressWarnings("finally")

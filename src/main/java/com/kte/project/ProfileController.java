@@ -143,28 +143,5 @@ public class ProfileController {
 		return "alert";
 	}
 	
-	@RequestMapping(value="/guest.do", method = RequestMethod.GET)
-	public String guest(HttpSession http,Model model) {
-		CustomVO vo =(CustomVO)http.getAttribute("custom");
-		/*
-		if(vo == null) {
-			return "redirect:login.do";
-		}*/
-		/*
-		CustomVO cvo = cdao.selectmember(vo.getCustom_id());
-		model.addAttribute("cvo", cvo);*/
-		int sum = 0;
-		
-		List<ReservationVO> list = gdao.guest_reser("a@a.ab");
-		for(int i=0;i<list.size();i++) {
-			sum += list.get(i).getReser_count();
-		}
-		
-		List<ReservationVO> rlist = gdao.guest_reser_list("a@a.ab");
-		model.addAttribute("list", list);
-		model.addAttribute("sum", sum);
-		model.addAttribute("rlist", rlist);
-		return "guest";
-	}
-
+	
 }

@@ -43,7 +43,10 @@ public class AdminReserController {
 	private adminreservationDAO aredao = null;
 	
 	@RequestMapping(value = "/admin/admin_reser.do", method = RequestMethod.GET)
-	public String home(Model model,HttpSession http) {
+	public String home(Model model,HttpSession http,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
 		List<ReservationVO> list = aredao.reservation_all(0);
 		
 		for(int i = 0;i<list.size();i++) {
@@ -61,6 +64,7 @@ public class AdminReserController {
 		model.addAttribute("list", list);
 		model.addAttribute("tot", tot);
 		return "admin_reservation";
+		}
 	}
 		
 	@SuppressWarnings("finally")
@@ -69,6 +73,7 @@ public class AdminReserController {
 			@RequestParam("id")String id,
 			HttpServletRequest request,
 			HttpSession http) {
+
 		 ResponseEntity<byte[]> r_data = null;
 		 HttpHeaders header = new HttpHeaders();
 		 header.setContentType(MediaType.IMAGE_JPEG);

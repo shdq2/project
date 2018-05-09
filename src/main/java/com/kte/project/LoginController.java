@@ -40,7 +40,7 @@ public class LoginController {
 					httpsession.setAttribute("custom_id",cvo.getCustom_id());
 					httpsession.setAttribute("custom_name",cvo.getCustom_name());
 					
-					return "redirect:admin.do";
+					return "redirect:admin/admin.do";
 				}else {
 					httpsession.setAttribute("custom",cvo);
 					httpsession.setAttribute("custom_id",cvo.getCustom_id());

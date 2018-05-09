@@ -135,7 +135,7 @@
 				})
 				
 				 $.get('Json_sortable.do?val2='+list2,function(data){
-					 var time = new Date().getTime();										 
+					 var time = new Date().getTime();
 					 $('.col-img').empty();
 					 $('.col-img').append(
 						'<img src="show_img.do?time='+time+'&code='+data[0].img_code+'" class="user-picture profile-img"/>'	 
