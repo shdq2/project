@@ -5,6 +5,7 @@ public class HostVO {
 	private String custom_id = null;
 	private int room_code = 0;
 	private String room_code1 = null;
+	private int room_block = 0;
 	
 	//host_name
 	private String room_name = null;
@@ -56,9 +57,51 @@ public class HostVO {
 	private int fri_price = 0;
 	private int sat_price = 0;
 	private int sun_price = 0;
+	private int room_day = 0;
+	private int room_month = 0;
+	
+	//host_location
+	private String room_addr = null;
+	private double map_lat = 0;
+	private double map_lng = 0;
 	
 	
-	
+	public int getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(int room_day) {
+		this.room_day = room_day;
+	}
+	public int getRoom_month() {
+		return room_month;
+	}
+	public void setRoom_month(int room_month) {
+		this.room_month = room_month;
+	}
+	public int getRoom_block() {
+		return room_block;
+	}
+	public void setRoom_block(int room_block) {
+		this.room_block = room_block;
+	}
+	public double getMap_lat() {
+		return map_lat;
+	}
+	public void setMap_lat(double map_lat) {
+		this.map_lat = map_lat;
+	}
+	public double getMap_lng() {
+		return map_lng;
+	}
+	public void setMap_lng(double map_lng) {
+		this.map_lng = map_lng;
+	}
+	public String getRoom_addr() {
+		return room_addr;
+	}
+	public void setRoom_addr(String room_addr) {
+		this.room_addr = room_addr;
+	}
 	public int getFri_price() {
 		return fri_price;
 	}

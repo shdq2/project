@@ -36,7 +36,7 @@
 				<div class="row">
 				
 					<div class="col-md-12 col-lg-8">
-					<form:form action="host_basic.do" method="post" modelAttribute="vo">
+					<form:form action="host_basic.do" method="post" modelAttribute="vo" id= "form">
 						<div style="display:none">
 							<form:input type="text" path="room_code"/>
 						</div>
@@ -139,13 +139,13 @@
 													<option value="${i}" selected="selected">${i}</option>
 												</c:if>
 											</c:forEach>
-											<option>50이상</option>
+											<option>70이상</option>
 										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="pull-right button-next" style="padding-top:10px;">
-										<input class="btn btn-primary btn-block" type="submit" value="다음">
+										<input class="btn btn-primary btn-block btn_next" type="submit" value="다음">
 									</div>
 								</div>
 							</div>
@@ -159,10 +159,20 @@
 		</div>
 	</div>
 	
+	<div style="display:none">
+		<input type="text" id="confirm_name" value="${cVO.confirm_name}"/>
+		<input type="text" id="confirm_basic" value="${cVO.confirm_basic}"/>
+		<input type="text" id="confirm_location" value="${cVO.confirm_location}"/>
+		<input type="text" id="confirm_amenity" value="${cVO.confirm_amenity}"/>
+		<input type="text" id="confirm_img" value="${cVO.confirm_img}"/>
+		<input type="text" id="confirm_price" value="${cVO.confirm_price}"/>
+		<input type="text" id="confirm_inout" value="${cVO.confirm_inout}"/>
+	</div>
 	
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/hostside.js"></script>
 	<script type="text/javascript">
 	</script>
 

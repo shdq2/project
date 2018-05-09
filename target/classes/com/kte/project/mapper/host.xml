@@ -6,6 +6,10 @@
 	<select id="selectRoomList" parameterType="String" resultType="HostVO">
 		SELECT room_content, room_name, room_code FROM `room` WHERE custom_id=#{custom_id} ORDER BY room_date DESC;
 	</select>
+	
+	<select id="selectRoomName" parameterType="int" resultType="HostVO">
+		SELECT room_content, room_name FROM `room` WHERE room_code=#{room_code}; 
+	</select>
 
 	<update id="updateHostName" parameterType="HostVO">
 		UPDATE room SET room_name=#{room_name}, room_content=#{room_content} WHERE room_code=#{room_code};
@@ -60,7 +64,7 @@
    </delete>
    
    <select id="selectHostBasic" parameterType="int" resultType="HostVO">
-   		SELECT room_code, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
+   		SELECT room_code, room_space, room_type, room_building_type, room_bath_number, room_bed_number, room_number FROM room WHERE room_code=#{room_code}
    </select> 
    
    <update id="updateHostBasic" parameterType="HostVO">
@@ -95,7 +99,7 @@
    </select>
    
    <select id="selectHostPrice" parameterType="int" resultType="HostVO">
-   		SELECT room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
+   		SELECT room_day, room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
    			room_plus_price_apply, room_plus_price, bank_name, bank_num, bank_depositor, fri_price, sat_price, sun_price  FROM `room` WHERE room_code=#{room_code}
    </select>
    
@@ -190,7 +194,10 @@
 	</delete> 
 	<delete id="host_list_del7" parameterType="int">
 		DELETE FROM `room_set_confirm` WHERE room_code=#{room_code}
-	</delete> 
+	</delete>
+	<delete id="host_list_del8" parameterType="int">
+		DELETE FROM `room_addr` WHERE room_code=#{room_code}
+	</delete>  
 	
 	<insert id="insertRoomSetConfirm" parameterType="int">
 		INSERT INTO `room_set_confirm`(room_code, confirm_name,confirm_basic,confirm_location,confirm_amenity,confirm_img,confirm_price,confirm_inout) VALUES(#{room_code},0,0,0,0,0,0,0)
@@ -202,6 +209,40 @@
 	<update id="updateRoomSetConfirm2" parameterType="int">
 		UPDATE `room_set_confirm` SET confirm_basic=1 WHERE room_code=#{room_code}
 	</update>
+	<update id="updateRoomSetConfirm3" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_location=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm4" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_amenity=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm5" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_img=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm6" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_price=1 WHERE room_code=#{room_code}
+	</update>
+	<update id="updateRoomSetConfirm7" parameterType="int">
+		UPDATE `room_set_confirm` SET confirm_inout=1 WHERE room_code=#{room_code}
+	</update>
 	
+	<select id="selectRoomSetConfirm" parameterType="int" resultType="HostConfirmVO">
+		SELECT confirm_name, confirm_basic, confirm_location, confirm_amenity, confirm_img,confirm_price, confirm_inout FROM `room_set_confirm` WHERE room_code=#{room_code};
+	</select>
+	
+	<update id="updateRoomAddr" parameterType="HostVO">
+		UPDATE `room_addr` SET room_addr=#{room_addr}, map_lat=#{map_lat}, map_lng=#{map_lng} WHERE room_code=#{room_code}
+	</update>
+	
+	<select id="selectRoomAddr" parameterType="int" resultType="HostVO">
+		SELECT room_addr, map_lat, map_lng FROM `room_addr` WHERE room_code=#{room_code}
+	</select>
+	
+	<update id="updateHostBlock" parameterType="int">
+		UPDATE `room` SET room_block=2 WHERE room_code=#{room_code}
+	</update>
+	
+	<select id="selectRoomBlock" parameterType="int" resultType="int">
+		SELECT room_block FROM `room` WHERE room_code=#{room_code}
+	</select>
 	
 </mapper>	

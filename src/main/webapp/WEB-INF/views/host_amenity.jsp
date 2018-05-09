@@ -185,7 +185,7 @@
 									</div>
 								</div>
 								<div class="panel-body" style="padding-right:50px">
-									<input type="submit" value="다음" class="btn btn-primary pull-right" >
+									<input type="submit" value="다음" class="btn btn-primary pull-right btn_next" >
 								</div>
 							</form:form>
 						</div>
@@ -195,6 +195,15 @@
 		</div>
 	</div>
 	
+	<div style="display:none">
+		<input type="text" id="confirm_name" value="${cVO.confirm_name}"/>
+		<input type="text" id="confirm_basic" value="${cVO.confirm_basic}"/>
+		<input type="text" id="confirm_location" value="${cVO.confirm_location}"/>
+		<input type="text" id="confirm_amenity" value="${cVO.confirm_amenity}"/>
+		<input type="text" id="confirm_img" value="${cVO.confirm_img}"/>
+		<input type="text" id="confirm_price" value="${cVO.confirm_price}"/>
+		<input type="text" id="confirm_inout" value="${cVO.confirm_inout}"/>
+	</div>
 	
 	
 
@@ -203,6 +212,7 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/hostside.js"></script>
 	<script type="text/javascript">
 	</script>
 	<script>

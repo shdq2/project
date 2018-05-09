@@ -40,8 +40,8 @@
 								<h3 class="panel-title">회원님만의 특별한 이름과 소개글로 꾸며주세요.</h3>
 							</div>
 							<div class="panel-body">
-								<form:form action="host_name.do" method="post" modelAttribute="vo">
-									<form:input type="hidden" path="room_code" />
+								<form:form action="host_name.do" method="post" modelAttribute="vo1">
+									<form:input type="text" path="room_code" style="display:none"/>
 									<div class="form-group">
 										<label class="control-label">숙소이름</label> 
 										<form:input class="form-control" required="required" type="text" path="room_name"></form:input>
@@ -52,7 +52,7 @@
 									</div>
 									<div class="form-group">
 										<div class="pull-right button-next">
-											<input class="btn btn-primary btn-block" type="submit" value="다음">
+											<input class="btn btn-primary btn-block btn_next" type="submit" value="다음">
 										</div>
 									</div>
 								</form:form>
@@ -64,6 +64,16 @@
 		</div>
 	</div>
 	
+	<div style="display:none">
+		<input type="text" id="confirm_name" value="${cVO.confirm_name}"/>
+		<input type="text" id="confirm_basic" value="${cVO.confirm_basic}"/>
+		<input type="text" id="confirm_location" value="${cVO.confirm_location}"/>
+		<input type="text" id="confirm_amenity" value="${cVO.confirm_amenity}"/>
+		<input type="text" id="confirm_img" value="${cVO.confirm_img}"/>
+		<input type="text" id="confirm_price" value="${cVO.confirm_price}"/>
+		<input type="text" id="confirm_inout" value="${cVO.confirm_inout}"/>
+	</div>
+	
 	
 	
 
@@ -72,7 +82,9 @@
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
+	<script src="resources/js/hostside.js"></script>
 	<script type="text/javascript">
+		
 	</script>
 
 </body>

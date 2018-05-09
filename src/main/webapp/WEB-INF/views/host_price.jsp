@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -277,11 +278,21 @@
 									<tbody>
 										<c:forEach items="${list}" var="vo" varStatus="i">
 											<tr>
-												<td align="center" style="vertical-align:middle">
-													<a href="#" class="term_fix_button">${vo.busy_month_start}/${vo.busy_day_start} - ${vo.busy_month_end}/${vo.busy_day_end}</a>
-													<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
-													<input type="text" class="price_code" value="${vo.price_code}" style="display:none"/> 
-												</td>
+												<c:if test="${vo.busy_month_start eq null && vo.busy_day_start eq null && vo.busy_month_end eq null && vo.busy_day_end eq null}">
+													<td align="center" style="vertical-align:middle">
+														<a href="#" class="term_fix_button">1월/1일 - 12월/31일</a>
+														<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
+														<input type="text" class="price_code" value="${vo.price_code}" style="display:none"/> 
+													</td>
+												</c:if>
+												<c:if test="${vo.busy_month_start ne null && vo.busy_day_start ne null && vo.busy_month_end ne null && vo.busy_day_end ne null}">
+													<td align="center" style="vertical-align:middle">
+														<a href="#" class="term_fix_button">${vo.busy_month_start}/${vo.busy_day_start} - ${vo.busy_month_end}/${vo.busy_day_end}</a>
+														<a href="#" class="term_fix_del" id="term_fix_del"><i class="glyphicon glyphicon-remove" id="remove_btn"></i></a>
+														<input type="text" class="price_code" value="${vo.price_code}" style="display:none"/> 
+													</td>
+												</c:if>
+												
 												<td>
 													<table class="table">
 														<thead>
@@ -431,10 +442,127 @@
 									</div>
 								</div>
 							</form:form>
-						
+						<div class="panel-body">
+							<div class="pull-right">
+								<!-- <input type="button" class="btn btn-primary btn-block btn_next_price" id="btn_next_price" style="width:100px" value="다음"/> -->
+								<a href="host_price_next.do" class="btn btn-primary btn-block btn_next" style="width:100px">다음</a>
+							</div>
+						</div>
 						</div><!-- panel -->
-						</div> 
+						</div> <!--=====================================-->
+						
+					<div class="col-md-12 col-lg-10 col-xlg-7">
+						<div class="panel">
+							<h3 class="p-r-title">
+								<span class="panel-desc">기본금액 (특정 기간은 다를 수 있음)</span><br />
+								<span class="font-size-30 red-600" style="color: #A50D73; font-size: 30px; font-weight: bolder">
+								<span style="font-weight: bold;">₩</span> 
+								<fmt:formatNumber value="${vo.room_day}" pattern="#,###" /> <small>(1박)</small>
+								</span><br />
+								<br /> <small>※ <small style="color: #A50D73; font-size: 16px;">최소 1박</small> 부터 이용 가능한
+									숙소
+								</small><br /> <small>※ 위 금액은 비수기, 성수기에 따라 금액이 상이할 수 있습니다.</small>
+							</h3>
+
+							<div class="p-r-body">
+								<div class="col-sm-8" style="display: block; clear: both; margin-bottom: 15px;">
+									<label>체크인 / 체크아웃</label> 
+									<input type="text" class="form-control daterange" value="체크인 / 체크아웃" />
+								</div>
+
+
+								<div class="col-sm-4" style="display: block;">
+									<label>총 숙박인원 <i data-toggle="tooltip"
+										data-placement="top"
+										class="glyphicon glyphicon-question-sign menu-icon"
+										aria-hidden="true" data-tooltip="true"
+										title="어른과 아이 모두 포함한 인원 수 입니다."></i></label> <select
+										class="form-control" required="required" name="people">
+										<c:forEach var="i" begin="1" end="19">
+											<option value="${i}">${i}</option>
+										</c:forEach>
+									</select>
+								</div>
+
+								<div style="clear: both;"></div>
+
+								<div class="col-sm-8" style="display: block; clear: both;">
+									<label>아이 동반 여부 <i data-toggle="tooltip"
+										data-placement="top"
+										class="glyphicon glyphicon-question-sign menu-icon"
+										aria-hidden="true" data-tooltip="true"
+										title="총 숙박인원 중 아이가 있을 경우 체크해 주세요."></i></label>
+								</div>
+								<div class="col-sm-4" style="display: block;">
+									<div class="click-open"	style="text-align: center; display: block; font-weight: 300; cursor: pointer;">열기 ▼</div>
+									<div class="click-close" style="text-align: center; display: none; font-weight: 300; cursor: pointer;">닫기 ▲</div>
+								</div>
+								<div class="add-child-box" style="display: none;">
+									<div class="col-sm-6" style="margin-top: 15px; text-align: center;">
+										<label>만 3세 미만</label>
+									</div>
+									<div class="col-sm-6" style="margin-top: 15px;">
+										<select class="form-control" required="required" name="people">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${i ne 10}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${i eq 10}">
+													<option value="${i}">${i}+</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="col-sm-6" style="margin-top: 15px; text-align: center;">
+										<label>만 8세 미만</label>
+									</div>
+									<div class="col-sm-6" style="margin-top: 15px;">
+										<select class="form-control" required="required" name="people">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${i ne 10}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${i eq 10}">
+													<option value="${i}">${i}+</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</div>
+									<div class="col-sm-6"
+										style="margin-top: 15px; text-align: center;">
+										<label>만 13세 미만</label>
+									</div>
+									<div class="col-sm-6" style="margin-top: 15px;">
+										<select class="form-control" required="required" name="people">
+											<c:forEach var="i" begin="0" end="10">
+												<c:if test="${i ne 10}">
+													<option value="${i}">${i}</option>
+												</c:if>
+												<c:if test="${i eq 10}">
+													<option value="${i}">${i}+</option>
+												</c:if>
+											</c:forEach>
+										</select>
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+								<div class="col-sm-12">
+									<button type="submit" id="btn-reservation" class="btn btn-custom" style="width: 100%; margin-top: 15px; margin-bottom: 15px;">예약 조회</button>
+								</div>
+								<div class="col-sm-12">
+									<small>* 예약 신청 후 호스트 수락 시 결제가 가능합니다.</small>
+								</div>
+								<div class="col-sm-12">
+									<small>* 숙박료는 서비스 이용료가 포함된 요금입니다.</small>
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+
+
+						</div>
 					</div>
+						
+				</div>
 				</div>
 			</div>
 		</div>
@@ -575,7 +703,15 @@
 		</div>
 	</div>
 	
-	
+	<div style="display:none">
+		<input type="text" id="confirm_name" value="${cVO.confirm_name}"/>
+		<input type="text" id="confirm_basic" value="${cVO.confirm_basic}"/>
+		<input type="text" id="confirm_location" value="${cVO.confirm_location}"/>
+		<input type="text" id="confirm_amenity" value="${cVO.confirm_amenity}"/>
+		<input type="text" id="confirm_img" value="${cVO.confirm_img}"/>
+		<input type="text" id="confirm_price" value="${cVO.confirm_price}"/>
+		<input type="text" id="confirm_inout" value="${cVO.confirm_inout}"/>
+	</div>
 
 	
 	
@@ -584,6 +720,7 @@
 	<script src="resources/js/topbar_menu.js"></script>
 	<script src="resources/js/topbar.js"></script>
 	<script src="resources/js/sweetalert.min.js"></script>
+	<script src="resources/js/hostside.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			
@@ -747,7 +884,42 @@
 				}
 			});
 			
+			 $('.daterange').daterangepicker({
+                 autoApply:true,
+                 locale: {
+                    'format':'YYYY/MM/DD',
+                    'daysOfWeek': [
+                          "일",
+                          "월",
+                          "화",
+                          "수",
+                          "목",
+                          "금",
+                          "토"
+                      ],
+                    'monthNames': [
+                          "1월",
+                          "2월",
+                          "3월",
+                          "4월",
+                          "5월",
+                          "6월",
+                          "7월",
+                          "8월",
+                          "9월",
+                          "10월",
+                          "11월",
+                          "12월"
+                      ]
+                 },
+                 'minDate': new Date()
+              }, function(start, end) {
+                 console.log('start : ' + start.format('YYYY-MM-DD'));
+                 console.log('end : ' + end.format('YYYY-MM-DD'));
+              });
+			
 		});
 	</script>
+	
 </body>
 </html>
