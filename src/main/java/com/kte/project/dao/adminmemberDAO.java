@@ -41,4 +41,8 @@ public class adminmemberDAO {
 	public int reser_total(String id) {
 		return sql.selectOne("admin_reservation.reser_total",id);
 	}
+	
+	public List<RoomVO> admin_hope_list(String[] array){
+		return sql.selectList("admin_member.admin_hope_list",array);
+	}
 }	

@@ -28,7 +28,7 @@
          <a href="guest.do" id="guest-list-1"> 
             <i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">전체 여행보기</span>
          </a>
-         <a href="profileEdit.do" id="guest-list-2">
+         <a href="hope.do" id="guest-list-2">
             <i class="glyphicon glyphicon-share menu-icon" aria-hidden="true"></i><span class="menu-title">전체 찜 보기</span>
          </a>
 

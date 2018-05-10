@@ -102,6 +102,7 @@ function reser_list(state,page){
 							'</div>'+			
 							'<div style="float:right">'+
 								'<input type="button" id="request_'+i+'" value="예약신청" class="request btn btn-default btn_state" />'+
+								'<input type="button" id="accept_'+i+'" value="수락"  class="accept btn btn-default btn_state"/>'+
 								'<input type="button" id="payment_'+i+'" value="결제진행중"  class="payment btn btn-default btn_state"/>'+
 								'<input type="button" id="request_finish_'+i+'" value="예약완료"  class="request_finish btn btn-default btn_state"/>'+
 								'<input type="button" id="travel_'+i+'" value="여행중"  class="travel btn btn-default btn_state" />'+
@@ -122,21 +123,23 @@ function reser_list(state,page){
 				$('.request').eq(i).attr('disabled',true).css('border','1px solid #ccc').css('background-color','#ccc').css('color','black');;				
 			}
 			else if(data[i].reser_code == 1){						
-				$('.payment').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
+				$('.accept').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 			}
 			else if(data[i].reser_code == 2){						
-				$('.request_finish').eq(i).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
+				$('.payment').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 			}
 			else if(data[i].reser_code == 3){						
-				$('.travel').eq(i).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
+				$('.request_finish').eq(i).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
 			}
 			else if(data[i].reser_code == 4){						
-				$('.finish').eq(i).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
+				$('.travel').eq(i).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
 			}
 			else if(data[i].reser_code == 5){						
-				$('.cancel').eq(i).attr('disabled',true).css('border','1px solid #d9534f').css('background-color','#d9534f').css('color','white');
+				$('.finish').eq(i).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
 			}
-			
+			else if(data[i].reser_code == 6){						
+				$('.cancel').eq(i).attr('disabled',true).css('border','1px solid #d9534f').css('background-color','#d9534f').css('color','white');
+			}						
 		}
 		
 	})	
@@ -246,12 +249,13 @@ function destroy_page(state){
 	    									'</table>'+
 	    								'</div>'+			
 	    								'<div style="float:right">'+
-	    									'<input type="button" id="request_'+i+'" value="예약신청" class="request btn btn-default btn_state" />'+
-	    									'<input type="button" id="payment_'+i+'" value="결제진행중"  class="payment btn btn-default btn_state"/>'+
-	    									'<input type="button" id="request_finish_'+i+'" value="예약완료"  class="request_finish btn btn-default btn_state"/>'+
-	    									'<input type="button" id="travel_'+i+'" value="여행중"  class="travel btn btn-default btn_state" />'+
-	    									'<input type="button" id="finish_'+i+'" value="여행완료"  class="finish btn btn-default btn_state" />'+
-	    									'<input type="button" id="cancel_'+i+'" value="취소"  class="cancel btn btn-default btn_state" />'+
+	    								'<input type="button" id="request_'+i+'" value="예약신청" class="request btn btn-default btn_state" />'+
+	    								'<input type="button" id="accept_'+i+'" value="수락"  class="accept btn btn-default btn_state"/>'+
+	    								'<input type="button" id="payment_'+i+'" value="결제진행중"  class="payment btn btn-default btn_state"/>'+
+	    								'<input type="button" id="request_finish_'+i+'" value="예약완료"  class="request_finish btn btn-default btn_state"/>'+
+	    								'<input type="button" id="travel_'+i+'" value="여행중"  class="travel btn btn-default btn_state" />'+
+	    								'<input type="button" id="finish_'+i+'" value="여행완료"  class="finish btn btn-default btn_state" />'+
+	    								'<input type="button" id="cancel_'+i+'" value="취소"  class="cancel btn btn-default btn_state" />'+
 	    								'</div>'+
 	    							'</div>'+
 	    						'</div>'+
@@ -267,18 +271,21 @@ function destroy_page(state){
 	    					$('.request').eq(i).attr('disabled',true).css('border','1px solid #ccc').css('background-color','#ccc').css('color','black');;				
 	    				}
 	    				else if(data[i].reser_code == 1){						
-	    					$('.payment').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
+	    					$('.accept').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 	    				}
 	    				else if(data[i].reser_code == 2){						
-	    					$('.request_finish').eq(i).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
+	    					$('.payment').eq(i).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 	    				}
 	    				else if(data[i].reser_code == 3){						
-	    					$('.travel').eq(i).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
+	    					$('.request_finish').eq(i).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
 	    				}
 	    				else if(data[i].reser_code == 4){						
-	    					$('.finish').eq(i).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
+	    					$('.travel').eq(i).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
 	    				}
 	    				else if(data[i].reser_code == 5){						
+	    					$('.finish').eq(i).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
+	    				}
+	    				else if(data[i].reser_code == 6){						
 	    					$('.cancel').eq(i).attr('disabled',true).css('border','1px solid #d9534f').css('background-color','#d9534f').css('color','white');
 	    				}
 	    				
@@ -393,6 +400,7 @@ function search_reser(){
 								'</div>'+			
 								'<div style="float:right">'+
 									'<input type="button" id="request_'+i+'" value="예약신청" class="request btn btn-default btn_state" />'+
+									'<input type="button" id="accept_'+i+'" value="수락"  class="accept btn btn-default btn_state"/>'+
 									'<input type="button" id="payment_'+i+'" value="결제진행중"  class="payment btn btn-default btn_state"/>'+
 									'<input type="button" id="request_finish_'+i+'" value="예약완료"  class="request_finish btn btn-default btn_state"/>'+
 									'<input type="button" id="travel_'+i+'" value="여행중"  class="travel btn btn-default btn_state" />'+

@@ -24,6 +24,7 @@ import com.kte.project.VO.RoomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.adminmemberDAO;
 import com.kte.project.dao.adminroomDAO;
+import com.kte.project.dao.guestDAO;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +37,9 @@ public class AdminMemberController {
 	private adminroomDAO ardao = null;
 	@Autowired
 	private adminDAO adao = null;
+	@Autowired
+	private guestDAO gdao = null;
+	
 	@RequestMapping(value = "/admin/admin_member.do", method = RequestMethod.GET)
 	public String member(Model model,HttpServletRequest request) {
 		if(request.getHeader("referer")==null) {
@@ -72,8 +76,6 @@ public class AdminMemberController {
 			list.get(i).setRoom_count(num);
 		}
 		model.addAttribute("list", list);
-		
-		
 		model.addAttribute("count", count);
 		
 		ReservationVO revo = new ReservationVO();
@@ -90,6 +92,25 @@ public class AdminMemberController {
 		}
 		model.addAttribute("rcount",rcount);
 		
+		String like = gdao.custom_like(id);
+		String[] array = like.split(";");
+		List<RoomVO> hlist = new ArrayList<RoomVO>();
+		if(array.length>6) {
+			String[] array2 =new String[6];
+			for(int i=0;i<6;i++) {
+				array2[i] = array[i];
+				
+				
+			}
+			hlist = amdao.admin_hope_list(array2);
+			
+		}else {
+			 hlist = amdao.admin_hope_list(array);
+		}
+		
+		model.addAttribute("hlist", hlist);
+		model.addAttribute("hsize", array.length);
+		model.addAttribute("hpage", array.length/6+1);
 		return "admin_member_detail";
 		}
 	}

@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 import com.kte.project.VO.SortableVO;
 
 @Service
@@ -36,5 +38,17 @@ private SqlSession sqlsession = null;
 	
 	public CustomVO host_info(String id) {
 		return sqlsession.selectOne("guest.host_info",id);
+	}
+	
+	public List<RoomVO> hope_list(String[] array){
+		return sqlsession.selectList("guest.hope_list",array);
+	}
+	
+	public int like_remove(RoomVO vo) {
+		return sqlsession.update("guest.like_remove",vo);
+	}
+	
+	public String custom_like(String id) {
+		return sqlsession.selectOne("guest.custom_like",id);
 	}
 }

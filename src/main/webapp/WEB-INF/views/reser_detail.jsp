@@ -58,11 +58,11 @@
 				여행시작날짜 : ${reser.reservation_start }<br />				
 				여행종료날짜 : ${reser.reservation_end}<br />
 				<c:if test="${guest!=host.custom_id }">			
-					<input type="button" value="취소" />					
+					<input type="button" value="취소" class="cancel"/>					
 				</c:if>
 				<c:if test="${guest==host.custom_id }">			
 					<input type="button" value="수락" />
-					<input type="button" value="거절" />
+					<input type="button" value="거절" class="cancel"/>
 				</c:if>				
 			</div>
 			<div style="clear:both;height:10px;"></div> 
@@ -84,7 +84,9 @@
    
    <script>
 	$(function() {
-	
+		$('.cancel').click(function(){
+			$.get('admin/Json_update_state.do?code=${param.code}&state=6')
+		})
 	});
    </script>
 </body>

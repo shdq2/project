@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonParser;
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 import com.kte.project.dao.CustomDAO;
 import com.kte.project.dao.guestDAO;
 
@@ -77,5 +78,37 @@ public class GuestController {
 			return "reser_detail";
 		}
 		
+	}
+	
+	@RequestMapping(value="/hope.do", method = RequestMethod.GET)
+	public String hope(HttpSession http,Model model) {
+		CustomVO vo =(CustomVO)http.getAttribute("custom");
+		
+		if(vo == null) {
+			return "redirect:login.do";
+		}
+		
+		String like = gdao.custom_like(vo.getCustom_id());	
+		
+		String[] a = like.split(";");
+		
+		List<RoomVO> list = gdao.hope_list(a);
+		
+		int size = list.size();
+		
+		for(RoomVO rvo : list) {
+			
+			String addr = rvo.getRoom_addr();
+			String addr2 = "";
+			String[] saddr = addr.split(" ");
+			for(int i=0;i<=2;i++) {
+				addr2+=saddr[i] + " ";
+			}
+			rvo.setRoom_addr(addr2);
+		}
+		model.addAttribute("size", size);
+		model.addAttribute("list", list);
+		
+		return "hope";
 	}
 }

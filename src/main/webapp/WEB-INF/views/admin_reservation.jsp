@@ -132,11 +132,12 @@
 						</div>						
 						<div style="float:right">
 							<input type="button" id="request_${j.index }" value="예약신청" class="request btn btn-default btn_state" <c:if test="${i.reser_code } == 0">disabled=disabled</c:if>/>
-							<input type="button" id="payment_${j.index }" value="결제진행중"  class="payment btn btn-default btn_state"<c:if test="${i.reser_code } == 1">disabled=disabled</c:if>/>
-							<input type="button" id="request_finish_${j.index }" value="예약완료"  class="request_finish btn btn-default btn_state"<c:if test="${i.reser_code } == 2">disabled=disabled</c:if>/>
-							<input type="button" id="travel_${j.index }"value="여행중"  class="travel btn btn-default btn_state" <c:if test="${i.reser_code } == 3">disabled=disabled</c:if>/>
-							<input type="button" id="finish_${j.index }" value="여행완료"  class="finish btn btn-default btn_state" <c:if test="${i.reser_code } == 4">disabled=disabled</c:if>/>
-							<input type="button" id="cancel_${j.index }"value="취소"  class="cancel btn btn-default btn_state" <c:if test="${i.reser_code } == 5">disabled=disabled</c:if>/>
+							<input type="button" id="accept_${j.index }" value="수락"  class="accept btn btn-default btn_state"<c:if test="${i.reser_code } == 1">disabled=disabled</c:if>/>
+							<input type="button" id="payment_${j.index }" value="결제진행중"  class="payment btn btn-default btn_state"<c:if test="${i.reser_code } == 2">disabled=disabled</c:if>/>
+							<input type="button" id="request_finish_${j.index }" value="예약완료"  class="request_finish btn btn-default btn_state"<c:if test="${i.reser_code } == 3">disabled=disabled</c:if>/>
+							<input type="button" id="travel_${j.index }"value="여행중"  class="travel btn btn-default btn_state" <c:if test="${i.reser_code } == 4">disabled=disabled</c:if>/>
+							<input type="button" id="finish_${j.index }" value="여행완료"  class="finish btn btn-default btn_state" <c:if test="${i.reser_code } == 5">disabled=disabled</c:if>/>
+							<input type="button" id="cancel_${j.index }"value="취소"  class="cancel btn btn-default btn_state" <c:if test="${i.reser_code } == 6">disabled=disabled</c:if>/>
 						</div>
 					</div>
 				</div>
@@ -167,38 +168,45 @@
 	<script type="text/javascript" src="/project/resources/js/admin_reser_list.js"></script>
 	<script>
 	function update_state(state,txt,code,idx,ix){
+
 			$.get('Json_update_state.do?state='+state+'&code='+code,function(data){
-				console.log(data.list2);
+				console.log(data);
 				if(data.ret == 1){
-					var d = parseInt(ix/6);					
-					for(var i = d*6;i<(d+1)*6;i++){					
+					console.log("test");
+					var d = parseInt(ix/7);
+					console.log("test");
+					for(var i = d*7;i<(d+1)*7;i++){
+						
 						$('.btn_state').eq(i).attr('disabled',false).css('border','1px solid #ccc').css('background-color','#fff').css('color','black');
 					}
-						
+					console.log("test");
 					if(state == 0){
 						$('.request').eq(idx).attr('disabled',true).css('border','1px solid #ccc').css('background-color','#ccc').css('color','black');
 					}
 					else if(state == 1){
-						$('.payment').eq(idx).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
+						$('.accept').eq(idx).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 					}						
 					else if(state == 2){
-						$('.request_finish').eq(idx).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
+						$('.payment').eq(idx).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
 					}						
 					else if(state == 3){
-						$('.travel').eq(idx).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
+						$('.request_finish').eq(idx).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
 					}						
 					else if(state == 4){
+						$('.travel').eq(idx).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
+					}						
+					else if(state == 5){
 						$('.finish').eq(idx).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
 					}
-					else if(state == 5){
+					else if(state == 6){
 						$('.cancel').eq(idx).attr('disabled',true).css('border','1px solid #d9534f').css('background-color','#d9534f').css('color','white');
 					}
 					$('.reser_title').eq(idx).text(txt);
-
+					console.log("test");
 					for(var i=0;i<data.list2.length;i++){
 						$('.state_count').eq(i).text(data.list2[i].state_count);
 					}
-					
+					console.log("test");
 				}
 			})
 		
@@ -264,19 +272,22 @@
 				if(reser_code == 0){						
 					$('.request').eq(idx).attr('disabled',true).css('border','1px solid #ccc').css('background-color','#ccc').css('color','black');;				
 				}
-				else if(reser_code == 1){						
+				else if(state == 1){
+					$('.accept').eq(idx).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
+				}						
+				else if(state == 2){
 					$('.payment').eq(idx).attr('disabled',true).css('border','1px solid #eee236').css('background-color','#eee236').css('color','black');
-				}
-				else if(reser_code == 2){						
+				}						
+				else if(state == 3){
 					$('.request_finish').eq(idx).attr('disabled',true).css('border','1px solid #337ab7').css('background-color','#337ab7').css('color','white');
-				}
-				else if(reser_code == 3){						
+				}						
+				else if(state == 4){
 					$('.travel').eq(idx).attr('disabled',true).css('border','1px solid #46b8da').css('background-color','#46b8da').css('color','white');
-				}
-				else if(reser_code == 4){						
+				}						
+				else if(state == 5){
 					$('.finish').eq(idx).attr('disabled',true).css('border','1px solid #4cae4c').css('background-color','#4cae43').css('color','white');
 				}
-				else if(reser_code == 5){						
+				else if(state == 6){
 					$('.cancel').eq(idx).attr('disabled',true).css('border','1px solid #d9534f').css('background-color','#d9534f').css('color','white');
 				}
 			})
@@ -287,7 +298,7 @@
 				if(show_class == 'glyphicon glyphicon-chevron-down'){
 					$('.show_detail span').eq(idx).removeClass('glyphicon-chevron-down');
 					$('.show_detail span').eq(idx).addClass('glyphicon-chevron-up');
-					$('.reser_item').eq(idx).css('height','305px');
+					$('.reser_item').eq(idx).css('height','338px');
 					$('.show_detail').eq(idx).css('height','65px');
 					$('.detail').eq(idx).css('display','block');
 					
@@ -303,27 +314,31 @@
 						var ix = $(this).index('.btn_state');
 						update_state(0,"예약신청",code,idx,ix);						
 					})
+					$(document).on('click','#accept_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(1,"수락",code,idx,ix);
+					})
 					$(document).on('click','#payment_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(1,"결제진행중",code,idx,ix);
+						update_state(2,"결제진행중",code,idx,ix);
 					})
 					$(document).on('click','#request_finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(2,"예약완료 ",code,idx,ix);
+						update_state(3,"예약완료 ",code,idx,ix);
 						
 					})
 					$(document).on('click','#travel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(3,"여행중",code,idx,ix);
+						update_state(4,"여행중",code,idx,ix);
 
 					}) 
 					$(document).on('click','#finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(4,"여행완료",code,idx,ix);	
+						update_state(5,"여행완료",code,idx,ix);	
 					})
 					$(document).on('click','#cancel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(5,"취소",code,idx,ix);
+						update_state(6,"취소",code,idx,ix);
 					})
 				}else{
 					$('.show_detail span').eq(idx).addClass('glyphicon-chevron-down');
@@ -362,43 +377,50 @@
 					var ix = $(this).index('.btn_state');
 					update_state(0,"예약신청",code,idx,ix);
 				})
-				$(document).on('click','#payment_'+idx,function(){
-					var ix = $(this).index('.btn_state');
-					update_state(1,"결제진행중",code,idx,ix);
-				})
-				$(document).on('click','#request_finish_'+idx,function(){
-					var ix = $(this).index('.btn_state');
-					update_state(2,"예약완료",code,idx,ix);
-				})
-				$(document).on('click','#travel_'+idx,function(){
-					var ix = $(this).index('.btn_state');
-					update_state(3,"여행중",code,idx,ix);
+				$(document).on('click','#accept_'+idx,function(){
+					
+						var ix = $(this).index('.btn_state');
+						update_state(1,"수락",code,idx,ix);
+					})
+					$(document).on('click','#payment_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(2,"결제진행중",code,idx,ix);
+					})
+					$(document).on('click','#request_finish_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(3,"예약완료 ",code,idx,ix);
+						
+					})
+					$(document).on('click','#travel_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(4,"여행중",code,idx,ix);
 
-				})
-				$(document).on('click','#finish_'+idx,function(){
-					var ix = $(this).index('.btn_state');
-					update_state(4,"여행완료",code,idx,ix);	
-				})
-				$(document).on('click','#cancel_'+idx,function(){
-					var ix = $(this).index('.btn_state');
-					update_state(5,"취소",code,idx,ix);
-				})
+					}) 
+					$(document).on('click','#finish_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(5,"여행완료",code,idx,ix);	
+					})
+					$(document).on('click','#cancel_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(6,"취소",code,idx,ix);
+					})
 			})
 			
 			$(document).on('click','.guest_btn',function(){				
 				var idx = $(this).index('.guest_btn');
-				code =$('.reser_guest_id').eq(idx).val();
-				
+				code =$('.reser_num').eq(idx).val();
+				var guest = $('.reser_guest_id').eq(idx).val();
+				console.log(guest);
 				$('.reser_btn').eq(idx).removeClass('active');
 				$('.host_btn').eq(idx).removeClass('active');
 				$('.guest_btn').eq(idx).addClass('active');
 				$('.table-reser').eq(idx).css('display','none');
 				$('.table_member').eq(idx).css('display','table');
-				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+code);
+				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+guest);
 				
 				$('.bank').eq(idx).text('이용횟수');
 				
-				$.get('Json_member_reser.do?id='+code,function(data){
+				$.get('Json_member_reser.do?id='+guest,function(data){
 					$('.name').eq(idx).text(data.custom_name);
 					$('.custom_id').eq(idx).text(data.custom_id);
 					$('.phone').eq(idx).text(data.custom_phone);
@@ -406,51 +428,55 @@
 					
 				})
 				
-				$(document).on('click','#request_'+idx,function(){
+					$(document).on('click','#request_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(0,"예약신청",code,idx,ix);						
+						update_state(0,"예약신청",code,idx,ix);
+					})
+					$(document).on('click','#accept_'+idx,function(){				
+						
+						var ix = $(this).index('.btn_state');						
+						update_state(1,"수락",code,idx,ix);
 					})
 					$(document).on('click','#payment_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(1,"결제진행중",code,idx,ix);
+						update_state(2,"결제진행중",code,idx,ix);
 					})
 					$(document).on('click','#request_finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(2,"예약완료 ",code,idx,ix);
+						update_state(3,"예약완료 ",code,idx,ix);
 						
 					})
 					$(document).on('click','#travel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(3,"여행중",code,idx,ix);
+						update_state(4,"여행중",code,idx,ix);
 
 					}) 
 					$(document).on('click','#finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(4,"여행완료",code,idx,ix);	
+						update_state(5,"여행완료",code,idx,ix);	
 					})
 					$(document).on('click','#cancel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(5,"취소",code,idx,ix);
+						update_state(6,"취소",code,idx,ix);
 					})
 					
-				$('.member_info').eq(idx).attr('href','admin_member_detail.do?id='+code);
+				$('.member_info').eq(idx).attr('href','admin_member_detail.do?id='+guest);
 			})
-			
 			
 				$(document).on('click','.host_btn',function(){				
 				var idx = $(this).index('.host_btn');
-				code =$('.reser_host_id').eq(idx).val();
-				
+				code =$('.reser_num').eq(idx).val();
+				var host = $('.reser_host_id').eq(idx).val();
 				$('.reser_btn').eq(idx).removeClass('active');
 				$('.host_btn').eq(idx).addClass('active');
 				$('.guest_btn').eq(idx).removeClass('active');
 				$('.table-reser').eq(idx).css('display','none');
 				$('.table_member').eq(idx).css('display','table');
-				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+code);
+				$('.img-div img').eq(idx).attr('src','admin_show_profile.do?id='+host);
 				
 				$('.bank').eq(idx).text('계좌 정보');
 				
-				$.get('Json_member_reser.do?id='+code,function(data){
+				$.get('Json_member_reser.do?id='+host,function(data){
 					$('.name').eq(idx).text(data.custom_name);
 					$('.custom_id').eq(idx).text(data.custom_id);
 					$('.phone').eq(idx).text(data.custom_phone);
@@ -462,30 +488,34 @@
 						var ix = $(this).index('.btn_state');
 						update_state(0,"예약신청",code,idx,ix);						
 					})
+					$(document).on('click','#accept_'+idx,function(){
+						var ix = $(this).index('.btn_state');
+						update_state(1,"수락",code,idx,ix);
+					})
 					$(document).on('click','#payment_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(1,"결제진행중",code,idx,ix);
+						update_state(2,"결제진행중",code,idx,ix);
 					})
 					$(document).on('click','#request_finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(2,"예약완료 ",code,idx,ix);
+						update_state(3,"예약완료 ",code,idx,ix);
 						
 					})
 					$(document).on('click','#travel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(3,"여행중",code,idx,ix);
+						update_state(4,"여행중",code,idx,ix);
 
 					}) 
 					$(document).on('click','#finish_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(4,"여행완료",code,idx,ix);	
+						update_state(5,"여행완료",code,idx,ix);	
 					})
 					$(document).on('click','#cancel_'+idx,function(){
 						var ix = $(this).index('.btn_state');
-						update_state(5,"취소",code,idx,ix);
+						update_state(6,"취소",code,idx,ix);
 					})
 					
-				$('.member_info').eq(idx).attr('href','admin_member_detail.do?id='+code);
+				$('.member_info').eq(idx).attr('href','admin_member_detail.do?id='+host);
 			})
 			
 			$('.div_menu').click(function(){

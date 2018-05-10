@@ -21,5 +21,16 @@
 	<select id="admin_member_select" parameterType="String" resultType="customVO">
 		select * from custom where custom_id=#{id}
 	</select>
-
+	<select id="admin_hope_list" resultType="roomVO" parameterType="hashmap">
+		select r.*,c.custom_name from custom c 
+		inner join
+		(select r.*,a.room_addr from room_addr a
+			inner join
+			(select room_code,room_name,custom_id,room_day,room_min_day,room_max_day from room where room_code in 
+				<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>) r
+			on a.room_code = r.room_code) r
+		on c.custom_id = r.custom_id		
+	</select>
 </mapper>

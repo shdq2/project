@@ -7,7 +7,7 @@
 	    inner join(
 	    SELECT reser_code,count(*) as reser_count FROM ksm.reservation where custom_id=#{id} group by reser_code
 		union all
-		select distinct reser_code,0 from reservation where reser_code not in(select reser_code from reservation where custom_id=#{id})
+		select distinct reser_code,0 from reservation_state where reser_code not in(select reser_code from reservation where custom_id=#{id})
 		order by reser_code) r
 	    on r.reser_code = rs.reser_code;
 	</select>	
@@ -139,4 +139,26 @@
 		SELECT custom_name,custom_phone,custom_id
 		 FROM custom WHERE custom_id = #{id};
 	</select>
+	
+	<select id="hope_list" resultType="roomVO" parameterType="hashmap">
+	select r.*,c.custom_name from custom c 
+	inner join
+		(select r.*,a.room_addr from room_addr a
+		inner join
+			(select room_code,room_name,custom_id,room_day from room where room_code in 
+				<foreach collection="array" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>) r
+			on a.room_code = r.room_code) r
+		on c.custom_id = r.custom_id
+	</select>
+	<select id="custom_like" parameterType="String" resultType="String">
+		select custom_like from custom where custom_id = #{id}
+	</select>
+	<update id="like_remove" parameterType="roomVO">
+		call like_remove(
+			#{custom_id,mode=IN},
+			#{room_code,mode=IN}
+		)
+	</update>
 </mapper>

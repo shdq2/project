@@ -1,6 +1,7 @@
 package com.kte.project;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 import com.kte.project.VO.SortableVO;
 import com.kte.project.dao.CustomDAO;
 import com.kte.project.dao.RegisterDAO;
@@ -133,6 +135,27 @@ public class JsonController {
 		return ret;
 	}
 	
+	
+	@RequestMapping(value = "/Json_guest_hope_remove.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> Json_guest_hope_remove(
+			Model model,
+			@RequestParam("code")String code,
+			HttpSession http) {		
+			Map<String,Object> map = new HashMap<String, Object>();
+			CustomVO id = (CustomVO)http.getAttribute("custom");
+			RoomVO vo = new RoomVO();
+			vo.setCustom_id(id.getCustom_id());
+			vo.setRoom_code(code);
+			
+			gdao.like_remove(vo);
+			
+			String like = gdao.custom_like(id.getCustom_id());
+			String[] array = like.split(";");
+			List<RoomVO> list = gdao.hope_list(array);
+			map.put("size", list.size());
+			map.put("list", list);
+			return map;
+	}
 	@RequestMapping(value = "/Json_phone_update.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int edit_phone(Model model,
 		HttpSession http,@RequestParam("custom_phone")String phone) {

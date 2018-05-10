@@ -5,7 +5,7 @@ html, body {
    overflow: hidden;
 }
 
-.guest-container {
+.hope-container {
     position: relative;
     width: 100%;
     height: calc(100% - 60px);
@@ -16,6 +16,9 @@ html, body {
     
 }
 
+.div_menu{
+	cursor:pointer;
+}
 /*reser_list*/
 .reser_list{
 	
@@ -28,14 +31,14 @@ html, body {
 .reser_list div{
 	display:inline-block;
 	text-align: center;
-	width:11%;
+	width:13%;
 	vertical-align: middle;
 	font-size:15px;
 	margin-top:15px;
-	cursor:pointer;	
+	
 }
 .table td,th{
-	text-align:center !important;
+	text-align:left !important;
 	vertical-align: middle !important;
 }
 .reser_list div p{
@@ -43,9 +46,9 @@ html, body {
 	font-size: 25px;
 }
 
-/* guest-nav */
+/* hope-nav */
 
-.guest-nav {
+.hope-nav {
     position: fixed;
     vertical-align: top;
    width: 205px;
@@ -56,7 +59,7 @@ html, body {
     margin: 0px 15px 0px 0px;
 }
 
-.guest-nav a {
+.hope-nav a {
    display: table;
    width: 100%;
    height: 50px;
@@ -65,7 +68,7 @@ html, body {
    text-decoration: none;
 }
 
-.guest-nav a:hover {
+.hope-nav a:hover {
    background-color: #f5f5f5;
    text-decoration: none;
 }
@@ -83,9 +86,9 @@ html, body {
 
 
 
-/* guest-main */
+/* hope-main */
 
-.guest-main {
+.hope-main {
    position: relative;
    display: inline-block;
    width: calc(100% - 220px);
@@ -96,38 +99,6 @@ html, body {
    overflow-y: scroll;
 }
 
-
-
-/* user-guest */
-
-.user-guest {
-   width: 100%;
-   height: 100%;
-   
-}
-
-.user-guest-list {
-   width: 100%;
-   height:70%;
-}
-
-.col-img {
-   padding-bottom: 40px;
-}
-
-.photo{
-	height:100%;
-	margin-top:10px;
-	margin-left:10px;
-	margin-right:10px;
-	border:1px solid #ddd;
-	border-radius: 4px;
-	padding-left:4px;
-	padding-right:4px;
-	box-shadow:0 1px 1px rgba(0,0,0,0.5);
-	display:block;
-	cursor: pointer;
-}
 
 /*block */
 @media (min-width: 768px) {

@@ -26,10 +26,18 @@ public class CustomVO {
 	private byte[] custom_img = null;
 	private int img_code = 0;
 	private int reser_count = 0;
-	
+	private String custom_like = null;
 	private int start= 0;
 	private int end = 0;
 	
+	
+	
+	public String getCustom_like() {
+		return custom_like;
+	}
+	public void setCustom_like(String custom_like) {
+		this.custom_like = custom_like;
+	}
 	public int getStart() {
 		return start;
 	}

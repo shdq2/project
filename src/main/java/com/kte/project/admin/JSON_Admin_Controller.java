@@ -25,6 +25,7 @@ import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
 import com.kte.project.dao.adminreservationDAO;
 import com.kte.project.dao.adminroomDAO;
+import com.kte.project.dao.guestDAO;
 
 @RestController
 public class JSON_Admin_Controller {
@@ -36,6 +37,8 @@ public class JSON_Admin_Controller {
 	private adminroomDAO ardao=null; 
 	@Autowired
 	private adminreservationDAO aredao = null;
+	@Autowired
+	private guestDAO gdao= null;
 	
 	// json member ///////
 	@RequestMapping(value = "/admin/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
@@ -118,6 +121,42 @@ public class JSON_Admin_Controller {
 		map.put("page", tot);
 		return map;
 	}
+	
+	@RequestMapping(value = "/admin/Json_member_hope.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> member_hope(Model model,
+			HttpSession http,
+			@RequestParam("id")String id,
+			@RequestParam("page")int page) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		String like = gdao.custom_like(id);
+		String[] array = like.split(";");
+		
+		int p = (page-1)*6;
+		
+		int leng = page*6;
+		
+		List<RoomVO> hlist = new ArrayList<RoomVO>();
+		String[] array2 =new String[6];
+		if(array.length-p> 6) {
+			for(int i=p;i<leng;i++) {
+				array2[i-p] = array[i];	
+				
+			}
+		}else {
+			for(int i=p;i<array.length;i++) {
+				array2[i-p] = array[i];	
+				
+			}
+		}	
+		
+		hlist = amdao.admin_hope_list(array2);
+		
+		map.put("data", hlist);
+		map.put("page", (array.length-1)/6+1);
+		return map;
+	}
 	////////////////////////
 	
 	///////// json reser ////////////
@@ -126,6 +165,7 @@ public class JSON_Admin_Controller {
 			HttpSession http,
 			@RequestParam("code")int code,
 			@RequestParam("state")int state) {		
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		ReservationVO vo = new ReservationVO();
 		vo.setReser_code(state);

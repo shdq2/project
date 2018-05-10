@@ -1,4 +1,4 @@
-	function room_paging(page,id){
+function room_paging(page,id){
 		$('.room_table tbody').empty();
 		$.get('Json_member_room.do?page='+page+'&id='+id,function(data){
 			var p = data.page;
@@ -76,6 +76,44 @@ function travel_paging(page,id){
 					'<td>리뷰 작성 미완료</td>'+
 				'</tr>'
 			);
+		}
+	},'json');
+}
+
+function hope_paging(page,id){
+	$('.hope_table tbody').empty();
+	$.get('Json_member_hope.do?page='+page+'&id='+id,function(data){
+		console.log(data);
+		var p = data.page;
+		if(page == 1){
+			$('.hope_left').addClass("disabled");
+			$('.hope_left').removeClass("hope_left_btn");
+			$('.hope_right').removeClass("disabled");
+			$('.hope_right').addClass("hope_right_btn");
+			
+		}else if(p == page){
+			$('.hope_left').removeClass("disabled");
+			$('.hope_left').addClass("hope_left_btn");
+			$('.hope_right').addClass("disabled");
+			$('.hope_right').removeClass("hope_right_btn");
+		}else{
+			$('.hope_right').addClass("hope_right_btn");
+			$('.hope_left').addClass("hope_left_btn");
+			$('.hope_right').removeClass("disabled");
+			$('.hope_left').removeClass("disabled");
+		}
+		var data1 = data.data
+		var length = data1.length;
+		for(var i = 0; i<length;i++){
+			var block = data1[i].room_block;
+			$('.hope_table tbody').append(
+				'<tr class="hlist">'+
+					'<td>'+data1[i].room_name+'</td>'+
+					'<td>'+data1[i].room_min_day+' 일 / '+data1[i].room_max_day+' 일</td>'+
+					'<td>'+data1[i].custom_name+'</td>'+
+					'<td>'+data1[i].room_day+' 원</td>'+
+				'</tr>	'
+			);			
 		}
 	},'json');
 }
