@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html, body {
+	overflow: hidden;
+}
+
 .container1 {
 	position: relative;
     width: 100%;
@@ -19,8 +23,6 @@
     border-bottom: 1px solid #f2f2f2;
     margin: 0px 15px 0px 0px;
     vertical-align: middle;
-    
-    
 }
 
 .host-side{

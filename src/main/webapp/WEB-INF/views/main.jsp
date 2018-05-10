@@ -34,14 +34,14 @@
 
 
 	<div class="container1" align="center" style="margin-top:62px">
-		<div class="test1">
+		<!-- <div class="test1">
 			<div class="test" style="border:1px solid #ccc">
 		</div>
 		
-		</div>
+		</div> -->
 		<!-- 슬라이드  -->
 		
-			<!-- <div class="row" align="center">
+			<div class="row" align="center">
 				<div class="col-md-12" >
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
 						<ol class="carousel-indicators">
@@ -51,22 +51,22 @@
 						</ol>
 						<div class="carousel-inner" >
 							<div class="item active">
-								<img src="resources/imgs/mr11.PNG" >
-								<div class="carousel-caption">
+								<img src="resources/imgs/mr1.PNG" >
+							<!-- 	<div class="carousel-caption">
 									<h3>First slide</h3>
 									<p>첫번째 슬라이드</p>
-								</div>
+								</div> -->
 							</div>
 							<div class="item" style="overflow:hidden">
-								<img src="resources/imgs/mr22.PNG" >
+								<img src="resources/imgs/mr2.PNG" >
 							</div>
 							<div class="item" style="overflow:hidden">
-								<img src="resources/imgs/mr33.PNG">
+								<img src="resources/imgs/mr3.PNG">
 							</div>
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div>
 		
 		
 		<!-- 어디로 (jpg) -->
@@ -77,7 +77,7 @@
 		<!-- 어디로 (글) -->
 		<div class="hidden-xs hidden-sm" align ="center" style="padding:30px 0px;" >
 			<h1>어디로 가실래요?</h1><br/>
-			<h1>미스터펜션!</h1>
+			<h1 style="margin-top:-10px">미스터멘션!</h1>
 		</div>
 		
 		<!-- 갈 곳 고르는 버튼  -->

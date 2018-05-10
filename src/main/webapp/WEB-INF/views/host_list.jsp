@@ -33,6 +33,11 @@
 			<div class="host-header">
 				<h3 class="host-title">숙소 목록 <small>Room list</small></h3>
 			</div>
+			
+			<div class="form-inline" style="margin-right:10%" >
+				<input id="txt_search" style="width:130px" type="text" class="form-control" placeholder="검색어"/>
+				<button id="btn_search" type="submit" class="btn  btn-default">검색</button>
+			</div>
 			<div class="host-content">
 				<div class="row">
 				
@@ -40,12 +45,19 @@
 						<div class="panel">
 							<div class="panel-body">
 								<form:form action="/host_list.do" method="post" modelAttribute="list">
-									<table class="table">
+									<table class="table" style="text-align: center;">
 										<thead>
 											<tr>
 												<td>No</td>
 												<td>방 사진</td>
-												<td>상태</td>
+												<td style="width:15%">
+													<select class="form-control" style="width:80%" id="room_block">
+														<option value="3" ${param.room_block == '3' ? 'selected="selected"':'' }>전체</option>
+														<option value="0" ${param.room_block == '0' ? 'selected="selected"':'' }>미완성</option>
+														<option value="2" ${param.room_block == '2' ? 'selected="selected"':'' }>완료</option>
+														<option value="1" ${param.room_block == '1' ? 'selected="selected"':'' }>차단</option>
+													</select>
+												</td>
 												<td>제목</td>
 												<td>설명</td>
 												<td>관리</td>
@@ -144,6 +156,23 @@
 					window.location.href='host_list_del.do?room_code='+rc
 				}
 			});
+		});
+		
+		$('#room_block').change(function(){
+			var str = $(this).val();
+			window.location.href='host_list.do?room_block='+str
+		});
+		
+		$('#txt_search').keyup(function(event){
+			if(event.which == 13){
+				var txt = $(this).val();
+				window.location.href="host_list.do?txt="+txt;
+			}
+		});
+		
+		$('#btn_search').click(function(event){
+				var txt = $('#txt_search').val();
+				window.location.href="host_list.do?txt="+txt;
 		});
 	</script>
 

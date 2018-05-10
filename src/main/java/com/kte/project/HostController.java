@@ -441,6 +441,9 @@ public class HostController {
 		HostVO vo = hDAO.selectHostPrice(room_code);
 		List<HostVO> list = hDAO.selectLongPrice(room_code);
 		
+		vo.getRoom_day();
+		vo.getRoom_month();
+		
 		List<List<HostVO>> list2 = new ArrayList<List<HostVO>>();
 		for(HostVO tmp : list) {
 			System.out.println(tmp.getPrice_code());
@@ -660,7 +663,10 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host_list.do", method=RequestMethod.GET)
-	public String hostlist(Model model, HttpSession httpsession) {
+	public String hostlist(Model model, HttpSession httpsession, @RequestParam(value="room_block", defaultValue="3") int room_block,
+						   @RequestParam(value="txt", defaultValue="") String txt) {
+		
+		model.addAttribute("list", hDAO.selectBoardListSearch(txt));
 		
 		String custom_id = (String)httpsession.getAttribute("custom_id");
 		
@@ -670,7 +676,11 @@ public class HostController {
 			/*세션의 room_code 삭제*/
 			httpsession.removeAttribute("room_code");
 			
-			List<HostVO> list = hDAO.selectRoomList(custom_id);
+			HostVO vo = new HostVO();
+			vo.setRoom_block(room_block);
+			vo.setCustom_id(custom_id);
+			
+			List<HostVO> list = hDAO.selectRoomList(vo);
 			
 			/*세션에 있는 모든 값 보기*/
 			Enumeration se = httpsession.getAttributeNames();

@@ -57,6 +57,8 @@ public class HostVO {
 	private int fri_price = 0;
 	private int sat_price = 0;
 	private int sun_price = 0;
+	private int room_day = 0;
+	private int room_month = 0;
 	
 	//host_location
 	private String room_addr = null;
@@ -64,6 +66,18 @@ public class HostVO {
 	private double map_lng = 0;
 	
 	
+	public int getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(int room_day) {
+		this.room_day = room_day;
+	}
+	public int getRoom_month() {
+		return room_month;
+	}
+	public void setRoom_month(int room_month) {
+		this.room_month = room_month;
+	}
 	public int getRoom_block() {
 		return room_block;
 	}

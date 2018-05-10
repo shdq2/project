@@ -3,8 +3,12 @@
 
 <mapper namespace="Host">
 
-	<select id="selectRoomList" parameterType="String" resultType="HostVO">
-		SELECT room_content, room_name, room_code FROM `room` WHERE custom_id=#{custom_id} ORDER BY room_date DESC;
+	<select id="selectRoomList" parameterType="HostVO" resultType="HostVO">
+		SELECT room_content, room_name, room_code FROM `room` WHERE custom_id=#{custom_id} 
+		<if test="room_block != 3">
+			AND room_block=#{room_block}
+		</if>
+		ORDER BY room_date DESC;
 	</select>
 	
 	<select id="selectRoomName" parameterType="int" resultType="HostVO">
@@ -99,7 +103,7 @@
    </select>
    
    <select id="selectHostPrice" parameterType="int" resultType="HostVO">
-   		SELECT room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
+   		SELECT room_day, room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
    			room_plus_price_apply, room_plus_price, bank_name, bank_num, bank_depositor, fri_price, sat_price, sun_price  FROM `room` WHERE room_code=#{room_code}
    </select>
    

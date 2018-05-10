@@ -10,14 +10,7 @@
 
 		<div class="host-side">
 			<p style="text-align:center; margin-bottom:30px" >숙소설정</p>
-			<!-- <div style="width:100%;border:1px solid;cursor: pointer;height:50px;vertical-align: middle;" class="test_div">
-				<input type="hidden" value="/project/host.do" class="test_val" />
-				<span>설명</span>
-			</div>
-			<div style="width:100%;border:1px solid;cursor: pointer;" class="test_div">
-				<input type="hidden" value="/project/host.do" class="test_val" />
-				<span>설명</span>
-			</div> -->
+			
 			<a href="/project/host_name.do" >
 				<span class="pull-left">설명</span>
 				<span class="pull-right" id="name_icon" style="color:#D8D8D8"><i class="fa fa-check-circle"></i></span>
@@ -59,3 +52,5 @@
 				<span class="pull-left1">  숙소목록</span>
 			</a>
 		</div>
+
+

@@ -151,8 +151,8 @@ public class HostDAO {
 		return sqlsession.update("Host.updateHostPrice_Weekend", vo);
 	}
 	
-	public List<HostVO> selectRoomList (String custom_id) {
-		return sqlsession.selectList("Host.selectRoomList", custom_id);
+	public List<HostVO> selectRoomList (HostVO vo) {
+		return sqlsession.selectList("Host.selectRoomList", vo);
 	}
 	public int selectLastListImgCode(int room_code) {
 		return sqlsession.selectOne("Host.selectLastListImgCode", room_code);
@@ -222,5 +222,8 @@ public class HostDAO {
 	
 	public int selectRoomBlock(int room_code) {
 		return sqlsession.selectOne("Host.selectRoomBlock", room_code);
+	}
+	public List<HostVO> selectBoardListSearch(String txt){
+		return sqlsession.selectList("Host.selectBoardListSearch", txt);
 	}
 }
