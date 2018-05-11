@@ -3,14 +3,14 @@
 
 <mapper namespace="Host">
 
-	<select id="selectRoomList" parameterType="HostVO" resultType="HostVO">
+	<!-- <select id="selectRoomList" parameterType="HostVO" resultType="HostVO">
 		SELECT room_content, room_name, room_code FROM `room` WHERE custom_id=#{custom_id} 
 		<if test="room_block != 3">
 			AND room_block=#{room_block}
 		</if>
 		ORDER BY room_date DESC;
-	</select>
-	
+	</select> -->
+		
 	<select id="selectRoomName" parameterType="int" resultType="HostVO">
 		SELECT room_content, room_name FROM `room` WHERE room_code=#{room_code}; 
 	</select>
@@ -103,7 +103,7 @@
    </select>
    
    <select id="selectHostPrice" parameterType="int" resultType="HostVO">
-   		SELECT room_day, room_min_day, room_max_day, room_price_show, room_month_price, room_basic_deposit, room_basic_member, 
+   		SELECT room_day, room_min_day, room_max_day, room_price_show, room_month, room_basic_deposit, room_basic_member, 
    			room_plus_price_apply, room_plus_price, bank_name, bank_num, bank_depositor, fri_price, sat_price, sun_price  FROM `room` WHERE room_code=#{room_code}
    </select>
    
@@ -112,7 +112,7 @@
    </update>
    
    <update id="updateHostPrice_Basic" parameterType="HostVO">
-   		UPDATE `room` SET room_month_price=#{room_month_price}, room_basic_deposit=#{room_basic_deposit}, room_basic_member=#{room_basic_member}, room_plus_price_apply=#{room_plus_price_apply}, room_plus_price=#{room_plus_price} WHERE room_code=#{room_code}
+   		UPDATE `room` SET room_month=#{room_month}, room_basic_deposit=#{room_basic_deposit}, room_basic_member=#{room_basic_member}, room_plus_price_apply=#{room_plus_price_apply}, room_plus_price=#{room_plus_price} WHERE room_code=#{room_code}
    </update>
    
    <select id="selectLongPricecode" resultType="int">
@@ -149,7 +149,7 @@
 	</delete>
 	
 	<select id="selectRtCode" resultType="int">
-		SELECT MAX(rt_code) FROM `room_term_plus` 
+		SELECT IFNULL(MAX(rt_code), 1) FROM `room_term_plus` 
 	</select>
 	
 	<insert id="insertRoomTermPlus" parameterType="HostVO">
@@ -247,6 +247,44 @@
 	
 	<select id="selectRoomBlock" parameterType="int" resultType="int">
 		SELECT room_block FROM `room` WHERE room_code=#{room_code}
+	</select>
+	
+	<select id="selectRoomList" parameterType="HostVO" resultType="HostVO">
+		SELECT room_content, room_name, room_code FROM `room` 
+		
+		WHERE 
+			custom_id=#{custom_id} 
+			<if test="room_block != -1">
+				AND room_block=#{room_block}
+			</if>
+			<if test="listselect != null">
+				<foreach collection="listselect" item="str" separator=" ">
+					AND room_name LIKE CONCAT('%',#{str},'%')
+				</foreach>
+				
+				OR 
+				
+				custom_id=#{custom_id}
+				<foreach collection="listselect" item="str" separator=" ">
+					AND room_content LIKE CONCAT('%',#{str},'%')
+				</foreach>
+				<if test="room_block != -1">
+					AND room_block=#{room_block}
+				</if>
+				
+				<foreach collection="listselect" item="str" separator=" ">
+					OR room_name LIKE CONCAT('%',#{str},'%') AND custom_id=#{custom_id} 
+					<if test="room_block != -1">
+						AND room_block=#{room_block}
+					</if>
+					OR room_content LIKE CONCAT('%',#{str},'%')	AND custom_id=#{custom_id}
+					<if test="room_block != -1">
+						AND room_block=#{room_block}
+					</if>
+				</foreach>
+			</if>
+		
+		ORDER BY room_date DESC;
 	</select>
 	
 </mapper>	

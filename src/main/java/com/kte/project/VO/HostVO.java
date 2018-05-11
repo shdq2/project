@@ -1,11 +1,14 @@
 package com.kte.project.VO;
 
+import java.util.List;
+
 public class HostVO {
 	
 	private String custom_id = null;
 	private int room_code = 0;
 	private String room_code1 = null;
 	private int room_block = 0;
+	private List<String> listselect	= null;
 	
 	//host_name
 	private String room_name = null;
@@ -37,7 +40,6 @@ public class HostVO {
 	private int room_min_day = 0;
 	private int room_max_day = 0;
 	private String room_price_show = null;
-	private int room_month_price = 0;
 	private int room_basic_deposit = 0;
 	private int room_basic_member = 0;
 	private String room_plus_price_apply = null;
@@ -66,6 +68,13 @@ public class HostVO {
 	private double map_lng = 0;
 	
 	
+	
+	public List<String> getListselect() {
+		return listselect;
+	}
+	public void setListselect(List<String> listselect) {
+		this.listselect = listselect;
+	}
 	public int getRoom_day() {
 		return room_day;
 	}
@@ -215,12 +224,6 @@ public class HostVO {
 	}
 	public void setRoom_plus_price(int room_plus_price) {
 		this.room_plus_price = room_plus_price;
-	}
-	public int getRoom_month_price() {
-		return room_month_price;
-	}
-	public void setRoom_month_price(int room_month_price) {
-		this.room_month_price = room_month_price;
 	}
 	public int getRoom_basic_deposit() {
 		return room_basic_deposit;

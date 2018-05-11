@@ -1,6 +1,7 @@
 package com.kte.project;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -646,7 +647,7 @@ public class HostController {
 		
 		hDAO.updateRoomInOut(vo);
 		
-		return "redirect:host_inout.do";
+		return "redirect:host_list.do";
 	}
 	
 	@RequestMapping(value="/host_calendar.do", method=RequestMethod.GET)
@@ -663,10 +664,8 @@ public class HostController {
 	
 	
 	@RequestMapping(value="/host_list.do", method=RequestMethod.GET)
-	public String hostlist(Model model, HttpSession httpsession, @RequestParam(value="room_block", defaultValue="3") int room_block,
-						   @RequestParam(value="txt", defaultValue="") String txt) {
-		
-		model.addAttribute("list", hDAO.selectBoardListSearch(txt));
+	public String hostlist(Model model, HttpSession httpsession, @RequestParam(value="room_block", defaultValue="-1") int room_block,
+						   @RequestParam(value="txt", defaultValue="") String txt) {		
 		
 		String custom_id = (String)httpsession.getAttribute("custom_id");
 		
@@ -677,6 +676,19 @@ public class HostController {
 			httpsession.removeAttribute("room_code");
 			
 			HostVO vo = new HostVO();
+			
+			//검색
+			List<String> listselect =  null;
+			if(txt.contains(" ")) {
+				String[] arr = txt.split(" ");
+				listselect = Arrays.asList(arr);
+			}else {
+				listselect = new ArrayList<String>();
+				listselect.add(txt);
+			}
+			vo.setListselect(listselect);
+			
+			
 			vo.setRoom_block(room_block);
 			vo.setCustom_id(custom_id);
 			
@@ -692,7 +704,9 @@ public class HostController {
 			for(HostVO tmp1 : list) {
 				int room_code = tmp1.getRoom_code();
 				HostConfirmVO cVO = hDAO.selectRoomSetConfirm(room_code);
-				int confirm = cVO.getConfirm_amenity()+cVO.getConfirm_basic()+cVO.getConfirm_img()+cVO.getConfirm_inout()+cVO.getConfirm_location()+cVO.getConfirm_name()+cVO.getConfirm_price();
+				System.out.println(cVO.getConfirm_basic());
+				int confirm = cVO.getConfirm_amenity()+cVO.getConfirm_basic()+cVO.getConfirm_img()+cVO.getConfirm_inout()
+							 +cVO.getConfirm_location()+cVO.getConfirm_name()+cVO.getConfirm_price();
 				if(confirm == 7) {
 					hDAO.updateHostBlock(room_code);
 				}

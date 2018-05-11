@@ -39,10 +39,10 @@
 				<span class="pull-left">입/퇴실시간</span>
 				<span class="pull-right" id="inout_icon" style="color:#D8D8D8"><i class="fa fa-check-circle"></i></span>
 			</a>
-			<a href="/project/host_calendar.do">
+			<!-- <a href="/project/host_calendar.do">
 				<span class="pull-left"><i class="glyphicon glyphicon-calendar"></i></span>  
 				<span class="pull-left1">달력 관리</span>
-			</a>
+			</a> -->
 			<a href="/project/host_create.do">
 				<span class="pull-left"><i class="glyphicon glyphicon-plus"></i></span> 
 				<span class="pull-left1">새로운 숙소 등록</span>

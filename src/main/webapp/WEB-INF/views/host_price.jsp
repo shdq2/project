@@ -116,7 +116,7 @@
 									<div class="form-group col-sm-12">
 										<label class="control-label col-sm-3">한 달 숙박 가격(29박 기준)</label>
 										<div class="col-sm-9">
-											<form:input class="form-control inline" style="width: calc(100% - 35px)" type="text" value="${vo.room_month_price}" path="room_month_price"/> 원
+											<form:input class="form-control inline" style="width: calc(100% - 35px)" type="text" value="${vo.room_month}" path="room_month"/> 원
 											<span class="help-block"></span>
 										</div>
 									</div>

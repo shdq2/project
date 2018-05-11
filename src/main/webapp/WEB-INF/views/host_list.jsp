@@ -52,7 +52,7 @@
 												<td>방 사진</td>
 												<td style="width:15%">
 													<select class="form-control" style="width:80%" id="room_block">
-														<option value="3" ${param.room_block == '3' ? 'selected="selected"':'' }>전체</option>
+														<option value="-1" ${param.room_block == '-1' ? 'selected="selected"':'' }>전체</option>
 														<option value="0" ${param.room_block == '0' ? 'selected="selected"':'' }>미완성</option>
 														<option value="2" ${param.room_block == '2' ? 'selected="selected"':'' }>완료</option>
 														<option value="1" ${param.room_block == '1' ? 'selected="selected"':'' }>차단</option>
