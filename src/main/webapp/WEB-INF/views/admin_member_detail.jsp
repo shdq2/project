@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
 	<jsp:include page="admin_menu.jsp"></jsp:include>
 	
@@ -71,7 +72,7 @@
 								<tr class="rlist">
 									<td>${i.room_count }</td>
 									<td>${i.room_name }</td>
-									<td>${i.room_day} 원</td>
+									<td><fmt:formatNumber value="${i.room_day}" pattern="#,###" /> 원</td>
 									<td><input type="button" value="날짜 선택"></td>
 									<td>
 									<input type="hidden" class="room_code" value="${i.room_code }" />
@@ -116,14 +117,19 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${!empty hlist }">
 						<c:forEach var="i" items="${hlist }">
 							<tr>
 								<td>${i.room_name }</td>
 								<td>${i.room_min_day } 일 / ${i.room_max_day } 일</td>
 								<td>${i.custom_name }</td>
-								<td>${i.room_day } 원</td>
+								<td><fmt:formatNumber value="${i.room_day}" pattern="#,###" /> 원</td>
 							</tr>	
 						</c:forEach>
+						</c:if>
+						<c:if test="${empty hlist }">
+						<td colspan ="5" style="text-align: center;">찜한 목록이 없습니다</td>
+						</c:if>
 					</tbody>					
 				</table>
 			</div>
@@ -187,7 +193,7 @@
 
 	
 	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/project/resources/js/member_paging.js"></script>
 	<script>
 	

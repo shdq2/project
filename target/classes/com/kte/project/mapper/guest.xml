@@ -96,17 +96,17 @@
 	<select id="select_guest_reser" parameterType="Int" resultType="reservationVO">
 		select r.room_name,r.host_id,r.reser_title,r.reser_code,date_format(r.reservation_start,"%Y-%m-%d") as reservation_start,
 		date_format(r.reservation_end,"%Y-%m-%d") as reservation_end, r.reservation_people,
-		TO_DAYS(r.reservation_end) - TO_DAYS(r.reservation_start) as reser_day,r.dayofweek_start,r.dayofweek_end,r.reservation_date
+		TO_DAYS(r.reservation_end) - TO_DAYS(r.reservation_start) as reser_day,r.dayofweek_start,r.dayofweek_end,r.reservation_date,r.room_day
 		from custom c 
 			inner join
 				(select c.custom_name as host_name,r.host_id,r.room_code,r.guest_id,r.reservation_code,r.reser_title,r.reser_code,r.dayofweek_start,r.dayofweek_end,r.reservation_people,
-				r.reservation_start,r.reservation_end,r.room_name,r.reservation_date from custom c
+				r.reservation_start,r.reservation_end,r.room_name,r.reservation_date,r.room_day from custom c
 				inner join
 					(select rs.reser_title,r.room_code,r.host_id,r.guest_id,r.reser_code,r.dayofweek_start,r.dayofweek_end,r.reservation_people,
-						r.reservation_start,r.reservation_end,r.room_name,r.reservation_code,r.reservation_date from reservation_state rs
+						r.reservation_start,r.reservation_end,r.room_name,r.reservation_code,r.reservation_date,r.room_day from reservation_state rs
 						inner join
 						(select ro.room_code,ro.custom_id as host_id,re.custom_id as guest_id,re.reser_code,re.reservation_date,
-						re.reservation_start,re.reservation_end,ro.room_name,re.reservation_code,re.reservation_people,
+						re.reservation_start,re.reservation_end,ro.room_name,re.reservation_code,re.reservation_people,ro.room_day,
 						case WEEKDAY(re.reservation_start) 
 							when '0' then '월'
 							when '1' then '화'

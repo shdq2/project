@@ -72,9 +72,12 @@ public class GuestController {
 			ReservationVO reser = gdao.select_guest_reser(code);
 			CustomVO host = gdao.host_info(reser.getHost_id());
 			
+			String[] card = {"KB국민","삼성","현대","신한","롯데","NH농협","우리","하나","씨티","SC리워드","카카오뱅크","BC"};
+			
 			model.addAttribute("host", host);
 			model.addAttribute("reser", reser);
 			model.addAttribute("guest", vo.getCustom_id());
+			model.addAttribute("card", card);
 			return "reser_detail";
 		}
 		

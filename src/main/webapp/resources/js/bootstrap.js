@@ -3,6 +3,24 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under the MIT license
  */
+
+function numberformat(num){
+		var str;
+		
+	num = num+"";
+		var len = num.length;
+		var idx = num.length%3;
+		str = num.substring(0,idx);
+		while(idx<len){
+			if(str != ""){
+				str+=",";
+			}
+			str+= num.substring(idx,idx+3);
+			idx+=3;
+		}
+		return str;
+	}
+
 function close_event(){
 	alert('test');
 }

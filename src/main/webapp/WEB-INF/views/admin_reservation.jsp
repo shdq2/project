@@ -211,22 +211,7 @@
 			})
 		
 	}
-	var numberformat = function(num){
-		var str;
-		
-	num = num+"";
-		var len = num.length;
-		var idx = num.length%3;
-		str = num.substring(0,idx);
-		while(idx<len){
-			if(str != ""){
-				str+=",";
-			}
-			str+= num.substring(idx,idx+3);
-			idx+=3;
-		}
-		return str;
-	}
+
 	
 	function reser_detail(code,idx){
 		$.get('Json_select_reser.do?code='+code,function(data){					

@@ -27,7 +27,7 @@ function room_paging(page,id){
 					'<tr class="rlist">'+
 						'<td>'+(data1[i].room_count)+'</td>'+
 						'<td>'+data1[i].room_name+'</td>'+
-						'<td>'+data1[i].room_day+' 원</td>'+
+						'<td>'+numberformat(data1[i].room_day)+' 원</td>'+
 						'<td><input type="button" value="날짜 선택"></td>'+
 						'<td>'+
 						'<select class="room_state form-control" style="width:100px;">'+
@@ -111,7 +111,7 @@ function hope_paging(page,id){
 					'<td>'+data1[i].room_name+'</td>'+
 					'<td>'+data1[i].room_min_day+' 일 / '+data1[i].room_max_day+' 일</td>'+
 					'<td>'+data1[i].custom_name+'</td>'+
-					'<td>'+data1[i].room_day+' 원</td>'+
+					'<td>'+numberformat(data1[i].room_day)+' 원</td>'+
 				'</tr>	'
 			);			
 		}
