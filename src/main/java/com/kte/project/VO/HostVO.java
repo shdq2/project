@@ -54,6 +54,7 @@ public class HostVO {
 	private int rt_price = 0;
 	private String rt_date = null;
 	private String bank_name = null;
+	private String bank_code = null;
 	private int bank_num = 0;
 	private String bank_depositor = null;
 	private int fri_price = 0;
@@ -69,6 +70,12 @@ public class HostVO {
 	
 	
 	
+	public String getBank_code() {
+		return bank_code;
+	}
+	public void setBank_code(String bank_code) {
+		this.bank_code = bank_code;
+	}
 	public List<String> getListselect() {
 		return listselect;
 	}

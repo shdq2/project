@@ -455,14 +455,14 @@ public class HostController {
 			list2.add(list1);
 		}
 		
-		String[] str = {"한국산업은행","기업은행","국민은행(주택은행)","외환은행","수협중앙회","농협중앙회","단위농협","축협중앙회","우리은행","신한은행(조흥은행)","제일은행","하나은행(서울은행)","신한은행","한국씨티은행(한미은행)","대구은행","부산은행","광주은행",
-				"제주은행","전북은행","강원은행","경남은행","비씨카드","씨티은행","홍콩상하이은행","우체국","하나은행","평화은행","신세계","신한은행(조흥 통합)","신협","새마을금고"};
+		//BankList
+		List<HostVO> banklist = hDAO.selectBankList();
+		model.addAttribute("banklist", banklist);
 		
 		//Confirm
 		HostConfirmVO cVO = hDAO.selectRoomSetConfirm(room_code);
 		model.addAttribute("cVO", cVO);
 		
-		model.addAttribute("str", str);
 		model.addAttribute("list",list);
 		model.addAttribute("list2",list2);
 		model.addAttribute("vo", vo);

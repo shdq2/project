@@ -104,7 +104,7 @@
    
    <select id="selectHostPrice" parameterType="int" resultType="HostVO">
    		SELECT room_day, room_min_day, room_max_day, room_price_show, room_month, room_basic_deposit, room_basic_member, 
-   			room_plus_price_apply, room_plus_price, bank_name, bank_num, bank_depositor, fri_price, sat_price, sun_price  FROM `room` WHERE room_code=#{room_code}
+   			room_plus_price_apply, room_plus_price, bank_code, bank_num, bank_depositor, fri_price, sat_price, sun_price  FROM `room` WHERE room_code=#{room_code}
    </select>
    
    <update id="updateHostPrice_MinMax" parameterType="HostVO">
@@ -161,7 +161,7 @@
 	</select>
 	
 	<update id="updateHostPrice_Bank" parameterType="HostVO">
-		UPDATE `room` SET bank_name=#{bank_name}, bank_num=#{bank_num}, bank_depositor=#{bank_depositor} WHERE room_code=#{room_code}
+		UPDATE `room` SET bank_code=#{bank_code}, bank_num=#{bank_num}, bank_depositor=#{bank_depositor} WHERE room_code=#{room_code}
 	</update>
 	
 	<update id="updateHostPrice_Weekend" parameterType="HostVO">
@@ -287,4 +287,7 @@
 		ORDER BY room_date DESC;
 	</select>
 	
+	<select id="selectBankList" resultType="HostVO">
+		SELECT bank_code, bank_name FROM `bank`
+	</select>
 </mapper>	

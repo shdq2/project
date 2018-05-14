@@ -194,15 +194,20 @@
 								<div class="form-group col-sm-12">
 									<label for="bank_name" class="control-label col-sm-3">은행선택</label>
 									<div class="col-sm-9">
-										<form:select class="form-control inline" id="bank_name" name="bank_name" path="bank_name">
+										<form:select class="form-control inline" id="bank_name" name="bank_name" path="bank_code">
 											<option selected="selected"	value="">선택하세요.</option>
-											<c:forEach var="tmp" items="${str}">
-												<c:if test="${vo.bank_name eq tmp}">
-													<option selected="selected" value="${tmp}">${tmp}</option>
+											<c:forEach var="tmp" items="${banklist}">
+											
+												<option value="${tmp.bank_code}" ${tmp.bank_code == vo.bank_code ? 'selected="selected"':''}>${tmp.bank_name}</option>
+												
+												<%--
+												<c:if test="${vo.bank_name eq tmp.bank_code}">
+													<option selected="selected" value="${tmp.bank_code}">${tmp.bank_name}</option>
 												</c:if>
 												<c:if test="${vo.bank_name eq null}">
-													<option value="${tmp}">${tmp}</option>
-												</c:if>
+													<option value="${tmp.bank_code}">${tmp.bank_name}</option>
+												</c:if> --%>
+												
 											</c:forEach>
 										</form:select>
 									</div>
@@ -452,6 +457,7 @@
 						</div><!-- panel -->
 						</div> <!--=====================================-->
 						
+					<!-- 요금계산 -->
 					<div class="col-md-12 col-lg-10 col-xlg-7">
 						<div class="panel">
 							<h3 class="p-r-title">

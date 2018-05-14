@@ -223,4 +223,9 @@ public class HostDAO {
 	public int selectRoomBlock(int room_code) {
 		return sqlsession.selectOne("Host.selectRoomBlock", room_code);
 	}
+	
+	public List<HostVO> selectBankList() {
+		return sqlsession.selectList("Host.selectBankList");
+	}
+	
 }
