@@ -42,6 +42,10 @@
 			<th>인원</th>
 			<td>${vo.wish_number }</td>
 		</tr>
+		<tr>
+			<th>요청사항</th>
+			<td>${req }</td>
+		</tr>
 	</table>
 	<c:if test="${pre != 0}">
 		<a href="admin_wish_detail.do?code=${pre}" class="btn btn-info">이전글</a>
@@ -66,8 +70,8 @@
  
 
 	
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
 	<script>
 		$(function(){
 			//활성화된 메뉴 처리

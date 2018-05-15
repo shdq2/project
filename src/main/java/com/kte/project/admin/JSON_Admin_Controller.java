@@ -1,5 +1,6 @@
 package com.kte.project.admin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,9 @@ import com.kte.project.VO.WishVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.admin_wishDAO;
 import com.kte.project.dao.adminmemberDAO;
+import com.kte.project.dao.adminreservationDAO;
 import com.kte.project.dao.adminroomDAO;
+import com.kte.project.dao.guestDAO;
 
 @RestController
 public class JSON_Admin_Controller {
@@ -32,15 +35,17 @@ public class JSON_Admin_Controller {
 	private admin_wishDAO wdao=null; 
 	@Autowired
 	private adminroomDAO ardao=null; 
+	@Autowired
+	private adminreservationDAO aredao = null;
+	@Autowired
+	private guestDAO gdao= null;
 	
 	// json member ///////
-	@RequestMapping(value = "/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_block.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody int member_block(Model model,
 			HttpSession http,
 			@RequestParam("id")String id,
 			@RequestParam("block")int block) {
-		System.out.println("테스트 : " + id);
-		System.out.println("test : " + block);
 		CustomVO vo = new CustomVO();
 		vo.setCustom_id(id);
 		vo.setCustom_block(block);
@@ -48,7 +53,19 @@ public class JSON_Admin_Controller {
 		return ret;
 	}
 	
-	@RequestMapping(value = "/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_page.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<CustomVO> member_page(Model model,
+			HttpSession http,
+			@RequestParam("page")int page) {
+		page = (page-1)*10;
+		List<CustomVO> list = amdao.AdminUserMain(page);
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
+		}
+		return list;
+	}
+	
+	@RequestMapping(value = "/admin/Json_member_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String,Object> member_room(Model model,
 			HttpSession http,HttpServletResponse response,
 			@RequestParam("id")String id,
@@ -69,13 +86,18 @@ public class JSON_Admin_Controller {
 		vo.setPage(p);
 		int total = ardao.total_room_count(id);
 		int tot = ((total-1)/4)+1;
-		List<RoomVO> list = ardao.roomList(vo);
+		List<RoomVO> list = ardao.roomList(vo);		
+		for(int i=0;i<list.size();i++) {
+			int num = total - (page-1)*4-i;			
+			list.get(i).setRoom_count(num);
+		}
 		map.put("data", list);
 		map.put("page", tot);
+		
 		return map;
 	}
 	
-	@RequestMapping(value = "/Json_member_travel.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/Json_member_travel.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody Map<String,Object> member_travel(Model model,
 			HttpSession http,
 			@RequestParam("id")String id,
@@ -91,14 +113,197 @@ public class JSON_Admin_Controller {
 		int total = amdao.reser_total(id);
 		int tot = ((total-1)/6)+1;
 		List<ReservationVO> list = amdao.reser_list(vo);
+		for(int i=0;i<list.size();i++) {
+			int num = total - (page-1)*4-i;			
+			list.get(i).setReser_count(num);
+		}
 		map.put("data", list);
 		map.put("page", tot);
 		return map;
 	}
+	
+	@RequestMapping(value = "/admin/Json_member_hope.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> member_hope(Model model,
+			HttpSession http,
+			@RequestParam("id")String id,
+			@RequestParam("page")int page) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		String like = gdao.custom_like(id);
+		String[] array = like.split(";");
+		
+		int p = (page-1)*6;
+		
+		int leng = page*6;
+		
+		List<RoomVO> hlist = new ArrayList<RoomVO>();
+		String[] array2 =new String[6];
+		if(array.length-p> 6) {
+			for(int i=p;i<leng;i++) {
+				array2[i-p] = array[i];	
+				
+			}
+		}else {
+			for(int i=p;i<array.length;i++) {
+				array2[i-p] = array[i];	
+				
+			}
+		}	
+		
+		hlist = amdao.admin_hope_list(array2);
+		
+		map.put("data", hlist);
+		map.put("page", (array.length-1)/6+1);
+		return map;
+	}
 	////////////////////////
 	
+	///////// json reser ////////////
+	@RequestMapping(value = "/admin/Json_update_state.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> update_state(Model model,	
+			HttpSession http,
+			@RequestParam("code")int code,
+			@RequestParam("state")int state) {		
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		ReservationVO vo = new ReservationVO();
+		vo.setReser_code(state);
+		vo.setReservation_code(code);
+		int ret = aredao.update_state(vo);
+		map.put("ret", ret);
+		List<ReservationVO> list2 = aredao.state_count();		
+		map.put("list2", list2);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/admin/Json_select_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody ReservationVO select_reser(Model model,	
+			HttpSession http,
+			@RequestParam("code")int code) {
+		
+		ReservationVO vo = aredao.select_reser(code);		
+		return vo;
+	}
+	
+	@RequestMapping(value = "/admin/Json_member_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody CustomVO member(Model model,	
+			HttpSession http,
+			@RequestParam("id")String id) {
+		CustomVO vo = aredao.admin_custom(id);
+		
+		try {
+			int count = aredao.reser_member_count(id);
+			vo.setReser_count(count);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return vo;
+	}
+	
+	@RequestMapping(value = "/admin/Json_reser_list.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> reser_list(Model model,	
+			HttpSession http,
+			@RequestParam("state")int state,
+			@RequestParam("page")int page) {
+			List<ReservationVO> list = new ArrayList<ReservationVO>();
+			Map<String,Object> map = new HashMap<String, Object>();
+			page = (page-1)*10;
+			int tot = 0;
+		if(state == -1) {
+			list = aredao.reservation_all(page);
+			 tot = ((aredao.reser_count()-1)/10)+1;
+		}else {
+			ReservationVO vo = new ReservationVO();
+			vo.setState_count(state);
+			vo.setPage(page);;
+			list = aredao.reservation_all_sort(vo);
+			tot = ((aredao.reser_count_state(state)-1)/10)+1;
+		}
+			
+		map.put("tot", tot);
+		map.put("list", list);
+		return map;
+	}
+	
+	@RequestMapping(value = "/admin/Json_reser_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<ReservationVO> serarch(Model model,	
+			HttpSession http,
+			@RequestParam("type")String type,
+			@RequestParam("txt")String txt) {
+		
+		ReservationVO vo = new ReservationVO();
+		
+		vo.setTxt(txt);
+		vo.setType(type);
+		List<ReservationVO> list = aredao.reservation_search(vo);
+		return list;
+	}
+	////////////////
+	
+	//////////////////// json room///////////////
+	
+	@RequestMapping(value = "/admin/json_room.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> room(Model model,	
+			HttpSession http,
+			@RequestParam("page")int p,
+			@RequestParam(value="id",defaultValue="")String id) {		
+		Map<String,Object> map = new HashMap<String, Object>();
+		int page = (p-1)*10;		
+		ReservationVO rvo = new ReservationVO(); // reservationVO에 page와 hostid가 둘다 존재하여 사용
+		rvo.setHost_id(id);
+		rvo.setPage(page);		
+		List<RoomVO> list = ardao.allroomList(rvo);
+		RoomVO vo = new RoomVO();		
+		vo.setState(-1);
+		vo.setTxt("");
+		
+		int ret = ardao.room_search_count(vo);
+		ret = (ret-1)/10+1;
+		map.put("list", list);
+		map.put("ret", ret);
+		return map;
+	}
+	
+	@RequestMapping(value = "/admin/json_room_state_change.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody int room_state_change(Model model,	
+			HttpSession http,
+			@RequestParam("code")String code,
+			@RequestParam("value")int value) {	
+		
+		RoomVO vo= new RoomVO();
+		vo.setRoom_block(value);
+		vo.setRoom_code(code);
+		int ret = ardao.state_change(vo);
+		return ret;
+	}
+	
+	@RequestMapping(value = "/admin/Json_room_state_search.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> room_state_search(Model model,	
+			HttpSession http,			
+			@RequestParam("state")int state,
+			@RequestParam(value = "text",required=false)String txt,
+			@RequestParam(value = "page",defaultValue="1")int p) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		int page = (p-1)*10;
+		RoomVO vo= new RoomVO();
+		vo.setState(state);
+		vo.setTxt(txt);
+		vo.setPage(page);
+		List<RoomVO> list = ardao.room_search(vo);
+		int ret = ardao.room_search_count(vo); 
+		ret = (ret-1)/10+1;
+		map.put("list", list);
+		map.put("ret", ret);
+		return map;
+	}
+	//////////////////////////
+	
 	// json wish /////////////
-	@RequestMapping(value = "/json_wish.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/admin/json_wish.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody List<WishVO> wish(Model model,	
 			HttpSession http,
 			@RequestParam("page")int p) {		

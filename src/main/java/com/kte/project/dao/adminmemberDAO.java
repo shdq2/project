@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
+import com.kte.project.VO.RoomVO;
 
 @Service
 public class adminmemberDAO {
@@ -18,8 +19,8 @@ public class adminmemberDAO {
 	private SqlSession sql = null;
 	
 
-	public List<CustomVO> AdminUserMain(){
-		return sql.selectList("admin_member.AdminUserMain");
+	public List<CustomVO> AdminUserMain(int page){
+		return sql.selectList("admin_member.AdminUserMain",page);
 	}
 	
 	public int room_count(String custom_id){
@@ -39,5 +40,9 @@ public class adminmemberDAO {
 	}
 	public int reser_total(String id) {
 		return sql.selectOne("admin_reservation.reser_total",id);
+	}
+	
+	public List<RoomVO> admin_hope_list(String[] array){
+		return sql.selectList("admin_member.admin_hope_list",array);
 	}
 }	

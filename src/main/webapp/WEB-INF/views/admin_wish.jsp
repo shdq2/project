@@ -44,9 +44,9 @@
  
 
 	
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery.twbsPagination.js"></script>
 	<script>
 	
 	var numberformat = function(num){

@@ -1,24 +1,11 @@
 package com.kte.project.VO;
 
 public class ReservationVO {
-	/*
-	 * ���� vo
-	 * */
-	private int reservation_code = 0;		//���� ���̺� �⺻Ű
-	private String reservation_date = null;	//��������
-	/*
-	 * ���� vo
-	 * */
-	/*
-	 * ������� vo
-	 * */
-	private int reser_code = 0;				//������� �⺻Ű
-	private String reser_title = null;		//������� ��(ex) ���� ���, ����Ϸ�, ������, �����Ϸ�, ��� ���)
+	private int reservation_code = 0;		
+	private String reservation_date = null;	
+	private int reser_code = 0;				
+	private String reser_title = null;		
 	private String reser_date=null;			
-	/*
-	 * ������� vo
-	 * */
-	
 	private String reservation_start = null;
 	private String reservation_end = null;
 	
@@ -27,7 +14,142 @@ public class ReservationVO {
 	
 	private int page=0;
 	private String custom_id=null;
+	private String custom_name = null;
 	
+	private String host_name = null;
+	private String host_id = null;
+	private int host_img_code = 0;
+	
+	private String guest_name = null;
+	private String guest_id = null;
+	private int guest_img_code = 0;
+	private String room_code = null;
+	
+	private int state_count = 0;
+
+	private int room_day = 0;
+	private String dayofweek_start = null;
+	private String dayofweek_end = null;
+	
+	private String type=null;
+	private String txt = null;
+	
+	private int reservation_people = 0;
+	
+	private int reser_count = 0;
+	  private String room_in =null;
+	   private String room_out=null;
+	   
+	   public String getRoom_in() {
+		return room_in;
+	}
+	public void setRoom_in(String room_in) {
+		this.room_in = room_in;
+	}
+	public String getRoom_out() {
+		return room_out;
+	}
+	public void setRoom_out(String room_out) {
+		this.room_out = room_out;
+	}
+	
+	public int getReser_count() {
+		return reser_count;
+	}
+	public void setReser_count(int reser_count) {
+		this.reser_count = reser_count;
+	}
+	public int getReservation_people() {
+		return reservation_people;
+	}
+	public void setReservation_people(int reservation_people) {
+		this.reservation_people = reservation_people;
+	}
+	public String getTxt() {
+		return txt;
+	}
+	public void setTxt(String txt) {
+		this.txt = txt;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getDayofweek_start() {
+		return dayofweek_start;
+	}
+	public void setDayofweek_start(String dayofweek_start) {
+		this.dayofweek_start = dayofweek_start;
+	}
+	public String getDayofweek_end() {
+		return dayofweek_end;
+	}
+	public void setDayofweek_end(String dayofweek_end) {
+		this.dayofweek_end = dayofweek_end;
+	}
+
+	public int getRoom_day() {
+		return room_day;
+	}
+	public void setRoom_day(int room_day) {
+		this.room_day = room_day;
+	}
+	public int getState_count() {
+		return state_count;
+	}
+	public void setState_count(int state_count) {
+		this.state_count = state_count;
+	}
+	public String getRoom_code() {
+		return room_code;
+	}
+	public void setRoom_code(String room_code) {
+		this.room_code = room_code;
+	}
+	public int getHost_img_code() {
+		return host_img_code;
+	}
+	public void setHost_img_code(int host_img_code) {
+		this.host_img_code = host_img_code;
+	}
+	public int getGuest_img_code() {
+		return guest_img_code;
+	}
+	public void setGuest_img_code(int guest_img_code) {
+		this.guest_img_code = guest_img_code;
+	}
+	public String getGuest_name() {
+		return guest_name;
+	}
+	public void setGuest_name(String guest_name) {
+		this.guest_name = guest_name;
+	}
+	public String getGuest_id() {
+		return guest_id;
+	}
+	public void setGuest_id(String guest_id) {
+		this.guest_id = guest_id;
+	}
+	public String getHost_id() {
+		return host_id;
+	}
+	public void setHost_id(String host_id) {
+		this.host_id = host_id;
+	}
+	public String getCustom_name() {
+		return custom_name;
+	}
+	public void setCustom_name(String custom_name) {
+		this.custom_name = custom_name;
+	}
+	public String getHost_name() {
+		return host_name;
+	}
+	public void setHost_name(String host_name) {
+		this.host_name = host_name;
+	}
 	public int getPage() {
 		return page;
 	}
@@ -94,8 +216,5 @@ public class ReservationVO {
 	public void setReser_date(String reser_date) {
 		this.reser_date = reser_date;
 	}
-	
-
-	
 	
 }	

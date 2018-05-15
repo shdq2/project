@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="admin_room">
+	<resultMap id="resultImg" type="roomVO">
+		<result column="room_img" property="room_img" jdbcType="BLOB" />	
+	</resultMap>
 	
 	<select id="select_room" resultType="roomVO" parameterType="roomVO">
 		select * from room where custom_id = #{custom_id} order by room_code desc LIMIT #{page},4
@@ -11,4 +14,40 @@
 		select count(*) from room where custom_id=#{id}
 	</select>
 	
+	<select id="all_room" resultType="roomVO" parameterType="reservationVO">
+		select c.custom_name,r.room_name,r.room_day,r.room_block,r.room_code from custom c 
+		inner join
+		(select * from room ) r 
+		on c.custom_id = r.custom_id
+		where r.custom_id like concat(#{host_id},'%')
+		order by room_code desc
+		Limit #{page},10
+	</select>
+	
+	<select id="room_count" resultType="Int">
+		select count(*) from room
+	</select>
+	
+	<update id="state_change" parameterType="roomVO">
+		update room set room_block=#{room_block} where room_code = #{room_code}  
+	</update>
+	
+	<select id="room_img" parameterType="String" resultMap="resultImg">
+		select room_img from room_img where room_img_code in (select min(room_img_code) from room_img where room_code=#{room_code})
+	</select>
+	
+	<select id="room_search" parameterType="roomVO" resultType="roomVO">
+		call room_search(
+			#{state,mode=IN},
+			#{txt,mode=IN},
+			#{page,mode=IN}
+		)
+	</select>
+	
+	<select id="room_search_count" parameterType="roomVO" resultType="Int">
+		call room_search_count(
+			#{state,mode=IN},
+			#{txt,mode=IN}
+		)
+	</select>
 </mapper>

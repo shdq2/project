@@ -1,10 +1,12 @@
 package com.kte.project.admin;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -22,6 +24,7 @@ import com.kte.project.VO.RoomVO;
 import com.kte.project.dao.adminDAO;
 import com.kte.project.dao.adminmemberDAO;
 import com.kte.project.dao.adminroomDAO;
+import com.kte.project.dao.guestDAO;
 
 /**
  * Handles requests for the application home page.
@@ -32,40 +35,83 @@ public class AdminMemberController {
 	private adminmemberDAO amdao = null; 
 	@Autowired
 	private adminroomDAO ardao = null;
+	@Autowired
+	private adminDAO adao = null;
+	@Autowired
+	private guestDAO gdao = null;
 	
-	@RequestMapping(value = "/admin_member.do", method = RequestMethod.GET)
-	public String member(Model model) {
-		List<CustomVO> list = amdao.AdminUserMain();
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));
+	@RequestMapping(value = "/admin/admin_member.do", method = RequestMethod.GET)
+	public String member(Model model,HttpServletRequest request) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
+			List<CustomVO> list = amdao.AdminUserMain(0);
+			for(int i=0;i<list.size();i++) {
+				list.get(i).setRoom_count(amdao.room_count(list.get(i).getCustom_id()));			
+			}
+			int count = adao.usercount();
+			int tot = ((count-1)/10)+1;
+			model.addAttribute("list", list);
+			model.addAttribute("tot", tot);
+			return "admin_member";	
 		}
-		model.addAttribute("list", list);
-		return "admin_member";
+		
 	}
 	
-	@RequestMapping(value = "/admin_member_detail.do", method = RequestMethod.GET)
-	public String admin_member_detail(Model model,
+	@RequestMapping(value = "/admin/admin_member_detail.do", method = RequestMethod.GET)
+	public String admin_member_detail(Model model,HttpServletRequest request,
 			@RequestParam("id")String id) {
+		if(request.getHeader("referer")==null) {
+			return "redirect:admin.do";
+		}else {
 		CustomVO vo = amdao.admin_member_select(id);
+		int count = ardao.total_room_count(id);
 		model.addAttribute("vo", vo);
 		RoomVO rvo = new RoomVO();
 		rvo.setCustom_id(id);
 		rvo.setPage(0);
 		List<RoomVO> list = ardao.roomList(rvo);
+		for(int i=0;i<list.size();i++) {
+			int num = count - i;			
+			list.get(i).setRoom_count(num);
+		}
 		model.addAttribute("list", list);
-		
-		int count = ardao.total_room_count(id);
 		model.addAttribute("count", count);
 		
 		ReservationVO revo = new ReservationVO();
 		revo.setCustom_id(id);
-		revo.setPage(0);
+		revo.setPage(0);		
 		
 		List<ReservationVO> rlist = amdao.reser_list(revo);
 		model.addAttribute("rlist", rlist);
 		
-		int rcount=amdao.reser_total(id);
+		int rcount=rlist.size();
+		for(int i=0;i<rlist.size();i++) {
+			int num = rcount - i;			
+			rlist.get(i).setReser_count(num);
+		}
 		model.addAttribute("rcount",rcount);
+		
+		String like = gdao.custom_like(id);
+		String[] array = like.split(";");
+		List<RoomVO> hlist = new ArrayList<RoomVO>();
+		if(array.length>6) {
+			String[] array2 =new String[6];
+			for(int i=0;i<6;i++) {
+				array2[i] = array[i];
+				
+				
+			}
+			hlist = amdao.admin_hope_list(array2);
+			
+		}else {
+			 hlist = amdao.admin_hope_list(array);
+		}
+		
+		model.addAttribute("hlist", hlist);
+		model.addAttribute("hsize", array.length);
+		model.addAttribute("hpage", array.length/6+1);
 		return "admin_member_detail";
+		}
 	}
 }

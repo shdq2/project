@@ -42,9 +42,9 @@
 								<div class="well dash-box">
 									<h2>
 										<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-										25
+										${sessionScope._rcount }
 									</h2>
-									<h4>Pages</h4>
+									<h4>Room</h4>
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -124,11 +124,13 @@
 			Copyright : Madhav Prasad<br>2017
 		</p>
 	</footer>
-	<script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/project/resources/js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/project/resources/js/bootstrap.min.js"></script>
 	<script>
 		$(function(){
 			$('.main').addClass("active");
+			
+			
 		})
 	</script>
 </body>

@@ -30,7 +30,6 @@
 			#{custom_img,mode=IN,jdbcType=BLOB}
 		)
 	</select>
-	
 	<!-- 프로필 사진 목록 -->
 	<select id="select_profile" parameterType="String" resultType="customVO">
 		select img_code,custom_img from custom_profile where custom_id = #{id} order by img_code asc
@@ -68,4 +67,9 @@
 	<update id="phone_edit" parameterType="customVO">
 		update custom set custom_phone=#{custom_phone} 
 		where custom_id=#{custom_id}
-	</update></mapper>
+	</update>
+	
+	<select id="guest_reser_list" resultType="reservationVO">
+		select reser_title,reser_code from reservation_state
+	</select>
+</mapper>

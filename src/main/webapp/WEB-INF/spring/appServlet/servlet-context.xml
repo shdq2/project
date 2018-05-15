@@ -14,21 +14,26 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
-			<exclude-mapping path="/admin**"/>
 			<exclude-mapping path="/login**"/>
 			<exclude-mapping path="/logout**"/>
 			<exclude-mapping path="/block**"/>
 			<exclude-mapping path="/visit**"/>
 			<exclude-mapping path="/json**"/>
+			<exclude-mapping path="/alert**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/admin/**"/>
+			<exclude-mapping path="/admin**"/>
 			<exclude-mapping path="/resources**"/>
 			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/show_img**"/>
 			
 			<beans:bean class="com.kte.project.interceptor.UrlInterceptor"></beans:bean>
 		</interceptor>
-		<interceptor>
+		<!-- <interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/block**"/>
-			<exclude-mapping path="/admin**"/>
+			<exclude-mapping path="/admin/**"/>
+			<exclude-mapping path="/show_img**"/>
 			<exclude-mapping path="/home**"/>
 			<exclude-mapping path="/visit**"/>
 			<exclude-mapping path="/login**"/>
@@ -39,7 +44,7 @@
 			<exclude-mapping path="/resources/**"/>
 			
 			<beans:bean class="com.kte.project.interceptor.VisitInterceptor"></beans:bean>
-		</interceptor>
+		</interceptor> -->
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/admin**"/>

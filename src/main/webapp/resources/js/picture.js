@@ -1,4 +1,10 @@
 function w_resize() {
+	var p_w = $('.user-picture').css('width');
+	var l_w = $('.picture-img').css('width');
+	var ph_w = $('.photo').css('width');
+	$('.user-picture').css('height',p_w);
+	$('.user-picture-list img').css('height',l_w);
+	$('.photo').css('height',ph_w+50);
 	if(width <= 768) {
 		$('.picture-container').css('padding', '0px');
 		$('.picture-nav').css('display', 'none');
@@ -8,6 +14,7 @@ function w_resize() {
 		$('.col-main').removeClass('col-xs-9').addClass('col-xs-12');
 		$('.col-img').removeClass('col-xs-3').addClass('col-xs-12');
 		$('.picture-container').css('transition', 'transform 0.3s ease');
+		
 	} else {
 		$('.picture-container').css('padding', '0px 0px 0px 15px');
 		$('.picture-nav').css('display', 'inline-block');
@@ -20,21 +27,36 @@ function w_resize() {
 		
 		$('.tmenu').css('transform', 'translateX(-270px)');
 		$('.picture-container').css('transform', 'translateX(0px)');
+		
+		$('.user-picture-list').css('height','');
 	}
+	if(width>=992){
+		
+	}
+
 }
 
 $(function() {
 	width = $(window).width();
 	height = $(window).height();
-	
+
+
 	scrollbar();
 	w_resize();
+	var p_w = $('.user-picture').css('width');
+	var l_w = $('.picture-img').css('width');
+	var ph_w = $('.photo').css('width');
+	$('.user-picture').css('height',p_w);
+	$('.user-picture-list img').css('height',l_w);
+	$('.photo').css('height',ph_w+50);
 	$(window).resize(function(){
+		
 		width = $(window).width();
 		height = $(window).height();
-
+		
 		scrollbar();
 		w_resize();
+
 	});
 	
 	$('.picture-container').click(function() {

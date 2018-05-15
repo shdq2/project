@@ -5,8 +5,16 @@ public class SortableVO {
 	public int idx2 = 0;
 
 	public byte[] img1 = null;
+	public String id = null;
 	
 	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public byte[] getImg1() {
 		return img1;
 	}

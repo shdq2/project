@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kte.project.VO.CustomVO;
 import com.kte.project.dao.adminDAO;
@@ -37,47 +39,36 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,HttpSession http) {
 		CustomVO vo = (CustomVO)http.getAttribute("custom");
+		
 		if(vo == null) {
 			String id = http.getId();
-			http.setAttribute("custom_id", id);	
-		}
-		int ret = vdao.visit_chk((String)http.getAttribute("custom_id"));
-		if(ret == 0) {
-			return "redirect:visit.do";
-		}else {
-			return "home";
+			vdao.visit_insert(id);
 		}
 		
+		http.setAttribute("chk", "1");
+		String url = (String)http.getAttribute("_path");
+		if(url != null)
+			return "redirect:"+url;
+		else
+			return "redirect:main.do";
 	}
-	
-	@RequestMapping(value = "visit.do", method = RequestMethod.GET)
-	public String visit(Locale locale, Model model,HttpSession http) {
-		CustomVO vo = (CustomVO)http.getAttribute("custom");
-		String ret1=null;
-		int ret = 0;
-		if(vo != null) {
-			ret = vdao.visit_chk(vo.getCustom_id());
-			if(ret == 0) {
-				vdao.visit_insert(vo.getCustom_id());
-			}
-			
-		}else {
-			ret = vdao.visit_chk((String)http.getAttribute("custom_id"));
-			if(ret == 0) {
-				vdao.visit_insert((String)http.getAttribute("custom_id"));
-			}
+	@RequestMapping(value = "main.do", method = RequestMethod.GET)
+	public String main(Locale locale, Model model,HttpSession http) {
+		if((String)http.getAttribute("chk") == null) {
+			return "redirect:/";
+		}else {			
+			CustomVO vo = (CustomVO)http.getAttribute("custom");
+			return "home";	
 		}
-		ret1 = ret+"";
-		http.setAttribute("ret1", ret1);
-		return "redirect:picture.do";
 	}
-	
 	@RequestMapping(value = "block.do", method = RequestMethod.GET)
 	public String block(Model model,HttpSession http) {
 		String id= (String)http.getAttribute("custom_id");
-		System.out.println("custom_id : " + id);
 		int block = adao.block_chk(id);
 		http.setAttribute("block", block+"");
-		return "redirect:/";
+		if(block != 999)
+			return "redirect:/";
+		else
+			return "redirect:admin/admin.do";
 	}
 }

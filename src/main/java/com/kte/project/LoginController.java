@@ -40,15 +40,20 @@ public class LoginController {
 					httpsession.setAttribute("custom_id",cvo.getCustom_id());
 					httpsession.setAttribute("custom_name",cvo.getCustom_name());
 					
-					return "redirect:admin.do";
+					return "redirect:admin/admin.do";
 				}else {
 					httpsession.setAttribute("custom",cvo);
 					httpsession.setAttribute("custom_id",cvo.getCustom_id());
 					httpsession.setAttribute("custom_name",cvo.getCustom_name());
+					vdao.visit_insert(cvo.getCustom_id());
+					String url = (String)httpsession.getAttribute("path");
+					if(url == null) {
+						url = "/project/";
+					}
 					
-					model.addAttribute("url", "visit.do");
+					model.addAttribute("url", url);
 					model.addAttribute("msg", "환영합니다");
-					model.addAttribute("ret", "y");	
+					model.addAttribute("ret", "y");
 				}
 				
 			}else {
