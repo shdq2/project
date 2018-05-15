@@ -62,7 +62,7 @@ public class GuestController {
 		return "guest";
 	}
 	
-	@RequestMapping(value="/host.do", method = RequestMethod.GET)
+	@RequestMapping(value="/host_list.do", method = RequestMethod.GET)
 	public String host(HttpSession http,Model model) {
 		CustomVO vo =(CustomVO)http.getAttribute("custom");
 		
