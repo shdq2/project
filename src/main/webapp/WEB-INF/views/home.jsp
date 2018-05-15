@@ -26,6 +26,7 @@ tes
 <a href="logout.do">로그아웃</a>
 </c:if>
 <a href="admin/admin.do">어드민 페이지 이동</a>
+<a href="host.do">호스트 페이지 이동</a>
 <script type="text/javascript" src="resources/js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 	<script>
