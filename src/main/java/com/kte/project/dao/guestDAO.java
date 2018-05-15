@@ -51,4 +51,23 @@ private SqlSession sqlsession = null;
 	public String custom_like(String id) {
 		return sqlsession.selectOne("guest.custom_like",id);
 	}
+	
+	public List<ReservationVO> host_reser(String id){
+		return sqlsession.selectList("guest.host_reser", id);
+	}
+	
+	public List<ReservationVO> host_reser_list(String id){
+		return sqlsession.selectList("guest.host_reser_list", id);
+	}
+	
+	public List<ReservationVO> select_host_reser_list(ReservationVO vo){
+		return sqlsession.selectList("guest.select_host_reser_list",vo);
+	}
+	public ReservationVO select_host_reser(int code) {
+		return sqlsession.selectOne("guest.select_host_reser",code);
+	}
+	
+	public RoomVO mapSearch(String code) {
+		return sqlsession.selectOne("guest.mapSearch",code);
+	}
 }

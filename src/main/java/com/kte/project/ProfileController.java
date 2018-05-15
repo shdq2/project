@@ -91,7 +91,7 @@ public class ProfileController {
 		 header.setContentType(MediaType.IMAGE_JPEG);
 		byte[] imgs=null;
 		try {
-			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/user.png");
+			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/no_picture.png");
 			imgs = IOUtils.toByteArray(is);
 			if(code != -1) {
 				CustomVO vo = cdao.show_profile(code);

@@ -50,6 +50,7 @@ public class LoginController {
 					if(url == null) {
 						url = "/project/";
 					}
+					
 					model.addAttribute("url", url);
 					model.addAttribute("msg", "환영합니다");
 					model.addAttribute("ret", "y");

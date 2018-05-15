@@ -5,6 +5,7 @@
 	<resultMap id="resultImg" type="roomVO">
 		<result column="room_img" property="room_img" jdbcType="BLOB" />	
 	</resultMap>
+	
 	<select id="select_room" resultType="roomVO" parameterType="roomVO">
 		select * from room where custom_id = #{custom_id} order by room_code desc LIMIT #{page},4
 	</select>

@@ -40,9 +40,8 @@ public class RoomVO {
    private int room_count = 0;
    private int room_min_day = 0;
    private int room_max_day = 0;
-     
-   
-   public int getRoom_max_day() {
+ 
+public int getRoom_max_day() {
 	return room_max_day;
 }
 public void setRoom_max_day(int room_max_day) {

@@ -30,7 +30,8 @@ public class UrlInterceptor extends HandlerInterceptorAdapter {
 		else {
 			http.setAttribute("_url", root+path+"?"+query);
 			http.setAttribute("_path", path+"?"+query);
-		}		
+		}
+		
 		return true;
 	}
 	

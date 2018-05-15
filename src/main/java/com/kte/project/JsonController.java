@@ -21,9 +21,12 @@ import com.kte.project.VO.CustomVO;
 import com.kte.project.VO.ReservationVO;
 import com.kte.project.VO.RoomVO;
 import com.kte.project.VO.SortableVO;
+import com.kte.project.VO.paymentVO;
 import com.kte.project.dao.CustomDAO;
 import com.kte.project.dao.RegisterDAO;
+import com.kte.project.dao.adminreservationDAO;
 import com.kte.project.dao.guestDAO;
+import com.kte.project.dao.paymentDAO;
 
 @RestController
 public class JsonController {
@@ -33,6 +36,72 @@ public class JsonController {
 	private CustomDAO cdao = null;
 	@Autowired
 	private guestDAO gdao = null;
+	@Autowired
+	private paymentDAO pdao = null;
+	@Autowired
+	private adminreservationDAO aredao=null;
+	
+	@RequestMapping(value = "Json_reser_payment.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> payment(Model model,
+		HttpSession http,
+		@RequestParam(value="payment_type")int payment_type,
+		@RequestParam(value="state")int state,
+		@RequestParam(value="code")int code,
+		@RequestParam(value = "name",defaultValue="")String name,
+		@RequestParam(value = "card",defaultValue="")String card,
+		@RequestParam(value = "card_type",defaultValue="0")int card_type,
+		@RequestParam(value = "monthly",defaultValue="0")int monthly,
+		@RequestParam(value = "money",defaultValue="0")int money) {		
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		ReservationVO vo = new ReservationVO();
+		
+		paymentVO pvo =new paymentVO();
+		pvo.setPayment_type(payment_type); // 결제방식   =  계좌이체/카드결제
+		pvo.setReservation_code(code); // 예약번호
+		
+		pvo.setPayment_card_type(card_type); // 카드결제 방식 = 안전결제, 일반결제
+		pvo.setPayment_card(card); // 카드이름
+		pvo.setPayment_money(money); // 예약금
+		pvo.setPayment_monthly(monthly); // 할부
+		pvo.setPayment_name(name); // 계좌이체 입금자명
+		
+		pdao.payment(pvo);
+		pvo = pdao.select_payment(code);
+		map.put("pvo", pvo);
+		vo.setReser_code(state);
+		vo.setReservation_code(code);
+		int ret = aredao.update_state(vo);
+		map.put("ret", ret);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "Json_reser_accept.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody Map<String,Object> accept(Model model,
+		HttpSession http,
+		@RequestParam(value="state")int state,
+		@RequestParam(value="code")int code) {		
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		ReservationVO vo = new ReservationVO();		
+		ReservationVO reser = gdao.select_guest_reser(code);
+		CustomVO host = gdao.host_info(reser.getHost_id());
+		CustomVO guestvo = gdao.host_info(reser.getGuest_id());
+		RoomVO mvo = gdao.mapSearch(reser.getRoom_code());
+		vo.setReser_code(state);
+		vo.setReservation_code(code);
+		int ret = aredao.update_state(vo);
+		
+		map.put("ret", ret);
+		map.put("reser", reser);
+		map.put("host", host);
+		map.put("gvo", guestvo);
+		map.put("map", mvo);
+		
+		return map;
+	}
+	
 	
 	@RequestMapping(value = "/Json_guest_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody List<ReservationVO> select_reser_guest(Model model,
@@ -47,6 +116,23 @@ public class JsonController {
 			vo.setCustom_id(id);
 			vo.setState_count(state);
 			list = gdao.select_guest_reser_list(vo);
+		}
+		return list;
+	}
+	
+	@RequestMapping(value = "/Json_host_reser.do", produces="application/json", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody List<ReservationVO> select_reser_host(Model model,
+		HttpSession http,
+		@RequestParam("state")int state) {		
+		List<ReservationVO> list = new ArrayList<ReservationVO>();
+		String id = (String)http.getAttribute("custom_id");
+		if(state == -1) {
+			list = gdao.host_reser_list(id);
+		}else {
+			ReservationVO vo = new ReservationVO();
+			vo.setCustom_id(id);
+			vo.setState_count(state);
+			list = gdao.select_host_reser_list(vo);
 		}
 		return list;
 	}

@@ -30,7 +30,6 @@
 			#{custom_img,mode=IN,jdbcType=BLOB}
 		)
 	</select>
-	
 	<!-- 프로필 사진 목록 -->
 	<select id="select_profile" parameterType="String" resultType="customVO">
 		select img_code,custom_img from custom_profile where custom_id = #{id} order by img_code asc

@@ -37,7 +37,21 @@ public class ReservationVO {
 	private int reservation_people = 0;
 	
 	private int reser_count = 0;
-	
+	  private String room_in =null;
+	   private String room_out=null;
+	   
+	   public String getRoom_in() {
+		return room_in;
+	}
+	public void setRoom_in(String room_in) {
+		this.room_in = room_in;
+	}
+	public String getRoom_out() {
+		return room_out;
+	}
+	public void setRoom_out(String room_out) {
+		this.room_out = room_out;
+	}
 	
 	public int getReser_count() {
 		return reser_count;

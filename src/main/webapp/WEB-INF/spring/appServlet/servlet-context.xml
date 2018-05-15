@@ -25,6 +25,7 @@
 			<exclude-mapping path="/admin**"/>
 			<exclude-mapping path="/resources**"/>
 			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/show_img**"/>
 			
 			<beans:bean class="com.kte.project.interceptor.UrlInterceptor"></beans:bean>
 		</interceptor>

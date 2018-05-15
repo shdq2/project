@@ -75,15 +75,15 @@ public class AdminRoomController {
 			@RequestParam("id")String id,
 			HttpServletRequest request,
 			HttpSession http) {
-		 ResponseEntity<byte[]> r_data = null;
-		 HttpHeaders header = new HttpHeaders();
-		 header.setContentType(MediaType.IMAGE_JPEG);
+		ResponseEntity<byte[]> r_data = null;
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.IMAGE_JPEG);
 		byte[] imgs=null;
 		try {
 			RoomVO vo = ardao.room_img(id);
-				imgs=vo.getRoom_img();
+			imgs=vo.getRoom_img();
 		} catch (Exception e) {
-			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/default.jpg");
+			InputStream is = request.getSession().getServletContext().getResourceAsStream("/resources/imgs/no_image.png");
 			imgs = IOUtils.toByteArray(is);
 		}finally {
 			r_data = new ResponseEntity<byte[]>(imgs,header,HttpStatus.OK);
